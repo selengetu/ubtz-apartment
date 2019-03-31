@@ -16,6 +16,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+  <link rel="stylesheet" href="{{ asset('https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css') }}">
     <link href="{{ asset('css/ptsans.css') }}" rel="stylesheet">
 
     @yield('style')
@@ -207,13 +208,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="{{ route('home') }}" class="nav-link">
+                    <a href="{{ route('barilga') }}" class="nav-link">
                       <i class="fa fa-ticket nav-icon"></i>
                       <p>Их барилга</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{ route('home') }}" class="nav-link">
+                    <a href="{{ route('zaswar') }}" class="nav-link">
                       <i class="fa fa-ticket nav-icon"></i>
                       <p>Их засвар</p>
                     </a>
@@ -288,7 +289,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <!-- AdminLTE App -->
 <script src="{{ asset('js/app.js') }}"></script>
-
+<script type="text/javascript" src="{{ URL::asset('https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js') }}"></script>
 @yield('script')
 <script>
     // Show active menu

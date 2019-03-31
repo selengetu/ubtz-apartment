@@ -9,7 +9,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>2018 оны эхний 11 сарын их засвар</h1>
+                    <h1>Их засвар</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -27,12 +27,12 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title"></h3>
+                            <h3 class="card-title">2018 оны эхний 11 сарын их засвар</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body text-center">
                             <div class="m-scrollable" data-scrollable="true" data-height="400" >
-                                <table class="table table-striped table-bordered">
+                                <table class="table table-striped table-bordered" id="example">
                                     <thead>
                                     <tr role="row">
                                         <th>#</th>
@@ -80,5 +80,13 @@
 @endsection
 
 @section('script')
-
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable(
+            {
+                "scrollX": true
+            }
+        );
+    } );
+</script>
 @endsection

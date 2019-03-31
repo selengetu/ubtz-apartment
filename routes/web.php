@@ -25,8 +25,8 @@ Route::get('/collapsemenu/{val}', function($val){
 });
 
 
-Route::get('/ticket', function () {
-    return view('train');
-});
+
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/blank', 'HomeController@blank')->name('blank');
+Route::get('/barilga', 'BarilgaController@index')->name('barilga');
+Route::get('/zaswar', 'ZaswarController@index')->name('zaswar');
