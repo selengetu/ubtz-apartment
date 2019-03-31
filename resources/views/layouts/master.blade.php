@@ -193,32 +193,62 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview">
+          <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+              <!-- Add icons to the links using the .nav-icon class
+                   with font-awesome or any other icon font library -->
+              <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
                   <i class="nav-icon fa fa-user-circle-o"></i>
                   <p>
-                    Кассир
+                    Бүртгэл
                     <i class="right fa fa-angle-left"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="{{ route('home') }}" class="nav-link">
                       <i class="fa fa-ticket nav-icon"></i>
-                      <p>Тасалбар бичих</p>
+                      <p>Их барилга</p>
                     </a>
                   </li>
+                  <li class="nav-item">
+                    <a href="{{ route('home') }}" class="nav-link">
+                      <i class="fa fa-ticket nav-icon"></i>
+                      <p>Их засвар</p>
+                    </a>
+                  </li>
+
                 </ul>
               </li>
-          <li class="nav-item">
-                <a href="#" class="nav-link" >
-                  <i class="nav-icon fa fa-th"></i>
-                  <p>
-                    Simple Link
-                    <span class="right badge badge-danger">New</span>
-                  </p>
+            </ul>
+          </nav>
+
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa fa-user-circle-o"></i>
+              <p>
+                Тайлан
+                <i class="right fa fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="" class="nav-link">
+                  <i class="fa fa-ticket nav-icon"></i>
+                  <p>Их барилга</p>
                 </a>
               </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="" class="nav-link">
+                  <i class="fa fa-ticket nav-icon"></i>
+                  <p>Их засвар</p>
+                </a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
