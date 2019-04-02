@@ -222,34 +222,34 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                 </ul>
               </li>
+              <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fa fa-user-circle-o"></i>
+                  <p>
+                    Тайлан
+                    <i class="right fa fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{ route('barilga') }}" class="nav-link">
+                      <i class="fa fa-ticket nav-icon"></i>
+                      <p>Их барилга</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ route('zaswar') }}" class="nav-link">
+                      <i class="fa fa-ticket nav-icon"></i>
+                      <p>Их засвар</p>
+                    </a>
+                  </li>
+
+                </ul>
+              </li>
             </ul>
           </nav>
 
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-user-circle-o"></i>
-              <p>
-                Тайлан
-                <i class="right fa fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="" class="nav-link">
-                  <i class="fa fa-ticket nav-icon"></i>
-                  <p>Их барилга</p>
-                </a>
-              </li>
-            </ul>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="" class="nav-link">
-                  <i class="fa fa-ticket nav-icon"></i>
-                  <p>Их засвар</p>
-                </a>
-              </li>
-            </ul>
-          </li>
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

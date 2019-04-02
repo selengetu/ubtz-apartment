@@ -77,8 +77,8 @@
             </div>
         </div>
     </section>
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+    <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
@@ -89,49 +89,53 @@
                 <div class="modal-body">
                     <form>
                         <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="inputEmail4">Email</label>
-                                <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+                            <div class="form-group col-md-3">
+                                <label for="inputEmail4">Захиалагч</label>
+                                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
                             </div>
-                            <div class="form-group col-md-6">
-                                <label for="inputPassword4">Password</label>
+                            <div class="form-group col-md-3">
+                                <label for="inputPassword4">Гүйцэтгэгч</label>
                                 <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
                             </div>
+                            <div class="form-group col-md-3">
+                                <label for="inputAddress">Ажлын нэр</label>
+                                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="inputAddress2">Төлөвлөгөө</label>
+                                <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="inputAddress">Address</label>
-                            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-                        </div>
-                        <div class="form-group">
-                            <label for="inputAddress2">Address 2</label>
-                            <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-                        </div>
+
                         <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="inputCity">City</label>
+                            <div class="form-group col-md-3">
+                                <label for="inputCity">Төсөв</label>
                                 <input type="text" class="form-control" id="inputCity">
                             </div>
-                            <div class="form-group col-md-4">
-                                <label for="inputState">State</label>
+                            <div class="form-group col-md-3">
+                                <label for="inputState">Гүйцэтгэл</label>
                                 <select id="inputState" class="form-control">
-                                    <option selected>Choose...</option>
+                                    <option selected></option>
                                     <option>...</option>
                                 </select>
                             </div>
-                            <div class="form-group col-md-2">
-                                <label for="inputZip">Zip</label>
+                            <div class="form-group col-md-3">
+                                <label for="inputZip">Үүнээс хаасан</label>
+                                <input type="text" class="form-control" id="inputZip">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="inputZip">Биелэлт</label>
+                                <input type="text" class="form-control" id="inputZip">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="inputZip">Хариуцагч</label>
+                                <input type="text" class="form-control" id="inputZip">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputZip">Тайлбар</label>
                                 <input type="text" class="form-control" id="inputZip">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="gridCheck">
-                                <label class="form-check-label" for="gridCheck">
-                                    Check me out
-                                </label>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Sign in</button>
                     </form>
                 </div>
                 <div class="modal-footer">
