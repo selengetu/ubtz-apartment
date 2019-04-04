@@ -175,79 +175,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-dashboard"></i>
               <p>
-                Dashboard
+                Бүртгэл
                 <i class="right fa fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
                     <li class="nav-item">
-                      <a href="{{ route('home') }}" class="nav-link">
+                      <a href="{{ route('barilga') }}" class="nav-link">
                         <i class="fa fa-circle-o nav-icon"></i>
-                        <p>Home</p>
+                        <p>Их барилга</p>
                       </a>
                     </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('zaswar') }}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Page</p>
+                  <p>Их засвар</p>
                 </a>
               </li>
             </ul>
           </li>
-          <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-              <!-- Add icons to the links using the .nav-icon class
-                   with font-awesome or any other icon font library -->
-              <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fa fa-user-circle-o"></i>
-                  <p>
-                    Бүртгэл
-                    <i class="right fa fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{ route('barilga') }}" class="nav-link">
-                      <i class="fa fa-ticket nav-icon"></i>
-                      <p>Их барилга</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ route('zaswar') }}" class="nav-link">
-                      <i class="fa fa-ticket nav-icon"></i>
-                      <p>Их засвар</p>
-                    </a>
-                  </li>
 
-                </ul>
-              </li>
-              <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fa fa-user-circle-o"></i>
-                  <p>
-                    Тайлан
-                    <i class="right fa fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{ route('barilga') }}" class="nav-link">
-                      <i class="fa fa-ticket nav-icon"></i>
-                      <p>Их барилга</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ route('zaswar') }}" class="nav-link">
-                      <i class="fa fa-ticket nav-icon"></i>
-                      <p>Их засвар</p>
-                    </a>
-                  </li>
-
-                </ul>
-              </li>
-            </ul>
-          </nav>
 
 
         </ul>
