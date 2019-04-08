@@ -91,11 +91,21 @@
                         <div class="form-row">
                             <div class="form-group col-md-3">
                                 <label for="inputEmail4">Захиалагч</label>
-                                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                                <select class="form-control select2" id="constructor_id" name="constructor_id" >
+                                    @foreach($constructor as $constructors)
+                                        <option value= "{{$constructors->department_id}}">{{$constructors->department_name}}</option>
+                                    @endforeach
+                                </select>
+
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="inputPassword4">Гүйцэтгэгч</label>
-                                <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+                                <select class="form-control select2" id="executor_id" name="executor_id" >
+                                    @foreach($executor as $executors)
+                                        <option value= "{{$executors->executor_id}}">{{$executors->executor_name}}</option>
+                                    @endforeach
+                                </select>
+
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="inputAddress">Ажлын нэр</label>
@@ -114,10 +124,7 @@
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="inputState">Гүйцэтгэл</label>
-                                <select id="inputState" class="form-control">
-                                    <option selected></option>
-                                    <option>...</option>
-                                </select>
+                                <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="inputZip">Үүнээс хаасан</label>

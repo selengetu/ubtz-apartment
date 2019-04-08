@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Constructor;
+use App\Executor;
 class BarilgaController extends Controller
 {
     /**
@@ -23,6 +24,8 @@ class BarilgaController extends Controller
      */
     public function index()
     {
-        return view('barilga');
+        $constructor = Constructor::orderby('department_name')->get();
+        $executor = Executor::all();
+        return view('barilga')->with(['constructor'=>$constructor,'executor'=>$executor]);
     }
 }
