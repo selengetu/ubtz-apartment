@@ -52,7 +52,7 @@
                                             <td>{{$states->state_name_mn}}</td>
                                             <td>{{$states->state_name_ru}}</td>
 
-                                            <td class='m1'> <a class='btn btn-xs btn-info update' data-toggle='modal' data-target='#exampleModal' data-id="{{$states->state_id}}" tag='{{$states->state_id}}'><i class="fa fa-pencil-square-o" style="color: rgb(255, 255, 255); "></i></a> </td>
+                                            <td class='m1'> <a class='btn btn-xs btn-info update' data-toggle='modal' data-target='#exampleModal' data-id="{{$states->state_id}}" tag='{{$states->state_id}}'><i class="fa fa-pencil-square-ofa fa-pencil-square-o" style="color: rgb(255, 255, 255); "></i></a> </td>
                                         </tr>
                                         <?php $no++; ?>
                                     @endforeach

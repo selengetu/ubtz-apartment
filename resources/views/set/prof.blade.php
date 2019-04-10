@@ -25,7 +25,7 @@
                                 <div class="col-md-4">
                                     <h4 class="m-0">Албан тушаал</h4>
                                 </div>
-                                <div class="col-md-3 col-xs-5">
+                                <div class="col-md-2 col-xs-5">
                                     <button data-toggle="modal" data-target="#exampleModal" class="btn btn-primary form-control" style="padding-bottom: 10px;"><i class="fa fa-pencil-square-o" style="color: rgb(255, 255, 255);">Албан тушаал нэмэх</i></button>
                                 </div>
                             </div>
@@ -52,7 +52,7 @@
                                             <td>{{$pro->profession_name}}</td>
                                             <td>{{$pro->project_type_name_ru}}</td>
 
-                                            <td class='m1'> <a class='btn btn-xs btn-info update' data-toggle='modal' data-target='#exampleModal' data-id="{{$pro->project_type_id}}" tag='{{$pro->project_type_id}}'><i class="fa fa-plus-square-o" style="color: rgb(255, 255, 255); "></i></a> </td>
+                                            <td class='m1'> <a class='btn btn-xs btn-info update' data-toggle='modal' data-target='#exampleModal' data-id="{{$pro->project_type_id}}" tag='{{$pro->project_type_id}}'><i class="fa fa-pencil-square-o" style="color: rgb(255, 255, 255); "></i></a> </td>
                                         </tr>
                                         <?php $no++; ?>
                                     @endforeach

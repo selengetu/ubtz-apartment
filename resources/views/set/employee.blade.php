@@ -56,7 +56,7 @@
                                             <td>{{$employees->depart_id}} - {{$employees->prof_id}}</td>
                                             <td>{{$employees->hired_date}}</td>
                                             <td>{{$employees->fired_date}}</td>
-                                            <td class='m1'> <a class='btn btn-xs btn-info update' data-toggle='modal' data-target='#exampleModal' data-id="{{$employees->executor_id}}" tag='{{$employees->executor_id}}'><i class="fa fa-plus-square-o" style="color: rgb(255, 255, 255); "></i></a> </td>
+                                            <td class='m1'> <a class='btn btn-xs btn-info update' data-toggle='modal' data-target='#exampleModal' data-id="{{$employees->executor_id}}" tag='{{$employees->executor_id}}'><i class="fa fa-pencil-square-o" style="color: rgb(255, 255, 255); "></i></a> </td>
                                         </tr>
                                         <?php $no++; ?>
                                     @endforeach

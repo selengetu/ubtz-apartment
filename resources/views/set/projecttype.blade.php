@@ -26,7 +26,7 @@
                                     <h4 class="m-0">Ажлын төрөл</h4>
                                 </div>
                                 <div class="col-md-2 col-xs-5">
-                                    <button data-toggle="modal" data-target="#exampleModal" class="btn btn-primary form-control" style="padding-bottom: 10px;"><i class="fa fa-plus" style="color: rgb(255, 255, 255);">Ажлын төрөл нэмэх</i></button>
+                                    <button data-toggle="modal" data-target="#exampleModal" class="btn btn-primary form-control" style="padding-bottom: 10px;"><i class="fa fa-pencil-square-o" style="color: rgb(255, 255, 255);">Ажлын төрөл нэмэх</i></button>
                                 </div>
                             </div>
 
