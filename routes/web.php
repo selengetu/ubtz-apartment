@@ -67,3 +67,30 @@ Route::get('/statefill/{id?}',function($id = 0){
     $dt=App\State::where('state_id','=',$id)->get();
     return $dt;
 });
+
+Route::get('/method', 'MethodController@index')->name('method');
+Route::get('/destroymethod/{id}/delete', ['as' => 'method.destroy', 'uses' => 'MethodController@destroy']);
+Route::post('/addmethod','MethodController@store');
+Route::post('/updatemethod','MethodController@update');
+Route::get('/methodfill/{id?}',function($id = 0){
+    $dt=App\Method::where('state_id','=',$id)->get();
+    return $dt;
+});
+
+Route::get('/prof', 'ProfController@index')->name('prof');
+Route::get('/destroyprof/{id}/delete', ['as' => 'prof.destroy', 'uses' => 'ProfController@destroy']);
+Route::post('/addprof','ProfController@store');
+Route::post('/updateprof','ProfController@update');
+Route::get('/proffill/{id?}',function($id = 0){
+    $dt=App\Prof::where('prof_id','=',$id)->get();
+    return $dt;
+});
+
+Route::get('/projecttype', 'ProjecttypeController@index')->name('projecttype');
+Route::get('/destroyprojecttype/{id}/delete', ['as' => 'projecttype.destroy', 'uses' => 'ProjecttypeController@destroy']);
+Route::post('/addprojecttype','ProjecttypeController@store');
+Route::post('/updateprojecttype','ProjecttypeController@update');
+Route::get('/projecttypefill/{id?}',function($id = 0){
+    $dt=App\Projecttype::where('project_type_id','=',$id)->get();
+    return $dt;
+});

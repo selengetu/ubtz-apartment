@@ -205,29 +205,49 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('zaswar') }}" class="nav-link">
+                <a href="{{ route('prof') }}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>Албан тушаал</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('zaswar') }}" class="nav-link">
+                <a href="{{ route('employee') }}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>Ажилтан</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('zaswar') }}" class="nav-link">
+                <a href="{{ route('state') }}" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Ажлын төлөв</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('method') }}" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Ажлын арга</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('projecttype') }}" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Ажлын төрөл</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('executor') }}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>Гүйцэтгэгч</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('barilga') }}" class="nav-link">
+                <a href="{{ route('constructor') }}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Ажлын төлөв</p>
+                  <p>Захиалагч</p>
                 </a>
               </li>
+
+
 
 
             </ul>
