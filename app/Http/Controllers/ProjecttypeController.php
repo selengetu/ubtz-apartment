@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Request;
 use App\Constructor;
 use App\Projecttype;
+use DB;
 class ProjecttypeController extends Controller
 {
     /**
@@ -39,7 +40,7 @@ class ProjecttypeController extends Controller
 
     public function update(Request $request)
     {
-        $projecttype = DB::table('CONST_projecttype')
+        $projecttype = DB::table('CONST_project_type')
             ->where('project_type_id', Request::input('id'))
             ->update(['project_type_name_ru' => Request::input('project_type_name_ru'),'project_type_name_mn' => Request::input('project_type_name_mn')]);
         return Redirect('projecttype');
@@ -53,7 +54,7 @@ class ProjecttypeController extends Controller
      */
     public function destroy($id)
     {
-        Executor::where('project_type_id', '=', $id)->delete();
+        Projecttype::where('project_type_id', '=', $id)->delete();
         return Redirect('projecttype');
     }
 }

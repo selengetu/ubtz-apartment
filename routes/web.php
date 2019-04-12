@@ -11,15 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index')->name('home');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('/collapsemenu/{val}', function($val){
     DB::update("update users set menucollapse = $val where id = ".Auth::user()->id);
 });
@@ -33,7 +31,7 @@ Route::get('/zaswar', 'ZaswarController@index')->name('zaswar');
 
 
 Route::get('/executor', 'ExecutorController@index')->name('executor');
-Route::get('/destroyexecutor/{id}/delete', ['as' => 'executor.destroy', 'uses' => 'ExecutorController@destroy']);
+Route::get('/executor/delete/{id}', 'ExecutorController@destroy');
 Route::post('/addexecutor','ExecutorController@store');
 Route::post('/updateexecutor','ExecutorController@update');
 Route::get('/executorfill/{id?}',function($id = 0){
@@ -42,7 +40,7 @@ Route::get('/executorfill/{id?}',function($id = 0){
 });
 
 Route::get('/constructor', 'ConstructorController@index')->name('constructor');
-Route::get('/destroyconstructor/{id}/delete', ['as' => 'constructor.destroy', 'uses' => 'ConstructorController@destroy']);
+Route::get('/constructor/delete/{id}', 'ConstructorController@destroy');
 Route::post('/addconstructor','ConstructorController@store');
 Route::post('/updateconstructor','ConstructorController@update');
 Route::get('/constructorfill/{id?}',function($id = 0){
@@ -87,7 +85,7 @@ Route::get('/proffill/{id?}',function($id = 0){
 });
 
 Route::get('/projecttype', 'ProjecttypeController@index')->name('projecttype');
-Route::get('/destroyprojecttype/{id}/delete', ['as' => 'projecttype.destroy', 'uses' => 'ProjecttypeController@destroy']);
+Route::get('/projecttype/delete/{id}', 'ProjecttypeController@destroy');
 Route::post('/addprojecttype','ProjecttypeController@store');
 Route::post('/updateprojecttype','ProjecttypeController@update');
 Route::get('/projecttypefill/{id?}',function($id = 0){

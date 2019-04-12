@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Request;
 use App\Constructor;
+use DB;
 class ConstructorController extends Controller
 {
 
@@ -20,9 +21,9 @@ class ConstructorController extends Controller
     public function store()
     {
         $constructor = new Constructor;
-        $constructor->department_name = Request::input('department_name');
-        $constructor->department_abbr = Request::input('department_abbr');
-        $constructor->department_name_ru = Request::input('department_name_ru');
+        $constructor->department_name = Request::input('constructor_name');
+        $constructor->department_abbr = Request::input('constructor_abbr');
+        $constructor->department_name_ru = Request::input('constructor_name_ru');
         $constructor->save();
         return Redirect('constructor');
     }
@@ -31,7 +32,7 @@ class ConstructorController extends Controller
     {
         $constructor = DB::table('CONST_DEPARTMENT')
             ->where('department_id', Request::input('id'))
-            ->update(['department_name' => Request::input('department_name'),'department_name_ru' => Request::input('department_name_ru'),'department_abbr' => Request::input('department_abbr')]);
+            ->update(['department_name' => Request::input('constructor_name'),'department_name_ru' => Request::input('constructor_name_ru'),'department_abbr' => Request::input('constructor_abbr')]);
         return Redirect('constructor');
     }
 

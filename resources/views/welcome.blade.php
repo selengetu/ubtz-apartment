@@ -1,98 +1,144 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.master')
 
-        <title>Laravel</title>
+@section('style')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+    <link rel="stylesheet" href="//jonthornton.github.io/jquery-timepicker/jquery.timepicker.css">
+    <style>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
+    </style>
+@endsection
+@section('content')
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
+                <div class="col-sm-4">
 
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register josh</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
             </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h4 class="m-0">НОКС албаны ажилтанууд</h4>
+                                </div>
+                                <div class="col-md-2 col-xs-5">
+                                    <button data-toggle="modal" data-target="#exampleModal" class="btn btn-primary form-control add" style="padding-bottom: 10px;"><i class="fa fa-plus" style="color: rgb(255, 255, 255);"> Ажилтан нэмэх</i></button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body text-center">
+                            <div class="m-scrollable" data-scrollable="true" data-height="400" >
+                                <iframe
+                                        style="width:210px;font-size:11px;height:280px;border: none;overflow:hidden;margin:0;"
+                                        src="//monxansh.appspot.com/xansh.html?currency=USD|EUR|JPY|GBP|RUB|CNY|KRW&conv_tool=1"></iframe>
+                                <table class="table table-striped table-bordered" id="example">
+                                    <thead>
+                                    <tr role="row" bgcolor="#d3d3d3">
+                                        <th>#</th>
+                                        <th>Албан тушаал</th>
+                                        <th>Ажилтны овог</th>
+                                        <th>Ажилтны нэр</th>
+                                        <th>Хариуцах ажлын үндсэн чиглэл</th>
+                                        <th>Ажилд орсон огноо</th>
+                                        <th>Ажлаас гарсан огноо</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+
+            </div>
+            <!-- /.col (right) -->
+
+
+
+            <!-- row 2 dood-->
+            <div class="row">
+
+                <!-- /.col (left) -->
+
+            </div>
         </div>
-    </body>
-</html>
+    </section>
+    <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <form id="form1" action="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modal-title">Шинэ ажилтан бүртгэх цонх</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-row">
+
+                            <div class="form-group col-md-4">
+                                <label for="inputAddress">Овог</label>
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <input type="hidden" class="form-control" id="id" name="id">
+                                <input type="text" class="form-control" id="lastname" name="lastname" placeholder="" maxlength="50">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputAddress2">Нэр</label>
+                                <input type="text" class="form-control" id="firstname" name="firstname" placeholder="" maxlength="50">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputCity">Албан тушаал</label>
+
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="inputAddress2">Хариуцах ажлын үндсэн чиглэл</label>
+                                <textarea class="form-control" rows="2" id="mainduty" name="mainduty"></textarea>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputAddress2">Ажилд орсон огноо</label>
+                                <input class="form-control form-control-inline input-medium date-picker" name="date1" id="date1"
+                                       size="16" type="text" value="" required>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputCity">Ажлаас гарсан огноо</label>
+                                <input class="form-control form-control-inline input-medium date-picker" name="date2" id="date2"
+                                       size="16" type="text" value="" required>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-md-5">
+                            <button type="button" class="btn btn-danger delete">Устгах</button>
+                        </div>
+                        <div class="col-md-7" style="display: inline-block; text-align: right;" >
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Хаах</button>
+                            <button type="submit" class="btn btn-primary">Хадгалах</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('script')
+
+@endsection

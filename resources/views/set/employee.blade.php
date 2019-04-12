@@ -29,7 +29,7 @@
                                     <h4 class="m-0">НОКС албаны ажилтанууд</h4>
                                 </div>
                                 <div class="col-md-2 col-xs-5">
-                                    <button data-toggle="modal" data-target="#exampleModal" class="btn btn-primary form-control add" style="padding-bottom: 10px;"><i class="fa fa-pencil-square-o" style="color: rgb(255, 255, 255);"> Ажилтан нэмэх</i></button>
+                                    <button data-toggle="modal" data-target="#exampleModal" class="btn btn-primary form-control add" style="padding-bottom: 10px;"><i class="fa fa-plus" style="color: rgb(255, 255, 255);"> Ажилтан нэмэх</i></button>
                                 </div>
                             </div>
 
@@ -141,9 +141,13 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger delete">Устгах</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Хаах</button>
-                    <button type="submit" class="btn btn-primary">Хадгалах</button>
+                    <div class="col-md-5">
+                        <button type="button" class="btn btn-danger delete">Устгах</button>
+                    </div>
+                    <div class="col-md-7" style="display: inline-block; text-align: right;" >
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Хаах</button>
+                        <button type="submit" class="btn btn-primary">Хадгалах</button>
+                    </div>
                 </div>
                 </form>
             </div>
@@ -215,6 +219,7 @@
             $('#date2').val('');
             $('#prof_id').val(1);
             $('#mainduty').val('');
+            $('.delete').hide();
         });
         $('.delete').on('click',function(){
             var itag = $('#id').val();

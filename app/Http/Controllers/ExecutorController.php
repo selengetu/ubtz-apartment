@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Request;
 use App\Constructor;
 use App\Executor;
+use DB;
 class ExecutorController extends Controller
 {
     /**
@@ -32,9 +33,9 @@ class ExecutorController extends Controller
     public function store()
     {
         $executor = new Executor;
-        $executor->executor_name = Request::input('department_name');
-        $executor->executor_abbr = Request::input('department_abbr');
-        $executor->executor_name_ru = Request::input('department_name_ru');
+        $executor->executor_name = Request::input('executor_name');
+        $executor->executor_abbr = Request::input('executor_abbr');
+        $executor->executor_name_ru = Request::input('executor_name_ru');
         $executor->is_ubtz = Request::input('is_ubtz');
         $executor->save();
         return Redirect('executor');

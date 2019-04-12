@@ -26,7 +26,7 @@
                                     <h4 class="m-0">Ажлын төрөл</h4>
                                 </div>
                                 <div class="col-md-2 col-xs-5">
-                                    <button data-toggle="modal" data-target="#exampleModal" class="btn btn-primary form-control" style="padding-bottom: 10px;"><i class="fa fa-pencil-square-o" style="color: rgb(255, 255, 255);">Ажлын төрөл нэмэх</i></button>
+                                    <button data-toggle="modal" data-target="#exampleModal" class="btn btn-primary form-control add" style="padding-bottom: 10px;"><i class="fa fa-plus" style="color: rgb(255, 255, 255);"> Ажлын төрөл нэмэх</i></button>
                                 </div>
                             </div>
 
@@ -86,7 +86,7 @@
             <div class="modal-content">
                 <form id="form1" action="post">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modal-title">Шинэ ажилтан бүртгэх цонх</h5>
+                        <h5 class="modal-title" id="modal-title">Ажлын төрлийн нэр бүртгэх цонх</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -111,9 +111,13 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger delete">Устгах</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Хаах</button>
-                        <button type="submit" class="btn btn-primary">Хадгалах</button>
+                        <div class="col-md-5">
+                            <button type="button" class="btn btn-danger delete">Устгах</button>
+                        </div>
+                        <div class="col-md-7" style="display: inline-block; text-align: right;" >
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Хаах</button>
+                            <button type="submit" class="btn btn-primary">Хадгалах</button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -153,19 +157,16 @@
     <script>
         $('.update').on('click',function(){
             var title = document.getElementById("modal-title");
-            title.innerHTML = "Албан ажилтан засварлах цонх";
-            document.getElementById('form1').action = "updateemployee";
+            title.innerHTML = "Ажлын төрөл засварлах цонх";
+            document.getElementById('form1').action = "updateprojecttype";
             document.getElementById('form1').method ="post"
             var itag=$(this).attr('tag');
-            $.get('employeefill/'+itag,function(data){
+            $.get('projecttypefill/'+itag,function(data){
                 $.each(data,function(i,qwe){
-                    $('#id').val(qwe.emp_id);
-                    $('#firstname').val(qwe.firstname);
-                    $('#lastname').val(qwe.lastname);
-                    $('#date1').val(qwe.hired_date);
-                    $('#date2').val(qwe.fired_date);
-                    $('#prof_id').val(qwe.prof_id);
-                    $('#mainduty').val(qwe.mainduty);
+                    $('#id').val(qwe.project_type_id);
+                    $('#project_type_name_ru').val(qwe.project_type_name_ru);
+                    $('#project_type_name_mn').val(qwe.project_type_name_mn);
+
                 });
 
             });
@@ -175,23 +176,20 @@
     <script>
         $('.add').on('click',function(){
             var title = document.getElementById("modal-title");
-            title.innerHTML = "Шинэ ажилтан бүртгэх цонх";
-            document.getElementById('form1').action = "addemployee"
+            title.innerHTML = "Ажлын төрөл бүртгэх цонх";
+            document.getElementById('form1').action = "addprojecttype"
             document.getElementById('form1').method ="post"
             $('#id').val('');
-            $('#firstname').val('');
-            $('#lastname').val('');
-            $('#date1').val('');
-            $('#date2').val('');
-            $('#prof_id').val(1);
-            $('#mainduty').val('');
+            $('#project_type_name_ru').val('');
+            $('#project_type_name_mn').val('');
+            $('.delete').hide();
         });
         $('.delete').on('click',function(){
             var itag = $('#id').val();
 
             $.ajax(
                 {
-                    url: "employee/delete/" + itag,
+                    url: "projecttype/delete/" + itag,
                     type: 'GET',
                     dataType: "JSON",
                     data: {
@@ -199,11 +197,11 @@
                         "_method": 'DELETE',
                     },
                     success: function () {
-                        alert('Ажилтан устгагдлаа');
+                        alert('Ажлын төрөл устгагдлаа');
                     }
 
                 });
-            alert('Ажилтан устгагдлаа');
+            alert('Ажлын төрөл устгагдлаа');
             location.reload();
         });
     </script>
