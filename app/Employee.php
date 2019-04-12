@@ -8,5 +8,5 @@ class Employee extends Model
 {
     public $timestamps = false;
     protected $table='Const_employee';
-    protected $primaryKey = 'employee_id';
+    protected $primaryKey = 'emp_id';
 }

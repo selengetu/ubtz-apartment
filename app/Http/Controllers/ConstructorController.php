@@ -29,7 +29,7 @@ class ConstructorController extends Controller
 
     public function update(Request $request)
     {
-        $constructor = DB::table('SET_DEPARTMENT')
+        $constructor = DB::table('CONST_DEPARTMENT')
             ->where('department_id', Request::input('id'))
             ->update(['department_name' => Request::input('department_name'),'department_name_ru' => Request::input('department_name_ru'),'department_abbr' => Request::input('department_abbr')]);
         return Redirect('constructor');

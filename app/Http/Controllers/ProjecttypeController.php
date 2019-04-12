@@ -39,7 +39,7 @@ class ProjecttypeController extends Controller
 
     public function update(Request $request)
     {
-        $projecttype = DB::table('SET_projecttype')
+        $projecttype = DB::table('CONST_projecttype')
             ->where('project_type_id', Request::input('id'))
             ->update(['project_type_name_ru' => Request::input('project_type_name_ru'),'project_type_name_mn' => Request::input('project_type_name_mn')]);
         return Redirect('projecttype');

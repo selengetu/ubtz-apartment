@@ -51,16 +51,16 @@ Route::get('/constructorfill/{id?}',function($id = 0){
 });
 
 Route::get('/employee', 'EmployeeController@index')->name('employee');
-Route::get('/destroyemployee/{id}/delete', ['as' => 'employee.destroy', 'uses' => 'EmployeeController@destroy']);
+Route::get('/employee/delete/{id}', 'EmployeeController@destroy');
 Route::post('/addemployee','EmployeeController@store');
 Route::post('/updateemployee','EmployeeController@update');
 Route::get('/employeefill/{id?}',function($id = 0){
-    $dt=App\Employee::where('employee_id','=',$id)->get();
+    $dt=App\Employee::where('emp_id','=',$id)->get();
     return $dt;
 });
 
 Route::get('/state', 'StateController@index')->name('state');
-Route::get('/destroystate/{id}/delete', ['as' => 'state.destroy', 'uses' => 'StateController@destroy']);
+Route::get('/state/delete/{id}', 'StateController@destroy');
 Route::post('/addstate','StateController@store');
 Route::post('/updatestate','StateController@update');
 Route::get('/statefill/{id?}',function($id = 0){
@@ -69,20 +69,20 @@ Route::get('/statefill/{id?}',function($id = 0){
 });
 
 Route::get('/method', 'MethodController@index')->name('method');
-Route::get('/destroymethod/{id}/delete', ['as' => 'method.destroy', 'uses' => 'MethodController@destroy']);
+Route::get('/method/delete/{id}', 'MethodController@destroy');
 Route::post('/addmethod','MethodController@store');
 Route::post('/updatemethod','MethodController@update');
 Route::get('/methodfill/{id?}',function($id = 0){
-    $dt=App\Method::where('state_id','=',$id)->get();
+    $dt=App\Method::where('method_code','=',$id)->get();
     return $dt;
 });
 
 Route::get('/prof', 'ProfController@index')->name('prof');
-Route::get('/destroyprof/{id}/delete', ['as' => 'prof.destroy', 'uses' => 'ProfController@destroy']);
+Route::get('/prof/delete/{id}', 'ProfController@destroy');
 Route::post('/addprof','ProfController@store');
 Route::post('/updateprof','ProfController@update');
 Route::get('/proffill/{id?}',function($id = 0){
-    $dt=App\Prof::where('prof_id','=',$id)->get();
+    $dt=App\Prof::where('profession_id','=',$id)->get();
     return $dt;
 });
 

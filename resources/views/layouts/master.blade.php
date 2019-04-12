@@ -152,7 +152,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Brand Logo -->
     <a href="{{ route('home') }}" class="brand-link">
     <img src="{{ asset('img/ubtz_logo_128.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" {{--style="opacity: .8"--}}>
-      <span class="brand-text font-weight-light">{{ config('app.name', 'ЗТҮС') }}</span>
+      <span class="brand-text font-weight-light">НОКС</span>
     </a>
 
     <!-- Sidebar -->

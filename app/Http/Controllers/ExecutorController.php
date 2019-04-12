@@ -42,7 +42,7 @@ class ExecutorController extends Controller
 
     public function update(Request $request)
     {
-        $executor = DB::table('SET_EXECUTOR')
+        $executor = DB::table('CONST_EXECUTOR')
             ->where('executor_id', Request::input('id'))
             ->update(['executor_name' => Request::input('executor_name'),'executor_name_ru' => Request::input('executor_name_ru'),'executor_abbr' => Request::input('executor_abbr'),'is_ubtz' => Request::input('is_ubtz')]);
         return Redirect('executor');

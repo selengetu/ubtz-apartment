@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Request;
 use App\Constructor;
 use App\Prof;
+use DB;
 class ProfController extends Controller
 {
     /**
@@ -25,7 +26,7 @@ class ProfController extends Controller
     public function index()
     {
         $constructor = Constructor::orderby('department_name')->get();
-        $prof = Prof::all();
+        $prof = Prof::orderby('profession_id')->get();
         return view('set.prof')->with(['constructor'=>$constructor,'prof'=>$prof]);
     }
 
@@ -33,6 +34,7 @@ class ProfController extends Controller
     {
         $prof= new Prof;
         $prof->profession_name = Request::input('profession_name');
+        $prof->profession_num = Request::input('profession_num');
         $prof->description = Request::input('description');
         $prof->save();
         return Redirect('prof');
@@ -40,9 +42,10 @@ class ProfController extends Controller
 
     public function update(Request $request)
     {
-        $prof= DB::table('SET_PROFESSION')
+
+        $prof= DB::table('CONST_PROFESSION')
             ->where('profession_id', Request::input('id'))
-            ->update(['profession_name' => Request::input('profession_name'),'description' => Request::input('description')]);
+            ->update(['profession_num' => Request::input('profession_num'),'profession_name' => Request::input('profession_name'),'description' => Request::input('description')]);
         return Redirect('prof');
     }
 
@@ -55,6 +58,6 @@ class ProfController extends Controller
     public function destroy($id)
     {
         Prof::where('profession_id', '=', $id)->delete();
-        return Redirect('profession');
+
     }
 }

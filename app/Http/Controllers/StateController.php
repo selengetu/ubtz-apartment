@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Request;
 use App\Constructor;
 use App\State;
+use DB;
 class StateController extends Controller
 {
     /**
@@ -33,12 +34,12 @@ class StateController extends Controller
         $state->state_name_mn = Request::input('state_name_mn');
         $state->state_name_ru = Request::input('state_name_ru');
         $state->save();
-        return Redirect('executor');
+        return Redirect('state');
     }
 
     public function update(Request $request)
     {
-        $state = DB::table('SET_STATE')
+        $state = DB::table('CONST_STATE')
             ->where('state_id', Request::input('id'))
             ->update(['state_name_mn' => Request::input('state_name_mn'),'state_name_ru' => Request::input('state_name_ru')]);
         return Redirect('state');

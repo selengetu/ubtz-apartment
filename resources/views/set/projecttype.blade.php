@@ -38,8 +38,8 @@
                                     <thead>
                                     <tr role="row">
                                         <th>#</th>
-                                        <th>Нэр</th>
-                                        <th>Орос нэр</th>
+                                        <th>Ажлын төрлийн нэр</th>
+                                        <th>Ажлын төрлийн нэр</th>
 
                                         <th></th>
                                     </tr>
@@ -84,47 +84,127 @@
     <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ажлын төрөл</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
+                <form id="form1" action="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modal-title">Шинэ ажилтан бүртгэх цонх</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
                         <div class="form-row">
 
                             <div class="form-group col-md-4">
-                                <label for="inputAddress">Нэр</label>
-                                <input type="text" class="form-control" id="inputAddress" placeholder="">
+                                <label for="inputAddress">Ажлын төрлийн нэр</label>
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <input type="hidden" class="form-control" id="id" name="id">
+                                <input type="text" class="form-control" id="project_type_name_mn" name="project_type_name_mn" placeholder="" maxlength="50">
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="inputAddress2">Орос нэр</label>
-                                <input type="text" class="form-control" id="inputAddress2" placeholder="">
+                                <label for="inputAddress2">Ажлын төрлийн нэр</label>
+                                <input type="text" class="form-control" id="project_type_name_ru" name="project_type_name_ru" placeholder="" maxlength="50">
                             </div>
-
 
                         </div>
 
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Хаах</button>
-                    <button type="button" class="btn btn-primary">Хадгалах</button>
-                </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger delete">Устгах</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Хаах</button>
+                        <button type="submit" class="btn btn-primary">Хадгалах</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 @endsection
 
 @section('script')
+    <script src="//jonthornton.github.io/jquery-timepicker/jquery.timepicker.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(".date-picker").datepicker({
+            dateFormat: 'yy-mm-dd'
+        });
+    </script>
     <script>
         $(document).ready(function() {
-            $('#example').DataTable(
-                {
-
-                }
-            );
+            $('#example').dataTable( {
+                "language": {
+                    "lengthMenu": " _MENU_ бичлэг",
+                    "zeroRecords": "Бичлэг олдсонгүй",
+                    "info": "_PAGE_ ээс _PAGES_ хуудас" ,
+                    "infoEmpty": "Бичлэг олдсонгүй",
+                    "infoFiltered": "(filtered from _MAX_ total records)",
+                    "search": "Хайлт:",
+                    "paginate": {
+                        "first":      "Эхнийх",
+                        "last":       "Сүүлийнх",
+                        "next":       "Дараагийнх",
+                        "previous":   "Өмнөх"
+                    },
+                },
+                "pageLength": 50
+            } );
         } );
+    </script>
+    <script>
+        $('.update').on('click',function(){
+            var title = document.getElementById("modal-title");
+            title.innerHTML = "Албан ажилтан засварлах цонх";
+            document.getElementById('form1').action = "updateemployee";
+            document.getElementById('form1').method ="post"
+            var itag=$(this).attr('tag');
+            $.get('employeefill/'+itag,function(data){
+                $.each(data,function(i,qwe){
+                    $('#id').val(qwe.emp_id);
+                    $('#firstname').val(qwe.firstname);
+                    $('#lastname').val(qwe.lastname);
+                    $('#date1').val(qwe.hired_date);
+                    $('#date2').val(qwe.fired_date);
+                    $('#prof_id').val(qwe.prof_id);
+                    $('#mainduty').val(qwe.mainduty);
+                });
+
+            });
+            $('.delete').show();
+        });
+    </script>
+    <script>
+        $('.add').on('click',function(){
+            var title = document.getElementById("modal-title");
+            title.innerHTML = "Шинэ ажилтан бүртгэх цонх";
+            document.getElementById('form1').action = "addemployee"
+            document.getElementById('form1').method ="post"
+            $('#id').val('');
+            $('#firstname').val('');
+            $('#lastname').val('');
+            $('#date1').val('');
+            $('#date2').val('');
+            $('#prof_id').val(1);
+            $('#mainduty').val('');
+        });
+        $('.delete').on('click',function(){
+            var itag = $('#id').val();
+
+            $.ajax(
+                {
+                    url: "employee/delete/" + itag,
+                    type: 'GET',
+                    dataType: "JSON",
+                    data: {
+                        "id": itag,
+                        "_method": 'DELETE',
+                    },
+                    success: function () {
+                        alert('Ажилтан устгагдлаа');
+                    }
+
+                });
+            alert('Ажилтан устгагдлаа');
+            location.reload();
+        });
     </script>
 @endsection

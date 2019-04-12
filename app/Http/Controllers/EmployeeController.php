@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Request;
 use App\Constructor;
 use App\Employee;
+use App\Prof;
+use DB;
 class EmployeeController extends Controller
 {
     /**
@@ -24,31 +26,36 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employee =Employee::orderby('firstname')->get();
-        return view('set.employee')->with(['employee'=>$employee]);
+        $prof =Prof::orderby('profession_id')->get();
+        $employee =DB::select('select  * from V_CONST_EMPLOYEE t order by firstname');
+        return view('set.employee')->with(['employee'=>$employee,'prof'=>$prof]);
     }
     public function store()
     {
         $employee = new Employee;
         $employee->firstname = Request::input('firstname');
-        $employee->depart_id = Request::input('depart_id');
+        $employee->depart_id = 22;
         $employee->prof_id = Request::input('prof_id');
         $employee->lastname = Request::input('lastname');
+        $employee->hired_date = Request::input('date1');
+        $employee->fired_date = Request::input('date2');
+        $employee->mainduty = Request::input('mainduty');
         $employee->save();
         return Redirect('employee');
     }
 
     public function update(Request $request)
     {
-        $employee = DB::table('SET_Employee')
-            ->where('employee_id', Request::input('id'))
-            ->update(['firstname' => Request::input('firstname'),'lastname' => Request::input('lastname'),'depart_id' => Request::input('depart_id'),'prof_id' => Request::input('prof_id')]);
+        $employee = DB::table('CONST_Employee')
+            ->where('emp_id', Request::input('id'))
+            ->update(['firstname' => Request::input('firstname'),'lastname' => Request::input('lastname'),'prof_id' => Request::input('prof_id')
+                ,'hired_date' => Request::input('date1'),'fired_date' => Request::input('date2'),'mainduty' => Request::input('mainduty')]);
         return Redirect('employee');
     }
 
     public function destroy($id)
     {
-        Employee::where('employee_id', '=', $id)->delete();
+        Employee::where('emp_id', '=', $id)->delete();
         return Redirect('employee');
     }
 }
