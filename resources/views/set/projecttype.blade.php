@@ -39,7 +39,7 @@
                                     <tr role="row">
                                         <th>#</th>
                                         <th>Ажлын төрлийн нэр</th>
-                                        <th>Ажлын төрлийн нэр</th>
+                                        <th>Наименование вида работы</th>
 
                                         <th></th>
                                     </tr>
@@ -81,7 +81,7 @@
             </div>
         </div>
     </section>
-    <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <form id="form1" action="post">
@@ -102,7 +102,7 @@
                                 <input type="text" class="form-control" id="project_type_name_mn" name="project_type_name_mn" placeholder="" maxlength="50">
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="inputAddress2">Ажлын төрлийн нэр</label>
+                                <label for="inputAddress2">Наименование вида работы</label>
                                 <input type="text" class="form-control" id="project_type_name_ru" name="project_type_name_ru" placeholder="" maxlength="50">
                             </div>
 

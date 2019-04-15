@@ -26,10 +26,7 @@
                     </select>
 
                 </div>
-                <div class="form-group col-md-4">
-                    <button type="button" class="btn btn-primary">Хайх</button>
 
-                </div>
             </div>
 
             <div class="row">
@@ -62,11 +59,12 @@
                                         <th>2018 оны төлөвлөгөө</th>
 
                                         <th>Төсөв</th>
-
+                                        <th>Гүйцэтгэл</th>
                                         <th>Үүнээс</th>
                                         <th>Биелэлт</th>
                                         <th>Хариуцагч инженер</th>
                                         <th>Тайлбар</th>
+                                        <th></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -85,13 +83,16 @@
                                                 echo number_format($projects->estimation)."<br>";
                                                 ?></td>
                                             <td><?php
-                                                echo number_format($projects->estimation)."<br>";
+                                                echo number_format($projects->economic)."<br>";
+                                                ?></td>
+                                            <td><?php
+                                                echo number_format($projects->economic)."<br>";
                                                 ?></td>
 
-                                            <td>{{$projects->percent}}</td>
+                                            <td>{{$projects->percent}}%</td>
                                             <td>{{$projects->firstname}}</td>
                                             <td>{{$projects->state_name_mn}}</td>
-
+                                            <td><button class="btn btn-primary">   <i class="fa fa-plus" style="color: rgb(255, 255, 255);"> Гүйцэтгэл</i></button></td>
                                         </tr>
                                         <?php $no++; ?>
                                     @endforeach
@@ -120,6 +121,7 @@
     <div class="modal fade " id="exampleModal" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
+                <form id="form1" method="post" action="addproject">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Их барилга, их засварын ажил бүртгэх цонх</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -127,11 +129,11 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <label for="inputEmail4">Ажлын төрөл</label>
-                                <select class="form-control select2" id="constructor_id" name="constructor_id" >
+                                <select class="form-control select2" id="project_type" name="project_type" >
                                     @foreach($projecttype as $projecttypes)
                                         <option value= "{{$projecttypes->project_type_id}}">{{$projecttypes->project_type_name_mn}}</option>
                                     @endforeach
@@ -158,11 +160,11 @@
                             </div>
                             <div class="form-group col-md-9">
                                 <label for="inputAddress">Ажлын нэр</label>
-                                <textarea class="form-control" rows="1" id="mainduty" name="mainduty"></textarea>
+                                <textarea class="form-control" rows="1" id="project_name" name="project_name"></textarea>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="inputZip">Хариуцагч</label>
-                                <select class="form-control select2" id="executor_id" name="executor_id" >
+                                <select class="form-control select2" id="respondent_emp_id" name="respondent_emp_id" >
                                 @foreach($employee as $employees)
                                     <option value= "{{$employees->emp_id}}">{{$employees->firstname}}</option>
                                 @endforeach
@@ -170,11 +172,11 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputAddress2">Төлөвлөгөө</label>
-                                <input type="text" class="form-control money" id="inputAddress2" placeholder="">
+                                <input type="text" class="form-control money" id="plan" name="plan" placeholder="">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputCity">Төсөв</label>
-                                <input type="text" class="form-control money" id="inputCity">
+                                <input type="text" class="form-control money" id="estimation" name="estimation">
                             </div>
 
                         </div>
@@ -183,15 +185,15 @@
 
                             <div class="form-group col-md-6">
                                 <label for="inputZip">Үүнээс хаасан</label>
-                                <input type="text" class="form-control money" id="inputZip">
+                                <input type="text" class="form-control money" id="economic" name="economic">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputZip">Биелэлт</label>
-                                <input type="number" class="form-control " id="inputZip" placeholder="99.9">
+                                <input type="text" class="form-control" id="percent" name="percent" placeholder="99.9" maxlength="4">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputZip">Төлөв</label>
-                                <select class="form-control select2" id="executor_id" name="executor_id" >
+                                <select class="form-control select2" id="state_id" name="state_id" >
                                     @foreach($state as $states)
                                         <option value= "{{$states->state_id}}">{{$states->state_name_mn}}</option>
                                     @endforeach
@@ -199,15 +201,16 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputZip">Тайлбар</label>
-                                <textarea class="form-control" rows="2" id="mainduty" name="mainduty" maxlength="500"></textarea>
+                                <textarea class="form-control" rows="2" id="description" name="description" maxlength="500"></textarea>
                             </div>
                         </div>
-                    </form>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Хаах</button>
                     <button type="button" class="btn btn-primary">Хадгалах</button>
                 </div>
+                </form>
             </div>
         </div>
     </div>

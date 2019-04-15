@@ -42,7 +42,7 @@
                                     <tr role="row">
                                         <th>#</th>
                                         <th>Гүйцэтгэлийн аргын нэр</th>
-                                        <th>Гүйцэтгэлийн аргын нэр</th>
+                                        <th>Наименование метода выполнения работы</th>
                                         <th>Харьяа</th>
                                         <th></th>
                                     </tr>
@@ -84,7 +84,7 @@
             </div>
         </div>
     </section>
-    <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <form id="form1" action="post">
@@ -105,7 +105,7 @@
                                 <input type="text" class="form-control" id="method_name" name="method_name" placeholder="" maxlength="50">
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="inputAddress2">Гүйцэтгэлийн аргын нэр</label>
+                                <label for="inputAddress2">Наименование метода выполнения работы</label>
                                 <input type="text" class="form-control" id="method_name_ru" name="method_name_ru" placeholder="" maxlength="50">
                             </div>
                             <div class="form-group col-md-4">

@@ -45,6 +45,7 @@
                                         <th>Ажилтны овог</th>
                                         <th>Ажилтны нэр</th>
                                         <th>Хариуцах ажлын үндсэн чиглэл</th>
+                                        <th>Утасны дугаар</th>
                                         <th>Ажилд орсон огноо</th>
                                         <th>Ажлаас гарсан огноо</th>
                                         <th></th>
@@ -59,8 +60,9 @@
                                             <td>{{$employees->lastname}}</td>
                                             <td>{{$employees->firstname}}</td>
                                             <td>{{$employees->mainduty}}</td>
-                                            <td>{{$employees->hired_date}}</td>
-                                            <td>{{$employees->fired_date}}</td>
+                                            <td>{{$employees->phone}}</td>
+                                            <td>{{date('Y-m-d', strtotime($employees->hired_date))}}</td>
+                                            <td>{{date('Y-m-d', strtotime($employees->fired_date))}}</td>
                                             <td class='m1'> <a class='btn btn-xs btn-info update' data-toggle='modal' data-target='#exampleModal' data-id="{{$employees->emp_id}}" tag='{{$employees->emp_id}}'><i class="fa fa-pencil-square-o" style="color: rgb(255, 255, 255); "></i></a> </td>
                                         </tr>
                                         <?php $no++; ?>
@@ -90,7 +92,7 @@
             </div>
         </div>
     </section>
-    <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <form id="form1" action="post">
@@ -121,6 +123,10 @@
                                         <option value= "{{$profs->profession_id}}">{{$profs->profession_name}}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputAddress2">Утасны дугаар</label>
+                                <input type="number" class="form-control" id="phone" name="phone" placeholder="" maxlength="8">
                             </div>
                             <div class="form-group col-md-12">
                                 <label for="inputAddress2">Хариуцах ажлын үндсэн чиглэл</label>
@@ -200,6 +206,7 @@
                     $('#date2').val(qwe.fired_date);
                     $('#prof_id').val(qwe.prof_id);
                     $('#mainduty').val(qwe.mainduty);
+                    $('#phone').val(qwe.phone);
                 });
 
             });
@@ -219,6 +226,7 @@
             $('#date2').val('');
             $('#prof_id').val(1);
             $('#mainduty').val('');
+            $('#phone').val('');
             $('.delete').hide();
         });
         $('.delete').on('click',function(){

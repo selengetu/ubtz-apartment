@@ -40,6 +40,7 @@ class EmployeeController extends Controller
         $employee->hired_date = Request::input('date1');
         $employee->fired_date = Request::input('date2');
         $employee->mainduty = Request::input('mainduty');
+        $employee->phone = Request::input('phone');
         $employee->save();
         return Redirect('employee');
     }
@@ -49,7 +50,7 @@ class EmployeeController extends Controller
         $employee = DB::table('CONST_Employee')
             ->where('emp_id', Request::input('id'))
             ->update(['firstname' => Request::input('firstname'),'lastname' => Request::input('lastname'),'prof_id' => Request::input('prof_id')
-                ,'hired_date' => Request::input('date1'),'fired_date' => Request::input('date2'),'mainduty' => Request::input('mainduty')]);
+                ,'hired_date' => Request::input('date1'),'fired_date' => Request::input('date2'),'mainduty' => Request::input('mainduty'),'phone' => Request::input('phone')]);
         return Redirect('employee');
     }
 

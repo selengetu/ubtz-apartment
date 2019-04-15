@@ -38,9 +38,9 @@
                                     <thead>
                                     <tr role="row">
                                         <th>#</th>
-                                        <th>Гүйцэтгэгч байгууллагын нэр</th>
-                                        <th>Гүйцэтгэгч байгууллагын нэр</th>
-                                        <th>Гүйцэтгэгч байгууллагын товчилсон нэр</th>
+                                        <th>Байгууллагын нэр</th>
+                                        <th>Службы УБТЗ</th>
+                                        <th>Байгууллагын товчилсон нэр</th>
                                         <th>УБТЗ эсэх</th>
                                         <th></th>
                                     </tr>
@@ -89,7 +89,7 @@
         </div>
     </section>
 
-    <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <form id="form1" action="post">
@@ -104,17 +104,17 @@
                         <div class="form-row">
 
                             <div class="form-group col-md-4">
-                                <label for="inputAddress">Гүйцэтгэгч байгууллагын нэр</label>
+                                <label for="inputAddress">Байгууллагын нэр</label>
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <input type="hidden" class="form-control" id="id" name="id">
                                 <input type="text" class="form-control" id="executor_name" name="executor_name" placeholder="">
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="inputAddress2">Гүйцэтгэгч байгууллагын товчилсон нэр</label>
+                                <label for="inputAddress2">Байгууллагын товчилсон нэр</label>
                                 <input type="text" class="form-control" id="executor_abbr" name="executor_abbr" placeholder="">
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="inputCity">Гүйцэтгэгч байгууллагын нэр</label>
+                                <label for="inputCity">Службы УБТЗ</label>
                                 <input type="text" class="form-control" id="executor_name_ru" name="executor_name_ru" placeholder="">
                             </div>
                             <div class="form-group col-md-4">

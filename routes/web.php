@@ -26,9 +26,16 @@ Route::get('/collapsemenu/{val}', function($val){
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/blank', 'HomeController@blank')->name('blank');
-Route::get('/barilga', 'BarilgaController@index')->name('barilga');
 Route::get('/zaswar', 'ZaswarController@index')->name('zaswar');
 
+Route::get('/barilga', 'BarilgaController@index')->name('barilga');
+Route::post('/addproject','BarilgaController@store');
+Route::get('/project/delete/{id}', 'BarilgaController@destroy');
+Route::post('/updateproject','BarilgaController@update');
+Route::get('/projectfill/{id?}',function($id = 0){
+    $dt=App\Project::where('project_id','=',$id)->get();
+    return $dt;
+});
 
 Route::get('/executor', 'ExecutorController@index')->name('executor');
 Route::get('/executor/delete/{id}', 'ExecutorController@destroy');

@@ -39,9 +39,9 @@
                                     <thead>
                                     <tr role="row">
                                         <th>#</th>
-                                        <th>Ажил захиалагчийн нэр</th>
-                                        <th>Ажил захиалагчийн товч нэр</th>
-                                        <th>Ажил захиалагчийн нэр</th>
+                                        <th>Байгууллагын нэр</th>
+                                        <th>Байгууллагын товч нэр</th>
+                                        <th>Службы УБТЗ</th>
                                         <th></th>
                                     </tr>
                                     </thead>
@@ -84,7 +84,7 @@
     </section>
 
 
-    <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <form id="form1" action="post">
@@ -99,17 +99,17 @@
                         <div class="form-row">
 
                             <div class="form-group col-md-4">
-                                <label for="inputAddress">Ажил захиалагчийн нэр</label>
+                                <label for="inputAddress">Байгууллагын нэр</label>
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <input type="hidden" class="form-control" id="id" name="id">
                                 <input type="text" class="form-control" id="constructor_name" name="constructor_name" placeholder="">
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="inputAddress2"> Ажил захиалагчийн товч нэр</label>
+                                <label for="inputAddress2"> Байгууллагын товч нэр</label>
                                 <input type="text" class="form-control" id="constructor_abbr" name="constructor_abbr" placeholder="">
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="inputCity">Ажил захиалагчийн нэр</label>
+                                <label for="inputCity">Службы УБТЗ</label>
                                 <input type="text" class="form-control" id="constructor_name_ru" name="constructor_name_ru">
                             </div>
                         </div>
