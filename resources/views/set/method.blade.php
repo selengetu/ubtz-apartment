@@ -28,7 +28,7 @@
                                     <h4 class="m-0">Ажлын гүйцэтгэлийн арга</h4>
                                 </div>
                                 <div class="col-md-2 col-xs-5">
-                                    <button data-toggle="modal" data-target="#exampleModal" class="btn btn-primary form-control add" style="padding-bottom: 10px;"><i class="fa fa-plus" style="color: rgb(255, 255, 255);"> Ажлын арга нэмэх</i></button>
+                                    <button data-toggle="modal" data-target="#exampleModal" class="btn btn-primary add" style="padding-bottom: 10px;"><i class="fa fa-plus" style="color: rgb(255, 255, 255);"> Ажлын арга нэмэх</i></button>
                                 </div>
                             </div>
 
@@ -111,6 +111,7 @@
                             <div class="form-group col-md-4">
                                 <label for="inputAddress2">Харьяа</label>
                                 <select class="form-control select2" id="parent_method_code" name="parent_method_code" >
+                                    <option value=""></option>
                                     @foreach($method as $methods)
                                         <option value= "{{$methods->method_code}}">{{$methods->method_name}}</option>
                                     @endforeach

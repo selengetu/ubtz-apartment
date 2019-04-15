@@ -1,73 +1,181 @@
-@extends('layouts.app')
+<div class="body"></div>
+<div class="grad"></div>
+<div class="header">
+    <div><span>ИХ БАРИЛГА</span> <br><span>ИХ ЗАСВАРЫН</span> <br><span>ГҮЙЦЭТГЭЛИЙН</span> <br><span>ТАЙЛАН</span></div>
+</div>
+<br>
+<div class="login">
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+    <form class="form-horizontal" method="POST" action="{{ route('login') }}">
+        {{ csrf_field() }}
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
-
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
-                </div>
+        <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
+            <div class="col-md-6">
+                <input id="email" type="text" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus placeholder="Нэвтрэх код">
+                @if ($errors->has('username'))
+                    <span class="help-block">
+                <strong>{{ $errors->first('username') }}</strong>
+            </span>
+                @endif
             </div>
         </div>
-    </div>
+
+        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+
+            <div class="col-md-6">
+                <input id="password" type="password" class="form-control" name="password" required placeholder="Нууц үг">
+
+                @if ($errors->has('password'))
+                    <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                @endif
+            </div>
+        </div>
+
+
+        <div class="form-group">
+
+            <button type="submit" class="btn btn-primary">
+                Нэвтрэх
+            </button>
+
+        </div>
+    </form>
 </div>
-@endsection
+<style type="text/css">
+    @font-face {
+        font-family:Perforama; src: url('{{ asset('fonts/Perforama.otf') }}'), format('otf');
+    }
+
+    .body{
+        position: absolute;
+        top: -20px;
+        left: -20px;
+        right: -40px;
+        bottom: -40px;
+        width: auto;
+        height: auto;
+        background-image: url('{{ asset('img/galt.jpg') }}');
+        background-size: cover;
+        -webkit-filter: blur(3px);
+        z-index: 0;
+    }
+
+    .grad{
+        position: absolute;
+        top: -20px;
+        left: -20px;
+        right: -40px;
+        bottom: -40px;
+        width: auto;
+        height: auto;
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65))); /* Chrome,Safari4+ */
+        z-index: 1;
+        opacity: 0.7;
+    }
+
+    .header{
+        position: absolute;
+        top: calc(60% - 60px);
+        left: calc(57% - 180px);
+        z-index: 2;
+    }
+
+    .header div{
+        float: left;
+        color: #2EB9A9;
+        font-size: 25px;
+        font-weight: 200;
+        font-family: Perforama;
+    }
+
+    .header div span{
+        color:#ffffff;
+
+
+
+    }
+
+    .login{
+        position: absolute;
+        top: calc(60% - 75px);
+        left: calc(60% - 10px);
+        height: 150px;
+        width: 350px;
+        padding: 10px;
+        z-index: 2;
+    }
+
+    .login input[type=text]{
+        width: 250px;
+        height: 30px;
+        background: #fff;
+        border: 1px solid rgba(255,255,255,0.6);
+        border-radius: 2px;
+        color: #2EB9A9;
+        font-family: 'Days';
+        font-size: 16px;
+        font-weight: 400;
+        padding: 4px;
+    }
+
+    .login input[type=password]{
+        width: 250px;
+        height: 30px;
+        background: #fff;
+        border: 1px solid rgba(255,255,255,0.6);
+        border-radius: 2px;
+        color: #2EB9A9;
+        font-family: 'Days';
+        font-size: 16px;
+        font-weight: 400;
+        padding: 4px;
+        margin-top: 10px;
+    }
+
+    .login button{
+        width: 250px;
+        height: 35px;
+        background: #fff;
+        border: 1px solid #fff;
+        cursor: pointer;
+        border-radius: 2px;
+        color: #a18d6c;
+        font-family: 'Days';
+        font-size: 16px;
+        font-weight: 400;
+        padding: 6px;
+        margin-top: 10px;
+    }
+
+    .login input[type=button]:hover{
+        opacity: 0.8;
+    }
+
+    .login input[type=button]:active{
+        opacity: 0.6;
+    }
+
+    .login input[type=text]:focus{
+        outline: none;
+        border: 1px solid rgba(255,255,255,0.9);
+    }
+
+    .login input[type=password]:focus{
+        outline: none;
+        border: 1px solid rgba(255,255,255,0.9);
+    }
+
+    .login input[type=button]:focus{
+        outline: none;
+    }
+
+    ::-webkit-input-placeholder{
+        color: #2EB9A9;
+    }
+
+    ::-moz-input-placeholder{
+        color: #2EB9A9;
+    }
+</style>

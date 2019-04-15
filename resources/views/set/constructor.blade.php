@@ -26,7 +26,8 @@
                                     <h4 class="m-0">Ажлын захиалагч байгууллагууд</h4>
                                 </div>
                                 <div class="col-md-2 col-xs-5">
-                                    <button data-toggle="modal" data-target="#exampleModal" class="btn btn-primary form-control add" style="padding-bottom: 10px;"><i class="fa fa-plus" style="color: rgb(255, 255, 255);"> Ажил захиалагч нэмэх</i></button>
+
+                                    <button data-toggle="modal" data-target="#exampleModal" class="btn btn-primary add" style="padding-bottom: 10px;"><i class="fa fa-plus"> Ажил захиалагч нэмэх</i></button>
                                 </div>
                             </div>
 

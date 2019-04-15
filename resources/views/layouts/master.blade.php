@@ -97,12 +97,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <p>Их барилга</p>
                       </a>
                     </li>
-              <li class="nav-item">
-                <a href="{{ route('zaswar') }}" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Их засвар</p>
-                </a>
-              </li>
+
             </ul>
           </li>
 
@@ -194,7 +189,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       Anything you want
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2014-2018 <a href="ubtz.mn">UBTZ MN</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2019 СБМТА <a href="">НЧи Т.Сэлэнгэ</a></strong> 88877833
   </footer>
 </div>
 <!-- ./wrapper -->

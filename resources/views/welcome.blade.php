@@ -26,38 +26,26 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-md-4">
-                                    <h4 class="m-0">НОКС албаны ажилтанууд</h4>
+                                    <h4 class="m-0">Их барилга хөрөнгө ,оруулалтын хэлтэс</h4>
                                 </div>
-                                <div class="col-md-2 col-xs-5">
-                                    <button data-toggle="modal" data-target="#exampleModal" class="btn btn-primary form-control add" style="padding-bottom: 10px;"><i class="fa fa-plus" style="color: rgb(255, 255, 255);"> Ажилтан нэмэх</i></button>
-                                </div>
+
                             </div>
 
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body text-center">
                             <div class="m-scrollable" data-scrollable="true" data-height="400" >
-                                <iframe
-                                        style="width:210px;font-size:11px;height:280px;border: none;overflow:hidden;margin:0;"
-                                        src="//monxansh.appspot.com/xansh.html?currency=USD|EUR|JPY|GBP|RUB|CNY|KRW&conv_tool=1"></iframe>
-                                <table class="table table-striped table-bordered" id="example">
-                                    <thead>
-                                    <tr role="row" bgcolor="#d3d3d3">
-                                        <th>#</th>
-                                        <th>Албан тушаал</th>
-                                        <th>Ажилтны овог</th>
-                                        <th>Ажилтны нэр</th>
-                                        <th>Хариуцах ажлын үндсэн чиглэл</th>
-                                        <th>Ажилд орсон огноо</th>
-                                        <th>Ажлаас гарсан огноо</th>
-                                        <th></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
+                                <div class="col-md-12">
+                                    <div class="col-md-10"></div>
+                                    <div class="col-md-2">
+                                        <iframe
+                                                style="width:270px;font-size:11px;height:210px;border: none;overflow:hidden;margin:0;"
+                                                src="//monxansh.appspot.com/xansh.html?currency=USD|EUR|JPY|GBP|RUB|CNY|KRW&conv_tool=1"></iframe>
+                                        <br>
+                                        <iframe id="forecast_embed" type="text/html" frameborder="0" height="310" width="370" src="http://tsag-agaar.gov.mn/embed/?name=292&color=228ad4&color2=2179b8&color3=ffffff&color4=ffffff&type=vertical&tdegree=cwidth=370"> </iframe>
+                                    </div>
+                                </div>
 
-
-                                    </tbody>
-                                </table>
                             </div>
                         </div>
                         <!-- /.card-body -->

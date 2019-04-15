@@ -8,30 +8,50 @@
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-8">
-                    <h1>Их барилга</h1>
-                </div>
-                <div class="col-sm-4">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                        Нэмэх
-                    </button>
-                </div>
+
+
             </div>
         </div><!-- /.container-fluid -->
     </section>
     <section class="content">
         <div class="container-fluid">
             <div class="row">
+                <div class="form-group col-md-4">
+
+                    <select class="form-control select2" id="constructor_id" name="constructor_id" >
+                        <option value= "0">Бүгд</option>
+                        @foreach($projecttype as $projecttypes)
+                            <option value= "{{$projecttypes->project_type_id}}">{{$projecttypes->project_type_name_mn}}</option>
+                        @endforeach
+                    </select>
+
+                </div>
+                <div class="form-group col-md-4">
+                    <button type="button" class="btn btn-primary">Хайх</button>
+
+                </div>
+            </div>
+
+            <div class="row">
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <div class="col-md-6">
-                                <h3 class="card-title">2018 оны эхний 11 сарын их барилга</h3>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h3 class="card-title">2019 оны их барилга, их засварын ажлууд </h3>
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                        <i class="fa fa-plus" style="color: rgb(255, 255, 255);"> Их барилга, их засварын ажил бүртгэх</i>
+                                    </button>
+                                </div>
                             </div>
+
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body text-center">
-                            <div class="m-scrollable" data-scrollable="true" data-height="400" >
+
+                            <div class="table-responsive" data-scrollable="true" data-height="400" >
                                 <table class="table table-striped table-bordered" id="example">
                                     <thead>
                                     <tr role="row">
@@ -40,21 +60,41 @@
                                         <th>Гүйцэтгэгч</th>
                                         <th>Ажлын нэр</th>
                                         <th>2018 оны төлөвлөгөө</th>
-                                        <th>2018 оны өөрчлөгдсөн төлөвлөгөө</th>
+
                                         <th>Төсөв</th>
-                                        <th>Эхний 11 сарын өссөн дүн</th>
+
                                         <th>Үүнээс</th>
                                         <th>Биелэлт</th>
-                                        <th>Графикийн дагуу дуусах огноо</th>
-                                        <th>Дууссан огноо</th>
-                                        <th>Хугацаа  хэтэрсэн огноо</th>
-                                        <th>Гэмтлийн акт</th>
                                         <th>Хариуцагч инженер</th>
                                         <th>Тайлбар</th>
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    <?php $no = 1; ?>
+                                    @foreach($project as $projects)
+                                        <tr>
+                                            <td>{{$no}}</td>
+                                            <td>{{$projects->department_name}}</td>
+                                            <td>{{$projects->executor_abbr}}</td>
+                                            <td>{{$projects->project_name}}</td>
+                                            <td><?php
+                                                echo number_format($projects->plan)."<br>";
+                                                ?></td>
 
+                                            <td><?php
+                                                echo number_format($projects->estimation)."<br>";
+                                                ?></td>
+                                            <td><?php
+                                                echo number_format($projects->estimation)."<br>";
+                                                ?></td>
+
+                                            <td>{{$projects->percent}}</td>
+                                            <td>{{$projects->firstname}}</td>
+                                            <td>{{$projects->state_name_mn}}</td>
+
+                                        </tr>
+                                        <?php $no++; ?>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -77,11 +117,11 @@
             </div>
         </div>
     </section>
-    <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade " id="exampleModal" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Их барилга, их засварын ажил бүртгэх цонх</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -89,7 +129,16 @@
                 <div class="modal-body">
                     <form>
                         <div class="form-row">
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
+                                <label for="inputEmail4">Ажлын төрөл</label>
+                                <select class="form-control select2" id="constructor_id" name="constructor_id" >
+                                    @foreach($projecttype as $projecttypes)
+                                        <option value= "{{$projecttypes->project_type_id}}">{{$projecttypes->project_type_name_mn}}</option>
+                                    @endforeach
+                                </select>
+
+                            </div>
+                            <div class="form-group col-md-4">
                                 <label for="inputEmail4">Захиалагч</label>
                                 <select class="form-control select2" id="constructor_id" name="constructor_id" >
                                     @foreach($constructor as $constructors)
@@ -98,56 +147,66 @@
                                 </select>
 
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
                                 <label for="inputPassword4">Гүйцэтгэгч</label>
                                 <select class="form-control select2" id="executor_id" name="executor_id" >
                                     @foreach($executor as $executors)
-                                        <option value= "{{$executors->executor_id}}">{{$executors->executor_name}}</option>
+                                        <option value= "{{$executors->executor_id}}">{{$executors->executor_abbr}}</option>
                                     @endforeach
                                 </select>
 
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-9">
                                 <label for="inputAddress">Ажлын нэр</label>
-                                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="inputAddress2">Төлөвлөгөө</label>
-                                <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group col-md-3">
-                                <label for="inputCity">Төсөв</label>
-                                <input type="text" class="form-control" id="inputCity">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="inputState">Гүйцэтгэл</label>
-                                <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="inputZip">Үүнээс хаасан</label>
-                                <input type="text" class="form-control" id="inputZip">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="inputZip">Биелэлт</label>
-                                <input type="text" class="form-control" id="inputZip">
+                                <textarea class="form-control" rows="1" id="mainduty" name="mainduty"></textarea>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="inputZip">Хариуцагч</label>
-                                <input type="text" class="form-control" id="inputZip">
+                                <select class="form-control select2" id="executor_id" name="executor_id" >
+                                @foreach($employee as $employees)
+                                    <option value= "{{$employees->emp_id}}">{{$employees->firstname}}</option>
+                                @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputAddress2">Төлөвлөгөө</label>
+                                <input type="text" class="form-control money" id="inputAddress2" placeholder="">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputCity">Төсөв</label>
+                                <input type="text" class="form-control money" id="inputCity">
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+
+                            <div class="form-group col-md-6">
+                                <label for="inputZip">Үүнээс хаасан</label>
+                                <input type="text" class="form-control money" id="inputZip">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputZip">Биелэлт</label>
+                                <input type="number" class="form-control " id="inputZip" placeholder="99.9">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputZip">Төлөв</label>
+                                <select class="form-control select2" id="executor_id" name="executor_id" >
+                                    @foreach($state as $states)
+                                        <option value= "{{$states->state_id}}">{{$states->state_name_mn}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputZip">Тайлбар</label>
-                                <input type="text" class="form-control" id="inputZip">
+                                <textarea class="form-control" rows="2" id="mainduty" name="mainduty" maxlength="500"></textarea>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Хаах</button>
+                    <button type="button" class="btn btn-primary">Хадгалах</button>
                 </div>
             </div>
         </div>
@@ -157,11 +216,38 @@
 @section('script')
     <script>
         $(document).ready(function() {
-            $('#example').DataTable(
-                {
-                    "scrollX": true
-                }
-            );
+            $('#example').dataTable( {
+                "language": {
+                    "lengthMenu": " _MENU_ бичлэг",
+                    "zeroRecords": "Бичлэг олдсонгүй",
+                    "info": "_PAGE_ ээс _PAGES_ хуудас" ,
+                    "infoEmpty": "Бичлэг олдсонгүй",
+                    "infoFiltered": "(filtered from _MAX_ total records)",
+                    "search": "Хайлт:",
+                    "paginate": {
+                        "first":      "Эхнийх",
+                        "last":       "Сүүлийнх",
+                        "next":       "Дараагийнх",
+                        "previous":   "Өмнөх"
+                    },
+                },
+                "pageLength": 50
+            } );
         } );
     </script>
+    <script type='text/javascript' src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
+    <script type="text/javascript">
+
+        $('.money').inputmask("numeric", {
+            radixPoint: ".",
+            groupSeparator: ",",
+            digits: 2,
+            autoGroup: true,
+
+            rightAlign: false,
+            oncleared: function () { self.Value(''); }
+        });
+
+    </script>
+
 @endsection
