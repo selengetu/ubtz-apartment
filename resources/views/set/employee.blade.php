@@ -1,8 +1,7 @@
 @extends('layouts.master')
 
 @section('style')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
-    <link rel="stylesheet" href="//jonthornton.github.io/jquery-timepicker/jquery.timepicker.css">
+
     <style>
         .date-picker{z-index: 9999 !important};
     </style>
@@ -162,8 +161,7 @@
 @endsection
 
 @section('script')
-    <script src="//jonthornton.github.io/jquery-timepicker/jquery.timepicker.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+
     <script>
         $(".date-picker").datepicker({
             dateFormat: 'yy-mm-dd'

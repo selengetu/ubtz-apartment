@@ -15,9 +15,10 @@
     </section>
     <section class="content">
         <div class="container-fluid">
-            <div class="row">
-                <div class="form-group col-md-4">
 
+            <div class="row">
+                <div class="form-group col-md-2">
+                    <label for="inputEmail4">Ажлын төрөл</label>
                     <select class="form-control select2" id="constructor_id" name="constructor_id" >
                         <option value= "0">Бүгд</option>
                         @foreach($projecttype as $projecttypes)
@@ -26,7 +27,45 @@
                     </select>
 
                 </div>
+                <div class="form-group col-md-2">
 
+                    <label for="inputEmail4">Ажлын төлөв</label>
+                    <select class="form-control select2" id="state_id" name="state_id" >
+                        <option value= "0">Бүгд</option>
+                        @foreach($state as $states)
+                            <option value= "{{$states->state_id}}">{{$states->state_name_mn}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="inputEmail4">Захиалагч</label>
+                    <select class="form-control select2" id="constructor_id" name="constructor_id" >
+                        <option value= "0">Бүгд</option>
+                        @foreach($constructor as $constructors)
+                            <option value= "{{$constructors->department_id}}">{{$constructors->department_name}}</option>
+                        @endforeach
+                    </select>
+
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="inputPassword4">Гүйцэтгэгч</label>
+                    <select class="form-control select2" id="executor_id" name="executor_id" >
+                        <option value= "0">Бүгд</option>
+                        @foreach($executor as $executors)
+                            <option value= "{{$executors->executor_id}}">{{$executors->executor_abbr}}</option>
+                        @endforeach
+                    </select>
+
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="inputZip">Хариуцагч</label>
+                    <select class="form-control select2" id="respondent_emp_id" name="respondent_emp_id" >
+                        <option value= "0">Бүгд</option>
+                        @foreach($employee as $employees)
+                            <option value= "{{$employees->emp_id}}">{{$employees->firstname}}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
 
             <div class="row">
@@ -92,7 +131,11 @@
                                             <td>{{$projects->percent}}%</td>
                                             <td>{{$projects->firstname}}</td>
                                             <td>{{$projects->state_name_mn}}</td>
-                                            <td><button class="btn btn-primary">   <i class="fa fa-plus" style="color: rgb(255, 255, 255);"> Гүйцэтгэл</i></button></td>
+                                            <td> <button class="btn btn-info">  <a href="{{ route('process') }}"> <i class="fa fa-plus" style="color: rgb(255, 255, 255);"></i></a></button>
+                                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+                                                    <i class="fa fa-pencil" style="color: rgb(255, 255, 255);"></i>
+                                                </button>
+                                            </td>
                                         </tr>
                                         <?php $no++; ?>
                                     @endforeach
@@ -132,10 +175,20 @@
 
                         <div class="form-row">
                             <div class="form-group col-md-4">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <label for="inputEmail4">Ажлын төрөл</label>
                                 <select class="form-control select2" id="project_type" name="project_type" >
                                     @foreach($projecttype as $projecttypes)
                                         <option value= "{{$projecttypes->project_type_id}}">{{$projecttypes->project_type_name_mn}}</option>
+                                    @endforeach
+                                </select>
+
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputEmail4">Ажлын арга</label>
+                                <select class="form-control select2" id="method_code" name="method_code" >
+                                    @foreach($method as $methods)
+                                        <option value= "{{$methods->method_code}}">{{$methods->method_name}}</option>
                                     @endforeach
                                 </select>
 
@@ -158,9 +211,11 @@
                                 </select>
 
                             </div>
+
+
                             <div class="form-group col-md-9">
                                 <label for="inputAddress">Ажлын нэр</label>
-                                <textarea class="form-control" rows="1" id="project_name" name="project_name"></textarea>
+                                <textarea class="form-control" rows="1" id="project_name" name="project_name" required></textarea>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="inputZip">Хариуцагч</label>
@@ -172,11 +227,11 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputAddress2">Төлөвлөгөө</label>
-                                <input type="text" class="form-control money" id="plan" name="plan" placeholder="">
+                                <input type="text" class="form-control money" id="plan" name="plan" placeholder="" maxlength="14">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputCity">Төсөв</label>
-                                <input type="text" class="form-control money" id="estimation" name="estimation">
+                                <input type="text" class="form-control money" id="estimation" name="estimation" maxlength="14">
                             </div>
 
                         </div>
@@ -185,11 +240,21 @@
 
                             <div class="form-group col-md-6">
                                 <label for="inputZip">Үүнээс хаасан</label>
-                                <input type="text" class="form-control money" id="economic" name="economic">
+                                <input type="text" class="form-control money" id="economic" name="economic" maxlength="14">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputZip">Биелэлт</label>
                                 <input type="text" class="form-control" id="percent" name="percent" placeholder="99.9" maxlength="4">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputAddress2">Эхлэх огноо</label>
+                                <input class="form-control form-control-inline input-medium date-picker" name="date1" id="date1" placeholder="2019-04-15"
+                                       size="16" type="text" value="">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputCity">Дуусах огноо</label>
+                                <input class="form-control form-control-inline input-medium date-picker" name="date2" id="date2" placeholder="2019-06-15"
+                                       size="16" type="text" value="">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputZip">Төлөв</label>
@@ -208,7 +273,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Хаах</button>
-                    <button type="button" class="btn btn-primary">Хадгалах</button>
+                    <button type="submit" class="btn btn-primary">Хадгалах</button>
                 </div>
                 </form>
             </div>
@@ -252,5 +317,7 @@
         });
 
     </script>
+    <script>
 
+    </script>
 @endsection

@@ -18,6 +18,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
   <link rel="stylesheet" href="{{ asset('plugins/font-awesome/css/font-awesome.min.css') }}">
   <link rel="stylesheet" href="{{ asset('https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+    <link rel="stylesheet" href="//jonthornton.github.io/jquery-timepicker/jquery.timepicker.css">
     <link href="{{ asset('css/ptsans.css') }}" rel="stylesheet">
 
     @yield('style')
@@ -200,6 +202,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{ asset('js/app.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="//jonthornton.github.io/jquery-timepicker/jquery.timepicker.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
 @yield('script')
 <script>
     // Show active menu
@@ -223,6 +227,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
         }
         $.get( "/collapsemenu/"+val);
     });
+    $(".date-picker").datepicker({
+        dateFormat: 'yy-mm-dd'
+    });
 </script>
+
 </body>
 </html>
