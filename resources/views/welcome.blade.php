@@ -35,15 +35,22 @@
                         <!-- /.card-header -->
                         <div class="card-body text-center">
                             <div class="m-scrollable" data-scrollable="true" data-height="400" >
-                                <div class="col-md-12">
-                                    <div class="col-md-10"></div>
+                                <div class="row">
                                     <div class="col-md-2">
                                         <iframe
-                                                style="width:270px;font-size:11px;height:210px;border: none;overflow:hidden;margin:0;"
+                                                style="width:270px;font-size:11px;height:210px;border: none;overflow:hidden;"
                                                 src="//monxansh.appspot.com/xansh.html?currency=USD|EUR|JPY|GBP|RUB|CNY|KRW&conv_tool=1"></iframe>
                                         <br>
                                         <iframe id="forecast_embed" type="text/html" frameborder="0" height="310" width="370" src="http://tsag-agaar.gov.mn/embed/?name=292&color=228ad4&color2=2179b8&color3=ffffff&color4=ffffff&type=vertical&tdegree=cwidth=370"> </iframe>
                                     </div>
+                                    <div class="col-md-1">
+
+                                    </div>
+
+                                    <div class="col-md-9">
+                                        <canvas id="bar-chart-grouped" width="800" height="450"></canvas>
+                                    </div>
+
                                 </div>
 
                             </div>
@@ -128,5 +135,29 @@
 @endsection
 
 @section('script')
-
+    <script>
+        new Chart(document.getElementById("bar-chart-grouped"), {
+            type: 'bar',
+            data: {
+                labels: ["1900", "1950", "1999", "2050"],
+                datasets: [
+                    {
+                        label: "Africa",
+                        backgroundColor: "#3e95cd",
+                        data: [133,221,783,2478]
+                    }, {
+                        label: "Europe",
+                        backgroundColor: "#8e5ea2",
+                        data: [408,547,675,734]
+                    }
+                ]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Population growth (millions)'
+                }
+            }
+        });
+    </script>
 @endsection

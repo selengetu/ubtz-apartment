@@ -7,7 +7,7 @@
 <div class="login">
 
     <form class="form-horizontal" method="POST" action="{{ route('login') }}">
-        {{ csrf_field() }}
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
         <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
             <div class="col-md-6">

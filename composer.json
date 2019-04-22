@@ -12,6 +12,7 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
+        "spatie/laravel-activitylog": "^3.2",
         "yajra/laravel-oci8": "5.7.*"
     },
     "require-dev": {

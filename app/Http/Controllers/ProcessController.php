@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Projecttype;
-use Illuminate\Http\Request;
+use Request;
 use App\Constructor;
 use App\Executor;
 use App\Employee;
 use App\Project;
 use App\State;
+use Auth;
+use App\Process;
+use Illuminate\Support\Facades\Input;
 use DB;
 class ProcessController extends Controller
 {
@@ -39,41 +42,46 @@ class ProcessController extends Controller
     }
     public function store()
     {
-        $project = new Project;
-        $project->plan_year = Request::input('plan_year');
-        $project->project_name = Request::input('project_name');
-        $project->budget = Request::input('budget');
-        $project->estimation = Request::input('estimation');
-        $project->plan = Request::input('plan');
-        $project->department_id = Request::input('department_id');
-        $project->project_type = Request::input('project_type');
-        $project->respondent_emp_id = Request::input('respondent_emp_id');
-        $project->state_id = Request::input('state_id');
-        $project->method_code = Request::input('method_code');
-        $project->percent = Request::input('percent');
-        $project->executor_id = Request::input('executor_id');
-        $project->project_name_ru = Request::input('project_name_ru');
-        $project->economic = Request::input('economic');
-        $project->description = Request::input('description');
-        $project->save();
+
+        $process = new Process;
+        $process ->project_id = Request::input('project_id');
+        $process ->budget = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('budget'));
+        $process ->month = Request::input('month');
+        $process ->register_date = Request::input('register_date');
+        $process ->respondent_emp_id = Auth::user()->id;
+        $process ->description = Request::input('description');
+
+        request()->validate([
+
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+
+        ]);
+
+
+
+        $imageName = time().'.'.request()->image->getClientOriginalExtension();
+
+        request()->image->move(public_path('images'), $imageName);
+        $process ->image_b =$imageName;
+        $process ->image_s =$imageName;
+        $process ->year = Request::input('year');
+        $process ->state_id = Request::input('state_id');
+        $process->save();
         return Redirect('barilga');
     }
 
     public function update(Request $request)
     {
-        $project = DB::table('Project')
-            ->where('emp_id', Request::input('id'))
-            ->update(['plan_year' => Request::input('plan_year'),'project_name' => Request::input('project_name'),'budget' => Request::input('budget')
-                ,'estimation' => Request::input('estimation'),'plan' => Request::input('plan'),'department_id' => Request::input('department_id')
-                ,'project_type' => Request::input('project_type'),'respondent_emp_id' => Request::input('respondent_emp_id'),'state_id' => Request::input('state_id')
-                ,'method_code' => Request::input('method_code'),'percent' => Request::input('percent'),'executor_id' => Request::input('executor_id')
-                ,'project_name_ru' => Request::input('project_name_ru'),'economic' => Request::input('economic'),'description' => Request::input('description')]);
+        $process = DB::table('Project_process')
+            ->where('process_id', Request::input('gprocess_id'))
+            ->update(['budget' =>  preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('gbudget')),'month' => Request::input('gmonth'),'year' => Request::input('gyear')
+                ,'description' => Request::input('gdescription'),'state_id' => Request::input('gstate_id')]);
         return Redirect('barilga');
     }
 
     public function destroy($id)
     {
-        Project::where('project_id', '=', $id)->delete();
+        Process::where('process_id', '=', $id)->delete();
         return Redirect('barilga');
     }
 }

@@ -14,151 +14,316 @@
         </div><!-- /.container-fluid -->
     </section>
     <section class="content">
+
         <div class="container-fluid">
-
             <div class="row">
-                <div class="form-group col-md-2">
-                    <label for="inputEmail4">Ажлын төрөл</label>
-                    <select class="form-control select2" id="constructor_id" name="constructor_id" >
-                        <option value= "0">Бүгд</option>
-                        @foreach($projecttype as $projecttypes)
-                            <option value= "{{$projecttypes->project_type_id}}">{{$projecttypes->project_type_name_mn}}</option>
-                        @endforeach
-                    </select>
+                <nav>
+                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Ажил</a>
+                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Гүйцэтгэл</a>
 
-                </div>
-                <div class="form-group col-md-2">
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <div class="card"  style="margin-top: 20px">
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h3 class="card-title">Хайлт </h3>
+                                    </div>
 
-                    <label for="inputEmail4">Ажлын төлөв</label>
-                    <select class="form-control select2" id="state_id" name="state_id" >
-                        <option value= "0">Бүгд</option>
-                        @foreach($state as $states)
-                            <option value= "{{$states->state_id}}">{{$states->state_name_mn}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="inputEmail4">Захиалагч</label>
-                    <select class="form-control select2" id="constructor_id" name="constructor_id" >
-                        <option value= "0">Бүгд</option>
-                        @foreach($constructor as $constructors)
-                            <option value= "{{$constructors->department_id}}">{{$constructors->department_name}}</option>
-                        @endforeach
-                    </select>
-
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="inputPassword4">Гүйцэтгэгч</label>
-                    <select class="form-control select2" id="executor_id" name="executor_id" >
-                        <option value= "0">Бүгд</option>
-                        @foreach($executor as $executors)
-                            <option value= "{{$executors->executor_id}}">{{$executors->executor_abbr}}</option>
-                        @endforeach
-                    </select>
-
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="inputZip">Хариуцагч</label>
-                    <select class="form-control select2" id="respondent_emp_id" name="respondent_emp_id" >
-                        <option value= "0">Бүгд</option>
-                        @foreach($employee as $employees)
-                            <option value= "{{$employees->emp_id}}">{{$employees->firstname}}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <h3 class="card-title">2019 оны их барилга, их засварын ажлууд </h3>
                                 </div>
-                                <div class="col-md-4">
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                        <i class="fa fa-plus" style="color: rgb(255, 255, 255);"> Их барилга, их засварын ажил бүртгэх</i>
-                                    </button>
-                                </div>
+
                             </div>
+                            <!-- /.card-header -->
+                            <div class="card-body text-center">
+                            <form method="post" action="barilga">
+                                <div class="col-md-12" data-scrollable="true" data-height="400" >
+                                    <div class="row" >
+                                        <div class="form-group col-md-2">
+                                            <label for="inputEmail4">Ажлын төрөл</label>
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <select class="form-control select2" id="sproject_type" name="sproject_type" >
+                                                <option value= "0">Бүгд</option>
+                                                @foreach($projecttype as $projecttypes)
+                                                    <option value= "{{$projecttypes->project_type_id}}">{{$projecttypes->project_type_name_mn}}</option>
+                                                @endforeach
+                                            </select>
 
+                                        </div>
+                                        <div class="form-group col-md-2">
+
+                                            <label for="inputEmail4">Ажлын төлөв</label>
+                                            <select class="form-control select2" id="sstate_id" name="sstate_id" >
+                                                <option value= "0">Бүгд</option>
+                                                @foreach($state as $states)
+                                                    <option value= "{{$states->state_id}}">{{$states->state_name_mn}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label for="inputEmail4">Захиалагч</label>
+                                            <select class="form-control select2" id="sconstructor_id" name="sconstructor_id">
+                                                <option value= "0">Бүгд</option>
+                                                @foreach($constructor as $constructors)
+                                                    <option value= "{{$constructors->department_id}}">{{$constructors->department_name}}</option>
+                                                @endforeach
+                                            </select>
+
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label for="inputPassword4">Гүйцэтгэгч</label>
+                                            <select class="form-control select2" id="sexecutor_id" name="sexecutor_id" >
+                                                <option value= "0">Бүгд</option>
+                                                @foreach($executor as $executors)
+                                                    <option value= "{{$executors->executor_id}}">{{$executors->executor_abbr}}</option>
+                                                @endforeach
+                                            </select>
+
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label for="inputZip">Хариуцагч</label>
+                                            <select class="form-control select2" id="srespondent_emp_id" name="srespondent_emp_id" >
+                                                <option value= "0">Бүгд</option>
+                                                @foreach($employee as $employees)
+                                                    <option value= "{{$employees->emp_id}}">{{$employees->firstname}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label for="inputZip"><span>.</span></label><br>
+                                            <button type="submit" class="btn btn-primary" >Хайх</button>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </form>
+
+                            </div>
+                            <!-- /.card-body -->
                         </div>
-                        <!-- /.card-header -->
-                        <div class="card-body text-center">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h3 class="card-title">2019 оны их барилга, их засварын ажлууд </h3>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button type="button" class="btn btn-primary add" data-toggle="modal" data-target="#exampleModal">
+                                            <i class="fa fa-plus" style="color: rgb(255, 255, 255);"> Их барилга, их засварын ажил бүртгэх</i>
+                                        </button>
+                                    </div>
+                                </div>
 
-                            <div class="table-responsive" data-scrollable="true" data-height="400" >
-                                <table class="table table-striped table-bordered" id="example">
-                                    <thead>
-                                    <tr role="row">
-                                        <th>#</th>
-                                        <th>Байгууллага</th>
-                                        <th>Гүйцэтгэгч</th>
-                                        <th>Ажлын нэр</th>
-                                        <th>2018 оны төлөвлөгөө</th>
-
-                                        <th>Төсөв</th>
-                                        <th>Гүйцэтгэл</th>
-                                        <th>Үүнээс</th>
-                                        <th>Биелэлт</th>
-                                        <th>Хариуцагч инженер</th>
-                                        <th>Тайлбар</th>
-                                        <th></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <?php $no = 1; ?>
-                                    @foreach($project as $projects)
-                                        <tr>
-                                            <td>{{$no}}</td>
-                                            <td>{{$projects->department_name}}</td>
-                                            <td>{{$projects->executor_abbr}}</td>
-                                            <td>{{$projects->project_name}}</td>
-                                            <td><?php
-                                                echo number_format($projects->plan)."<br>";
-                                                ?></td>
-
-                                            <td><?php
-                                                echo number_format($projects->estimation)."<br>";
-                                                ?></td>
-                                            <td><?php
-                                                echo number_format($projects->economic)."<br>";
-                                                ?></td>
-                                            <td><?php
-                                                echo number_format($projects->economic)."<br>";
-                                                ?></td>
-
-                                            <td>{{$projects->percent}}%</td>
-                                            <td>{{$projects->firstname}}</td>
-                                            <td>{{$projects->state_name_mn}}</td>
-                                            <td> <button class="btn btn-info">  <a href="{{ route('process') }}"> <i class="fa fa-plus" style="color: rgb(255, 255, 255);"></i></a></button>
-                                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
-                                                    <i class="fa fa-pencil" style="color: rgb(255, 255, 255);"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <?php $no++; ?>
-                                    @endforeach
-                                    </tbody>
-                                </table>
                             </div>
+                            <!-- /.card-header -->
+                            <div class="card-body text-center">
+
+                                <div class="table-responsive" data-scrollable="true" data-height="400" >
+                                    <table class="table table-striped table-bordered" id="example">
+                                        <thead>
+                                        <tr role="row">
+                                            <th>#</th>
+                                            <th>Байгууллага</th>
+                                            <th>Гүйцэтгэгч</th>
+                                            <th>Ажлын нэр</th>
+                                            <th>Төлөвлөгөө</th>
+
+                                            <th>Төсөв</th>
+                                            <th>Гүйцэтгэл</th>
+                                            <th>Үүнээс</th>
+                                            <th>Биелэлт</th>
+                                            <th>Хариуцагч инженер</th>
+                                            <th style="width: 55px">Эхлэх огноо</th>
+                                            <th style="width: 55px">Дуусах огноо</th>
+                                            <th>Тайлбар</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php $no = 1; ?>
+                                        @foreach($project as $projects)
+                                            <tr >
+                                                <td>{{$no}}</td>
+                                                <td>{{$projects->department_name}}</td>
+                                                <td>{{$projects->executor_abbr}}</td>
+                                                <td>{{$projects->project_name}}</td>
+                                                <td><?php
+                                                    echo number_format($projects->plan)."<br>";
+                                                    ?></td>
+
+                                                <td><?php
+                                                    echo number_format($projects->estimation)."<br>";
+                                                    ?></td>
+                                                <td><?php
+                                                    echo number_format($projects->economic)."<br>";
+                                                    ?></td>
+                                                <td><?php
+                                                    echo number_format($projects->economic)."<br>";
+                                                    ?></td>
+
+                                                <td>{{$projects->percent}}%</td>
+                                                <td>{{$projects->firstname}}</td>
+                                                <td width="45px">{{$projects->start_date}}
+                                                <td>{{$projects->end_date}}
+                                                <td>{{$projects->state_name_mn}}</td>
+                                                <td> <button onclick="$('#nav-profile-tab').trigger('click')" data-id="{{$projects->project_id}}" tag="{{$projects->project_id}}" class="btn btn-warning process"> <i class="fa fa-plus" style="color: rgb(255, 255, 255);"></i></button>
+
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-success update" data-toggle="modal"  data-id="{{$projects->project_id}}" tag="{{$projects->project_id}}"  data-target="#exampleModal" id="updateproj" onclick="updateproj({{$projects->project_id}})">
+                                                        <i class="fa fa-pencil" style="color: rgb(255, 255, 255);"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <?php $no++; ?>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                    </div>
+
+
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <div class="card" style="margin-top: 20px">
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h3 class="card-title">Их барилга, их засварын ажил </h3>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body text-center" >
+
+                                <div class="table-responsive" data-scrollable="true" data-height="400" >
+                                    <table class="table table-striped table-bordered" id="projecttable">
+                                        <thead>
+                                        <tr role="row">
+
+                                            <th>Байгууллага</th>
+                                            <th>Гүйцэтгэгч</th>
+                                            <th>Ажлын нэр</th>
+                                            <th>Төлөвлөгөө</th>
+                                            <th>Төсөв</th>
+                                            <th>Гүйцэтгэл</th>
+                                            <th>Үүнээс</th>
+                                            <th>Биелэлт</th>
+                                            <th>Хариуцагч инженер</th>
+                                            <th>Эхлэх огноо</th>
+                                            <th>Дуусах огноо</th>
+                                            <th>Тайлбар</th>
+
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <div class="card" style="margin-top: 20px">
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h3 class="card-title">Их барилга, их засварын ажлын гүйцэтгэл</h3>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button type="button" class="btn btn-primary add" data-toggle="modal" data-target="#processmodal">
+                                            <i class="fa fa-plus" style="color: rgb(255, 255, 255);"> Гүйцэтгэл бүртгэх</i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body text-center" >
+
+                                <div class="table-responsive" data-scrollable="true" data-height="400" >
+                                    <table class="table table-striped table-bordered" id="processtable">
+                                        <thead>
+                                        <tr role="row">
+
+                                            <th>Тооцох он сар</th>
+                                            <th>Гүйцэтгэл</th>
+                                            <th>Тайлбар</th>
+                                            <th>Зураг</th>
+                                            <th></th>
+
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
                         </div>
                         <!-- /.card-body -->
                     </div>
-                    <!-- /.card -->
-                </div>
+                    </div>
+                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <table class="table" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>Project Name2</th>
+                                <th>Employer</th>
+                                <th>Time</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td><a href="#">Work 1</a></td>
+                                <td>Doe</td>
+                                <td>john@example.com</td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">Work 2</a></td>
+                                <td>Moe</td>
+                                <td>mary@example.com</td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">Work 3</a></td>
+                                <td>Dooley</td>
+                                <td>july@example.com</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
+
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <!-- /.card -->
+                                </div>
+
+                            </div>
+
+
+
+                </div>
             </div>
+        </div>
+        </div>
+
             <!-- /.col (right) -->
 
 
 
             <!-- row 2 dood-->
-            <div class="row">
 
-                <!-- /.col (left) -->
-
-            </div>
         </div>
     </section>
     <div class="modal fade " id="exampleModal" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
@@ -166,7 +331,7 @@
             <div class="modal-content">
                 <form id="form1" method="post" action="addproject">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Их барилга, их засварын ажил бүртгэх цонх</h5>
+                    <h5 class="modal-title" id="modal-title">Их барилга, их засварын ажил бүртгэх цонх</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -176,6 +341,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <input type="hidden" class="form-control" id="id" name="id">
                                 <label for="inputEmail4">Ажлын төрөл</label>
                                 <select class="form-control select2" id="project_type" name="project_type" >
                                     @foreach($projecttype as $projecttypes)
@@ -271,11 +437,120 @@
                         </div>
 
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Хаах</button>
-                    <button type="submit" class="btn btn-primary">Хадгалах</button>
-                </div>
+                    <div class="modal-footer">
+                        <div class="col-md-5">
+                            <button type="button" class="btn btn-danger delete" id="deleteproj">Устгах</button>
+                        </div>
+                        <div class="col-md-7" style="display: inline-block; text-align: right;" >
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Хаах</button>
+                            <button type="submit" class="btn btn-primary">Хадгалах</button>
+                        </div>
+                    </div>
                 </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade " id="processmodal" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <form id="form2" method="post" enctype="multipart/form-data">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modal-title1">Их барилга, их засварын ажлын гүйцэтгэл бүртгэх цонх</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-row">
+                            <div class="form-group col-md-2">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <input type="hidden" class="form-control" id="gprocess_id" name="gprocess_id">
+                                <input type="hidden" class="form-control" id="gproject_id" name="gproject_id">
+                                <label for="inputEmail4">Тооцох он</label>
+                                <input type="text" class="form-control" id="gyear" name="gyear" maxlength="4">
+
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="inputEmail4">Сар</label>
+                                <input type="text" class="form-control" id="gmonth" name="gmonth" maxlength="2">
+
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputEmail4">Гүйцэтгэл</label>
+                                <input type="text" class="form-control money" id="gbudget" name="gbudget" maxlength="14">
+
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputZip">Төлөв</label>
+                                <select class="form-control select2" id="gstate_id" name="gstate_id" >
+                                    @foreach($state as $states)
+                                        <option value= "{{$states->state_id}}">{{$states->state_name_mn}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group col-md-8">
+                                <label for="inputZip">Тайлбар</label>
+                                <textarea class="form-control" rows="2" id="gdescription" name="gdescription" maxlength="500"></textarea>
+                            </div>
+
+                                <div class="col-md-6">
+                                    @if ($message = Session::get('success'))
+
+                                        <div class="alert alert-success alert-block">
+
+                                            <button type="button" class="close" data-dismiss="alert">×</button>
+
+                                            <strong>{{ $message }}</strong>
+
+                                        </div>
+
+                                        <img src="images/{{ Session::get('image') }}">
+
+                                    @endif
+
+
+
+                                    @if (count($errors) > 0)
+
+                                        <div class="alert alert-danger">
+
+                                            <strong>Whoops!</strong> There were some problems with your input.
+
+                                            <ul>
+
+                                                @foreach ($errors->all() as $error)
+
+                                                    <li>{{ $error }}</li>
+
+                                                @endforeach
+
+                                            </ul>
+
+                                        </div>
+
+                                    @endif
+                                    <input type="file" name="image" class="form-control">
+
+                                </div>
+
+
+
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-md-5">
+                            <button type="button" id="deleteproc" class="btn btn-danger delete">Устгах</button>
+                        </div>
+                        <div class="col-md-7" style="display: inline-block; text-align: right;" >
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Хаах</button>
+                            <button type="submit" class="btn btn-primary">Хадгалах</button>
+                        </div>
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>
@@ -318,6 +593,174 @@
 
     </script>
     <script>
+        function updateproj($id){
 
+            var title = document.getElementById("modal-title");
+            title.innerHTML = "Их барилга, их засварын ажил засварлах цонх";
+            document.getElementById('form1').action = "updateproject";
+            document.getElementById('form1').method ="post"
+            var itag=$id;
+
+            $.get('projectfill/'+itag,function(data){
+                $.each(data,function(i,qwe){
+
+                    $('#id').val(qwe.project_id);
+                    $('#project_name').val(qwe.project_name);
+                    $('#budget').val(qwe.budget);
+                    $('#estimation').val(qwe.estimation);
+                    $('#plan').val(qwe.plan);
+                    $('#constructor_id').val(qwe.department_id);
+                    $('#project_type').val(qwe.project_type);
+                    $('#respondent_emp_id').val(qwe.respondent_emp_id);
+                    $('#state_id').val(qwe.state_id);
+                    $('#method_code').val(qwe.method_code);
+                    $('#percent').val(qwe.percent);
+                    $('#executor_id').val(qwe.executor_id);
+                    $('#economic').val(qwe.economic);
+                    $('#description').val(qwe.description);
+                    $('#date1').val(qwe.start_date);
+                    $('#date2').val(qwe.end_date);
+                });
+
+            });
+            $('#deleteproj').show();
+        };
+        function updateproc($id){
+
+            var title = document.getElementById("modal-title1");
+            title.innerHTML = "Их барилга, их засварын ажлын гүйцэтгэл засварлах цонх";
+            document.getElementById('form2').action = "updateprocess";
+            document.getElementById('form2').method ="post"
+            var itag=$id;
+            $.get('processfill/'+itag,function(data){
+                $.each(data,function(i,qwe){
+                    $('#gprocess_id').val(qwe.process_id);
+                    $('#gbudget').val(qwe.budget);
+                    $('#gmonth').val(qwe.month);
+                    $('#gdescription').val(qwe.description);
+                    $('#grespondent_emp_id').val(qwe.respondent_emp_id);
+                    $('#gimage_b').val(qwe.image_b);
+                    $('#gimage_s').val(qwe.image_s);
+                    $('#gyear').val(qwe.year);
+                    $('#gstate_id').val(qwe.state_id);
+                });
+
+            });
+            $('#deleteproc').show();
+        };
+        $('.process').on('click',function(){
+            var itag=$(this).attr('tag');
+            $.get('projectfill/'+itag,function(data){
+                $("#projecttable tbody").empty();
+                $.each(data,function(i,qwe){
+                    $('#project_id').val(qwe.project_id);
+                    var sHtml = " <tr class='table-row' >" +
+
+                        "   <td class='m1'>" + qwe.department_name + "</td>" +
+                        "   <td class='m1'>" + qwe.executor_abbr + "</td>" +
+                        "   <td class='m1'>" + qwe.project_name + "</td>" +
+                        "   <td class='m1'>" + number_format( qwe.plan ) + "</td>" +
+                        "   <td class='m1'>" + number_format( qwe.estimation ) + "</td>" +
+                        "   <td class='m1'>" + number_format( qwe.estimation )+ "</td>" +
+                        "   <td class='m1'>" + number_format( qwe.economic ) + "</td>" +
+                        "   <td class='m1'>" + qwe.percent + "</td>" +
+                        "   <td class='m1'>" + qwe.firstname + "</td>" +
+                        "   <td class='m1'>" + qwe.start_date + "</td>" +
+                        "   <td class='m1'>" + qwe.end_date + "</td>" +
+                        "   <td class='m1'>" + qwe.state_name_mn + "</td>" +
+                        "</tr>";
+
+                    $("#projecttable tbody").append(sHtml);
+
+
+                });
+
+            });
+            $.get('projectprocessfill/'+itag,function(data){
+                $("#processtable tbody").empty();
+                $.each(data,function(i,qwe){
+
+                    var sHtml = " <tr class='table-row' >" +
+
+                        "   <td class='m1'>" + qwe.year + " - " + qwe.month+"</td>" +
+                        "   <td class='m1'>" + qwe.budget+ "</td>" +
+                        "   <td class='m1'>" + qwe.description + "</td>" +
+                        "   <td class='m1'>" + qwe.image_b+ "</td>" +
+                        "   <td class='m1'> <button id='updateproc' class='btn btn-xs btn-success' data-toggle='modal' data-target='#processmodal' data-id=" + qwe.process_id + " tag=" + qwe.process_id + " onclick='updateproc("+qwe.process_id+")'>  <i class='fa fa-pencil' style='color: rgb(255, 255, 255);'></i></button></td>" +
+
+                        "</tr>";
+
+                    $("#processtable tbody").append(sHtml);
+
+
+                });
+
+            });
+        });
     </script>
+    <script>
+
+        $('#addproj').on('click',function(){
+            var title = document.getElementById("modal-title");
+            title.innerHTML = "Их барилга, их засварын ажил бүртгэх цонх";
+            document.getElementById('form1').action = "addproject"
+            document.getElementById('form1').method ="post"
+            $('#id').val('');
+            $('#budget').val('');
+            $('#estimation').val('');
+            $('#plan').val('');
+            $('#constructor_id').val('1');
+            $('#project_type').val('1');
+            $('#respondent_emp_id').val('1');
+            $('#state_id').val('1');
+            $('#method_code').val('1');
+            $('#percent').val('');
+            $('#executor_id').val('1');
+            $('#economic').val('');
+            $('#description').val('');
+            $('.delete').hide();
+        });
+
+        $('#deleteproj').on('click',function(){
+            var itag = $('#id').val();
+
+            $.ajax(
+                {
+                    url: "project/delete/" + itag,
+                    type: 'GET',
+                    dataType: "JSON",
+                    data: {
+                        "id": itag,
+                        "_method": 'DELETE',
+                    },
+                    success: function () {
+                        alert('Их барилга, их засварын ажил устгагдлаа');
+                    }
+
+                });
+            alert('Их барилга, их засварын ажил устгагдлаа');
+            location.reload();
+        });
+        $('#deleteproc').on('click',function(){
+            var itag = $('#gprocess_id').val();
+
+            $.ajax(
+                {
+                    url: "process/delete/" + itag,
+                    type: 'GET',
+                    dataType: "JSON",
+                    data: {
+                        "id": itag,
+                        "_method": 'DELETE',
+                    },
+                    success: function () {
+                        alert('Их барилга, их засварын ажлын гүйцэтгэл устгагдлаа');
+                    }
+
+                });
+            alert('Их барилга, их засварын ажлын гүйцэтгэл устгагдлаа');
+            location.reload();
+        });
+    </script>
+
 @endsection
