@@ -239,7 +239,7 @@
                                         <h3 class="card-title">Их барилга, их засварын ажлын гүйцэтгэл</h3>
                                     </div>
                                     <div class="col-md-4">
-                                        <button type="button" class="btn btn-primary add" data-toggle="modal" data-target="#processmodal">
+                                        <button type="button" class="btn btn-primary add" data-toggle="modal" data-target="#processmodal" id="addproc">
                                             <i class="fa fa-plus" style="color: rgb(255, 255, 255);"> Гүйцэтгэл бүртгэх</i>
                                         </button>
                                     </div>
@@ -387,7 +387,7 @@
                                 <label for="inputZip">Хариуцагч</label>
                                 <select class="form-control select2" id="respondent_emp_id" name="respondent_emp_id" >
                                 @foreach($employee as $employees)
-                                    <option value= "{{$employees->emp_id}}">{{$employees->firstname}}</option>
+                                    <option value= "{{$employees->emp_id}}">{{$employees->firstname}} {{$employees->fletter}}</option>
                                 @endforeach
                                 </select>
                             </div>
@@ -453,7 +453,7 @@
     <div class="modal fade " id="processmodal" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <form id="form2" method="post" enctype="multipart/form-data">
+                <form id="form2" method="post" action="addprocess" enctype="multipart/form-data">
                     <div class="modal-header">
                         <h5 class="modal-title" id="modal-title1">Их барилга, их засварын ажлын гүйцэтгэл бүртгэх цонх</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -468,12 +468,12 @@
                                 <input type="hidden" class="form-control" id="gprocess_id" name="gprocess_id">
                                 <input type="hidden" class="form-control" id="gproject_id" name="gproject_id">
                                 <label for="inputEmail4">Тооцох он</label>
-                                <input type="text" class="form-control" id="gyear" name="gyear" maxlength="4">
+                                <input type="text"  class="form-control year" id="gyear" name="gyear">
 
                             </div>
                             <div class="form-group col-md-2">
                                 <label for="inputEmail4">Сар</label>
-                                <input type="text" class="form-control" id="gmonth" name="gmonth" maxlength="2">
+                                <input type="text"  class="form-control month" id="gmonth" name="gmonth">
 
                             </div>
                             <div class="form-group col-md-4">
@@ -546,6 +546,214 @@
                         </div>
                         <div class="col-md-7" style="display: inline-block; text-align: right;" >
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Хаах</button>
+                            <button type="button" class="btn btn-primary" id="addprocessbutton">Хадгалах</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade " id="processmodal" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <form  method="post" action="addprocess">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modal-title1">Их барилга, их засварын ажлын гүйцэтгэл бүртгэх цонх</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-row">
+                            <div class="form-group col-md-2">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <input type="hidden" class="form-control" id="gprocess_id" name="gprocess_id">
+                                <input type="hidden" class="form-control" id="gproject_id" name="gproject_id">
+                                <label for="inputEmail4">Тооцох он</label>
+                                <input type="text" class="form-control year" id="gyear" name="gyear" maxlength="4">
+
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="inputEmail4">Сар</label>
+                                <input type="text" class="form-control month" id="gmonth" name="gmonth" maxlength="2">
+
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputEmail4">Гүйцэтгэл</label>
+                                <input type="text" class="form-control money" id="gbudget" name="gbudget" maxlength="14">
+
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputZip">Төлөв</label>
+                                <select class="form-control select2" id="gstate_id" name="gstate_id" >
+                                    @foreach($state as $states)
+                                        <option value= "{{$states->state_id}}">{{$states->state_name_mn}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group col-md-8">
+                                <label for="inputZip">Тайлбар</label>
+                                <textarea class="form-control" rows="2" id="gdescription" name="gdescription" maxlength="500"></textarea>
+                            </div>
+
+                            <div class="col-md-6">
+                                @if ($message = Session::get('success'))
+
+                                    <div class="alert alert-success alert-block">
+
+                                        <button type="button" class="close" data-dismiss="alert">×</button>
+
+                                        <strong>{{ $message }}</strong>
+
+                                    </div>
+
+                                    <img src="images/{{ Session::get('image') }}">
+
+                                @endif
+
+
+
+                                @if (count($errors) > 0)
+
+                                    <div class="alert alert-danger">
+
+                                        <strong>Whoops!</strong> There were some problems with your input.
+
+                                        <ul>
+
+                                            @foreach ($errors->all() as $error)
+
+                                                <li>{{ $error }}</li>
+
+                                            @endforeach
+
+                                        </ul>
+
+                                    </div>
+
+                                @endif
+                                <input type="file" name="image" class="form-control">
+
+                            </div>
+
+
+
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-md-5">
+                            <button type="button" id="deleteproj" class="btn btn-danger delete">Устгах</button>
+                        </div>
+                        <div class="col-md-7" style="display: inline-block; text-align: right;" >
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Хаах</button>
+                            <button type="submit" class="btn btn-primary">Хадгалах</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade " id="eprocessmodal" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <form id="form3" method="post" action="updateprocess" enctype="multipart/form-data">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modal-title2">Их барилга, их засварын ажлын гүйцэтгэл бүртгэх цонх</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-row">
+                            <div class="form-group col-md-2">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <input type="hidden" class="form-control" id="eprocess_id" name="eprocess_id">
+                                <input type="hidden" class="form-control" id="eproject_id" name="eproject_id">
+                                <label for="inputEmail4">Тооцох он</label>
+                                <input type="text" class="form-control" id="eyear" name="eyear" maxlength="4">
+
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="inputEmail4">Сар</label>
+                                <input type="text" class="form-control" id="emonth" name="emonth" maxlength="2">
+
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputEmail4">Гүйцэтгэл</label>
+                                <input type="text" class="form-control money" id="ebudget" name="ebudget" maxlength="14">
+
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputZip">Төлөв</label>
+                                <select class="form-control select2" id="estate_id" name="estate_id" >
+                                    @foreach($state as $states)
+                                        <option value= "{{$states->state_id}}">{{$states->state_name_mn}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group col-md-8">
+                                <label for="inputZip">Тайлбар</label>
+                                <textarea class="form-control" rows="2" id="edescription" name="edescription" maxlength="500"></textarea>
+                            </div>
+
+                            <div class="col-md-6">
+                                @if ($message = Session::get('success'))
+
+                                    <div class="alert alert-success alert-block">
+
+                                        <button type="button" class="close" data-dismiss="alert">×</button>
+
+                                        <strong>{{ $message }}</strong>
+
+                                    </div>
+
+                                    <img src="images/{{ Session::get('image') }}">
+
+                                @endif
+
+
+
+                                @if (count($errors) > 0)
+
+                                    <div class="alert alert-danger">
+
+                                        <strong>Whoops!</strong> There were some problems with your input.
+
+                                        <ul>
+
+                                            @foreach ($errors->all() as $error)
+
+                                                <li>{{ $error }}</li>
+
+                                            @endforeach
+
+                                        </ul>
+
+                                    </div>
+
+                                @endif
+                                <input type="file" name="eimage" class="form-control">
+
+                            </div>
+
+
+
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-md-5">
+                            <button type="button" id="deleteprocess" class="btn btn-danger delete">Устгах</button>
+                        </div>
+                        <div class="col-md-7" style="display: inline-block; text-align: right;" >
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Хаах</button>
                             <button type="submit" class="btn btn-primary">Хадгалах</button>
                         </div>
                     </div>
@@ -579,188 +787,6 @@
         } );
     </script>
     <script type='text/javascript' src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
-    <script type="text/javascript">
 
-        $('.money').inputmask("numeric", {
-            radixPoint: ".",
-            groupSeparator: ",",
-            digits: 2,
-            autoGroup: true,
-
-            rightAlign: false,
-            oncleared: function () { self.Value(''); }
-        });
-
-    </script>
-    <script>
-        function updateproj($id){
-
-            var title = document.getElementById("modal-title");
-            title.innerHTML = "Их барилга, их засварын ажил засварлах цонх";
-            document.getElementById('form1').action = "updateproject";
-            document.getElementById('form1').method ="post"
-            var itag=$id;
-
-            $.get('projectfill/'+itag,function(data){
-                $.each(data,function(i,qwe){
-
-                    $('#id').val(qwe.project_id);
-                    $('#project_name').val(qwe.project_name);
-                    $('#budget').val(qwe.budget);
-                    $('#estimation').val(qwe.estimation);
-                    $('#plan').val(qwe.plan);
-                    $('#constructor_id').val(qwe.department_id);
-                    $('#project_type').val(qwe.project_type);
-                    $('#respondent_emp_id').val(qwe.respondent_emp_id);
-                    $('#state_id').val(qwe.state_id);
-                    $('#method_code').val(qwe.method_code);
-                    $('#percent').val(qwe.percent);
-                    $('#executor_id').val(qwe.executor_id);
-                    $('#economic').val(qwe.economic);
-                    $('#description').val(qwe.description);
-                    $('#date1').val(qwe.start_date);
-                    $('#date2').val(qwe.end_date);
-                });
-
-            });
-            $('#deleteproj').show();
-        };
-        function updateproc($id){
-
-            var title = document.getElementById("modal-title1");
-            title.innerHTML = "Их барилга, их засварын ажлын гүйцэтгэл засварлах цонх";
-            document.getElementById('form2').action = "updateprocess";
-            document.getElementById('form2').method ="post"
-            var itag=$id;
-            $.get('processfill/'+itag,function(data){
-                $.each(data,function(i,qwe){
-                    $('#gprocess_id').val(qwe.process_id);
-                    $('#gbudget').val(qwe.budget);
-                    $('#gmonth').val(qwe.month);
-                    $('#gdescription').val(qwe.description);
-                    $('#grespondent_emp_id').val(qwe.respondent_emp_id);
-                    $('#gimage_b').val(qwe.image_b);
-                    $('#gimage_s').val(qwe.image_s);
-                    $('#gyear').val(qwe.year);
-                    $('#gstate_id').val(qwe.state_id);
-                });
-
-            });
-            $('#deleteproc').show();
-        };
-        $('.process').on('click',function(){
-            var itag=$(this).attr('tag');
-            $.get('projectfill/'+itag,function(data){
-                $("#projecttable tbody").empty();
-                $.each(data,function(i,qwe){
-                    $('#project_id').val(qwe.project_id);
-                    var sHtml = " <tr class='table-row' >" +
-
-                        "   <td class='m1'>" + qwe.department_name + "</td>" +
-                        "   <td class='m1'>" + qwe.executor_abbr + "</td>" +
-                        "   <td class='m1'>" + qwe.project_name + "</td>" +
-                        "   <td class='m1'>" + number_format( qwe.plan ) + "</td>" +
-                        "   <td class='m1'>" + number_format( qwe.estimation ) + "</td>" +
-                        "   <td class='m1'>" + number_format( qwe.estimation )+ "</td>" +
-                        "   <td class='m1'>" + number_format( qwe.economic ) + "</td>" +
-                        "   <td class='m1'>" + qwe.percent + "</td>" +
-                        "   <td class='m1'>" + qwe.firstname + "</td>" +
-                        "   <td class='m1'>" + qwe.start_date + "</td>" +
-                        "   <td class='m1'>" + qwe.end_date + "</td>" +
-                        "   <td class='m1'>" + qwe.state_name_mn + "</td>" +
-                        "</tr>";
-
-                    $("#projecttable tbody").append(sHtml);
-
-
-                });
-
-            });
-            $.get('projectprocessfill/'+itag,function(data){
-                $("#processtable tbody").empty();
-                $.each(data,function(i,qwe){
-
-                    var sHtml = " <tr class='table-row' >" +
-
-                        "   <td class='m1'>" + qwe.year + " - " + qwe.month+"</td>" +
-                        "   <td class='m1'>" + qwe.budget+ "</td>" +
-                        "   <td class='m1'>" + qwe.description + "</td>" +
-                        "   <td class='m1'>" + qwe.image_b+ "</td>" +
-                        "   <td class='m1'> <button id='updateproc' class='btn btn-xs btn-success' data-toggle='modal' data-target='#processmodal' data-id=" + qwe.process_id + " tag=" + qwe.process_id + " onclick='updateproc("+qwe.process_id+")'>  <i class='fa fa-pencil' style='color: rgb(255, 255, 255);'></i></button></td>" +
-
-                        "</tr>";
-
-                    $("#processtable tbody").append(sHtml);
-
-
-                });
-
-            });
-        });
-    </script>
-    <script>
-
-        $('#addproj').on('click',function(){
-            var title = document.getElementById("modal-title");
-            title.innerHTML = "Их барилга, их засварын ажил бүртгэх цонх";
-            document.getElementById('form1').action = "addproject"
-            document.getElementById('form1').method ="post"
-            $('#id').val('');
-            $('#budget').val('');
-            $('#estimation').val('');
-            $('#plan').val('');
-            $('#constructor_id').val('1');
-            $('#project_type').val('1');
-            $('#respondent_emp_id').val('1');
-            $('#state_id').val('1');
-            $('#method_code').val('1');
-            $('#percent').val('');
-            $('#executor_id').val('1');
-            $('#economic').val('');
-            $('#description').val('');
-            $('.delete').hide();
-        });
-
-        $('#deleteproj').on('click',function(){
-            var itag = $('#id').val();
-
-            $.ajax(
-                {
-                    url: "project/delete/" + itag,
-                    type: 'GET',
-                    dataType: "JSON",
-                    data: {
-                        "id": itag,
-                        "_method": 'DELETE',
-                    },
-                    success: function () {
-                        alert('Их барилга, их засварын ажил устгагдлаа');
-                    }
-
-                });
-            alert('Их барилга, их засварын ажил устгагдлаа');
-            location.reload();
-        });
-        $('#deleteproc').on('click',function(){
-            var itag = $('#gprocess_id').val();
-
-            $.ajax(
-                {
-                    url: "process/delete/" + itag,
-                    type: 'GET',
-                    dataType: "JSON",
-                    data: {
-                        "id": itag,
-                        "_method": 'DELETE',
-                    },
-                    success: function () {
-                        alert('Их барилга, их засварын ажлын гүйцэтгэл устгагдлаа');
-                    }
-
-                });
-            alert('Их барилга, их засварын ажлын гүйцэтгэл устгагдлаа');
-            location.reload();
-        });
-    </script>
-
+    @include('layouts.script')
 @endsection

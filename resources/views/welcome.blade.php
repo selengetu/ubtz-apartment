@@ -25,10 +25,15 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="row">
-                                <div class="col-md-4">
-                                    <h4 class="m-0">Их барилга хөрөнгө ,оруулалтын хэлтэс</h4>
+                                <div class="col-md-9">
+                                    <h4 class="m-0">Их барилга хөрөнгө, оруулалтын хэлтэс</h4>
                                 </div>
+                                <div class="col-md-3">
+                                    <?php
+                                    echo "Today is " . date("Y-m-d") . "<br>";
 
+                                    ?>
+                                </div>
                             </div>
 
                         </div>
@@ -47,10 +52,12 @@
 
                                     </div>
 
-                                    <div class="col-md-9">
-                                        <canvas id="bar-chart-grouped" width="800" height="450"></canvas>
+                                    <div class="col-md-4">
+                                        <canvas id="bar-chart-grouped" width="600" height="450"></canvas>
                                     </div>
-
+                                    <div class="col-md-3">
+                                        <canvas id="pie-chart" width="800" height="450"></canvas>
+                                    </div>
                                 </div>
 
                             </div>
@@ -156,6 +163,23 @@
                 title: {
                     display: true,
                     text: 'Population growth (millions)'
+                }
+            }
+        });
+        new Chart(document.getElementById("pie-chart"), {
+            type: 'pie',
+            data: {
+                labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+                datasets: [{
+                    label: "Population (millions)",
+                    backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+                    data: [2478,5267,734,784,433]
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Predicted world population (millions) in 2050'
                 }
             }
         });

@@ -8,6 +8,7 @@ use App\Constructor;
 use App\Executor;
 use App\Employee;
 use App\Project;
+use Carbon;
 use App\State;
 use Auth;
 use App\Process;
@@ -44,13 +45,13 @@ class ProcessController extends Controller
     {
 
         $process = new Process;
-        $process ->project_id = Request::input('project_id');
-        $process ->budget = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('budget'));
-        $process ->month = Request::input('month');
-        $process ->register_date = Request::input('register_date');
+        $process ->project_id = Request::input('gproject_id');
+        $process ->budget = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('gbudget'));
+        $process ->month = Request::input('gmonth');
+        $process ->register_date = Carbon\Carbon::now();
         $process ->respondent_emp_id = Auth::user()->id;
-        $process ->description = Request::input('description');
-
+        $process ->description = Request::input('gdescription');
+/*
         request()->validate([
 
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -63,9 +64,9 @@ class ProcessController extends Controller
 
         request()->image->move(public_path('images'), $imageName);
         $process ->image_b =$imageName;
-        $process ->image_s =$imageName;
-        $process ->year = Request::input('year');
-        $process ->state_id = Request::input('state_id');
+        $process ->image_s =$imageName; */
+        $process ->year = Request::input('gyear');
+        $process ->state_id = Request::input('gstate_id');
         $process->save();
         return Redirect('barilga');
     }
@@ -73,9 +74,9 @@ class ProcessController extends Controller
     public function update(Request $request)
     {
         $process = DB::table('Project_process')
-            ->where('process_id', Request::input('gprocess_id'))
-            ->update(['budget' =>  preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('gbudget')),'month' => Request::input('gmonth'),'year' => Request::input('gyear')
-                ,'description' => Request::input('gdescription'),'state_id' => Request::input('gstate_id')]);
+            ->where('process_id', Request::input('eprocess_id'))
+            ->update(['budget' =>  preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('ebudget')),'month' => Request::input('emonth'),'year' => Request::input('eyear')
+                ,'description' => Request::input('edescription'),'state_id' => Request::input('estate_id')]);
         return Redirect('barilga');
     }
 
