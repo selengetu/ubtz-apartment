@@ -1,5 +1,24 @@
 <script type="text/javascript">
+    $('#gstate_id').change(function() {
+        var item=$(this).val();
 
+      if(item == 1 || item == 2){
+          $('#gpercentdiv').show();
+      }
+      else{
+          $('#gpercentdiv').hide();
+      }
+    });
+    $('#estate_id').change(function() {
+        var item=$(this).val();
+
+        if(item == 1 || item == 2){
+            $('#epercentdiv').show();
+        }
+        else{
+            $('#epercentdiv').hide();
+        }
+    });
     $('.money').inputmask("numeric", {
         radixPoint: ".",
         groupSeparator: ",",
@@ -10,7 +29,7 @@
         oncleared: function () { self.Value(''); }
     });
     $(".year").inputmask('9999');
-    $(".month").inputmask('99');
+
 </script>
 <script>
     function updateproj($id){
@@ -66,8 +85,8 @@
         });
         $('#deleteprocess').show();
     };
-    $('.process').on('click',function(){
-        var itag=$(this).attr('tag');
+    function getproject($id){
+        var itag = $id;
         $.get('projectfill/'+itag,function(data){
             $("#projecttable tbody").empty();
             $.each(data,function(i,qwe){
@@ -94,6 +113,10 @@
             });
 
         });
+    }
+    $('.process').on('click',function(){
+        var itag=$(this).attr('tag');
+        getproject(itag);
         getproc(itag);
     });
 </script>
@@ -110,7 +133,7 @@
         $('#plan').val('');
         $('#constructor_id').val('1');
         $('#project_type').val('1');
-        $('#respondent_emp_id').val('1');
+        $('#respondent_emp_id').val('27');
         $('#state_id').val('1');
         $('#method_code').val('1');
         $('#percent').val('');
@@ -118,6 +141,7 @@
         $('#economic').val('');
         $('#description').val('');
         $('.delete').hide();
+
     });
     $('#addproc').on('click',function(){
         $('#gprocess_id').val('');
@@ -156,7 +180,7 @@
 
         $.ajax(
             {
-                url: "process/delete/" + itag,
+                url: "process/delete/" + itag+"/"+ tag,
                 type: 'GET',
                 dataType: "JSON",
                 data: {
@@ -169,6 +193,7 @@
 
             });
         alert('Их барилга, их засварын ажлын гүйцэтгэл устгагдлаа');
+        getproject(tag);
         getproc(tag);
         $('#eprocessmodal').modal('hide');
     });
@@ -197,21 +222,7 @@
     $.ajaxSetup({
         headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
     });
-    $('#addprocessbutton').on('click',function(){
-        event.preventDefault();
-        var itag = $('#gproject_id').val();
-        $.ajax({
-            type: 'POST',
-            url: 'addprocess',
-            data: $('#form2').serialize(),
-            success: function(){
-                alert('Их барилга, их засварын ажлын гүйцэтгэл бүртгэгдлээ');//this will alert you the last_id
-                getproc(itag);
-                $('#processmodal').modal('hide');
-            }
-        })
 
-    });
     $('#form3').submit(function(event){
         event.preventDefault();
 
@@ -225,6 +236,7 @@
                 {
                     alert('Ажлын гүйцэтгэл засагдлаа');
                     getproc(itag);
+                    getproject(itag);
                     $('#eprocessmodal').modal('hide');
                 },
                 error: function (jqXHR, textStatus, errorThrown) {

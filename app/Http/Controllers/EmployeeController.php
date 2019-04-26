@@ -27,7 +27,7 @@ class EmployeeController extends Controller
     public function index()
     {
         $prof =Prof::orderby('profession_id')->get();
-        $employee =DB::select('select  * from V_CONST_EMPLOYEE t order by firstname');
+        $employee =DB::select('select  * from V_CONST_EMPLOYEE t  order by firstname');
         return view('set.employee')->with(['employee'=>$employee,'prof'=>$prof]);
     }
     public function store()

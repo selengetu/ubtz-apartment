@@ -43,6 +43,8 @@ class ProcessController extends Controller
     }
     public function store()
     {
+        $data= Request::input('gproject_id');
+
 
         $process = new Process;
         $process ->project_id = Request::input('gproject_id');
@@ -51,38 +53,64 @@ class ProcessController extends Controller
         $process ->register_date = Carbon\Carbon::now();
         $process ->respondent_emp_id = Auth::user()->id;
         $process ->description = Request::input('gdescription');
-/*
+
         request()->validate([
 
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 
         ]);
 
-
-
         $imageName = time().'.'.request()->image->getClientOriginalExtension();
 
         request()->image->move(public_path('images'), $imageName);
         $process ->image_b =$imageName;
-        $process ->image_s =$imageName; */
+        $process ->image_s =$imageName;
         $process ->year = Request::input('gyear');
         $process ->state_id = Request::input('gstate_id');
         $process->save();
-        return Redirect('barilga');
+
+        $state = DB::select("select t.state_id as state from V_PROCESS t where t.process_id = (select max(v.process_id) from V_PROCESS v where v.project_id=".$data.")");
+        $est = DB::select("select estimation from V_PROJECT t where t.project_id=".$data."");
+
+        $budget = DB::select("select sum(t.budget) as totalbudget from V_PROCESS t where t.project_id=".$data."");
+        $percent=($budget[0]->totalbudget / $est[0]->estimation)*100;
+        $process = DB::table('Project')
+            ->where('project_id',$data)
+            ->update(['budget' => $budget[0]->totalbudget ,'state_id' => $state[0]->state,'percent' => $percent]);
+        return Redirect('barilga')->with(['data'=>$data]);
     }
 
     public function update(Request $request)
     {
+        $data= Request::input('eproject_id');
         $process = DB::table('Project_process')
             ->where('process_id', Request::input('eprocess_id'))
             ->update(['budget' =>  preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('ebudget')),'month' => Request::input('emonth'),'year' => Request::input('eyear')
                 ,'description' => Request::input('edescription'),'state_id' => Request::input('estate_id')]);
+
+        $state = DB::select("select t.state_id as state from V_PROCESS t where t.process_id = (select max(v.process_id) from V_PROCESS v where v.project_id=".$data.")");
+        $est = DB::select("select estimation from V_PROJECT t where t.project_id=".$data."");
+
+        $budget = DB::select("select sum(t.budget) as totalbudget from V_PROCESS t where t.project_id=".$data."");
+        $percent=($budget[0]->totalbudget / $est[0]->estimation)*100;
+        $process = DB::table('Project')
+            ->where('project_id',$data)
+            ->update(['budget' => $budget[0]->totalbudget ,'state_id' => $state[0]->state,'percent' => $percent,'percent' => $percent]);
         return Redirect('barilga');
     }
 
-    public function destroy($id)
+    public function destroy($id,$id1)
     {
+        $data= $id1;
         Process::where('process_id', '=', $id)->delete();
+        $state = DB::select("select t.state_id as state from V_PROCESS t where t.process_id = (select max(v.process_id) from V_PROCESS v where v.project_id=".$data.")");
+        $est = DB::select("select estimation from V_PROJECT t where t.project_id=".$data."");
+
+        $budget = DB::select("select sum(t.budget) as totalbudget from V_PROCESS t where t.project_id=".$data."");
+        $percent=($budget[0]->totalbudget / $est[0]->estimation)*100;
+        $process = DB::table('Project')
+            ->where('project_id',$data)
+            ->update(['budget' => $budget[0]->totalbudget ,'state_id' => $state[0]->state,'percent' => $percent]);
         return Redirect('barilga');
     }
 }

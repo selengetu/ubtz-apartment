@@ -42,6 +42,7 @@
                                 <div class="col-md-12" data-scrollable="true" data-height="400" >
                                     <div class="row" >
                                         <div class="form-group col-md-2">
+
                                             <label for="inputEmail4">Ажлын төрөл</label>
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                             <select class="form-control select2" id="sproject_type" name="sproject_type" >
@@ -111,7 +112,7 @@
                                         <h3 class="card-title">2019 оны их барилга, их засварын ажлууд </h3>
                                     </div>
                                     <div class="col-md-4">
-                                        <button type="button" class="btn btn-primary add" data-toggle="modal" data-target="#exampleModal">
+                                        <button type="button" class="btn btn-primary add" data-toggle="modal" data-target="#exampleModal" id="addproj">
                                             <i class="fa fa-plus" style="color: rgb(255, 255, 255);"> Их барилга, их засварын ажил бүртгэх</i>
                                         </button>
                                     </div>
@@ -122,6 +123,9 @@
                             <div class="card-body text-center">
 
                                 <div class="table-responsive" data-scrollable="true" data-height="400" >
+
+
+
                                     <table class="table table-striped table-bordered" id="example">
                                         <thead>
                                         <tr role="row">
@@ -159,7 +163,7 @@
                                                     echo number_format($projects->estimation)."<br>";
                                                     ?></td>
                                                 <td><?php
-                                                    echo number_format($projects->economic)."<br>";
+                                                    echo number_format($projects->budget)."<br>";
                                                     ?></td>
                                                 <td><?php
                                                     echo number_format($projects->economic)."<br>";
@@ -169,7 +173,23 @@
                                                 <td>{{$projects->firstname}}</td>
                                                 <td width="45px">{{$projects->start_date}}
                                                 <td>{{$projects->end_date}}
-                                                <td>{{$projects->state_name_mn}}</td>
+                                                <td @if($projects->state_id==2)
+                                                    bgcolor="#ff8c00";
+                                                    @elseif($projects->state_id==1)
+                                                    bgcolor="yellow";
+                                                    @elseif($projects->state_id==3)
+                                                    bgcolor="green";
+                                                    @elseif($projects->state_id==4)
+                                                    bgcolor="lightgreen";
+                                                    @elseif($projects->state_id==5)
+                                                    bgcolor="#8a2be2";
+                                                    @elseif($projects->state_id==6)
+                                                    bgcolor="blue";
+                                                    @else
+                                                        bgcolor="red";
+                                                @endif
+                                                        color="white"
+                                                ><font color="#fff">{{$projects->state_name_mn}}</font></td>
                                                 <td> <button onclick="$('#nav-profile-tab').trigger('click')" data-id="{{$projects->project_id}}" tag="{{$projects->project_id}}" class="btn btn-warning process"> <i class="fa fa-plus" style="color: rgb(255, 255, 255);"></i></button>
 
                                                 </td>
@@ -211,7 +231,7 @@
 
                                             <th>Байгууллага</th>
                                             <th>Гүйцэтгэгч</th>
-                                            <th>Ажлын нэр</th>
+                                            <th width="400px">Ажлын нэр</th>
                                             <th>Төлөвлөгөө</th>
                                             <th>Төсөв</th>
                                             <th>Гүйцэтгэл</th>
@@ -401,17 +421,14 @@
                             </div>
 
                         </div>
-
+                    <div class="form-group col-md-6">
+                        <label for="inputZip">Үүнээс хаасан</label>
+                        <input type="text" class="form-control money" id="economic" name="economic" maxlength="14">
+                    </div>
                         <div class="form-row">
 
-                            <div class="form-group col-md-6">
-                                <label for="inputZip">Үүнээс хаасан</label>
-                                <input type="text" class="form-control money" id="economic" name="economic" maxlength="14">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="inputZip">Биелэлт</label>
-                                <input type="text" class="form-control" id="percent" name="percent" placeholder="99.9" maxlength="4">
-                            </div>
+
+
                             <div class="form-group col-md-6">
                                 <label for="inputAddress2">Эхлэх огноо</label>
                                 <input class="form-control form-control-inline input-medium date-picker" name="date1" id="date1" placeholder="2019-04-15"
@@ -422,19 +439,15 @@
                                 <input class="form-control form-control-inline input-medium date-picker" name="date2" id="date2" placeholder="2019-06-15"
                                        size="16" type="text" value="">
                             </div>
-                            <div class="form-group col-md-6">
-                                <label for="inputZip">Төлөв</label>
-                                <select class="form-control select2" id="state_id" name="state_id" >
-                                    @foreach($state as $states)
-                                        <option value= "{{$states->state_id}}">{{$states->state_name_mn}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="inputZip">Тайлбар</label>
-                                <textarea class="form-control" rows="2" id="description" name="description" maxlength="500"></textarea>
-                            </div>
+
+
                         </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="inputZip">Тайлбар</label>
+                            <textarea class="form-control" rows="2" id="description" name="description" maxlength="500"></textarea>
+                        </div>
+                    </div>
 
                 </div>
                     <div class="modal-footer">
@@ -481,13 +494,17 @@
                                 <input type="text" class="form-control money" id="gbudget" name="gbudget" maxlength="14">
 
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-6">
                                 <label for="inputZip">Төлөв</label>
                                 <select class="form-control select2" id="gstate_id" name="gstate_id" >
                                     @foreach($state as $states)
                                         <option value= "{{$states->state_id}}">{{$states->state_name_mn}}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                            <div class="form-group col-md-6" id="gpercentdiv">
+                                <label for="inputZip">Биелэлт</label>
+                                <input type="text" class="form-control" id="gpercent" name="gpercent" placeholder="99.9" maxlength="4">
                             </div>
                             <div class="form-group col-md-8">
                                 <label for="inputZip">Тайлбар</label>
@@ -546,7 +563,7 @@
                         </div>
                         <div class="col-md-7" style="display: inline-block; text-align: right;" >
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Хаах</button>
-                            <button type="button" class="btn btn-primary" id="addprocessbutton">Хадгалах</button>
+                            <button type="submit" class="btn btn-primary" id="addprocessbutton">Хадгалах</button>
                         </div>
                     </div>
                 </form>
@@ -577,7 +594,7 @@
                             </div>
                             <div class="form-group col-md-2">
                                 <label for="inputEmail4">Сар</label>
-                                <input type="text" class="form-control month" id="gmonth" name="gmonth" maxlength="2">
+                                <input type="text" class="form-control" id="gmonth" name="gmonth" maxlength="2">
 
                             </div>
                             <div class="form-group col-md-4">
@@ -585,13 +602,18 @@
                                 <input type="text" class="form-control money" id="gbudget" name="gbudget" maxlength="14">
 
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-6">
                                 <label for="inputZip">Төлөв</label>
                                 <select class="form-control select2" id="gstate_id" name="gstate_id" >
                                     @foreach($state as $states)
                                         <option value= "{{$states->state_id}}">{{$states->state_name_mn}}</option>
                                     @endforeach
                                 </select>
+                            </div>
+
+                            <div class="form-group col-md-6" id="gpercentdiv">
+                                <label for="inputZip">Биелэлт</label>
+                                <input type="text" class="form-control" id="gpercent" name="gpercent" placeholder="99.9" maxlength="4">
                             </div>
                             <div class="form-group col-md-8">
                                 <label for="inputZip">Тайлбар</label>
@@ -689,13 +711,17 @@
                                 <input type="text" class="form-control money" id="ebudget" name="ebudget" maxlength="14">
 
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-6">
                                 <label for="inputZip">Төлөв</label>
                                 <select class="form-control select2" id="estate_id" name="estate_id" >
                                     @foreach($state as $states)
                                         <option value= "{{$states->state_id}}">{{$states->state_name_mn}}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                            <div class="form-group col-md-6" id="epercentdiv">
+                                <label for="inputZip">Биелэлт</label>
+                                <input type="text" class="form-control" id="epercent" name="epercent" placeholder="99.9" maxlength="4">
                             </div>
                             <div class="form-group col-md-8">
                                 <label for="inputZip">Тайлбар</label>

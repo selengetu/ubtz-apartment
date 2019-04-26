@@ -39,14 +39,13 @@ class BarilgaController extends Controller
         $constructor = Constructor::orderby('department_abbr')->get();
         $executor = Executor::orderby('executor_abbr')->get();
 
-        $employee =DB::select('select  * from V_CONST_EMPLOYEE t order by firstname');
+        $employee =DB::select('select  * from V_CONST_EMPLOYEE t where t.is_engineer=1 order by firstname');
 
         $sstate_id= Input::get('sstate_id');
         $sexecutor = Input::get('sexecutor_id');
         $sconstructor = Input::get('sconstructor_id');
         $srespondent_emp_id = Input::get('srespondent_emp_id');
         $sprojecttype= Input::get('sproject_type');
-        $enddate = Input::get('date2');
         $startdate= Input::get('date1');
         $enddate = Input::get('date2');
 
@@ -104,6 +103,7 @@ class BarilgaController extends Controller
             $query.=" ";
 
         }
+
         $project =DB::select("select  * from V_PROJECT t  where 1=1 " .$query. " order by project_id");
         return view('barilga')->with(['method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype]);
     }
@@ -142,12 +142,30 @@ class BarilgaController extends Controller
                 ,'project_type' => Request::input('project_type'),'respondent_emp_id' => Request::input('respondent_emp_id'),'state_id' => Request::input('state_id'),'start_date' => Request::input('date1'),'end_date' => Request::input('date2')
                 ,'method_code' => Request::input('method_code'),'percent' => Request::input('percent'),'executor_id' => Request::input('executor_id')
                 ,'project_name_ru' => Request::input('project_name_ru'),'economic' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('economic')),'description' => Request::input('description')]);
+        $data= Request::input('id');
+        $state = DB::select("select t.state_id as state from V_PROCESS t where t.process_id = (select max(v.process_id) from V_PROCESS v where v.project_id=".$data.")");
+        $est = DB::select("select estimation from V_PROJECT t where t.project_id=".$data."");
+
+        $budget = DB::select("select sum(t.budget) as totalbudget from V_PROCESS t where t.project_id=".$data."");
+        $percent=($budget[0]->totalbudget / $est[0]->estimation)*100;
+        $process = DB::table('Project')
+            ->where('project_id',$data)
+            ->update(['budget' => $budget[0]->totalbudget ,'state_id' => $state[0]->state,'percent' => $percent]);
         return Redirect('barilga');
     }
 
-    public function destroy($id)
+    public function destroy($id, $id1)
     {
         Project::where('project_id', '=', $id)->delete();
+        $data= $id1;
+        $state = DB::select("select t.state_id as state from V_PROCESS t where t.process_id = (select max(v.process_id) from V_PROCESS v where v.project_id=".$data.")");
+        $est = DB::select("select estimation from V_PROJECT t where t.project_id=".$data."");
+
+        $budget = DB::select("select sum(t.budget) as totalbudget from V_PROCESS t where t.project_id=".$data."");
+        $percent=($budget[0]->totalbudget / $est[0]->estimation)*100;
+        $process = DB::table('Project')
+            ->where('project_id',$data)
+            ->update(['budget' => $budget[0]->totalbudget ,'state_id' => $state[0]->state,'percent' => $percent]);
         return Redirect('barilga');
     }
 }

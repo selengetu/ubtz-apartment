@@ -37,7 +37,7 @@ Route::get('/projectfill/{id?}',function($id = 0){
 });
 Route::get('/process', 'ProcessController@index')->name('process');
 Route::post('/addprocess','ProcessController@store');
-Route::get('/process/delete/{id}', 'ProcessController@destroy');
+Route::get('/process/delete/{id}/{id1}', 'ProcessController@destroy');
 Route::post('/updateprocess','ProcessController@update');
 Route::get('/processfill/{id?}',function($id = 0){
     $dt=App\Process::where('process_id','=',$id)->get();
