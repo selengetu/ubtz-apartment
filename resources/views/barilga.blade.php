@@ -122,9 +122,9 @@
                             <!-- /.card-header -->
                             <div class="card-body text-center">
 
-                                <div class="table-responsive" data-scrollable="true" data-height="400" >
+                                <div class="table-responsive">
 
-
+                                    <input type="hidden" name="data" value="{{$data}}" id="data">
 
                                     <table class="table table-striped table-bordered" id="example">
                                         <thead>
@@ -739,7 +739,7 @@
 
                                     </div>
 
-                                    <img src="images/{{ Session::get('image') }}">
+                                    <img src="" id="eimage">
 
                                 @endif
 
@@ -793,7 +793,16 @@
 @section('script')
     <script>
         $(document).ready(function() {
+            if($('#data').val() != ''){
+                $('#nav-profile-tab').trigger('click');
+
+                    var itag=$('#data').val();
+                    getproject(itag);
+                    getproc(itag);
+
+            }
             $('#example').dataTable( {
+                responsive: true,
                 "language": {
                     "lengthMenu": " _MENU_ бичлэг",
                     "zeroRecords": "Бичлэг олдсонгүй",

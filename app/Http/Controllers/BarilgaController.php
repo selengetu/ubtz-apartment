@@ -103,9 +103,9 @@ class BarilgaController extends Controller
             $query.=" ";
 
         }
-
+        $data= Request::input('gproject_id');
         $project =DB::select("select  * from V_PROJECT t  where 1=1 " .$query. " order by project_id");
-        return view('barilga')->with(['method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype]);
+        return view('barilga')->with(['data'=>$data,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype]);
     }
     public function store()
     {
@@ -119,7 +119,7 @@ class BarilgaController extends Controller
         $project->department_id = Request::input('constructor_id');
         $project->project_type = Request::input('project_type');
         $project->respondent_emp_id = Request::input('respondent_emp_id');
-        $project->state_id = Request::input('state_id');
+        $project->state_id = 15;
         $project->method_code = Request::input('method_code');
         $project->percent = Request::input('percent');
         $project->executor_id = Request::input('executor_id');
@@ -139,7 +139,7 @@ class BarilgaController extends Controller
             ->where('project_id', Request::input('id'))
             ->update(['plan_year' => Request::input('plan_year'),'project_name' => Request::input('project_name'),'budget' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('budget'))
                 ,'estimation' =>preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('estimation')),'plan' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan')),'department_id' => Request::input('constructor_id')
-                ,'project_type' => Request::input('project_type'),'respondent_emp_id' => Request::input('respondent_emp_id'),'state_id' => Request::input('state_id'),'start_date' => Request::input('date1'),'end_date' => Request::input('date2')
+                ,'project_type' => Request::input('project_type'),'respondent_emp_id' => Request::input('respondent_emp_id'),'start_date' => Request::input('date1'),'end_date' => Request::input('date2')
                 ,'method_code' => Request::input('method_code'),'percent' => Request::input('percent'),'executor_id' => Request::input('executor_id')
                 ,'project_name_ru' => Request::input('project_name_ru'),'economic' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('economic')),'description' => Request::input('description')]);
         $data= Request::input('id');
@@ -147,10 +147,15 @@ class BarilgaController extends Controller
         $est = DB::select("select estimation from V_PROJECT t where t.project_id=".$data."");
 
         $budget = DB::select("select sum(t.budget) as totalbudget from V_PROCESS t where t.project_id=".$data."");
-        $percent=($budget[0]->totalbudget / $est[0]->estimation)*100;
-        $process = DB::table('Project')
-            ->where('project_id',$data)
-            ->update(['budget' => $budget[0]->totalbudget ,'state_id' => $state[0]->state,'percent' => $percent]);
+
+        if($budget[0]->totalbudget!=NULL && $budget[0]->totalbudget !=0)
+        {
+            $percent=($budget[0]->totalbudget / $est[0]->estimation)*100;
+            $process = DB::table('Project')
+                ->where('project_id',$data)
+                ->update(['budget' => $budget[0]->totalbudget ,'state_id' => $state[0]->state,'percent' => $percent]);
+        }
+
         return Redirect('barilga');
     }
 

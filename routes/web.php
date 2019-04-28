@@ -44,7 +44,7 @@ Route::get('/processfill/{id?}',function($id = 0){
     return $dt;
 });
 Route::get('/projectprocessfill/{id?}',function($id = 0){
-    $dt=DB::table('V_PROCESS')->where('project_id','=',$id)->get();
+    $dt=DB::table('V_PROCESS')->where('project_id','=',$id)->orderby('process_id')->get();
     return $dt;
 });
 Route::get('/executor', 'ExecutorController@index')->name('executor');

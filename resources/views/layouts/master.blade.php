@@ -27,6 +27,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     table{
       font-size: 12px;
     }
+
   </style>
 </head>
 <body class="hold-transition sidebar-mini @if(Auth::user()->menucollapse==1) sidebar-collapse @else sidebar-open @endif">

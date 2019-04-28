@@ -80,6 +80,7 @@
                 $('#edescription').val(qwe.description);
                 $('#eyear').val(qwe.year);
                 $('#estate_id').val(qwe.state_id);
+                $("#eimage").attr("src", qwe.image_s);
             });
 
         });
@@ -96,10 +97,10 @@
                     "   <td class='m1'>" + qwe.department_name + "</td>" +
                     "   <td class='m1'>" + qwe.executor_abbr + "</td>" +
                     "   <td class='m1'>" + qwe.project_name + "</td>" +
-                    "   <td class='m1'>" + number_format( qwe.plan ) + "</td>" +
-                    "   <td class='m1'>" + number_format( qwe.estimation ) + "</td>" +
-                    "   <td class='m1'>" + number_format( qwe.estimation )+ "</td>" +
-                    "   <td class='m1'>" + number_format( qwe.economic ) + "</td>" +
+                    "   <td class='m1'>" + qwe.plan+ "</td>" +
+                    "   <td class='m1'>" + number_format(qwe.estimation) + "</td>" +
+                    "   <td class='m1'>" + number_format(qwe.budget)+ "</td>" +
+                    "   <td class='m1'>" + number_format(qwe.economic) + "</td>" +
                     "   <td class='m1'>" + qwe.percent + "</td>" +
                     "   <td class='m1'>" + qwe.firstname + "</td>" +
                     "   <td class='m1'>" + qwe.start_date + "</td>" +
@@ -207,7 +208,7 @@
                     "   <td class='m1'>" + qwe.year + " - " + qwe.month+"</td>" +
                     "   <td class='m1'>" + qwe.budget+ "</td>" +
                     "   <td class='m1'>" + qwe.description + "</td>" +
-                    "   <td class='m1'>" + qwe.image_b+ "</td>" +
+                    "   <td class='m1'><img src=/profile_images/img/" +qwe.image_s + "</td>" +
                     "   <td class='m1'> <button id='updateproc' class='btn btn-xs btn-success' data-toggle='modal' data-target='#eprocessmodal' data-id=" + qwe.process_id + " tag=" + qwe.process_id + " onclick='updateproc("+qwe.process_id+")'>  <i class='fa fa-pencil' style='color: rgb(255, 255, 255);'></i></button></td>" +
 
                     "</tr>";
