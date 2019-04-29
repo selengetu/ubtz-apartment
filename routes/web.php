@@ -109,5 +109,7 @@ Route::get('/projecttypefill/{id?}',function($id = 0){
     $dt=App\Projecttype::where('project_type_id','=',$id)->get();
     return $dt;
 });
-Route::get('image-upload', 'ImageUploadController@imageUpload')->name('image.upload');
-Route::post('image-upload', 'ImageUploadController@imageUploadPost')->name('image.upload.post');
+Route::get('/main', 'TailanController@index')->name('main');
+Route::get('/time', 'TailanController@time')->name('time');
+Route::get('/analyse', 'TailanController@analyse')->name('analyse');
+Route::post('/searchanalyse', 'TailanController@analyse')->name('searchanalyse');

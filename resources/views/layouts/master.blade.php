@@ -26,6 +26,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <style>
     table{
       font-size: 12px;
+      text-align:left;
     }
 
   </style>
@@ -163,10 +164,42 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
 
-
             </ul>
           </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa fa-dashboard"></i>
+              <p>
+                Тайлан
+                <i class="right fa fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('main') }}" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Их засвар, их барилга</p>
+                </a>
+              </li>
 
+              <li class="nav-item">
+                <a href="{{ route('time') }}" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Ажлын хугацаа</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="{{ route('analyse') }}" class="nav-link">
+              <i class="nav-icon fa fa-dashboard"></i>
+              <p>
+                Анализ
+                <i class="right fa fa-angle-left"></i>
+              </p>
+            </a>
+
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -215,6 +248,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
 <script src="//jonthornton.github.io/jquery-timepicker/jquery.timepicker.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
 @yield('script')

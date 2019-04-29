@@ -124,13 +124,13 @@
 
                                 <div class="table-responsive">
 
-                                    <input type="hidden" name="data" value="{{$data}}" id="data">
+
 
                                     <table class="table table-striped table-bordered" id="example">
                                         <thead>
                                         <tr role="row">
                                             <th>#</th>
-                                            <th>Байгууллага</th>
+                                            <th>Захиалагч</th>
                                             <th>Гүйцэтгэгч</th>
                                             <th>Ажлын нэр</th>
                                             <th>Төлөвлөгөө</th>
@@ -190,7 +190,7 @@
                                                 @endif
                                                         color="white"
                                                 ><font color="#fff">{{$projects->state_name_mn}}</font></td>
-                                                <td> <button onclick="$('#nav-profile-tab').trigger('click')" data-id="{{$projects->project_id}}" tag="{{$projects->project_id}}" class="btn btn-warning process"> <i class="fa fa-plus" style="color: rgb(255, 255, 255);"></i></button>
+                                                <td> <button onclick="processClicked({{$projects->project_id}})"{{-- onclick="$('#nav-profile-tab').trigger('click')" --}} data-id="{{$projects->project_id}}" tag="{{$projects->project_id}}" class="btn btn-warning process"> <i class="fa fa-plus" style="color: rgb(255, 255, 255);"></i></button>
 
                                                 </td>
                                                 <td>
@@ -793,13 +793,9 @@
 @section('script')
     <script>
         $(document).ready(function() {
-            if($('#data').val() != ''){
-                $('#nav-profile-tab').trigger('click');
-
-                    var itag=$('#data').val();
-                    getproject(itag);
-                    getproc(itag);
-
+            const gproject_id = {{ $gproject_id }};
+            if(gproject_id != 0){
+                processClicked( gproject_id);
             }
             $('#example').dataTable( {
                 responsive: true,

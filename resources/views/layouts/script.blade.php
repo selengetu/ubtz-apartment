@@ -120,6 +120,11 @@
         getproject(itag);
         getproc(itag);
     });
+    function processClicked( processid) {
+        $('#nav-profile-tab').trigger('click');
+        getproject(processid);
+        getproc(processid);
+    }
 </script>
 <script>
 
@@ -208,7 +213,7 @@
                     "   <td class='m1'>" + qwe.year + " - " + qwe.month+"</td>" +
                     "   <td class='m1'>" + qwe.budget+ "</td>" +
                     "   <td class='m1'>" + qwe.description + "</td>" +
-                    "   <td class='m1'><img src=/profile_images/img/" +qwe.image_s + "</td>" +
+                    "   <td class='m1'><img src='/profile_images/thumbnail/" +qwe.image_s + "'></td>" +
                     "   <td class='m1'> <button id='updateproc' class='btn btn-xs btn-success' data-toggle='modal' data-target='#eprocessmodal' data-id=" + qwe.process_id + " tag=" + qwe.process_id + " onclick='updateproc("+qwe.process_id+")'>  <i class='fa fa-pencil' style='color: rgb(255, 255, 255);'></i></button></td>" +
 
                     "</tr>";

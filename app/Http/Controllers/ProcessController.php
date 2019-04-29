@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Projecttype;
 use Request;
+use Session;
 use Image;
 use Illuminate\Support\Facades\Storage;
 use App\Constructor;
@@ -73,6 +74,7 @@ class ProcessController extends Controller
 
             //filename to store
             $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+
             $filenametostoreb = $filename.'_'.uniqid().'.'.$extension;
 
             Storage::put('profile_images/'. $filenametostore, fopen($file, 'r+'));
@@ -82,15 +84,16 @@ class ProcessController extends Controller
             Storage::put('profile_images/img/'. $filenametostoreb, fopen($file, 'r+'));
             //Resize image here
             $thumbnailpath = public_path('profile_images/thumbnail/'.$filenametostore);
-            $img = Image::make($file->getRealPath())->resize(400, 150, function($constraint) {
+
+            $img1 = Image::make($file->getRealPath())->resize(400, 150, function($constraint) {
                 $constraint->aspectRatio();
             });
-            $img->save($thumbnailpath. $filenametostore);
+
+            $img1->save($thumbnailpath);
             $imgpath = public_path('profile_images/img/'.$filenametostoreb);
-            $img = Image::make($file->getRealPath())->save($imgpath. $filenametostoreb);
-
-
-            $process ->image_b =$filenametostore;
+            $img = Image::make($file->getRealPath())->save($filenametostoreb);
+            $img->save($imgpath);
+            $process ->image_b =$filenametostoreb;
             $process ->image_s =$filenametostore;
 
         }
@@ -98,7 +101,7 @@ class ProcessController extends Controller
         $process ->year = Request::input('gyear');
         $process ->state_id = Request::input('gstate_id');
         $process->save();
-
+        Session::flash('gproject_id',Request::input('gproject_id'));
         $states = DB::select("select t.state_id as state from V_PROCESS t where t.process_id = (select max(v.process_id) from V_PROCESS v where v.project_id=".$data.")");
 
         if(Request::input('gpercent') == NULL){
@@ -115,9 +118,9 @@ class ProcessController extends Controller
                 ->where('project_id',$data)
                 ->update(['state_id' => $states[0]->state,'percent' => Request::input('gpercent')]);
         }
+        return redirect('barilga');
 
-        $project =DB::select("select  * from V_PROJECT t  order by project_id");
-        return view('barilga')->with(['data'=>$data,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype]);
+
     }
 
     public function update(Request $request)

@@ -29,10 +29,12 @@
                                     <h4 class="m-0">Их барилга хөрөнгө, оруулалтын хэлтэс</h4>
                                 </div>
                                 <div class="col-md-3">
+                                    <i class="fa fa-calendar" aria-hidden="true">
                                     <?php
-                                    echo "Today is " . date("Y-m-d") . "<br>";
+                                    echo "" . date("Y-m-d") . "<br>";
 
                                     ?>
+                                    </i>
                                 </div>
                             </div>
 
@@ -53,10 +55,11 @@
                                     </div>
 
                                     <div class="col-md-4">
-                                        <canvas id="bar-chart-grouped" width="600" height="450"></canvas>
+                                        <canvas id="visitors-chart" width="600" height="350"></canvas>
+                                        <canvas id="percentchart" width="800" height="450"></canvas>
                                     </div>
-                                    <div class="col-md-3">
-                                        <canvas id="pie-chart" width="800" height="450"></canvas>
+                                    <div class="col-md-4">
+                                        <canvas id="piechart" width="800" height="450"></canvas>
                                     </div>
                                 </div>
 
@@ -80,100 +83,130 @@
             </div>
         </div>
     </section>
-    <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <form id="form1" action="post">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modal-title">Шинэ ажилтан бүртгэх цонх</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
 
-                        <div class="form-row">
-
-                            <div class="form-group col-md-4">
-                                <label for="inputAddress">Овог</label>
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <input type="hidden" class="form-control" id="id" name="id">
-                                <input type="text" class="form-control" id="lastname" name="lastname" placeholder="" maxlength="50">
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="inputAddress2">Нэр</label>
-                                <input type="text" class="form-control" id="firstname" name="firstname" placeholder="" maxlength="50">
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="inputCity">Албан тушаал</label>
-
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label for="inputAddress2">Хариуцах ажлын үндсэн чиглэл</label>
-                                <textarea class="form-control" rows="2" id="mainduty" name="mainduty"></textarea>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="inputAddress2">Ажилд орсон огноо</label>
-                                <input class="form-control form-control-inline input-medium date-picker" name="date1" id="date1"
-                                       size="16" type="text" value="" required>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="inputCity">Ажлаас гарсан огноо</label>
-                                <input class="form-control form-control-inline input-medium date-picker" name="date2" id="date2"
-                                       size="16" type="text" value="" required>
-                            </div>
-                        </div>
-
-
-                    </div>
-                    <div class="modal-footer">
-                        <div class="col-md-5">
-                            <button type="button" class="btn btn-danger delete">Устгах</button>
-                        </div>
-                        <div class="col-md-7" style="display: inline-block; text-align: right;" >
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Хаах</button>
-                            <button type="submit" class="btn btn-primary">Хадгалах</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 @endsection
 
 @section('script')
-    <script>
-        new Chart(document.getElementById("bar-chart-grouped"), {
+    <?php
+    $stack = array();
+    $stackValue = array();
+    $stackValue2 = array();
+    $depname = array();
+    $percent = array();
+    foreach($t as $wag)   {array_push($stack,$wag->department_name); array_push($stackValue,$wag->plan);array_push($stackValue2,$wag->estimation);
+        array_push($depname,$wag->department_name);array_push($percent,$wag->percent);}
+
+    ?>
+<script>
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF'.split('');
+        var color = '#';
+        for (var i = 0; i < 6; i++ ) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+    $(function () {
+        'use strict'
+
+        var ticksStyle = {
+            fontColor: '#495057',
+            fontStyle: 'bold',
+            autoSkip: false
+        }
+
+        var mode = 'index'
+        var intersect = true
+
+        var $salesChart = $('#visitors-chart')
+        var zuuchName = <?php echo json_encode($stack); ?>;
+        var zuuchQnt = <?php echo json_encode($stackValue); ?>;
+        var zuuchQnt2 = <?php echo json_encode($stackValue2); ?>;
+        var depname = <?php echo json_encode($depname); ?>;
+        var percent = <?php echo json_encode($percent); ?>;
+        var salesChart = new Chart($salesChart, {
             type: 'bar',
             data: {
-                labels: ["1900", "1950", "1999", "2050"],
-                datasets: [
+                labels:  zuuchName,
+                datasets: [{
+                    backgroundColor: '#007bff',
+                    borderColor: '#007bff',
+
+                    data: depname
+                },
                     {
-                        label: "Africa",
-                        backgroundColor: "#3e95cd",
-                        data: [133,221,783,2478]
-                    }, {
-                        label: "Europe",
-                        backgroundColor: "#8e5ea2",
-                        data: [408,547,675,734]
-                    }
+                        backgroundColor: '#007bff',
+                        borderColor: '#007bff',
+
+                        fillColor:  getRandomColor(),
+                        strokeColor: "rgba(220,220,220,0.8)",
+                        highlightFill: "rgba(220,220,220,0.75)",
+                        highlightStroke: "rgba(220,220,220,1)",
+                        data: percent
+                    },
                 ]
             },
             options: {
-                title: {
-                    display: true,
-                    text: 'Population growth (millions)'
+                maintainAspectRatio: true,
+                legend: {
+                    display: false
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        ticks: ticksStyle
+                    }]
                 }
             }
-        });
-        new Chart(document.getElementById("pie-chart"), {
+        })
+
+        var $visitorsChart = $('#percentchart')
+        var stack = <?php echo json_encode($depname); ?>;
+        var stackValue = <?php echo json_encode($percent); ?>;
+        var visitorsChart = new Chart($visitorsChart, {
+            data: {
+                labels: stack,
+                datasets: [{
+                    type: 'line',
+                    data: stackValue,
+                    backgroundColor: 'transparent',
+                    borderColor: '#007bff',
+                    pointBorderColor: '#007bff',
+                    pointBackgroundColor: '#007bff',
+                    fill: false
+                },
+                ]
+            },
+            options: {
+                maintainAspectRatio: true,
+                legend: {
+                    display: false
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: $.extend({
+                            beginAtZero: true,
+                            suggestedMax: 200
+                        }, ticksStyle)
+                    }],
+                    xAxes: [{
+                        display: true,
+                        gridLines: {
+                            display: false
+                        },
+                        ticks: ticksStyle
+                    }]
+                }
+            }
+        })
+        new Chart(document.getElementById("piechart"), {
             type: 'pie',
             data: {
-                labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+                labels: depname,
                 datasets: [{
-                    label: "Population (millions)",
+                    label: "Албаны нэр",
                     backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-                    data: [2478,5267,734,784,433]
+                    data: percent
                 }]
             },
             options: {
@@ -183,5 +216,6 @@
                 }
             }
         });
-    </script>
+    })
+</script>
 @endsection

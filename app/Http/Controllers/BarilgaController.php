@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Projecttype;
 use Request;
+use Session;
 use App\Constructor;
 use App\Executor;
 use App\Employee;
@@ -103,9 +104,13 @@ class BarilgaController extends Controller
             $query.=" ";
 
         }
-        $data= Request::input('gproject_id');
+        $gproject_id = 0;
+        if( Session::has('gproject_id') ) {
+            $gproject_id = Session::get('gproject_id');
+        }
+
         $project =DB::select("select  * from V_PROJECT t  where 1=1 " .$query. " order by project_id");
-        return view('barilga')->with(['data'=>$data,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype]);
+        return view('barilga')->with(['gproject_id'=>$gproject_id,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype]);
     }
     public function store()
     {
