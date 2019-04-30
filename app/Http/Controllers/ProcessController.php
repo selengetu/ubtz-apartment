@@ -111,7 +111,7 @@ class ProcessController extends Controller
             $percent=($budget[0]->totalbudget / $est[0]->estimation)*100;
             $process = DB::table('Project')
                 ->where('project_id',$data)
-                ->update(['budget' => $budget[0]->totalbudget ,'state_id' => $states[0]->state,'percent' => $percent]);
+                ->update(['budget' => $budget[0]->totalbudget ,'state_id' => $states[0]->state,'percent' => $percent,'prend_date' => Request::input('gdate')]);
         }
         else{
             $process = DB::table('Project')
@@ -138,8 +138,7 @@ class ProcessController extends Controller
         $percent=($budget[0]->totalbudget / $est[0]->estimation)*100;
         $process = DB::table('Project')
             ->where('project_id',$data)
-            ->update(['budget' => $budget[0]->totalbudget ,
-                'state_id' => $state[0]->state,'percent' => $percent,'percent' => $percent]);
+            ->update(['budget' => $budget[0]->totalbudget,'state_id' => $state[0]->state,'percent' => $percent,'percent' => $percent,'prend_date' => Request::input('edate')]);
         if (Request::hasFile('eimage')) {
             $file = request()->file('eimage');
             $filenamewithextension = $file->getClientOriginalName();
@@ -167,15 +166,10 @@ class ProcessController extends Controller
             $img->save($thumbnailpath. $filenametostore);
             $imgpath = public_path('profile_images/img/'.$filenametostoreb);
             $img = Image::make($file->getRealPath())->save($imgpath. $filenametostoreb);
-
-
             $process = DB::table('Project_process')
                 ->where('process_id', Request::input('eprocess_id'))
                 ->update(['image_b' => $imgpath , 'image_s' => $img]);
-
         }
-
-
         return Redirect('barilga');
     }
 

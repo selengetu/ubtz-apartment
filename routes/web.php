@@ -113,3 +113,4 @@ Route::get('/main', 'TailanController@index')->name('main');
 Route::get('/time', 'TailanController@time')->name('time');
 Route::get('/analyse', 'TailanController@analyse')->name('analyse');
 Route::post('/searchanalyse', 'TailanController@analyse')->name('searchanalyse');
+Route::match(['get', 'post'],'/album', 'TailanController@album')->name('album');

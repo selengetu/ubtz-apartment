@@ -57,6 +57,7 @@
 
                                     </div>
                                 </div>
+                                </div>
                             </form>
 
                         </div>
@@ -182,7 +183,7 @@
     $stackValue2 = array();
     $depname = array();
     $percent = array();
-    foreach($t as $wag)   {array_push($stack,$wag->department_name); array_push($stackValue,$wag->plan);array_push($stackValue2,$wag->estimation);
+    foreach($t as $wag)   {array_push($stack,$wag->department_name); array_push($stackValue,$wag->plan);array_push($stackValue2,$wag->budget);
         array_push($depname,$wag->department_name);array_push($percent,$wag->estimation);}
 
     ?>

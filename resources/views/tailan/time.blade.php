@@ -169,9 +169,10 @@
 
                                             <td>{{$projects->percent}}%</td>
                                             <td>{{$projects->firstname}}</td>
-                                            <td width="45px">{{$projects->start_date}}</td>
+
                                             <td>{{$projects->end_date}} </td>
-                                            <td> </td>
+                                            <td width="45px">{{$projects->prend_date}}</td>
+                                            <td> {{$projects->diff}}</td>
                                             <td @if($projects->state_id==2)
                                                 bgcolor="#ff8c00";
                                                 @elseif($projects->state_id==1)

@@ -126,6 +126,11 @@
                                     <br>
                                     <table class="table table-bordered" id="example" border="1" style="font-size:12px; width:100%; border-collapse: collapse;">
                                         <thead>
+                                        <?php $sum_plan = 0 ?>
+                                        <?php $sum_estimation = 0 ?>
+                                        <?php $sum_budget = 0 ?>
+                                        <?php $sum_economic = 0 ?>
+                                        <?php $sum_percent = 0 ?>
                                         <tr role="row">
                                             <th>#</th>
                                             <th>Байгууллага</th>
@@ -155,18 +160,21 @@
                                                 <td><?php
                                                     echo number_format($projects->plan)."<br>";
                                                     ?></td>
-
+                                                <?php $sum_plan += ($projects->plan) ?>
                                                 <td><?php
                                                     echo number_format($projects->estimation)."<br>";
                                                     ?></td>
+                                                <?php $sum_estimation += ($projects->estimation) ?>
                                                 <td><?php
                                                     echo number_format($projects->budget)."<br>";
                                                     ?></td>
+                                                <?php $sum_budget += ($projects->budget) ?>
                                                 <td><?php
                                                     echo number_format($projects->economic)."<br>";
                                                     ?></td>
-
+                                                <?php $sum_economic += ($projects->economic) ?>
                                                 <td>{{$projects->percent}}%</td>
+                                                <?php $sum_percent += ($projects->percent) ?>
                                                 <td>{{$projects->firstname}}</td>
                                                 <td width="45px">{{$projects->start_date}}
                                                 <td>{{$projects->end_date}}
@@ -186,11 +194,40 @@
                                                     bgcolor="red";
                                                     @endif
                                                     color="white"
-                                                ><font color="#fff">{{$projects->state_name_mn}}</font></td>
+                                                >    <font  @if($projects->state_id==1)
+                                                            color="black"; @else color="white"; @endif >{{$projects->state_name_mn}}</font></td></td>
 
                                             </tr>
                                             <?php $no++; ?>
                                         @endforeach
+                                        <tr>
+
+                                            <td><b>Нийт</b></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><b><?php
+                                                    echo number_format($sum_plan)."<br>";
+                                                    ?></b></td>
+                                            <td><b><?php
+                                                    echo number_format($sum_estimation)."<br>";
+                                                    ?></b></td>
+                                            <td><b><?php
+                                                    echo number_format($sum_budget)."<br>";
+                                                    ?></b></td>
+                                            <td><b><?php
+                                                    echo number_format($sum_economic)."<br>";
+                                                    ?></b></td>
+                                            <td><b><?php
+                                                    echo $no-1 == 0 ? 0 : number_format($sum_percent/($no-1),2,",",".")."%<br>";
+                                                    ?></b></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+
+
+                                        </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -235,16 +272,17 @@
             if (gproject_id != 0) {
                 processClicked(gproject_id);
             }
-            $('#export-btn').on('click', function(e){
-                $("#example").table2excel({
 
-                    exclude: ".noExl",
-                    name: "Worksheet Name",
-                    filename: "SomeFile" //do not include extension
-                });
+
+
+        });
+        $('#export-btn').on('click', function(e){
+            $("#example").table2excel({
+
+                exclude: ".noExl",
+                name: "Worksheet Name",
+                filename: "SomeFile" //do not include extension
             });
-
-
         });
         function printDiv() {
 

@@ -4,9 +4,11 @@
 
       if(item == 1 || item == 2){
           $('#gpercentdiv').show();
+          $('#gdatediv').show();
       }
       else{
           $('#gpercentdiv').hide();
+          $('#gdatediv').hide();
       }
     });
     $('#estate_id').change(function() {
@@ -14,9 +16,11 @@
 
         if(item == 1 || item == 2){
             $('#epercentdiv').show();
+            $('#edatediv').show();
         }
         else{
             $('#epercentdiv').hide();
+            $('#edatediv').hide();
         }
     });
     $('.money').inputmask("numeric", {
@@ -91,20 +95,69 @@
         $.get('projectfill/'+itag,function(data){
             $("#projecttable tbody").empty();
             $.each(data,function(i,qwe){
+                var $type;
+                var $type1;
+                var $type2;
+                var $type3;
+                var $type4;
+                var $type5;
+                var $type6;
+                if(qwe.plan == null){
+                    $type= ''
+                }
+                else{
+                    $type= qwe.plan;
+                }
+                if(qwe.estimation == null){
+                    $type1= ''
+                }
+                else{
+                    $type1= qwe.estimation;
+                }
+                if(qwe.budget == null){
+                    $type2= ''
+                }
+                else{
+                    $type2= qwe.budget;
+                }
+                if(qwe.economic == null){
+                    $type3= ''
+                }
+                else{
+                    $type3= qwe.economic;
+                }
+                if(qwe.percent == null){
+                    $type4= ''
+                }
+                else{
+                    $type4= qwe.percent;
+                }
+                if(qwe.start_date == null){
+                    $type5= ''
+                }
+                else{
+                    $type5= qwe.start_date;
+                }
+                if(qwe.end_date == null){
+                    $type6= ''
+                }
+                else{
+                    $type6= qwe.end_date;
+                }
                 $('#gproject_id').val(qwe.project_id);
                 var sHtml = " <tr class='table-row' >" +
 
                     "   <td class='m1'>" + qwe.department_name + "</td>" +
                     "   <td class='m1'>" + qwe.executor_abbr + "</td>" +
                     "   <td class='m1'>" + qwe.project_name + "</td>" +
-                    "   <td class='m1'>" + qwe.plan+ "</td>" +
-                    "   <td class='m1'>" + number_format(qwe.estimation) + "</td>" +
-                    "   <td class='m1'>" + number_format(qwe.budget)+ "</td>" +
-                    "   <td class='m1'>" + number_format(qwe.economic) + "</td>" +
-                    "   <td class='m1'>" + qwe.percent + "</td>" +
+                    "   <td class='m1'>" + $type+ "</td>" +
+                    "   <td class='m1'>" + $type1 + "</td>" +
+                    "   <td class='m1'>" + $type2+ "</td>" +
+                    "   <td class='m1'>" + $type3 + "</td>" +
+                    "   <td class='m1'>" + $type4 + "</td>" +
                     "   <td class='m1'>" + qwe.firstname + "</td>" +
-                    "   <td class='m1'>" + qwe.start_date + "</td>" +
-                    "   <td class='m1'>" + qwe.end_date + "</td>" +
+                    "   <td class='m1'>" + $type5 + "</td>" +
+                    "   <td class='m1'>" + $type6 + "</td>" +
                     "   <td class='m1'>" + qwe.state_name_mn + "</td>" +
                     "</tr>";
 
@@ -208,11 +261,18 @@
             $("#processtable tbody").empty();
             $.each(data,function(i,qwe){
 
+                var $type;
+                if(qwe.description == null){
+                    $type= ''
+                }
+                else{
+                    $type= qwe.description;
+                }
                 var sHtml = " <tr class='table-row' >" +
 
                     "   <td class='m1'>" + qwe.year + " - " + qwe.month+"</td>" +
                     "   <td class='m1'>" + qwe.budget+ "</td>" +
-                    "   <td class='m1'>" + qwe.description + "</td>" +
+                    "   <td class='m1'>" + $type + "</td>" +
                     "   <td class='m1'><img src='/profile_images/thumbnail/" +qwe.image_s + "'></td>" +
                     "   <td class='m1'> <button id='updateproc' class='btn btn-xs btn-success' data-toggle='modal' data-target='#eprocessmodal' data-id=" + qwe.process_id + " tag=" + qwe.process_id + " onclick='updateproc("+qwe.process_id+")'>  <i class='fa fa-pencil' style='color: rgb(255, 255, 255);'></i></button></td>" +
 

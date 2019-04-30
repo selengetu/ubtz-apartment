@@ -216,11 +216,40 @@ class TailanController extends Controller
 
         }
 
-        $t =DB::select("select d.department_name, t.department_id,d.department_type, sum(t.plan) as plan, sum(t.estimation) as estimation,  (sum(t.estimation)/sum(t.plan))*100 as percent, sum(t.estimation)-sum(t.plan) as diff from V_PROJECT t , CONST_DEPARTMENT d
+        $t =DB::select("select d.department_name, t.department_id,d.department_type, sum(t.plan) as plan, sum(t.budget) as budget, sum(t.estimation) as estimation,  (sum(t.estimation)/sum(t.plan))*100 as percent, sum(t.estimation)-sum(t.plan) as diff from V_PROJECT t , CONST_DEPARTMENT d
 where t.department_id=d.department_id ".$query. "
 group by d.department_type,t.department_id, d.department_name");
         $project =DB::select("select  * from V_PROJECT t  order by project_id");
         return view('tailan.analyse')->with(['t'=>$t,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype]);
+
+
+    }
+    public function album()
+    {
+        $query = "";
+        $state = State::orderby('state_name_mn')->get();
+        $method = Method::orderby('method_name')->get();
+        $projecttype = Projecttype::orderby('project_type_name_mn')->get();
+        $constructor = Constructor::orderby('department_abbr')->get();
+        $executor = Executor::orderby('executor_abbr')->get();
+
+        $employee =DB::select('select  * from V_CONST_EMPLOYEE t where t.is_engineer=1 order by firstname');
+
+        $sprojecttype= Input::get('sproject_type');
+
+        if ($sprojecttype!=NULL && $sprojecttype !=0) {
+            $query.=" and project_type = ".$sprojecttype."";
+
+        }
+        else
+        {
+            $query.=" ";
+
+        }
+
+
+        $project =DB::select("select  * from V_PROJECT_IMAGE t where 1=1 ".$query. "");
+        return view('tailan.album')->with(['method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype]);
 
 
     }

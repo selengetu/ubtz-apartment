@@ -188,6 +188,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <p>Ажлын хугацаа</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{ route('album') }}" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Фото албум</p>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="nav-item has-treeview">

@@ -40,7 +40,7 @@
                             <div class="card-body text-center">
                             <form method="post" action="barilga">
                                 <div class="col-md-12" data-scrollable="true" data-height="400" >
-                                    <div class="row" >
+                                    <div class="row">
                                         <div class="form-group col-md-2">
 
                                             <label for="inputEmail4">Ажлын төрөл</label>
@@ -129,6 +129,12 @@
                                     <table class="table table-striped table-bordered" id="example">
                                         <thead>
                                         <tr role="row">
+                                            <?php $sum_plan = 0 ?>
+                                            <?php $sum_estimation = 0 ?>
+                                            <?php $sum_budget = 0 ?>
+                                            <?php $sum_economic = 0 ?>
+                                            <?php $sum_percent = 0 ?>
+
                                             <th>#</th>
                                             <th>Захиалагч</th>
                                             <th>Гүйцэтгэгч</th>
@@ -158,18 +164,21 @@
                                                 <td><?php
                                                     echo number_format($projects->plan)."<br>";
                                                     ?></td>
-
+                                                <?php $sum_plan += ($projects->plan) ?>
                                                 <td><?php
                                                     echo number_format($projects->estimation)."<br>";
                                                     ?></td>
+                                                <?php $sum_estimation += ($projects->estimation) ?>
                                                 <td><?php
                                                     echo number_format($projects->budget)."<br>";
                                                     ?></td>
+                                                <?php $sum_budget += ($projects->budget) ?>
                                                 <td><?php
                                                     echo number_format($projects->economic)."<br>";
                                                     ?></td>
-
+                                                <?php $sum_economic += ($projects->economic) ?>
                                                 <td>{{$projects->percent}}%</td>
+                                                <?php $sum_percent += ($projects->percent) ?>
                                                 <td>{{$projects->firstname}}</td>
                                                 <td width="45px">{{$projects->start_date}}
                                                 <td>{{$projects->end_date}}
@@ -188,20 +197,57 @@
                                                     @else
                                                         bgcolor="red";
                                                 @endif
-                                                        color="white"
-                                                ><font color="#fff">{{$projects->state_name_mn}}</font></td>
-                                                <td> <button onclick="processClicked({{$projects->project_id}})"{{-- onclick="$('#nav-profile-tab').trigger('click')" --}} data-id="{{$projects->project_id}}" tag="{{$projects->project_id}}" class="btn btn-warning process"> <i class="fa fa-plus" style="color: rgb(255, 255, 255);"></i></button>
-
+                                                >
+                                                <font  @if($projects->state_id==1)
+                                                       color="black"; @else color="white"; @endif >{{$projects->state_name_mn}}</font></td>
+                                                <td>
+                                                    @if ( Auth::user()->id ==$projects->added_user_id or Auth::user()->user_grant ==2)
+                                                        <button onclick="processClicked({{$projects->project_id}})"{{-- onclick="$('#nav-profile-tab').trigger('click')" --}} data-id="{{$projects->project_id}}" tag="{{$projects->project_id}}" class="btn btn-warning process"> <i class="fa fa-plus" style="color: rgb(255, 255, 255);"></i></button>
+                                                    @endif
                                                 </td>
                                                 <td>
+                                                    @if ( Auth::user()->id ==$projects->added_user_id or Auth::user()->user_grant ==2)
                                                     <button type="button" class="btn btn-success update" data-toggle="modal"  data-id="{{$projects->project_id}}" tag="{{$projects->project_id}}"  data-target="#exampleModal" id="updateproj" onclick="updateproj({{$projects->project_id}})">
                                                         <i class="fa fa-pencil" style="color: rgb(255, 255, 255);"></i>
                                                     </button>
+                                                        @endif
                                                 </td>
                                             </tr>
                                             <?php $no++; ?>
+
                                         @endforeach
+
                                         </tbody>
+                                        <tr>
+
+                                            <td><b>Нийт</b></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><b><?php
+                                                echo number_format($sum_plan)."<br>";
+                                                ?></b></td>
+                                            <td><b><?php
+                                                echo number_format($sum_estimation)."<br>";
+                                                ?></b></td>
+                                            <td><b><?php
+                                                echo number_format($sum_budget)."<br>";
+                                                ?></b></td>
+                                            <td><b><?php
+                                                echo number_format($sum_economic)."<br>";
+                                                ?></b></td>
+                                            <td><b><?php
+                                                    echo $no-1 == 0 ? 0 : number_format($sum_percent/($no-1),2,",",".")."%<br>";
+
+                                                    ?></b></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+
+                                        </tr>
                                     </table>
                                 </div>
                             </div>
@@ -411,31 +457,33 @@
                                 @endforeach
                                 </select>
                             </div>
+
                             <div class="form-group col-md-6">
                                 <label for="inputAddress2">Төлөвлөгөө</label>
                                 <input type="text" class="form-control money" id="plan" name="plan" placeholder="" maxlength="14">
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputCity">Төсөв</label>
-                                <input type="text" class="form-control money" id="estimation" name="estimation" maxlength="14">
+                                <label for="inputZip">Үүнээс хаасан</label>
+                                <input type="text" class="form-control money" id="economic" name="economic" maxlength="14">
                             </div>
 
                         </div>
+
                     <div class="form-group col-md-6">
-                        <label for="inputZip">Үүнээс хаасан</label>
-                        <input type="text" class="form-control money" id="economic" name="economic" maxlength="14">
+                        <label for="inputCity">Төсөв</label>
+                        <input type="text" class="form-control money" id="estimation" name="estimation" maxlength="14">
                     </div>
                         <div class="form-row">
 
 
 
                             <div class="form-group col-md-6">
-                                <label for="inputAddress2">Эхлэх огноо</label>
+                                <label for="inputAddress2">Төлөвлөгөөт эхлэх огноо</label>
                                 <input class="form-control form-control-inline input-medium date-picker" name="date1" id="date1" placeholder="2019-04-15"
                                        size="16" type="text" value="">
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputCity">Дуусах огноо</label>
+                                <label for="inputCity">Төлөвлөгөөт дуусах огноо</label>
                                 <input class="form-control form-control-inline input-medium date-picker" name="date2" id="date2" placeholder="2019-06-15"
                                        size="16" type="text" value="">
                             </div>
@@ -502,9 +550,13 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group col-md-6" id="gpercentdiv">
+                            <div class="form-group col-md-3" id="gpercentdiv">
                                 <label for="inputZip">Биелэлт</label>
                                 <input type="text" class="form-control" id="gpercent" name="gpercent" placeholder="99.9" maxlength="4">
+                            </div>
+                            <div class="form-group col-md-3" id="gdatediv">
+                                <label for="inputZip">Дууссан огноо</label>
+                                <input class="form-control form-control-inline input-medium date-picker" name="gdate" id="gdate" placeholder="2019-04-15">
                             </div>
                             <div class="form-group col-md-8">
                                 <label for="inputZip">Тайлбар</label>
@@ -571,115 +623,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade " id="processmodal" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <form  method="post" action="addprocess">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modal-title1">Их барилга, их засварын ажлын гүйцэтгэл бүртгэх цонх</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
 
-                        <div class="form-row">
-                            <div class="form-group col-md-2">
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <input type="hidden" class="form-control" id="gprocess_id" name="gprocess_id">
-                                <input type="hidden" class="form-control" id="gproject_id" name="gproject_id">
-                                <label for="inputEmail4">Тооцох он</label>
-                                <input type="text" class="form-control year" id="gyear" name="gyear" maxlength="4">
-
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label for="inputEmail4">Сар</label>
-                                <input type="text" class="form-control" id="gmonth" name="gmonth" maxlength="2">
-
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="inputEmail4">Гүйцэтгэл</label>
-                                <input type="text" class="form-control money" id="gbudget" name="gbudget" maxlength="14">
-
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="inputZip">Төлөв</label>
-                                <select class="form-control select2" id="gstate_id" name="gstate_id" >
-                                    @foreach($state as $states)
-                                        <option value= "{{$states->state_id}}">{{$states->state_name_mn}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="form-group col-md-6" id="gpercentdiv">
-                                <label for="inputZip">Биелэлт</label>
-                                <input type="text" class="form-control" id="gpercent" name="gpercent" placeholder="99.9" maxlength="4">
-                            </div>
-                            <div class="form-group col-md-8">
-                                <label for="inputZip">Тайлбар</label>
-                                <textarea class="form-control" rows="2" id="gdescription" name="gdescription" maxlength="500"></textarea>
-                            </div>
-
-                            <div class="col-md-6">
-                                @if ($message = Session::get('success'))
-
-                                    <div class="alert alert-success alert-block">
-
-                                        <button type="button" class="close" data-dismiss="alert">×</button>
-
-                                        <strong>{{ $message }}</strong>
-
-                                    </div>
-
-                                    <img src="images/{{ Session::get('image') }}">
-
-                                @endif
-
-
-
-                                @if (count($errors) > 0)
-
-                                    <div class="alert alert-danger">
-
-                                        <strong>Whoops!</strong> There were some problems with your input.
-
-                                        <ul>
-
-                                            @foreach ($errors->all() as $error)
-
-                                                <li>{{ $error }}</li>
-
-                                            @endforeach
-
-                                        </ul>
-
-                                    </div>
-
-                                @endif
-                                <input type="file" name="image" class="form-control">
-
-                            </div>
-
-
-
-                        </div>
-
-
-                    </div>
-                    <div class="modal-footer">
-                        <div class="col-md-5">
-                            <button type="button" id="deleteproj" class="btn btn-danger delete">Устгах</button>
-                        </div>
-                        <div class="col-md-7" style="display: inline-block; text-align: right;" >
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Хаах</button>
-                            <button type="submit" class="btn btn-primary">Хадгалах</button>
-                        </div>
-                    </div>
-                </form>
-
-            </div>
-        </div>
-    </div>
     <div class="modal fade " id="eprocessmodal" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -719,9 +663,13 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group col-md-6" id="epercentdiv">
+                            <div class="form-group col-md-3" id="epercentdiv">
                                 <label for="inputZip">Биелэлт</label>
                                 <input type="text" class="form-control" id="epercent" name="epercent" placeholder="99.9" maxlength="4">
+                            </div>
+                            <div class="form-group col-md-3" id="edatediv">
+                                <label for="inputZip">Биелэлт</label>
+                                <input class="form-control form-control-inline input-medium date-picker" name="edate" id="edate" placeholder="2019-04-15">
                             </div>
                             <div class="form-group col-md-8">
                                 <label for="inputZip">Тайлбар</label>
@@ -815,6 +763,22 @@
                 },
                 "pageLength": 50
             } );
+            $('#export-btn').on('click', function(e){
+                $("#example").table2excel({
+
+                    exclude: ".noExl",
+                    name: "Worksheet Name",
+                    filename: "SomeFile" //do not include extension
+                });
+            });
+            function printDiv() {
+
+                var divToPrint=document.getElementById("example");
+                newWin= window.open("");
+                newWin.document.write(divToPrint.outerHTML);
+                newWin.print();
+                newWin.close();
+            }
         } );
     </script>
     <script type='text/javascript' src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
