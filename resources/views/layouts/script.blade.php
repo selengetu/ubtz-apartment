@@ -70,21 +70,21 @@
     };
     function updateproc($id){
 
-        var title = document.getElementById("modal-title2");
+        var title = document.getElementById("modal-title1");
         title.innerHTML = "Их барилга, их засварын ажлын гүйцэтгэл засварлах цонх";
-        document.getElementById('form3').action = "updateprocess";
-        document.getElementById('form3').method ="post"
+        document.getElementById('form2').action = "updateprocess";
+        document.getElementById('form2').method ="post"
         var itag=$id;
         $.get('processfill/'+itag,function(data){
             $.each(data,function(i,qwe){
-                $('#eprocess_id').val(qwe.process_id);
-                $('#eproject_id').val(qwe.project_id);
-                $('#ebudget').val(qwe.budget);
-                $('#emonth').val(qwe.month);
-                $('#edescription').val(qwe.description);
-                $('#eyear').val(qwe.year);
-                $('#estate_id').val(qwe.state_id);
-                $("#eimage").attr("src", qwe.image_s);
+                $('#gprocess_id').val(qwe.process_id);
+                $('#gproject_id').val(qwe.project_id);
+                $('#gbudget').val(qwe.budget);
+                $('#gmonth').val(qwe.month);
+                $('#gdescription').val(qwe.description);
+                $('#gyear').val(qwe.year);
+                $('#gstate_id').val(qwe.state_id);
+                $("#gimage").attr("src", qwe.image_s);
             });
 
         });
@@ -190,13 +190,13 @@
         $('#budget').val('');
         $('#estimation').val('');
         $('#plan').val('');
-        $('#constructor_id').val('1');
+        $('#constructor_id').val('999');
         $('#project_type').val('1');
-        $('#respondent_emp_id').val('27');
+        $('#respondent_emp_id').val('999');
         $('#state_id').val('1');
         $('#method_code').val('1');
         $('#percent').val('');
-        $('#executor_id').val('1');
+        $('#executor_id').val('999');
         $('#economic').val('');
         $('#description').val('');
         $('.delete').hide();
@@ -274,7 +274,7 @@
                     "   <td class='m1'>" + qwe.budget+ "</td>" +
                     "   <td class='m1'>" + $type + "</td>" +
                     "   <td class='m1'><img src='/profile_images/thumbnail/" +qwe.image_s + "'></td>" +
-                    "   <td class='m1'> <button id='updateproc' class='btn btn-xs btn-success' data-toggle='modal' data-target='#eprocessmodal' data-id=" + qwe.process_id + " tag=" + qwe.process_id + " onclick='updateproc("+qwe.process_id+")'>  <i class='fa fa-pencil' style='color: rgb(255, 255, 255);'></i></button></td>" +
+                    "   <td class='m1'> <button id='updateproc' class='btn btn-xs btn-warning' data-toggle='modal' data-target='#processmodal' data-id=" + qwe.process_id + " tag=" + qwe.process_id + " onclick='updateproc("+qwe.process_id+")'>  <i class='fa fa-pencil' style='color: rgb(255, 255, 255);'></i></button></td>" +
 
                     "</tr>";
 
@@ -289,30 +289,4 @@
         headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
     });
 
-    $('#form3').submit(function(event){
-        event.preventDefault();
-
-        var itag = $('#gproject_id').val();
-        $.ajax(
-            {
-                type: 'POST',
-                url: 'updateprocess',
-                data: $('form#form3').serialize(),
-                success: function ()
-                {
-                    alert('Ажлын гүйцэтгэл засагдлаа');
-                    getproc(itag);
-                    getproject(itag);
-                    $('#eprocessmodal').modal('hide');
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    if (jqXHR.status == 500) {
-                        alert('Internal error: ' + jqXHR.responseText);
-                    }
-                }
-            });
-
-
-
-    });
 </script>

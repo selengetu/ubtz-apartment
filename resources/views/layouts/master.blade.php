@@ -15,7 +15,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <title>{{ config('app.name', 'ЗТҮС') }}</title>
 
     <!-- Theme style -->
-  <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('dist/css/adminlte.css') }}">
   <link rel="stylesheet" href="{{ asset('plugins/font-awesome/css/font-awesome.min.css') }}">
   <link rel="stylesheet" href="{{ asset('https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
@@ -25,10 +25,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
     @yield('style')
   <style>
     table{
-      font-size: 12px;
+      font-size: 11px;
       text-align:left;
-    }
 
+    }
+    table td{
+      padding: .45em;
+
+    }
   </style>
 </head>
 <body class="hold-transition sidebar-mini @if(Auth::user()->menucollapse==1) sidebar-collapse @else sidebar-open @endif">
@@ -58,8 +62,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="{{ route('logout') }}" class="nav-link">Системээс гарах</a>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="fa fa-user-circle fa-2x"></i>
+
+        </a>
+
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+
+          <a href="{{ route('profile') }}" class="dropdown-item">
+            <i class="fa fa-envelope mr-2"></i> Нууц үг солих
+
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="{{ route('logout') }}" class="dropdown-item">
+            <i class="fa fa-users mr-2"></i> Системээс гарах
+
+          </a>
+
+        </div>
       </li>
 
     </ul>
@@ -109,7 +131,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             </ul>
           </li>
-
+          @if ( Auth::user()->id ==47)
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-dashboard"></i>
@@ -166,6 +188,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             </ul>
           </li>
+          @endif
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-dashboard"></i>
@@ -232,9 +255,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Main Footer -->
   <footer class="main-footer">
     <!-- To the right -->
-    <div class="float-right d-none d-sm-inline">
-      Anything you want
-    </div>
+
     <!-- Default to the left -->
     <strong>Copyright &copy; 2019 СБМТА <a href="">НЧи Т.Сэлэнгэ</a></strong> 88877833
   </footer>

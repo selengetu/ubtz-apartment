@@ -125,11 +125,11 @@ class ProcessController extends Controller
 
     public function update(Request $request)
     {
-        $data= Request::input('eproject_id');
+        $data= Request::input('gproject_id');
         $process = DB::table('Project_process')
-            ->where('process_id', Request::input('eprocess_id'))
-            ->update(['budget' =>  preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('ebudget')),'month' => Request::input('emonth'),'year' => Request::input('eyear')
-                ,'description' => Request::input('edescription'),'state_id' => Request::input('estate_id')]);
+            ->where('process_id', Request::input('gprocess_id'))
+            ->update(['budget' =>  preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('gbudget')),'month' => Request::input('gmonth'),'year' => Request::input('gyear')
+                ,'description' => Request::input('gdescription'),'state_id' => Request::input('gstate_id')]);
 
         $state = DB::select("select t.state_id as state from V_PROCESS t where t.process_id = (select max(v.process_id) from V_PROCESS v where v.project_id=".$data.")");
         $est = DB::select("select estimation from V_PROJECT t where t.project_id=".$data."");
@@ -139,8 +139,9 @@ class ProcessController extends Controller
         $process = DB::table('Project')
             ->where('project_id',$data)
             ->update(['budget' => $budget[0]->totalbudget,'state_id' => $state[0]->state,'percent' => $percent,'percent' => $percent,'prend_date' => Request::input('edate')]);
-        if (Request::hasFile('eimage')) {
-            $file = request()->file('eimage');
+        if (Request::hasFile('image')) {
+
+            $file = request()->file('image');
             $filenamewithextension = $file->getClientOriginalName();
 
             //get filename without extension
@@ -151,6 +152,7 @@ class ProcessController extends Controller
 
             //filename to store
             $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+
             $filenametostoreb = $filename.'_'.uniqid().'.'.$extension;
 
             Storage::put('profile_images/'. $filenametostore, fopen($file, 'r+'));
@@ -160,16 +162,20 @@ class ProcessController extends Controller
             Storage::put('profile_images/img/'. $filenametostoreb, fopen($file, 'r+'));
             //Resize image here
             $thumbnailpath = public_path('profile_images/thumbnail/'.$filenametostore);
-            $img = Image::make($file->getRealPath())->resize(400, 150, function($constraint) {
+
+            $img1 = Image::make($file->getRealPath())->resize(400, 150, function($constraint) {
                 $constraint->aspectRatio();
             });
-            $img->save($thumbnailpath. $filenametostore);
+
+            $img1->save($thumbnailpath);
             $imgpath = public_path('profile_images/img/'.$filenametostoreb);
-            $img = Image::make($file->getRealPath())->save($imgpath. $filenametostoreb);
+            $img = Image::make($file->getRealPath())->save($filenametostoreb);
+            $img->save($imgpath);
             $process = DB::table('Project_process')
-                ->where('process_id', Request::input('eprocess_id'))
-                ->update(['image_b' => $imgpath , 'image_s' => $img]);
+                ->where('process_id', Request::input('gprocess_id'))
+                ->update(['image_b' => $filenametostoreb , 'image_s' => $filenametostore]);
         }
+        Session::flash('gproject_id',Request::input('gproject_id'));
         return Redirect('barilga');
     }
 

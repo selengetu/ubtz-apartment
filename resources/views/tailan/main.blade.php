@@ -118,7 +118,7 @@
 
                                         </div>
                                         <div class="col-md-2">
-                                            <button class="btn btn-info" id="export-btn"><i class="fa fa-print" aria-hidden="true"></i> Excel</button>
+                                            <button class="btn btn-info" id="export-btn" onclick="tableToExcel('example', 'Export HTML Table to Excel')"><i class="fa fa-print" aria-hidden="true"></i> Excel</button>
                                             <button class="btn btn-info" id="buttonprint" onclick="printDiv()"><i class="fa fa-print" aria-hidden="true"></i> Хэвлэх</button>
 
                                         </div>
@@ -133,7 +133,7 @@
                                         <?php $sum_percent = 0 ?>
                                         <tr role="row">
                                             <th>#</th>
-                                            <th>Байгууллага</th>
+                                            <th>Захиалагч</th>
                                             <th>Гүйцэтгэгч</th>
                                             <th>Ажлын нэр</th>
                                             <th>Төлөвлөгөө</th>
@@ -143,9 +143,11 @@
                                             <th>Үүнээс</th>
                                             <th>Биелэлт</th>
                                             <th>Хариуцагч инженер</th>
-                                            <th style="width: 55px">Эхлэх огноо</th>
-                                            <th style="width: 55px">Дуусах огноо</th>
+                                            <th style="width: 55px">Төлөвлөгөөт эхлэх огноо</th>
+                                            <th style="width: 55px">Төлөвлөгөөт дуусах огноо</th>
+                                            <th style="width: 55px">Ажил дууссан огноо</th>
                                             <th>Тайлбар</th>
+
 
                                         </tr>
                                         </thead>
@@ -177,7 +179,8 @@
                                                 <?php $sum_percent += ($projects->percent) ?>
                                                 <td>{{$projects->firstname}}</td>
                                                 <td width="45px">{{$projects->start_date}}
-                                                <td>{{$projects->end_date}}
+                                                <td width="45px">{{$projects->end_date}}
+                                                <td width="45px">{{$projects->prend_date}}
                                                 <td @if($projects->state_id==2)
                                                     bgcolor="#ff8c00";
                                                     @elseif($projects->state_id==1)
@@ -276,14 +279,38 @@
 
 
         });
-        $('#export-btn').on('click', function(e){
-            $("#example").table2excel({
 
-                exclude: ".noExl",
-                name: "Worksheet Name",
-                filename: "SomeFile" //do not include extension
-            });
-        });
+            var tableToExcel = (function () {
+                var uri = 'data:application/vnd.ms-excel;base64,'
+                    , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body>        <p><center><b>Их засварын тайлан</b></center> </p><table border="1">{table}</table>   <center><b></b></center> <span> ТАЙЛАН ГАРГАСАН:</span><span style="margin-left: 180px"> {{ Auth::user()->name }}</span></body></html>'
+                    , base64 = function (s) { return window.btoa(unescape(encodeURIComponent(s))) }
+                    , format = function (s, c) { return s.replace(/{(\w+)}/g, function (m, p) { return c[p]; }) }
+                return function (table, name) {
+                    if (!table.nodeType) table = document.getElementById(table)
+                    var ctx = { worksheet: name || 'Worksheet', table: table.innerHTML }
+                    var blob = new Blob([format(template, ctx)]);
+                    var blobURL = window.URL.createObjectURL(blob);
+
+                    if (ifIE()) {
+                        csvData = table.innerHTML;
+                        if (window.navigator.msSaveBlob) {
+                            var blob = new Blob([format(template, ctx)], {
+                                type: "text/html"
+                            });
+                            navigator.msSaveBlob(blob, '' + name + '.xls');
+                        }
+                    }
+                    else
+                        window.location.href = uri + base64(format(template, ctx))
+                }
+            })()
+
+            function ifIE() {
+                var isIE11 = navigator.userAgent.indexOf(".NET CLR") > -1;
+                var isIE11orLess = isIE11 || navigator.appVersion.indexOf("MSIE") != -1;
+                return isIE11orLess;
+            }
+
         function printDiv() {
 
             var divToPrint=document.getElementById("example");

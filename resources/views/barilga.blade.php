@@ -5,14 +5,8 @@
 @endsection
 
 @section('content')
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css">
 
-
-            </div>
-        </div><!-- /.container-fluid -->
-    </section>
     <section class="content">
 
         <div class="container-fluid">
@@ -105,6 +99,7 @@
                             </div>
                             <!-- /.card-body -->
                         </div>
+
                         <div class="card">
                             <div class="card-header">
                                 <div class="row">
@@ -120,13 +115,9 @@
 
                             </div>
                             <!-- /.card-header -->
-                            <div class="card-body text-center">
-
+                            <div class="card-body">
                                 <div class="table-responsive">
-
-
-
-                                    <table class="table table-striped table-bordered" id="example">
+                                    <table class="table  table-bordered" id="example">
                                         <thead>
                                         <tr role="row">
                                             <?php $sum_plan = 0 ?>
@@ -146,8 +137,9 @@
                                             <th>Үүнээс</th>
                                             <th>Биелэлт</th>
                                             <th>Хариуцагч инженер</th>
-                                            <th style="width: 55px">Эхлэх огноо</th>
-                                            <th style="width: 55px">Дуусах огноо</th>
+                                            <th>Эхлэх огноо</th>
+                                            <th>Дуусах огноо</th>
+
                                             <th>Тайлбар</th>
                                             <th></th>
                                             <th></th>
@@ -195,22 +187,22 @@
                                                     @elseif($projects->state_id==6)
                                                     bgcolor="blue";
                                                     @else
-                                                        bgcolor="red";
-                                                @endif
+                                                    bgcolor="red";
+                                                        @endif
                                                 >
-                                                <font  @if($projects->state_id==1)
-                                                       color="black"; @else color="white"; @endif >{{$projects->state_name_mn}}</font></td>
+                                                    <font  @if($projects->state_id==1)
+                                                           color="black"; @else color="white"; @endif >{{$projects->state_name_mn}}</font></td>
                                                 <td>
-                                                    @if ( Auth::user()->id ==$projects->added_user_id or Auth::user()->user_grant ==2)
-                                                        <button onclick="processClicked({{$projects->project_id}})"{{-- onclick="$('#nav-profile-tab').trigger('click')" --}} data-id="{{$projects->project_id}}" tag="{{$projects->project_id}}" class="btn btn-warning process"> <i class="fa fa-plus" style="color: rgb(255, 255, 255);"></i></button>
+                                                    @if ( Auth::user()->id ==$projects->added_user_id or Auth::user()->user_grant !=6)
+                                                        <button onclick="processClicked({{$projects->project_id}})"{{-- onclick="$('#nav-profile-tab').trigger('click')" --}} data-id="{{$projects->project_id}}" tag="{{$projects->project_id}}" class="btn btn-primary btn-sm process"> <i class="fa fa-plus" style="color: rgb(255, 255, 255);"></i></button>
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    @if ( Auth::user()->id ==$projects->added_user_id or Auth::user()->user_grant ==2)
-                                                    <button type="button" class="btn btn-success update" data-toggle="modal"  data-id="{{$projects->project_id}}" tag="{{$projects->project_id}}"  data-target="#exampleModal" id="updateproj" onclick="updateproj({{$projects->project_id}})">
-                                                        <i class="fa fa-pencil" style="color: rgb(255, 255, 255);"></i>
-                                                    </button>
-                                                        @endif
+                                                    @if ( Auth::user()->id ==$projects->added_user_id or Auth::user()->user_grant !=6)
+                                                        <button type="button" class="btn btn-warning btn-sm update" data-toggle="modal"  data-id="{{$projects->project_id}}" tag="{{$projects->project_id}}"  data-target="#exampleModal" id="updateproj" onclick="updateproj({{$projects->project_id}})">
+                                                            <i class="fa fa-pencil" style="color: rgb(255, 255, 255);"></i>
+                                                        </button>
+                                                    @endif
                                                 </td>
                                             </tr>
                                             <?php $no++; ?>
@@ -225,17 +217,17 @@
                                             <td></td>
                                             <td></td>
                                             <td><b><?php
-                                                echo number_format($sum_plan)."<br>";
-                                                ?></b></td>
+                                                    echo number_format($sum_plan)."<br>";
+                                                    ?></b></td>
                                             <td><b><?php
-                                                echo number_format($sum_estimation)."<br>";
-                                                ?></b></td>
+                                                    echo number_format($sum_estimation)."<br>";
+                                                    ?></b></td>
                                             <td><b><?php
-                                                echo number_format($sum_budget)."<br>";
-                                                ?></b></td>
+                                                    echo number_format($sum_budget)."<br>";
+                                                    ?></b></td>
                                             <td><b><?php
-                                                echo number_format($sum_economic)."<br>";
-                                                ?></b></td>
+                                                    echo number_format($sum_economic)."<br>";
+                                                    ?></b></td>
                                             <td><b><?php
                                                     echo $no-1 == 0 ? 0 : number_format($sum_percent/($no-1),2,",",".")."%<br>";
 
@@ -250,6 +242,7 @@
                                         </tr>
                                     </table>
                                 </div>
+
                             </div>
                             <!-- /.card-body -->
                         </div>
@@ -409,7 +402,7 @@
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <input type="hidden" class="form-control" id="id" name="id">
                                 <label for="inputEmail4">Ажлын төрөл</label>
-                                <select class="form-control select2" id="project_type" name="project_type" >
+                                <select class="form-control select2" id="project_type" name="project_type" @if(Auth::user()->user_grant == 4) disabled="true"@endif>
                                     @foreach($projecttype as $projecttypes)
                                         <option value= "{{$projecttypes->project_type_id}}">{{$projecttypes->project_type_name_mn}}</option>
                                     @endforeach
@@ -418,7 +411,7 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="inputEmail4">Ажлын арга</label>
-                                <select class="form-control select2" id="method_code" name="method_code" >
+                                <select class="form-control select2" id="method_code" name="method_code" @if(Auth::user()->user_grant == 4) disabled="true"@endif>
                                     @foreach($method as $methods)
                                         <option value= "{{$methods->method_code}}">{{$methods->method_name}}</option>
                                     @endforeach
@@ -427,7 +420,7 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="inputEmail4">Захиалагч</label>
-                                <select class="form-control select2" id="constructor_id" name="constructor_id" >
+                                <select class="form-control select2" id="constructor_id" name="constructor_id" @if(Auth::user()->user_grant == 4) disabled="true"@endif>
                                     @foreach($constructor as $constructors)
                                         <option value= "{{$constructors->department_id}}">{{$constructors->department_name}}</option>
                                     @endforeach
@@ -436,7 +429,8 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="inputPassword4">Гүйцэтгэгч</label>
-                                <select class="form-control select2" id="executor_id" name="executor_id" >
+                                <select class="form-control select2" id="executor_id" name="executor_id" @if(Auth::user()->user_grant == 4) disabled="true"@endif>
+                                    <option value= "999">Тодорхойгүй</option>
                                     @foreach($executor as $executors)
                                         <option value= "{{$executors->executor_id}}">{{$executors->executor_abbr}}</option>
                                     @endforeach
@@ -447,11 +441,13 @@
 
                             <div class="form-group col-md-9">
                                 <label for="inputAddress">Ажлын нэр</label>
-                                <textarea class="form-control" rows="1" id="project_name" name="project_name" required></textarea>
+                                <textarea class="form-control" rows="1" id="project_name" name="project_name" required @if(Auth::user()->user_grant == 4) readonly="true"@endif></textarea>
                             </div>
+
                             <div class="form-group col-md-3">
                                 <label for="inputZip">Хариуцагч</label>
-                                <select class="form-control select2" id="respondent_emp_id" name="respondent_emp_id" >
+                                <select class="form-control select2" id="respondent_emp_id" name="respondent_emp_id" @if(Auth::user()->user_grant == 3 or Auth::user()->user_grant == 4 or Auth::user()->user_grant == 6) disabled="true"@endif>
+                                    <option value= "999">Тодорхойгүй</option>
                                 @foreach($employee as $employees)
                                     <option value= "{{$employees->emp_id}}">{{$employees->firstname}} {{$employees->fletter}}</option>
                                 @endforeach
@@ -460,40 +456,41 @@
 
                             <div class="form-group col-md-6">
                                 <label for="inputAddress2">Төлөвлөгөө</label>
-                                <input type="text" class="form-control money" id="plan" name="plan" placeholder="" maxlength="14">
+                                <input type="text" class="form-control money" id="plan" name="plan" placeholder="" maxlength="14" @if(Auth::user()->user_grant == 4) readonly="true"@endif>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputZip">Үүнээс хаасан</label>
-                                <input type="text" class="form-control money" id="economic" name="economic" maxlength="14">
+                                <input type="text" class="form-control money" id="economic" name="economic" maxlength="14" @if(Auth::user()->user_grant == 4) readonly="true"@endif>
                             </div>
 
                         </div>
 
                     <div class="form-group col-md-6">
                         <label for="inputCity">Төсөв</label>
-                        <input type="text" class="form-control money" id="estimation" name="estimation" maxlength="14">
+                        <input type="text" class="form-control money" id="estimation" name="estimation" maxlength="14"  @if(Auth::user()->user_grant == 3 or Auth::user()->user_grant == 5 or Auth::user()->user_grant == 6) readonly="true"@endif>
                     </div>
+
                         <div class="form-row">
 
 
 
                             <div class="form-group col-md-6">
                                 <label for="inputAddress2">Төлөвлөгөөт эхлэх огноо</label>
-                                <input class="form-control form-control-inline input-medium date-picker" name="date1" id="date1" placeholder="2019-04-15"
+                                <input class="form-control form-control-inline input-medium date-picker" name="date1" id="date1" placeholder="2019-04-15 " @if(Auth::user()->user_grant == 4) readonly="true"@endif
                                        size="16" type="text" value="">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputCity">Төлөвлөгөөт дуусах огноо</label>
-                                <input class="form-control form-control-inline input-medium date-picker" name="date2" id="date2" placeholder="2019-06-15"
+                                <input class="form-control form-control-inline input-medium date-picker" name="date2" id="date2" placeholder="2019-06-15" @if(Auth::user()->user_grant == 4) readonly="true"@endif
                                        size="16" type="text" value="">
                             </div>
 
 
                         </div>
                     <div class="form-row">
-                        <div class="form-group col-md-12">
+                        <div class="form-group col-md-12 col-xs-12">
                             <label for="inputZip">Тайлбар</label>
-                            <textarea class="form-control" rows="2" id="description" name="description" maxlength="500"></textarea>
+                            <textarea class="form-control" rows="2" id="description" name="description" maxlength="500" @if(Auth::user()->user_grant == 4) readonly="true"@endif></textarea>
                         </div>
                     </div>
 
@@ -501,10 +498,12 @@
                     <div class="modal-footer">
                         <div class="col-md-5">
                             <button type="button" class="btn btn-danger delete" id="deleteproj">Устгах</button>
+                            <button type="button" id="approveproj" class="btn btn-info">Батлах</button>
+                            <button type="submit" class="btn btn-primary">Хадгалах</button>
                         </div>
                         <div class="col-md-7" style="display: inline-block; text-align: right;" >
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Хаах</button>
-                            <button type="submit" class="btn btn-primary">Хадгалах</button>
+
                         </div>
                     </div>
                 </form>
@@ -612,123 +611,12 @@
                     <div class="modal-footer">
                         <div class="col-md-5">
                             <button type="button" id="deleteproc" class="btn btn-danger delete">Устгах</button>
-                        </div>
-                        <div class="col-md-7" style="display: inline-block; text-align: right;" >
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Хаах</button>
+                            <button type="button" id="approveproc" class="btn btn-info">Батлах</button>
                             <button type="submit" class="btn btn-primary" id="addprocessbutton">Хадгалах</button>
                         </div>
-                    </div>
-                </form>
-
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade " id="eprocessmodal" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <form id="form3" method="post" action="updateprocess" enctype="multipart/form-data">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modal-title2">Их барилга, их засварын ажлын гүйцэтгэл бүртгэх цонх</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-
-                        <div class="form-row">
-                            <div class="form-group col-md-2">
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <input type="hidden" class="form-control" id="eprocess_id" name="eprocess_id">
-                                <input type="hidden" class="form-control" id="eproject_id" name="eproject_id">
-                                <label for="inputEmail4">Тооцох он</label>
-                                <input type="text" class="form-control" id="eyear" name="eyear" maxlength="4">
-
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label for="inputEmail4">Сар</label>
-                                <input type="text" class="form-control" id="emonth" name="emonth" maxlength="2">
-
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="inputEmail4">Гүйцэтгэл</label>
-                                <input type="text" class="form-control money" id="ebudget" name="ebudget" maxlength="14">
-
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="inputZip">Төлөв</label>
-                                <select class="form-control select2" id="estate_id" name="estate_id" >
-                                    @foreach($state as $states)
-                                        <option value= "{{$states->state_id}}">{{$states->state_name_mn}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group col-md-3" id="epercentdiv">
-                                <label for="inputZip">Биелэлт</label>
-                                <input type="text" class="form-control" id="epercent" name="epercent" placeholder="99.9" maxlength="4">
-                            </div>
-                            <div class="form-group col-md-3" id="edatediv">
-                                <label for="inputZip">Биелэлт</label>
-                                <input class="form-control form-control-inline input-medium date-picker" name="edate" id="edate" placeholder="2019-04-15">
-                            </div>
-                            <div class="form-group col-md-8">
-                                <label for="inputZip">Тайлбар</label>
-                                <textarea class="form-control" rows="2" id="edescription" name="edescription" maxlength="500"></textarea>
-                            </div>
-
-                            <div class="col-md-6">
-                                @if ($message = Session::get('success'))
-
-                                    <div class="alert alert-success alert-block">
-
-                                        <button type="button" class="close" data-dismiss="alert">×</button>
-
-                                        <strong>{{ $message }}</strong>
-
-                                    </div>
-
-                                    <img src="" id="eimage">
-
-                                @endif
-
-
-
-                                @if (count($errors) > 0)
-
-                                    <div class="alert alert-danger">
-
-                                        <strong>Whoops!</strong> There were some problems with your input.
-
-                                        <ul>
-
-                                            @foreach ($errors->all() as $error)
-
-                                                <li>{{ $error }}</li>
-
-                                            @endforeach
-
-                                        </ul>
-
-                                    </div>
-
-                                @endif
-                                <input type="file" name="eimage" class="form-control">
-
-                            </div>
-
-
-
-                        </div>
-
-
-                    </div>
-                    <div class="modal-footer">
-                        <div class="col-md-5">
-                            <button type="button" id="deleteprocess" class="btn btn-danger delete">Устгах</button>
-                        </div>
                         <div class="col-md-7" style="display: inline-block; text-align: right;" >
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Хаах</button>
-                            <button type="submit" class="btn btn-primary">Хадгалах</button>
+
                         </div>
                     </div>
                 </form>
@@ -736,6 +624,7 @@
             </div>
         </div>
     </div>
+
 @endsection
 
 @section('script')
@@ -746,7 +635,10 @@
                 processClicked( gproject_id);
             }
             $('#example').dataTable( {
-                responsive: true,
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'excel', 'pdf'
+                ],
                 "language": {
                     "lengthMenu": " _MENU_ бичлэг",
                     "zeroRecords": "Бичлэг олдсонгүй",

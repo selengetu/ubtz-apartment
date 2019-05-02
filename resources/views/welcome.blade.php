@@ -22,7 +22,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card">
+                    <div class="card card-default">
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-md-9">
@@ -39,33 +39,7 @@
                             </div>
 
                         </div>
-                        <!-- /.card-header -->
-                        <div class="card-body text-center">
-                            <div class="m-scrollable" data-scrollable="true" data-height="400" >
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <iframe
-                                                style="width:270px;font-size:11px;height:210px;border: none;overflow:hidden;"
-                                                src="//monxansh.appspot.com/xansh.html?currency=USD|EUR|JPY|GBP|RUB|CNY|KRW&conv_tool=1"></iframe>
-                                        <br>
-                                        <iframe id="forecast_embed" type="text/html" frameborder="0" height="310" width="370" src="http://tsag-agaar.gov.mn/embed/?name=292&color=228ad4&color2=2179b8&color3=ffffff&color4=ffffff&type=vertical&tdegree=cwidth=370"> </iframe>
-                                    </div>
-                                    <div class="col-md-1">
 
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <canvas id="visitors-chart" width="600" height="350"></canvas>
-                                        <canvas id="percentchart" width="800" height="450"></canvas>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <canvas id="piechart" width="800" height="450"></canvas>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <!-- /.card-body -->
                     </div>
                     <!-- /.card -->
                 </div>
@@ -83,7 +57,68 @@
             </div>
         </div>
     </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
 
+                <!-- /.col (LEFT) -->
+                <div class="col-md-4">
+                    <!-- LINE CHART -->
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">Мэдээлэл</h3>
+
+
+                        </div>
+                        <div class="card-body">
+                            <div class="chart">
+                                <iframe
+                                        style="width:270px;font-size:11px;height:250px;border: none;overflow:hidden;"
+                                        src="//monxansh.appspot.com/xansh.html?currency=USD|EUR|JPY|GBP|RUB|CNY|KRW&conv_tool=1"></iframe>
+                                <br>
+                                <iframe id="forecast_embed" type="text/html" frameborder="0" height="280" width="370" src="http://tsag-agaar.gov.mn/embed/?name=292&color=228ad4&color2=2179b8&color3=ffffff&color4=ffffff&type=vertical&tdegree=cwidth=370"> </iframe>
+
+
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+
+                    <!-- /.card -->
+
+                </div>
+                <div class="col-md-8">
+                    <!-- LINE CHART -->
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">Ажлын үзүүлэлтүүд</h3>
+
+
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <canvas id="visitors-chart" width="600" height="350"></canvas>
+                                    <canvas id="percentchart" width="800" height="450"></canvas>
+                                </div>
+                                <div class="col-md-6">
+                                    <canvas id="piechart" width="800" height="450"></canvas>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+
+                    <!-- /.card -->
+
+                </div>
+                <!-- /.col (RIGHT) -->
+            </div>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+        <div>
+        </div></section>
 @endsection
 
 @section('script')
@@ -93,8 +128,8 @@
     $stackValue2 = array();
     $depname = array();
     $percent = array();
-    foreach($t as $wag)   {array_push($stack,$wag->department_name); array_push($stackValue,$wag->plan);array_push($stackValue2,$wag->estimation);
-        array_push($depname,$wag->department_name);array_push($percent,$wag->percent);}
+    foreach($t as $wag)   {array_push($stack,$wag->department_name); array_push($stackValue,$wag->plan);array_push($stackValue2,$wag->budget);
+        array_push($depname,$wag->department_name);array_push($percent,$wag->estimation);}
 
     ?>
 <script>
