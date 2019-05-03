@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Projecttype;
+use Carbon\Carbon;
 use Request;
 use Session;
 use App\Constructor;
@@ -163,7 +164,14 @@ class BarilgaController extends Controller
 
         return Redirect('barilga');
     }
+    public function approve(Request $request)
+    {
+        $project = DB::table('Project')
+            ->where('project_id', Request::input('id'))
+            ->update(['is_approved' =>1,'approved_date' =>Carbon::today(),'approved_id' =>Auth::user()->id]);
 
+        return Redirect('barilga');
+    }
     public function destroy($id)
     {
         Project::where('project_id', '=', $id)->delete();

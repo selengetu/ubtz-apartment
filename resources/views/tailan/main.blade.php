@@ -139,15 +139,14 @@
                                             <th>Төлөвлөгөө</th>
 
                                             <th>Төсөв</th>
-                                            <th>Гүйцэтгэл</th>
+                                            <th>Эхний 10 сарын </th>
+                                            <th>Энэ сарын </th>
+                                            <th>Эхний 11 сарын өссөн дүн </th>
                                             <th>Үүнээс</th>
                                             <th>Биелэлт</th>
                                             <th>Хариуцагч инженер</th>
-                                            <th style="width: 55px">Төлөвлөгөөт эхлэх огноо</th>
-                                            <th style="width: 55px">Төлөвлөгөөт дуусах огноо</th>
-                                            <th style="width: 55px">Ажил дууссан огноо</th>
                                             <th>Тайлбар</th>
-
+                                            <th colspan="2">Зурган тайлан</th>
 
                                         </tr>
                                         </thead>
@@ -170,6 +169,8 @@
                                                 <td><?php
                                                     echo number_format($projects->budget)."<br>";
                                                     ?></td>
+                                                <td></td>
+                                                <td></td>
                                                 <?php $sum_budget += ($projects->budget) ?>
                                                 <td><?php
                                                     echo number_format($projects->economic)."<br>";
@@ -178,9 +179,7 @@
                                                 <td>{{$projects->percent}}%</td>
                                                 <?php $sum_percent += ($projects->percent) ?>
                                                 <td>{{$projects->firstname}}</td>
-                                                <td width="45px">{{$projects->start_date}}
-                                                <td width="45px">{{$projects->end_date}}
-                                                <td width="45px">{{$projects->prend_date}}
+
                                                 <td @if($projects->state_id==2)
                                                     bgcolor="#ff8c00";
                                                     @elseif($projects->state_id==1)
@@ -199,7 +198,8 @@
                                                     color="white"
                                                 >    <font  @if($projects->state_id==1)
                                                             color="black"; @else color="white"; @endif >{{$projects->state_name_mn}}</font></td></td>
-
+                                                <td><img src="<?php echo asset("profile_images/img/$projects->image_b1")?>" alt="profile Pic" height="100" width="100"></td>
+                                                <td><img src="<?php echo asset("profile_images/img/$projects->image_b2")?>" alt="profile Pic" height="100" width="100"></td>
                                             </tr>
                                             <?php $no++; ?>
                                         @endforeach

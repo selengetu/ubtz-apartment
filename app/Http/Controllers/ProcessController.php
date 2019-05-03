@@ -6,6 +6,7 @@ use App\Projecttype;
 use Request;
 use Session;
 use Image;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use App\Constructor;
 use App\Executor;
@@ -13,7 +14,6 @@ use App\Employee;
 use App\Project;
 use App\Method;
 use App\State;
-use Carbon;
 use Auth;
 use App\Process;
 use Illuminate\Support\Facades\Input;
@@ -59,7 +59,7 @@ class ProcessController extends Controller
         $process ->project_id = Request::input('gproject_id');
         $process ->budget = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('gbudget'));
         $process ->month = Request::input('gmonth');
-        $process ->register_date = Carbon\Carbon::now();
+        $process ->register_date = Carbon::now();
         $process ->respondent_emp_id = Auth::user()->id;
         $process ->description = Request::input('gdescription');
         if (Request::hasFile('image')) {
@@ -191,6 +191,14 @@ class ProcessController extends Controller
         $process = DB::table('Project')
             ->where('project_id',$data)
             ->update(['budget' => $budget[0]->totalbudget ,'state_id' => $state[0]->state,'percent' => $percent]);
+        return Redirect('barilga');
+    }
+    public function approve(Request $request)
+    {
+        $process = DB::table('Project_process')
+            ->where('process_id', Request::input('gprocess_id'))
+            ->update(['is_approved' =>1,'approved_date' =>Carbon::today(),'approved_id' =>Auth::user()->id]);
+
         return Redirect('barilga');
     }
 }

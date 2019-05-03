@@ -75,8 +75,10 @@
         document.getElementById('form2').action = "updateprocess";
         document.getElementById('form2').method ="post"
         var itag=$id;
+
         $.get('processfill/'+itag,function(data){
             $.each(data,function(i,qwe){
+
                 $('#gprocess_id').val(qwe.process_id);
                 $('#gproject_id').val(qwe.project_id);
                 $('#gbudget').val(qwe.budget);
@@ -85,6 +87,8 @@
                 $('#gyear').val(qwe.year);
                 $('#gstate_id').val(qwe.state_id);
                 $("#gimage").attr("src", qwe.image_s);
+
+
             });
 
         });
@@ -106,25 +110,25 @@
                     $type= ''
                 }
                 else{
-                    $type= qwe.plan;
+                    $type= qwe.plancomma;
                 }
                 if(qwe.estimation == null){
                     $type1= ''
                 }
                 else{
-                    $type1= qwe.estimation;
+                    $type1= qwe.estimationcomma;
                 }
                 if(qwe.budget == null){
                     $type2= ''
                 }
                 else{
-                    $type2= qwe.budget;
+                    $type2= qwe.budgetcomma;
                 }
                 if(qwe.economic == null){
                     $type3= ''
                 }
                 else{
-                    $type3= qwe.economic;
+                    $type3= qwe.economiccomma;
                 }
                 if(qwe.percent == null){
                     $type4= ''
@@ -232,10 +236,11 @@
         alert('Их барилга, их засварын ажил устгагдлаа');
         location.reload();
     });
-    $('#deleteprocess').on('click',function(){
 
-        var itag = $('#eprocess_id').val();
-        var tag = $('#eproject_id').val();
+    $('#deleteproc').on('click',function(){
+
+        var itag = $('#gprocess_id').val();
+        var tag = $('#gproject_id').val();
 
         $.ajax(
             {
@@ -254,12 +259,70 @@
         alert('Их барилга, их засварын ажлын гүйцэтгэл устгагдлаа');
         getproject(tag);
         getproc(tag);
-        $('#eprocessmodal').modal('hide');
+        $('#processmodal').modal('hide');
     });
+    $('#approveproj').on('click',function(){
+
+        event.preventDefault();
+        var itag = $('#gprocess_id').val();
+        var tag = $('#gproject_id').val();
+
+        $.ajax(
+            {
+                type: 'POST',
+                url: 'approveproj',
+                data: $('form#form1').serialize(),
+                success: function ()
+                {
+                    alert(' Баталгаажилт хийгдлээ.');
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    if (jqXHR.status == 500) {
+                        alert('Internal error: ' + jqXHR.responseText);
+                    }
+                }
+            });
+
+
+        location.reload();
+    });
+    $('#approveproc').on('click',function(){
+
+        event.preventDefault();
+        var itag = $('#gprocess_id').val();
+        var tag = $('#gproject_id').val();
+
+        $.ajax(
+            {
+                type: 'POST',
+                url: 'approveproc',
+                data: $('form#form2').serialize(),
+                success: function ()
+                {
+                    alert(' Баталгаажилт хийгдлээ.');
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    if (jqXHR.status == 500) {
+                        alert('Internal error: ' + jqXHR.responseText);
+                    }
+                }
+            });
+        getproject(tag);
+        getproc(tag);
+        $('#processmodal').modal('hide');
+    });
+
     function getproc($id){
         $.get('projectprocessfill/'+$id,function(data){
             $("#processtable tbody").empty();
             $.each(data,function(i,qwe){
+                var $approve;
+                if(qwe.is_approved == 1){
+                    $approve=''
+                }
+                if(qwe.is_approved == 0){
+                    $approve= "<button id='updateproc' class='btn btn-xs btn-warning' data-toggle='modal' data-target='#processmodal' data-id=" + qwe.process_id + " tag=" + qwe.process_id + " onclick='updateproc("+qwe.process_id+")'>  <i class='fa fa-pencil' style='color: rgb(255, 255, 255);'></i></button>"
+                }
 
                 var $type;
                 if(qwe.description == null){
@@ -271,10 +334,10 @@
                 var sHtml = " <tr class='table-row' >" +
 
                     "   <td class='m1'>" + qwe.year + " - " + qwe.month+"</td>" +
-                    "   <td class='m1'>" + qwe.budget+ "</td>" +
+                    "   <td class='m1'>" + qwe.budgetcomma+ "</td>" +
                     "   <td class='m1'>" + $type + "</td>" +
                     "   <td class='m1'><img src='/profile_images/thumbnail/" +qwe.image_s + "'></td>" +
-                    "   <td class='m1'> <button id='updateproc' class='btn btn-xs btn-warning' data-toggle='modal' data-target='#processmodal' data-id=" + qwe.process_id + " tag=" + qwe.process_id + " onclick='updateproc("+qwe.process_id+")'>  <i class='fa fa-pencil' style='color: rgb(255, 255, 255);'></i></button></td>" +
+                    "   <td class='m1'>"+ $approve + "</td>" +
 
                     "</tr>";
 

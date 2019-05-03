@@ -1,11 +1,13 @@
 @extends('layouts.master')
 
 @section('style')
+<style>
 
+</style>
 @endsection
 
 @section('content')
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css">
+
 
     <section class="content">
 
@@ -116,7 +118,7 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <div class="table-responsive">
+                                <div class="table-responsive-sm">
                                     <table class="table  table-bordered" id="example">
                                         <thead>
                                         <tr role="row">
@@ -193,16 +195,18 @@
                                                     <font  @if($projects->state_id==1)
                                                            color="black"; @else color="white"; @endif >{{$projects->state_name_mn}}</font></td>
                                                 <td>
-                                                    @if ( Auth::user()->id ==$projects->added_user_id or Auth::user()->user_grant !=6)
+                                                    @if (Auth::user()->user_grant !=6 or Auth::user()->id ==$projects->added_user_id or Auth::user()->emp_id ==$projects->respondent_emp_id)
                                                         <button onclick="processClicked({{$projects->project_id}})"{{-- onclick="$('#nav-profile-tab').trigger('click')" --}} data-id="{{$projects->project_id}}" tag="{{$projects->project_id}}" class="btn btn-primary btn-sm process"> <i class="fa fa-plus" style="color: rgb(255, 255, 255);"></i></button>
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    @if ( Auth::user()->id ==$projects->added_user_id or Auth::user()->user_grant !=6)
+                                                    @if ($projects->is_approved == 0 )
+                                                    @if (Auth::user()->user_grant !=6 or Auth::user()->id ==$projects->added_user_id or Auth::user()->emp_id ==$projects->respondent_emp_id )
                                                         <button type="button" class="btn btn-warning btn-sm update" data-toggle="modal"  data-id="{{$projects->project_id}}" tag="{{$projects->project_id}}"  data-target="#exampleModal" id="updateproj" onclick="updateproj({{$projects->project_id}})">
                                                             <i class="fa fa-pencil" style="color: rgb(255, 255, 255);"></i>
                                                         </button>
                                                     @endif
+                                                        @endif
                                                 </td>
                                             </tr>
                                             <?php $no++; ?>
@@ -402,7 +406,7 @@
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <input type="hidden" class="form-control" id="id" name="id">
                                 <label for="inputEmail4">Ажлын төрөл</label>
-                                <select class="form-control select2" id="project_type" name="project_type" @if(Auth::user()->user_grant == 4) disabled="true"@endif>
+                                <select class="form-control select2" id="project_type" name="project_type">
                                     @foreach($projecttype as $projecttypes)
                                         <option value= "{{$projecttypes->project_type_id}}">{{$projecttypes->project_type_name_mn}}</option>
                                     @endforeach
@@ -411,7 +415,7 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="inputEmail4">Ажлын арга</label>
-                                <select class="form-control select2" id="method_code" name="method_code" @if(Auth::user()->user_grant == 4) disabled="true"@endif>
+                                <select class="form-control select2" id="method_code" name="method_code">
                                     @foreach($method as $methods)
                                         <option value= "{{$methods->method_code}}">{{$methods->method_name}}</option>
                                     @endforeach
@@ -420,7 +424,7 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="inputEmail4">Захиалагч</label>
-                                <select class="form-control select2" id="constructor_id" name="constructor_id" @if(Auth::user()->user_grant == 4) disabled="true"@endif>
+                                <select class="form-control select2" id="constructor_id" name="constructor_id">
                                     @foreach($constructor as $constructors)
                                         <option value= "{{$constructors->department_id}}">{{$constructors->department_name}}</option>
                                     @endforeach
@@ -429,7 +433,7 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="inputPassword4">Гүйцэтгэгч</label>
-                                <select class="form-control select2" id="executor_id" name="executor_id" @if(Auth::user()->user_grant == 4) disabled="true"@endif>
+                                <select class="form-control select2" id="executor_id" name="executor_id">
                                     <option value= "999">Тодорхойгүй</option>
                                     @foreach($executor as $executors)
                                         <option value= "{{$executors->executor_id}}">{{$executors->executor_abbr}}</option>
@@ -441,7 +445,7 @@
 
                             <div class="form-group col-md-9">
                                 <label for="inputAddress">Ажлын нэр</label>
-                                <textarea class="form-control" rows="1" id="project_name" name="project_name" required @if(Auth::user()->user_grant == 4) readonly="true"@endif></textarea>
+                                <textarea class="form-control" rows="1" id="project_name" name="project_name"></textarea>
                             </div>
 
                             <div class="form-group col-md-3">
@@ -456,11 +460,11 @@
 
                             <div class="form-group col-md-6">
                                 <label for="inputAddress2">Төлөвлөгөө</label>
-                                <input type="text" class="form-control money" id="plan" name="plan" placeholder="" maxlength="14" @if(Auth::user()->user_grant == 4) readonly="true"@endif>
+                                <input type="text" class="form-control money" id="plan" name="plan" placeholder="" maxlength="14">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputZip">Үүнээс хаасан</label>
-                                <input type="text" class="form-control money" id="economic" name="economic" maxlength="14" @if(Auth::user()->user_grant == 4) readonly="true"@endif>
+                                <input type="text" class="form-control money" id="economic" name="economic" maxlength="14">
                             </div>
 
                         </div>
@@ -476,12 +480,12 @@
 
                             <div class="form-group col-md-6">
                                 <label for="inputAddress2">Төлөвлөгөөт эхлэх огноо</label>
-                                <input class="form-control form-control-inline input-medium date-picker" name="date1" id="date1" placeholder="2019-04-15 " @if(Auth::user()->user_grant == 4) readonly="true"@endif
+                                <input class="form-control form-control-inline input-medium date-picker" name="date1" id="date1" placeholder="2019-04-15"
                                        size="16" type="text" value="">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputCity">Төлөвлөгөөт дуусах огноо</label>
-                                <input class="form-control form-control-inline input-medium date-picker" name="date2" id="date2" placeholder="2019-06-15" @if(Auth::user()->user_grant == 4) readonly="true"@endif
+                                <input class="form-control form-control-inline input-medium date-picker" name="date2" id="date2" placeholder="2019-06-15"
                                        size="16" type="text" value="">
                             </div>
 
@@ -490,7 +494,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-12 col-xs-12">
                             <label for="inputZip">Тайлбар</label>
-                            <textarea class="form-control" rows="2" id="description" name="description" maxlength="500" @if(Auth::user()->user_grant == 4) readonly="true"@endif></textarea>
+                            <textarea class="form-control" rows="2" id="description" name="description" maxlength="500"></textarea>
                         </div>
                     </div>
 

@@ -30,7 +30,7 @@ Route::match(['get', 'post'],'/barilga', 'BarilgaController@index')->name('baril
 Route::post('/addproject','BarilgaController@store');
 Route::get('/project/delete/{id}', 'BarilgaController@destroy');
 Route::post('/updateproject','BarilgaController@update');
-
+Route::post('/approveproj','BarilgaController@approve');
 Route::get('/projectfill/{id?}',function($id = 0){
     $dt=DB::table('V_PROJECT')->where('project_id','=',$id)->get();
     return $dt;
@@ -39,6 +39,7 @@ Route::get('/process', 'ProcessController@index')->name('process');
 Route::post('/addprocess','ProcessController@store');
 Route::get('/process/delete/{id}/{id1}', 'ProcessController@destroy');
 Route::post('/updateprocess','ProcessController@update');
+Route::post('/approveproc','ProcessController@approve');
 Route::get('/processfill/{id?}',function($id = 0){
     $dt=App\Process::where('process_id','=',$id)->get();
     return $dt;
