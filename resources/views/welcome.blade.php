@@ -26,7 +26,7 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-md-9">
-                                    <h4 class="m-0">Их барилга хөрөнгө, оруулалтын хэлтэс</h4>
+                                    <h4 class="m-0">Их барилга, хөрөнгө оруулалтын хэлтэс</h4>
                                 </div>
                                 <div class="col-md-3">
                                     <i class="fa fa-calendar" aria-hidden="true">

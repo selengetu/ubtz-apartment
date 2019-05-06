@@ -248,7 +248,7 @@ group by d.department_type,t.department_id, d.department_name");
         }
 
 
-        $project =DB::select("select  * from V_PROJECT_IMAGE t where 1=1 ".$query. "");
+        $project =DB::select("select  * from V_PROJECT_IMAGE2 t where 1=1 ".$query. "");
         return view('tailan.album')->with(['method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype]);
 
 

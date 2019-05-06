@@ -37,6 +37,13 @@
                                         <div class="row" >
                                             <div class="form-group col-md-2">
 
+                                                <label for="inputEmail4">Ажлын сар</label>
+                                                <input type="text" name="month" value="" class="form-control">
+
+
+                                            </div>
+                                            <div class="form-group col-md-2">
+
                                                 <label for="inputEmail4">Ажлын төрөл</label>
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <select class="form-control select2" id="sproject_type" name="sproject_type" >
@@ -67,25 +74,8 @@
                                                 </select>
 
                                             </div>
-                                            <div class="form-group col-md-2">
-                                                <label for="inputPassword4">Гүйцэтгэгч</label>
-                                                <select class="form-control select2" id="sexecutor_id" name="sexecutor_id" >
-                                                    <option value= "0">Бүгд</option>
-                                                    @foreach($executor as $executors)
-                                                        <option value= "{{$executors->executor_id}}">{{$executors->executor_abbr}}</option>
-                                                    @endforeach
-                                                </select>
 
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                                <label for="inputZip">Хариуцагч</label>
-                                                <select class="form-control select2" id="srespondent_emp_id" name="srespondent_emp_id" >
-                                                    <option value= "0">Бүгд</option>
-                                                    @foreach($employee as $employees)
-                                                        <option value= "{{$employees->emp_id}}">{{$employees->firstname}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
+
                                             <div class="form-group col-md-2">
                                                 <label for="inputZip"><span>.</span></label><br>
                                                 <button type="submit" class="btn btn-primary" >Хайх</button>
@@ -139,9 +129,9 @@
                                             <th>Төлөвлөгөө</th>
 
                                             <th>Төсөв</th>
-                                            <th>Эхний 10 сарын </th>
+                                            <th>Эхний 2 сарын </th>
                                             <th>Энэ сарын </th>
-                                            <th>Эхний 11 сарын өссөн дүн </th>
+                                            <th>Эхний 3 сарын өссөн дүн </th>
                                             <th>Үүнээс</th>
                                             <th>Биелэлт</th>
                                             <th>Хариуцагч инженер</th>
@@ -167,10 +157,14 @@
                                                     ?></td>
                                                 <?php $sum_estimation += ($projects->estimation) ?>
                                                 <td><?php
-                                                    echo number_format($projects->budget)."<br>";
+                                                    echo number_format($projects->diff)."<br>";
                                                     ?></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td><?php
+                                                    echo number_format($projects->bud)."<br>";
+                                                    ?></td>
+                                                <td><?php
+                                                    echo number_format($projects->runningtotal)."<br>";
+                                                    ?></td>
                                                 <?php $sum_budget += ($projects->budget) ?>
                                                 <td><?php
                                                     echo number_format($projects->economic)."<br>";
@@ -271,6 +265,7 @@
 @section('script')
     <script>
         $(document).ready(function() {
+
             const gproject_id = {{ $gproject_id }};
             if (gproject_id != 0) {
                 processClicked(gproject_id);

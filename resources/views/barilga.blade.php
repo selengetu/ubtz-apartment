@@ -633,7 +633,26 @@
 
 @section('script')
     <script>
+        $(function() {
+            $("#date1").datepicker({
+                format: 'yyyy-mm-dd',
+                todayBtn:  1,
+                autoclose: true,
+            }).on('changeDate', function (selected) {
+                var minDate = new Date(selected.date.valueOf());
+                $('#date2').datepicker('setStartDate', minDate);
+            });
+
+            $("#date2").datepicker({
+                format: 'yyyy-mm-dd',
+            })
+                .on('changeDate', function (selected) {
+                    var minDate = new Date(selected.date.valueOf());
+                    $('#date1').datepicker('setEndDate', minDate);
+                });
+        });
         $(document).ready(function() {
+
             const gproject_id = {{ $gproject_id }};
             if(gproject_id != 0){
                 processClicked( gproject_id);

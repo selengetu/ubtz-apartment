@@ -67,7 +67,7 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h3 class="card-title">2019 оны их барилга, их засварын ажлууд </h3>
+                                    <h3 class="card-title">2019 оны их барилга, их засварын ажлуудын фото тайлан </h3>
                                 </div>
 
                             </div>
