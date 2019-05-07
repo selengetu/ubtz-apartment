@@ -114,7 +114,7 @@
                                                     <td><?php
                                                         echo number_format($projects->diff)."<br>";
                                                         ?></td>
-                                                    <td></td>
+                                                    <td>{{number_format($projects->rpercent, 2, ',', '.')}}%</td>
 
 
                                                 </tr>

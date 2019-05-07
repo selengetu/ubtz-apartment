@@ -119,7 +119,7 @@
                                     </div>
                                     <div class="col-md-2">
                                         <button class="btn btn-info" id="export-btn"><i class="fa fa-print" aria-hidden="true"></i> Excel</button>
-                                        <button class="btn btn-info" id="buttonprint" onclick="printDiv()"><i class="fa fa-print" aria-hidden="true"></i> Хэвлэх</button>
+
 
                                     </div>
                                 </div>

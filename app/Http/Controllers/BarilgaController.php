@@ -124,7 +124,15 @@ class BarilgaController extends Controller
         $project->plan = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan'));
         $project->department_id = Request::input('constructor_id');
         $project->project_type = Request::input('project_type');
-        $project->respondent_emp_id = Request::input('respondent_emp_id');
+        if (Request::input('respondent_emp_id')!=NULL && Request::input('respondent_emp_id') !=0) {
+
+            $project->respondent_emp_id = Request::input('respondent_emp_id');
+        }
+        else{
+
+            $project->respondent_emp_id =999;
+        }
+
         $project->state_id = 15;
         $project->method_code = Request::input('method_code');
         $project->percent = Request::input('percent');
@@ -144,10 +152,23 @@ class BarilgaController extends Controller
         $project = DB::table('Project')
             ->where('project_id', Request::input('id'))
             ->update(['plan_year' => Request::input('plan_year'),'project_name' => Request::input('project_name'),'budget' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('budget'))
-                ,'estimation' =>preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('estimation')),'plan' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan')),'department_id' => Request::input('constructor_id')
+                ,'plan' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan')),'department_id' => Request::input('constructor_id')
                 ,'project_type' => Request::input('project_type'),'start_date' => Request::input('date1'),'end_date' => Request::input('date2')
                 ,'method_code' => Request::input('method_code'),'percent' => Request::input('percent'),'executor_id' => Request::input('executor_id')
                 ,'project_name_ru' => Request::input('project_name_ru'),'economic' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('economic')),'description' => Request::input('description')]);
+
+       if(Auth::user()->id ==53 )
+       {
+           $project = DB::table('Project')
+               ->where('project_id', Request::input('id'))
+               ->update(['respondent_emp_id' => Request::input('respondent_emp_id')]);
+       }
+        if(Auth::user()->id ==45 )
+        {
+            $project = DB::table('Project')
+                ->where('project_id', Request::input('id'))
+                ->update(['estimation' =>preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('estimation'))]);
+        }
         $data= Request::input('id');
         $state = DB::select("select t.state_id as state from V_PROCESS t where t.process_id = (select max(v.process_id) from V_PROCESS v where v.project_id=".$data.")");
         $est = DB::select("select estimation from V_PROJECT t where t.project_id=".$data."");

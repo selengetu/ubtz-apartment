@@ -12,6 +12,7 @@ use App\Project;
 use App\Method;
 use App\State;
 use DB;
+use Carbon\Carbon;
 use Auth;
 use Illuminate\Support\Facades\Input;
 class TailanController extends Controller
@@ -33,13 +34,15 @@ class TailanController extends Controller
      */
     public function index()
     {
+        $date = "";
+        $date1 = "";
         $query = "";
         $state = State::orderby('state_name_mn')->get();
         $method = Method::orderby('method_name')->get();
         $projecttype = Projecttype::orderby('project_type_name_mn')->get();
         $constructor = Constructor::orderby('department_abbr')->get();
         $executor = Executor::orderby('executor_abbr')->get();
-
+        $month = Input::get('month');
         $employee =DB::select('select  * from V_CONST_EMPLOYEE t where t.is_engineer=1 order by firstname');
 
         $sstate_id= Input::get('sstate_id');
@@ -104,13 +107,79 @@ class TailanController extends Controller
             $query.=" ";
 
         }
+        if ($month!=NULL && $month !=0) {
+            $date.=" and month <= ".$month."";
+            $date1.=" and par.month =".$month."";
+
+        }
+        else
+        {
+            $month =Carbon::now()->format('m');
+            $date.=" and month <= ".$month."";
+            $date1.=" and par.month =".$month."";
+
+
+        }
         $gproject_id = 0;
         if( Session::has('gproject_id') ) {
             $gproject_id = Session::get('gproject_id');
         }
+
         $data= Request::input('gproject_id');
-        $project =DB::select("select  * from V_PROJECT_IMAGE t  where 1=1 " .$query. " order by project_id");
-        return view('tailan.main')->with(['gproject_id'=>$gproject_id,'data'=>$data,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype]);
+        $project =DB::select("select u.project_id,
+       u.plan_year,
+       u.project_name,
+        to_char( u.budget,'999,999,999,999') as budgetcomma,
+       u.budget,
+       par.budget as bud,
+       par.runningtotal,
+       par.month,
+       par.diff,
+        to_char(u.estimation,'999,999,999,999') as estimationcomma,
+       u.estimation,
+        to_char(u.plan,'999,999,999,999') as plancomma,
+       u.plan,
+        u.economic,
+         to_char(u.economic,'999,999,999,999') as economiccomma,
+       u.department_id,
+       u.department_name,
+       u.project_type,
+       u.project_type_name_mn,
+       u.added_user_id,
+       u.name,
+       u.respondent_emp_id,
+       u.firstname   ,
+      u.state_id,
+       u.state_name_mn,
+       u.method_code,
+       u.method_name,
+       u.percent,
+       u.executor_id,
+       u.executor_abbr,
+       u.project_name_ru,
+       u.start_date,
+       u.end_date,
+       u.report_rowno,
+       q.image_b1,
+       q.image_b2
+       from
+       v_project u,
+(select r.process_id, r.image_b as image_b1, e.process_id, e.image_b as image_b2, r.project_id
+from PROJECT_PROCESS r, PROJECT_PROCESS e,
+(select project_id, min(process_id) mi, max(process_id) ma from PROJECT_PROCESS
+group by project_id) t
+where r.process_id = t.mi
+and e.process_id = t.ma
+) q,
+(
+select t.project_id , t.month, t.budget,
+        SUM(t.budget) OVER (PARTITION BY t.project_id ORDER BY Month) AS RunningTotal,( SUM(t.budget) OVER (PARTITION BY t.project_id ORDER BY Month) )- t.budget as diff
+    from V_PROCESS t where 1=1 ".$date."
+    order by t.project_id, t.month ) par
+where q.project_id=u.project_id and par.project_id=u.project_id ".$date1." ".$query."
+order by u.report_rowno");
+
+        return view('tailan.main')->with(['month'=>$month,'gproject_id'=>$gproject_id,'data'=>$data,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype]);
     }
     public function time()
     {
@@ -216,7 +285,7 @@ class TailanController extends Controller
 
         }
 
-        $t =DB::select("select d.department_name, t.department_id,d.department_type, sum(t.plan) as plan, sum(t.budget) as budget, sum(t.estimation) as estimation,  (sum(t.estimation)/sum(t.plan))*100 as percent, sum(t.estimation)-sum(t.plan) as diff from V_PROJECT t , CONST_DEPARTMENT d
+        $t =DB::select("select d.department_name, t.department_id,d.department_type, sum(t.plan) as plan, sum(t.budget) as budget, sum(t.estimation) as estimation,  (sum(t.estimation)/sum(t.plan))*100 as percent, sum(t.estimation)-sum(t.plan) as diff, (sum(t.percent)/count(percent)) as rpercent from V_PROJECT t , CONST_DEPARTMENT d
 where t.department_id=d.department_id ".$query. "
 group by d.department_type,t.department_id, d.department_name");
         $project =DB::select("select  * from V_PROJECT t  order by project_id");

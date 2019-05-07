@@ -110,7 +110,7 @@ Route::get('/projecttypefill/{id?}',function($id = 0){
     $dt=App\Projecttype::where('project_type_id','=',$id)->get();
     return $dt;
 });
-Route::get('/main', 'TailanController@index')->name('main');
+Route::match(['get', 'post'],'/main', 'TailanController@index')->name('main');
 Route::get('/time', 'TailanController@time')->name('time');
 Route::get('/analyse', 'TailanController@analyse')->name('analyse');
 Route::post('/searchanalyse', 'TailanController@analyse')->name('searchanalyse');

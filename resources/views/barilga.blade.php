@@ -504,7 +504,6 @@
                     <div class="modal-footer">
                         <div class="col-md-5">
                             <button type="button" class="btn btn-danger delete" id="deleteproj">Устгах</button>
-                            <button type="button" id="approveproj" class="btn btn-info">Батлах</button>
                             <button type="submit" class="btn btn-primary">Хадгалах</button>
                         </div>
                         <div class="col-md-7" style="display: inline-block; text-align: right;" >

@@ -32,13 +32,13 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body text-center">
-                                <form method="post" action="barilga">
+                                <form method="post" action="main">
                                     <div class="col-md-12" data-scrollable="true" data-height="400" >
                                         <div class="row" >
                                             <div class="form-group col-md-2">
 
                                                 <label for="inputEmail4">Ажлын сар</label>
-                                                <input type="text" name="month" value="" class="form-control">
+                                                <input type="text" name="month"  id="month" value="" class="form-control" maxlength="2">
 
 
                                             </div>
@@ -93,7 +93,7 @@
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <h3 class="card-title">2019 оны их барилга, их засварын ажлууд </h3>
+                                        <h3 class="card-title">2019 оны {{$month}} сарын их барилга, их засварын ажлууд </h3>
                                     </div>
 
                                 </div>
@@ -109,7 +109,7 @@
                                         </div>
                                         <div class="col-md-2">
                                             <button class="btn btn-info" id="export-btn" onclick="tableToExcel('example', 'Export HTML Table to Excel')"><i class="fa fa-print" aria-hidden="true"></i> Excel</button>
-                                            <button class="btn btn-info" id="buttonprint" onclick="printDiv()"><i class="fa fa-print" aria-hidden="true"></i> Хэвлэх</button>
+
 
                                         </div>
                                     </div>
@@ -118,9 +118,12 @@
                                         <thead>
                                         <?php $sum_plan = 0 ?>
                                         <?php $sum_estimation = 0 ?>
-                                        <?php $sum_budget = 0 ?>
+                                        <?php $sum_bud = 0 ?>
                                         <?php $sum_economic = 0 ?>
                                         <?php $sum_percent = 0 ?>
+                                        <?php $sum_bud = 0 ?>
+                                        <?php $sum_diff = 0 ?>
+                                        <?php $sum_runningtotal = 0 ?>
                                         <tr role="row">
                                             <th>#</th>
                                             <th>Захиалагч</th>
@@ -129,9 +132,9 @@
                                             <th>Төлөвлөгөө</th>
 
                                             <th>Төсөв</th>
-                                            <th>Эхний 2 сарын </th>
-                                            <th>Энэ сарын </th>
-                                            <th>Эхний 3 сарын өссөн дүн </th>
+                                            <th>Эхний {{$month -1 }} сарын </th>
+                                            <th>Энэ {{$month}} сарын </th>
+                                            <th>Эхний {{$month}} сарын өссөн дүн </th>
                                             <th>Үүнээс</th>
                                             <th>Биелэлт</th>
                                             <th>Хариуцагч инженер</th>
@@ -159,13 +162,16 @@
                                                 <td><?php
                                                     echo number_format($projects->diff)."<br>";
                                                     ?></td>
+                                                <?php $sum_diff += ($projects->diff) ?>
                                                 <td><?php
                                                     echo number_format($projects->bud)."<br>";
                                                     ?></td>
+                                                <?php $sum_bud += ($projects->bud) ?>
                                                 <td><?php
                                                     echo number_format($projects->runningtotal)."<br>";
                                                     ?></td>
-                                                <?php $sum_budget += ($projects->budget) ?>
+                                                <?php $sum_runningtotal += ($projects->runningtotal) ?>
+
                                                 <td><?php
                                                     echo number_format($projects->economic)."<br>";
                                                     ?></td>
@@ -210,7 +216,13 @@
                                                     echo number_format($sum_estimation)."<br>";
                                                     ?></b></td>
                                             <td><b><?php
-                                                    echo number_format($sum_budget)."<br>";
+                                                    echo number_format($sum_diff)."<br>";
+                                                    ?></b></td>
+                                            <td><b><?php
+                                                    echo number_format($sum_bud)."<br>";
+                                                    ?></b></td>
+                                            <td><b><?php
+                                                    echo number_format($sum_runningtotal)."<br>";
                                                     ?></b></td>
                                             <td><b><?php
                                                     echo number_format($sum_economic)."<br>";
@@ -222,6 +234,7 @@
                                             <td></td>
                                             <td></td>
                                             <td></td>
+
 
 
                                         </tr>

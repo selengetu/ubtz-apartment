@@ -100,23 +100,29 @@ class ProcessController extends Controller
 
         $process ->year = Request::input('gyear');
         $process ->state_id = Request::input('gstate_id');
+
         $process->save();
         Session::flash('gproject_id',Request::input('gproject_id'));
         $states = DB::select("select t.state_id as state from V_PROCESS t where t.process_id = (select max(v.process_id) from V_PROCESS v where v.project_id=".$data.")");
 
         if(Request::input('gpercent') == NULL){
+
             $est = DB::select("select estimation from V_PROJECT t where t.project_id=".$data."");
 
-            $budget = DB::select("select sum(t.budget) as totalbudget from V_PROCESS t where t.project_id=".$data."");
-            $percent=($budget[0]->totalbudget / $est[0]->estimation)*100;
-            $process = DB::table('Project')
-                ->where('project_id',$data)
-                ->update(['budget' => $budget[0]->totalbudget ,'state_id' => $states[0]->state,'percent' => $percent,'prend_date' => Request::input('gdate')]);
+            if($est[0]->estimation != NULL) {
+                $budget = DB::select("select sum(t.budget) as totalbudget from V_PROCESS t where t.project_id=" . $data . "");
+                $percent = ($budget[0]->totalbudget / $est[0]->estimation) * 100;
+                $process = DB::table('Project')
+                    ->where('project_id', $data)
+                    ->update(['budget' => $budget[0]->totalbudget, 'state_id' => $states[0]->state, 'percent' => $percent, 'prend_date' => Request::input('gdate')]);
+            }
         }
         else{
+            $st = DB::select("select t.state_id as state from V_PROCESS t where t.process_id = (select max(v.process_id) from V_PROCESS v where v.project_id=".$data.")");
+
             $process = DB::table('Project')
                 ->where('project_id',$data)
-                ->update(['state_id' => $states[0]->state,'percent' => Request::input('gpercent')]);
+                ->update(['state_id' => $st[0]->state,'percent' => Request::input('gpercent')]);
         }
         return redirect('barilga');
 
@@ -132,14 +138,26 @@ class ProcessController extends Controller
                 ,'description' => Request::input('gdescription'),'state_id' => Request::input('gstate_id')]);
 
         $state = DB::select("select t.state_id as state from V_PROCESS t where t.process_id = (select max(v.process_id) from V_PROCESS v where v.project_id=".$data.")");
-        $est = DB::select("select estimation from V_PROJECT t where t.project_id=".$data."");
+        if(Request::input('gpercent') == NULL){
 
-        $budget = DB::select("select sum(t.budget) as totalbudget from V_PROCESS t where t.project_id=".$data."");
-        $percent=($budget[0]->totalbudget / $est[0]->estimation)*100;
-        $process = DB::table('Project')
-            ->where('project_id',$data)
-            ->update(['budget' => $budget[0]->totalbudget,'state_id' => $state[0]->state,'percent' => $percent,'percent' => $percent,'prend_date' => Request::input('edate')]);
-        if (Request::hasFile('image')) {
+            $est = DB::select("select estimation from V_PROJECT t where t.project_id=".$data."");
+
+            if($est[0]->estimation != NULL) {
+                $budget = DB::select("select sum(t.budget) as totalbudget from V_PROCESS t where t.project_id=" . $data . "");
+                $percent = ($budget[0]->totalbudget / $est[0]->estimation) * 100;
+                $process = DB::table('Project')
+                    ->where('project_id', $data)
+                    ->update(['budget' => $budget[0]->totalbudget, 'state_id' => $state[0]->state, 'percent' => $percent, 'prend_date' => Request::input('gdate')]);
+            }
+        }
+        else{
+            $st = DB::select("select t.state_id as state from V_PROCESS t where t.process_id = (select max(v.process_id) from V_PROCESS v where v.project_id=".$data.")");
+
+            $process = DB::table('Project')
+                ->where('project_id',$data)
+                ->update(['state_id' => $st[0]->state,'percent' => Request::input('gpercent')]);
+        }
+       if (Request::hasFile('image')) {
 
             $file = request()->file('image');
             $filenamewithextension = $file->getClientOriginalName();
