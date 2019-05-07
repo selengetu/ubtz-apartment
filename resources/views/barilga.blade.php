@@ -266,32 +266,34 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body text-center" >
+                                <div class="col-md-12">
+                                    <div class="table-responsive" data-scrollable="true" data-height="400" >
+                                        <table class="table table-striped table-bordered" id="projecttable">
+                                            <thead>
+                                            <tr role="row">
 
-                                <div class="table-responsive" data-scrollable="true" data-height="400" >
-                                    <table class="table table-striped table-bordered" id="projecttable">
-                                        <thead>
-                                        <tr role="row">
+                                                <th>Байгууллага</th>
+                                                <th>Гүйцэтгэгч</th>
+                                                <th width="400px">Ажлын нэр</th>
+                                                <th>Төлөвлөгөө</th>
+                                                <th>Төсөв</th>
+                                                <th>Гүйцэтгэл</th>
+                                                <th>Үүнээс</th>
+                                                <th>Биелэлт</th>
+                                                <th>Хариуцагч инженер</th>
+                                                <th>Эхлэх огноо</th>
+                                                <th>Дуусах огноо</th>
+                                                <th width="100px">Тайлбар</th>
 
-                                            <th>Байгууллага</th>
-                                            <th>Гүйцэтгэгч</th>
-                                            <th width="400px">Ажлын нэр</th>
-                                            <th>Төлөвлөгөө</th>
-                                            <th>Төсөв</th>
-                                            <th>Гүйцэтгэл</th>
-                                            <th>Үүнээс</th>
-                                            <th>Биелэлт</th>
-                                            <th>Хариуцагч инженер</th>
-                                            <th>Эхлэх огноо</th>
-                                            <th>Дуусах огноо</th>
-                                            <th width="100px">Тайлбар</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
 
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-
-                                        </tbody>
-                                    </table>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
+
                             </div>
                             <!-- /.card-body -->
                         </div>
