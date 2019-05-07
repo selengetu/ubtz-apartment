@@ -336,7 +336,7 @@
                     "   <td class='m1'>" + qwe.year + " - " + qwe.month+"</td>" +
                     "   <td class='m1'>" + qwe.budgetcomma+ "</td>" +
                     "   <td class='m1'>" + $type + "</td>" +
-                    "   <td class='m1'><img src='/public/profile_images/thumbnail/" +qwe.image_s + "'></td>" +
+                    "   <td class='m1'><img src='/ibiz/public/profile_images/thumbnail/" +qwe.image_s + "'></td>" +
                     "   <td class='m1'>"+ $approve + "</td>" +
 
                     "</tr>";
