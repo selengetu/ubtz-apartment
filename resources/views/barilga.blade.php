@@ -252,7 +252,7 @@
                         </div>
                     </div>
 
-
+<hr>
                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                         <div class="card" style="margin-top: 20px">
                             <div class="card-header">
@@ -283,7 +283,7 @@
                                             <th>Хариуцагч инженер</th>
                                             <th>Эхлэх огноо</th>
                                             <th>Дуусах огноо</th>
-                                            <th>Тайлбар</th>
+                                            <th width="100px">Тайлбар</th>
 
                                         </tr>
                                         </thead>
