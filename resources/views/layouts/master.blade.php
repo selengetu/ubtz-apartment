@@ -26,7 +26,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     @yield('style')
   <style>
     table{
-      font-size: 11px;
+      font-size: 12px;
       text-align:left;
 
     }
