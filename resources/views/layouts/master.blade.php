@@ -126,7 +126,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <li class="nav-item">
                       <a href="{{ route('barilga') }}" class="nav-link">
                         <i class="fa fa-circle-o nav-icon"></i>
-                        <p>Их барилга</p>
+                        <p>ИБИЗ</p>
                       </a>
                     </li>
 

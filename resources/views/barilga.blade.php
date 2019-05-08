@@ -41,13 +41,29 @@
 
                                             <label for="inputEmail4">Ажлын төрөл</label>
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                            <select class="form-control select2" id="sproject_type" name="sproject_type" >
+                                            <input type="hidden" name="projtype" id="projtype" value="{{$sprojecttype}}">
+                                            <input type="hidden" name="stat" id="stat" value="{{$sstate_id}}">
+                                            <input type="hidden" name="construc" id="construc" value="{{$sconstructor}}">
+                                            <input type="hidden" name="exec" id="exec" value="{{$sexecutor}}">
+                                            <input type="hidden" name="resp" id="resp" value="{{$srespondent_emp_id}}">
+                                            <input type="hidden" name="meth" id="meth" value="{{$smethod_id}}">
+                                            <select class="form-control select2" id="sproject_type" name="sproject_type">
                                                 <option value= "0">Бүгд</option>
                                                 @foreach($projecttype as $projecttypes)
                                                     <option value= "{{$projecttypes->project_type_id}}">{{$projecttypes->project_type_name_mn}}</option>
                                                 @endforeach
                                             </select>
 
+                                        </div>
+                                        <div class="form-group col-md-2">
+
+                                            <label for="inputEmail4">Ажлын арга</label>
+                                            <select class="form-control select2" id="smethod_id" name="smethod_id" >
+                                                <option value= "0">Бүгд</option>
+                                                @foreach($method as $methods)
+                                                    <option value= "{{$methods->method_code}}">{{$methods->method_name}}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                         <div class="form-group col-md-2">
 
@@ -59,7 +75,7 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="form-group col-md-2">
+                                        <div class="form-group col-md-3">
                                             <label for="inputEmail4">Захиалагч</label>
                                             <select class="form-control select2" id="sconstructor_id" name="sconstructor_id">
                                                 <option value= "0">Бүгд</option>
@@ -69,7 +85,7 @@
                                             </select>
 
                                         </div>
-                                        <div class="form-group col-md-2">
+                                        <div class="form-group col-md-3">
                                             <label for="inputPassword4">Гүйцэтгэгч</label>
                                             <select class="form-control select2" id="sexecutor_id" name="sexecutor_id" >
                                                 <option value= "0">Бүгд</option>
@@ -88,9 +104,9 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="form-group col-md-2">
+                                        <div class="form-group col-md-1">
                                             <label for="inputZip"><span>.</span></label><br>
-                                            <button type="submit" class="btn btn-primary" >Хайх</button>
+                                            <button type="submit" class="btn btn-primary form-control" >Хайх</button>
 
                                         </div>
 
@@ -102,7 +118,7 @@
                             <!-- /.card-body -->
                         </div>
 
-                        <div class="card">
+                        <div class="card" >
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-md-6">
@@ -131,7 +147,7 @@
                                             <th>#</th>
                                             <th>Захиалагч</th>
                                             <th>Гүйцэтгэгч</th>
-                                            <th>Ажлын нэр</th>
+                                            <th width="400px">Ажлын нэр</th>
                                             <th>Төлөвлөгөө</th>
 
                                             <th>Төсөв</th>
@@ -297,7 +313,7 @@
                             </div>
                             <!-- /.card-body -->
                         </div>
-                        <div class="card" style="margin-top: 20px">
+                        <div class="card" style="margin-top: 20px;" >
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-md-6">
@@ -634,6 +650,24 @@
 
 @section('script')
     <script>
+        $("#method_code").on('change', function() {
+            var itag =$(this).val();
+
+            $.get('getexec/'+itag,function(data){
+                $('#executor_id').empty();
+
+                $.each(data,function(i,qwe){
+                    $('#executor_id').append($('<option>', {
+                        value: qwe.executor_id,
+                        id: qwe.executor_id,
+                        text: qwe.executor_name
+                    }));
+                    $('#executor_id').focus();
+                });
+            });
+
+        });
+
         $(function() {
             $("#date1").datepicker({
                 format: 'yyyy-mm-dd',
@@ -653,7 +687,12 @@
                 });
         });
         $(document).ready(function() {
-
+            $('#smethod_id').val($('#meth').val()).trigger('change');
+            $('#sproject_type').val($('#projtype').val()).trigger('change');
+            $('#sexecutor_id').val($('#exec').val()).trigger('change');
+            $('#srespondent_emp_id').val($('#resp').val()).trigger('change');
+            $('#sconstructor_id').val($('#construc').val()).trigger('change');
+            $('#sstate_id').val($('#stat').val()).trigger('change');
             const gproject_id = {{ $gproject_id }};
             if(gproject_id != 0){
                 processClicked( gproject_id);

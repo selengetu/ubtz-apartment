@@ -42,12 +42,13 @@ class BarilgaController extends Controller
         $executor = Executor::orderby('executor_abbr')->get();
 
         $employee =DB::select('select  * from V_CONST_EMPLOYEE t where t.is_engineer=1 order by firstname');
-
+        $smethod_id= Input::get('smethod_id');
         $sstate_id= Input::get('sstate_id');
         $sexecutor = Input::get('sexecutor_id');
         $sconstructor = Input::get('sconstructor_id');
         $srespondent_emp_id = Input::get('srespondent_emp_id');
         $sprojecttype= Input::get('sproject_type');
+
         $startdate= Input::get('date1');
         $enddate = Input::get('date2');
 
@@ -66,7 +67,9 @@ class BarilgaController extends Controller
         }
         else
         {
+            $sprojecttype=0;
             $query.=" ";
+
 
         }
         if ($sexecutor!=NULL && $sexecutor !=0) {
@@ -75,6 +78,7 @@ class BarilgaController extends Controller
         }
         else
         {
+            $sexecutor=0;
             $query.=" ";
 
         }
@@ -84,6 +88,17 @@ class BarilgaController extends Controller
         }
         else
         {
+            $sconstructor=0;
+            $query.=" ";
+
+        }
+        if ($smethod_id!=NULL && $smethod_id !=0) {
+            $query.=" and method_code = '".$smethod_id."'";
+
+        }
+        else
+        {
+            $srespondent_emp_id=0;
             $query.=" ";
 
         }
@@ -93,6 +108,7 @@ class BarilgaController extends Controller
         }
         else
         {
+            $srespondent_emp_id=0;
             $query.=" ";
 
         }
@@ -102,6 +118,7 @@ class BarilgaController extends Controller
         }
         else
         {
+            $sstate_id=0;
             $query.=" ";
 
         }
@@ -111,7 +128,7 @@ class BarilgaController extends Controller
         }
 
         $project =DB::select("select  * from V_PROJECT t  where 1=1 " .$query. " order by project_id");
-        return view('barilga')->with(['gproject_id'=>$gproject_id,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype]);
+        return view('barilga')->with(['smethod_id'=>$smethod_id,'sstate_id'=>$sstate_id,'srespondent_emp_id'=>$srespondent_emp_id,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'sprojecttype'=>$sprojecttype,'gproject_id'=>$gproject_id,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'employee'=>$employee,'method'=>$method,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype]);
     }
     public function store()
     {
