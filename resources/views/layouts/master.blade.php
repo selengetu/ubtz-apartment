@@ -132,7 +132,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             </ul>
           </li>
-          @if ( Auth::user()->id ==47)
+          @if ( Auth::user()->id ==47 or Auth::user()->id ==46)
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-dashboard"></i>
