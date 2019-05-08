@@ -49,6 +49,7 @@
 
                 $('#id').val(qwe.project_id);
                 $('#project_name').val(qwe.project_name);
+                $('#project_name_ru').val(qwe.project_name_ru);
                 $('#budget').val(qwe.budget);
                 $('#estimation').val(qwe.estimation);
                 $('#plan').val(qwe.plan);
@@ -192,6 +193,8 @@
         document.getElementById('form1').method ="post"
         $('#id').val('');
         $('#budget').val('');
+        $('#project_name_ru').val('');
+        $('#project_name').val('');
         $('#estimation').val('');
         $('#plan').val('');
         $('#constructor_id').val('999');

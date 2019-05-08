@@ -136,6 +136,7 @@ class BarilgaController extends Controller
         $project = new Project;
         $project->plan_year = 2019;
         $project->project_name = Request::input('project_name');
+        $project->project_name_ru = Request::input('project_name_ru');
         $project->budget =preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('budget'));
         $project->estimation = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('estimation'));
         $project->plan = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan'));
@@ -169,7 +170,7 @@ class BarilgaController extends Controller
     {
         $project = DB::table('Project')
             ->where('project_id', Request::input('id'))
-            ->update(['plan_year' => Request::input('plan_year'),'project_name' => Request::input('project_name'),'budget' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('budget'))
+            ->update(['plan_year' => Request::input('plan_year'),'project_name' => Request::input('project_name'),'project_name_ru' => Request::input('project_name_ru'),'budget' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('budget'))
                 ,'plan' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan')),'department_id' => Request::input('constructor_id')
                 ,'project_type' => Request::input('project_type'),'start_date' => Request::input('date1'),'end_date' => Request::input('date2')
                 ,'method_code' => Request::input('method_code'),'percent' => Request::input('percent'),'executor_id' => Request::input('executor_id')
@@ -200,7 +201,7 @@ class BarilgaController extends Controller
                 ->where('project_id',$data)
                 ->update(['budget' => $budget[0]->totalbudget ,'state_id' => $state[0]->state,'percent' => $percent]);
         }
-        activity()->performedOn($project)->log('Project updated');
+
         return Redirect('barilga');
     }
     public function approve(Request $request)

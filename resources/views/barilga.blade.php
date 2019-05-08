@@ -170,7 +170,7 @@
                                                 <td>{{$no}}</td>
                                                 <td>{{$projects->department_name}}</td>
                                                 <td>{{$projects->executor_abbr}}</td>
-                                                <td>{{$projects->project_name}}</td>
+                                                <td>{{$projects->project_name}}<br>{{$projects->project_name_ru}}</td>
                                                 <td><?php
                                                     echo number_format($projects->plan)."<br>";
                                                     ?></td>
@@ -475,7 +475,10 @@
                                 @endforeach
                                 </select>
                             </div>
-
+                            <div class="form-group col-md-9">
+                                <label for="inputAddress">Ажлын нэр /Орос/</label>
+                                <textarea class="form-control" rows="1" id="project_name_ru" name="project_name_ru"></textarea>
+                            </div>
                             <div class="form-group col-md-6">
                                 <label for="inputAddress2">Төлөвлөгөө</label>
                                 <input type="text" class="form-control money" id="plan" name="plan" placeholder="" maxlength="14">
