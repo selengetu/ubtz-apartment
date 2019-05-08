@@ -98,7 +98,7 @@ class BarilgaController extends Controller
         }
         else
         {
-            $srespondent_emp_id=0;
+            $smethod_id=0;
             $query.=" ";
 
         }
