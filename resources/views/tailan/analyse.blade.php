@@ -291,7 +291,7 @@
                 options: {
                     title: {
                         display: true,
-
+                        text: 'Гүйцэтгэлийн хувиар авч үзвэл'
                     }
                 }
             });

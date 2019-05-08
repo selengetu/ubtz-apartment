@@ -172,10 +172,21 @@ where r.process_id = t.mi
 and e.process_id = t.ma
 ) q,
 (
-select t.project_id , t.month, t.budget,
-        SUM(t.budget) OVER (PARTITION BY t.project_id ORDER BY Month) AS RunningTotal,( SUM(t.budget) OVER (PARTITION BY t.project_id ORDER BY Month) )- t.budget as diff
-    from V_PROCESS t where 1=1 ".$date."
-    order by t.project_id, t.month ) par
+select q.project_id , q.month, q.budget,  SUM(q.budget) OVER (PARTITION BY q.project_id ORDER BY Month) AS RunningTotal,( SUM(q.budget) OVER (PARTITION BY q.project_id ORDER BY Month) )- q.budget as diff
+from 
+(select project_id , month, sum (budget) budget
+from 
+(
+select t.project_id , t.month, t.budget
+from PROJECT_PROCESS t 
+union all    
+select t.project_id , m.id month , 0 budget
+from PROJECT t , CONST_MONTH m 
+order by project_id, month
+)
+group by project_id, month
+order by project_id, month) q
+order by q.project_id, q.month ) par
 where q.project_id=u.project_id and par.project_id=u.project_id ".$date1." ".$query."
 order by u.report_rowno");
 
