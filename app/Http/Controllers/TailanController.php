@@ -226,7 +226,9 @@ order by u.report_rowno");
         }
         else
         {
+            $sprojecttype=0;
             $query.=" ";
+
 
         }
         if ($sexecutor!=NULL && $sexecutor !=0) {
@@ -235,6 +237,7 @@ order by u.report_rowno");
         }
         else
         {
+            $sexecutor=0;
             $query.=" ";
 
         }
@@ -244,15 +247,18 @@ order by u.report_rowno");
         }
         else
         {
+            $sconstructor=0;
             $query.=" ";
 
         }
+
         if ($srespondent_emp_id!=NULL && $srespondent_emp_id !=0) {
             $query.=" and respondent_emp_id = '".$srespondent_emp_id."'";
 
         }
         else
         {
+            $srespondent_emp_id=0;
             $query.=" ";
 
         }
@@ -262,6 +268,7 @@ order by u.report_rowno");
         }
         else
         {
+            $sstate_id=0;
             $query.=" ";
 
         }
@@ -271,7 +278,7 @@ order by u.report_rowno");
         }
         $data= Request::input('gproject_id');
         $project =DB::select("select  * from V_PROJECT t  where 1=1 and t.method_code=3 " .$query. " order by project_id");
-        return view('tailan.time')->with(['gproject_id'=>$gproject_id,'data'=>$data,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype]);
+        return view('tailan.time')->with(['sstate_id'=>$sstate_id,'srespondent_emp_id'=>$srespondent_emp_id,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'sprojecttype'=>$sprojecttype,'gproject_id'=>$gproject_id,'data'=>$data,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype]);
     }
     public function analyse()
     {

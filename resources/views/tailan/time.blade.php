@@ -32,10 +32,16 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body text-center">
-                            <form method="post" action="barilga">
+                            <form method="post" action="time">
                                 <div class="col-md-12" data-scrollable="true" data-height="400" >
                                     <div class="row" >
                                         <div class="form-group col-md-2">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <input type="hidden" name="projtype" id="projtype" value="{{$sprojecttype}}">
+                                            <input type="hidden" name="stat" id="stat" value="{{$sstate_id}}">
+                                            <input type="hidden" name="construc" id="construc" value="{{$sconstructor}}">
+                                            <input type="hidden" name="exec" id="exec" value="{{$sexecutor}}">
+                                            <input type="hidden" name="resp" id="resp" value="{{$srespondent_emp_id}}">
 
                                             <label for="inputEmail4">Ажлын төрөл</label>
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -130,8 +136,8 @@
                                         <th>#</th>
                                         <th>Байгууллага</th>
                                         <th>Гүйцэтгэгч</th>
-                                        <th>Ажлын нэр</th>
-                                        <th>Төлөвлөгөө</th>
+                                        <th width="400px">Ажлын нэр</th>
+                                        <th >Төлөвлөгөө</th>
 
                                         <th>Төсөв</th>
                                         <th>Гүйцэтгэл</th>
@@ -235,6 +241,12 @@
 @section('script')
     <script>
         $(document).ready(function() {
+            $('#smethod_id').val($('#meth').val()).trigger('change');
+            $('#sproject_type').val($('#projtype').val()).trigger('change');
+            $('#sexecutor_id').val($('#exec').val()).trigger('change');
+            $('#srespondent_emp_id').val($('#resp').val()).trigger('change');
+            $('#sconstructor_id').val($('#construc').val()).trigger('change');
+            $('#sstate_id').val($('#stat').val()).trigger('change');
             const gproject_id = {{ $gproject_id }};
             if (gproject_id != 0) {
                 processClicked(gproject_id);

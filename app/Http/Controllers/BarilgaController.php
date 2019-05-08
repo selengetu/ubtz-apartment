@@ -161,6 +161,7 @@ class BarilgaController extends Controller
         $project->start_date = Request::input('date1');
         $project->end_date = Request::input('date2');
         $project->save();
+        activity()->performedOn($project)->log('Project added');
         return Redirect('barilga');
     }
 
