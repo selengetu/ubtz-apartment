@@ -200,7 +200,7 @@ class BarilgaController extends Controller
                 ->where('project_id',$data)
                 ->update(['budget' => $budget[0]->totalbudget ,'state_id' => $state[0]->state,'percent' => $percent]);
         }
-
+        activity()->performedOn($project)->log('Project updated');
         return Redirect('barilga');
     }
     public function approve(Request $request)
@@ -208,13 +208,12 @@ class BarilgaController extends Controller
         $project = DB::table('Project')
             ->where('project_id', Request::input('id'))
             ->update(['is_approved' =>1,'approved_date' =>Carbon::today(),'approved_id' =>Auth::user()->id]);
-
+        activity()->performedOn($project)->log('Project approved');
         return Redirect('barilga');
     }
     public function destroy($id)
     {
         Project::where('project_id', '=', $id)->delete();
-
         return Redirect('barilga');
     }
 }

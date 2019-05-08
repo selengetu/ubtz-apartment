@@ -468,7 +468,7 @@
 
                             <div class="form-group col-md-3">
                                 <label for="inputZip">Хариуцагч</label>
-                                <select class="form-control select2" id="respondent_emp_id" name="respondent_emp_id" @if(Auth::user()->user_grant == 3 or Auth::user()->user_grant == 4 or Auth::user()->user_grant == 6) disabled="true"@endif>
+                                <select class="form-control select2" id="respondent_emp_id" name="respondent_emp_id" @if(Auth::user()->user_grant == 6) disabled="true"@endif>
                                     <option value= "999">Тодорхойгүй</option>
                                 @foreach($employee as $employees)
                                     <option value= "{{$employees->emp_id}}">{{$employees->firstname}} {{$employees->fletter}}</option>
