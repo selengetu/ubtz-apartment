@@ -522,12 +522,12 @@
 
                             <div class="form-group col-md-6">
                                 <label for="inputAddress2">Төлөвлөгөөт эхлэх огноо</label>
-                                <input class="form-control form-control-inline input-medium date-picker" name="date1" id="date1" placeholder="2019-04-15"
+                                <input class="form-control form-control-inline input-medium date-picker" name="date1" id="date1"
                                        size="16" type="text" value="">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputCity">Төлөвлөгөөт дуусах огноо</label>
-                                <input class="form-control form-control-inline input-medium date-picker" name="date2" id="date2" placeholder="2019-06-15"
+                                <input class="form-control form-control-inline input-medium date-picker" name="date2" id="date2"
                                        size="16" type="text" value="">
                             </div>
 
