@@ -188,7 +188,7 @@ class BarilgaController extends Controller
                 ,'method_code' => Request::input('method_code'),'percent' => Request::input('percent'),'executor_id' => Request::input('executor_id')
                 ,'project_name_ru' => Request::input('project_name_ru'),'economic' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('economic')),'description' => Request::input('description')]);
 
-       if(Auth::user()->id ==53 )
+       if(Auth::user()->user_grant !=6 )
        {
            $project = DB::table('Project')
                ->where('project_id', Request::input('id'))
