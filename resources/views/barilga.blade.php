@@ -47,6 +47,7 @@
                                             <input type="hidden" name="exec" id="exec" value="{{$sexecutor}}">
                                             <input type="hidden" name="resp" id="resp" value="{{$srespondent_emp_id}}">
                                             <input type="hidden" name="meth" id="meth" value="{{$smethod_id}}">
+                                            <input type="hidden" name="child" id="child" value="{{$schildabbr}}">
                                             <select class="form-control select2" id="sproject_type" name="sproject_type">
                                                 <option value= "0">Бүгд</option>
                                                 @foreach($projecttype as $projecttypes)
@@ -75,7 +76,7 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-2">
                                             <label for="inputEmail4">Захиалагч</label>
                                             <select class="form-control select2" id="sconstructor_id" name="sconstructor_id">
                                                 <option value= "0">Бүгд</option>
@@ -85,7 +86,17 @@
                                             </select>
 
                                         </div>
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-2">
+                                            <label for="inputEmail4">Захиалагч нэгж</label>
+                                            <select class="form-control select2" id="schildabbr_id" name="schildabbr_id">
+                                                <option value= "0">Бүгд</option>
+                                                @foreach($executor as $executors)
+                                                    <option value= "{{$executors->executor_id}}">{{$executors->executor_abbr}}</option>
+                                                @endforeach
+                                            </select>
+
+                                        </div>
+                                        <div class="form-group col-md-2">
                                             <label for="inputPassword4">Гүйцэтгэгч</label>
                                             <select class="form-control select2" id="sexecutor_id" name="sexecutor_id" >
                                                 <option value= "0">Бүгд</option>
@@ -168,7 +179,7 @@
                                         @foreach($project as $projects)
                                             <tr >
                                                 <td>{{$no}}</td>
-                                                <td>{{$projects->department_name}}</td>
+                                                <td>{{$projects->department_name}} - {{$projects->childabbr}}</td>
                                                 <td>{{$projects->executor_abbr}}</td>
                                                 <td>{{$projects->project_name}}<br>{{$projects->project_name_ru}}</td>
                                                 <td><?php
@@ -450,6 +461,16 @@
 
                             </div>
                             <div class="form-group col-md-4">
+                                <label for="inputEmail4">Захиалагч нэгж</label>
+                                <select class="form-control select2" id="childabbr_id" name="childabbr_id">
+                                    <option value= "0">Бүгд</option>
+                                    @foreach($executor as $executors)
+                                        <option value= "{{$executors->executor_id}}">{{$executors->executor_abbr}}</option>
+                                    @endforeach
+                                </select>
+
+                            </div>
+                            <div class="form-group col-md-4">
                                 <label for="inputPassword4">Гүйцэтгэгч</label>
                                 <select class="form-control select2" id="executor_id" name="executor_id">
                                     <option value= "999">Тодорхойгүй</option>
@@ -696,6 +717,7 @@
             $('#srespondent_emp_id').val($('#resp').val()).trigger('change');
             $('#sconstructor_id').val($('#construc').val()).trigger('change');
             $('#sstate_id').val($('#stat').val()).trigger('change');
+            $('#schildabbr_id').val($('#child').val()).trigger('change');
             const gproject_id = {{ $gproject_id }};
             if(gproject_id != 0){
                 processClicked( gproject_id);

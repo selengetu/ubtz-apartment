@@ -54,6 +54,7 @@
                 $('#estimation').val(qwe.estimation);
                 $('#plan').val(qwe.plan);
                 $('#constructor_id').val(qwe.department_id);
+                $('#childabbr_id').val(qwe.department_child);
                 $('#project_type').val(qwe.project_type);
                 $('#respondent_emp_id').val(qwe.respondent_emp_id);
                 $('#state_id').val(qwe.state_id);
@@ -152,7 +153,7 @@
                 $('#gproject_id').val(qwe.project_id);
                 var sHtml = " <tr class='table-row' >" +
 
-                    "   <td class='m1'>" + qwe.department_name + "</td>" +
+                    "   <td class='m1'>" + qwe.department_name + " - "+ qwe.childabbr + "</td>" +
                     "   <td class='m1'>" + qwe.executor_abbr + "</td>" +
                     "   <td class='m1'>" + qwe.project_name + "</td>" +
                     "   <td class='m1'>" + $type+ "</td>" +
@@ -198,6 +199,7 @@
         $('#estimation').val('');
         $('#plan').val('');
         $('#constructor_id').val('999');
+        $('#childabbr_id').val('999');
         $('#project_type').val('1');
         $('#respondent_emp_id').val('999');
         $('#state_id').val('1');
