@@ -109,7 +109,8 @@ class ProcessController extends Controller
 
             $est = DB::select("select estimation from V_PROJECT t where t.project_id=".$data."");
 
-            if($est[0]->estimation != NULL) {
+            if($est[0]->estimation != 0) {
+
                 $budget = DB::select("select sum(t.budget) as totalbudget from V_PROCESS t where t.project_id=" . $data . "");
                 $percent = ($budget[0]->totalbudget / $est[0]->estimation) * 100;
                 $process = DB::table('Project')

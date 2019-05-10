@@ -205,13 +205,13 @@ class BarilgaController extends Controller
         $est = DB::select("select estimation from V_PROJECT t where t.project_id=".$data."");
 
         $budget = DB::select("select sum(t.budget) as totalbudget from V_PROCESS t where t.project_id=".$data."");
-
-        if($budget[0]->totalbudget!=NULL && $budget[0]->totalbudget !=0)
-        {
-            $percent=($budget[0]->totalbudget / $est[0]->estimation)*100;
-            $process = DB::table('Project')
-                ->where('project_id',$data)
-                ->update(['budget' => $budget[0]->totalbudget ,'state_id' => $state[0]->state,'percent' => $percent]);
+        if($est[0]->estimation != 0) {
+            if ($budget[0]->totalbudget != NULL && $budget[0]->totalbudget != 0) {
+                $percent = ($budget[0]->totalbudget / $est[0]->estimation) * 100;
+                $process = DB::table('Project')
+                    ->where('project_id', $data)
+                    ->update(['budget' => $budget[0]->totalbudget, 'state_id' => $state[0]->state, 'percent' => $percent]);
+            }
         }
 
         return Redirect('barilga');

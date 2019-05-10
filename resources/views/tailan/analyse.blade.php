@@ -106,7 +106,7 @@
                                                         ?></td>
 
                                                     <td><?php
-                                                        echo number_format($projects->estimation)."<br>";
+                                                        echo number_format($projects->budget)."<br>";
                                                         ?></td>
 
 
@@ -114,7 +114,7 @@
                                                     <td><?php
                                                         echo number_format($projects->diff)."<br>";
                                                         ?></td>
-                                                    <td>{{number_format($projects->rpercent, 2, ',', '.')}}%</td>
+                                                    <td></td>
 
 
                                                 </tr>
@@ -183,8 +183,11 @@
     $stackValue2 = array();
     $depname = array();
     $percent = array();
-    foreach($t as $wag)   {array_push($stack,$wag->department_name); array_push($stackValue,$wag->plan);array_push($stackValue2,$wag->budget);
-        array_push($depname,$wag->department_name);array_push($percent,$wag->estimation);}
+    $rpercent = array();
+    foreach($t as $wag)
+
+    {array_push($stack,$wag->department_name); array_push($stackValue,$wag->plan);array_push($stackValue2,$wag->budget);
+       ;array_push($percent,$wag->estimation); array_push($rpercent,$wag->rpercent);}
 
     ?>
     <script>
@@ -204,7 +207,6 @@
             var zuuchName = <?php echo json_encode($stack); ?>;
             var zuuchQnt = <?php echo json_encode($stackValue); ?>;
             var zuuchQnt2 = <?php echo json_encode($stackValue2); ?>;
-            var depname = <?php echo json_encode($depname); ?>;
             var percent = <?php echo json_encode($percent); ?>;
             var salesChart = new Chart($salesChart, {
                 type: 'bar',
@@ -217,12 +219,12 @@
                     datasets: [{
                         backgroundColor: '#007bff',
                         borderColor: '#007bff',
-                        data: depname
+                        data: zuuchQnt
                     },
                         {
                             backgroundColor: '#ff8400',
                             borderColor: '#ff8400',
-                            data: percent
+                            data: zuuchQnt2
                         },
                     ]
                 },
@@ -240,8 +242,8 @@
                 }
             })
             var $visitorsChart = $('#percentchart')
-            var stack = <?php echo json_encode($depname); ?>;
-            var stackValue = <?php echo json_encode($percent); ?>;
+            var stack = <?php echo json_encode($stack); ?>;
+            var stackValue = <?php echo json_encode($rpercent); ?>;
             var visitorsChart = new Chart($visitorsChart, {
                 data: {
                     labels: stack,
@@ -281,17 +283,17 @@
             new Chart(document.getElementById("piechart"), {
                 type: 'pie',
                 data: {
-                    labels: depname,
+                    labels: stack,
                     datasets: [{
                         label: "Албаны нэр",
                         backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-                        data: percent
+                        data: zuuchQnt2
                     }]
                 },
                 options: {
                     title: {
                         display: true,
-                        text: 'Гүйцэтгэлийн хувиар авч үзвэл'
+                        text: 'Гүйцэтгэлийн үнийн дүнгээр авч үзвэл'
                     }
                 }
             });
