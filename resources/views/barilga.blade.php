@@ -513,7 +513,7 @@
 
                     <div class="form-group col-md-6">
                         <label for="inputCity">Төсөв</label>
-                        <input type="text" class="form-control money" id="estimation" name="estimation" maxlength="14"  @if(Auth::user()->user_grant == 3 or Auth::user()->user_grant == 5 or Auth::user()->user_grant == 6) readonly="true"@endif>
+                        <input type="text" class="form-control money" id="estimation" name="estimation" maxlength="14">
                     </div>
 
                         <div class="form-row">
