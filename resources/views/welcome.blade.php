@@ -26,7 +26,7 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-md-9">
-                                    <h4 class="m-0">Их барилга, хөрөнгө оруулалтын хэлтэс</h4>
+                                    <h4 class="m-0">{{ trans('messages.ner') }}</h4>
                                 </div>
                                 <div class="col-md-3">
                                     <i class="fa fa-calendar" aria-hidden="true">
@@ -66,7 +66,7 @@
                     <!-- LINE CHART -->
                     <div class="card card-info">
                         <div class="card-header">
-                            <h3 class="card-title">Мэдээлэл</h3>
+                            <h3 class="card-title">{{ trans('messages.medeelel') }}</h3>
 
 
                         </div>
@@ -91,7 +91,7 @@
                     <!-- LINE CHART -->
                     <div class="card card-info">
                         <div class="card-header">
-                            <h3 class="card-title">Ажлын үзүүлэлтүүд</h3>
+                            <h3 class="card-title">{{ trans('messages.uzuulelt') }}</h3>
 
 
                         </div>
@@ -99,14 +99,17 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <canvas id="visitors-chart" width="600" height="350"></canvas>
-                                    <canvas id="percentchart" width="800" height="450"></canvas>
+                                    <canvas id="piechart" width="800" height="450"></canvas>
                                 </div>
                                 <div class="col-md-6">
-                                    <canvas id="piechart" width="800" height="450"></canvas>
+                                    <canvas id="detailchart" width="800" height="450"></canvas>
+
+                                    <canvas id="percentchart" width="800" height="450"></canvas>
                                 </div>
                             </div>
 
                         </div>
+
                         <!-- /.card-body -->
                     </div>
 
@@ -128,15 +131,23 @@
     $stackValue2 = array();
     $depname = array();
     $percent = array();
+    $depaname = array();
     $rpercent = array();
+    $exec = array();
+    $execplan = array();
+    $execestim= array();
+
     foreach($t as $wag)
 
     {array_push($stack,$wag->department_name); array_push($stackValue,$wag->plan);array_push($stackValue2,$wag->budget);
-        ;array_push($percent,$wag->estimation); array_push($rpercent,$wag->rpercent);}
+        ;array_push($percent,$wag->estimation); array_push($rpercent,$wag->rpercent);array_push($depaname,$wag->department_id);}
+
 
     ?>
 
+
     <script>
+
     $(function () {
         'use strict'
 
@@ -149,12 +160,14 @@
         var mode = 'index'
         var intersect = true
 
-        var $salesChart = $('#visitors-chart')
+
         var zuuchName = <?php echo json_encode($stack); ?>;
+        var depaname = <?php echo json_encode($depaname); ?>;
         var zuuchQnt = <?php echo json_encode($stackValue); ?>;
         var zuuchQnt2 = <?php echo json_encode($stackValue2); ?>;
         var percent = <?php echo json_encode($percent); ?>;
-        var salesChart = new Chart($salesChart, {
+        var salesChart = $('#visitors-chart')
+        var myChart = new Chart(salesChart, {
             type: 'bar',
             scaleOverride : true,
             scaleSteps : 10,
@@ -162,6 +175,7 @@
             scaleStartValue : 0,
             data: {
                 labels:  zuuchName,
+                id:depaname,
                 datasets: [{
                     backgroundColor: '#007bff',
                     borderColor: '#007bff',
@@ -176,17 +190,111 @@
             },
             options: {
                 maintainAspectRatio: true,
+
                 legend: {
                     display: false
                 },
+
                 scales: {
                     xAxes: [{
                         display: true,
                         ticks: ticksStyle
-                    }]
-                }
+                    }],
+                    yAxes: [
+                        {
+                            ticks: {
+                                callback: function(label, index, labels) {
+                                    return label/1000+' мян';
+                                }
+                            },
+                            scaleLabel: {
+                                display: true,
+                                labelString: '1мян = 1000'
+                            }
+                        }
+                    ]
+                },
+
             }
         })
+
+        $("#visitors-chart").click(function(e) {
+            var activePoints = myChart.getElementAtEvent(e);
+            if(activePoints.length > 0)
+            {
+                //get the internal index of slice in pie chart
+                var clickedElementindex = activePoints[0]["_index"];
+
+                //get specific label by index
+                var label = myChart.data.labels[clickedElementindex];
+
+                //get value by index
+                var value = myChart.data.id[clickedElementindex];
+                console.log(value);
+                drawchart(value);
+                /* other stuff that requires slice's label and value */
+
+            }
+
+        });
+
+        function drawchart($id) {
+            var plans=[];
+            var est=[];
+            var exec=[];
+            $.get('chartfill/'+$id,function(data){
+                $.each(data,function(i,qwe){
+                    console.log(qwe);
+                    plans.push(qwe.plan);
+                    est.push(qwe.estimation);
+                    exec.push(qwe.executor_abbr);
+
+                });
+                console.log(plans);
+                var $salesChartt = $('#detailchart')
+                var detailchart = new Chart($salesChartt, {
+                    type: 'bar',
+                    scaleSteps: 10,
+                    scaleStepWidth: 50,
+                    scaleStartValue: 0,
+                    data: {
+                        labels: exec,
+                        datasets: [
+                            {
+                            backgroundColor: '#007bff',
+                            borderColor: '#007bff',
+                            data: plans
+                            },
+                            {
+                                backgroundColor: '#ff8400',
+                                borderColor: '#ff8400',
+                                data:est
+                            },
+                        ]
+                    },
+                    options: {
+                        maintainAspectRatio: true,
+                        legend: {
+                            display: false
+                        },
+                        scales: {
+                            xAxes: [{
+                                display: true,
+                                ticks: ticksStyle
+                            }],
+                            yAxes: [
+                                {
+
+                                }
+                            ]
+                        }
+                    }
+                })
+
+            });
+        }
+
+
         var $visitorsChart = $('#percentchart')
         var stack = <?php echo json_encode($stack); ?>;
         var stackValue = <?php echo json_encode($rpercent); ?>;
@@ -213,7 +321,7 @@
                     yAxes: [{
                         ticks: $.extend({
                             beginAtZero: true,
-                            suggestedMax: 200
+                            suggestedMax: 120
                         }, ticksStyle)
                     }],
                     xAxes: [{

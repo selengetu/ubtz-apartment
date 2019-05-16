@@ -139,13 +139,11 @@
                                         <th width="400px">Ажлын нэр</th>
                                         <th >Төлөвлөгөө</th>
 
-                                        <th>Төсөв</th>
-                                        <th>Гүйцэтгэл</th>
-                                        <th>Үүнээс</th>
+                                        <th>Гэрээний дүн</th>
+
                                         <th>Биелэлт</th>
-                                        <th>Хариуцагч инженер</th>
                                         <th style="width: 55px">Графикийн дагуу дуусах огноо</th>
-                                        <th style="width: 55px">Дуусах огноо</th>
+                                        <th style="width: 55px">Дууссан огноо</th>
                                         <th style="width: 55px">Хэтэрсэн хоног</th>
                                         <th>Тайлбар</th>
 
@@ -164,17 +162,10 @@
                                                 ?></td>
 
                                             <td><?php
-                                                echo number_format($projects->estimation)."<br>";
-                                                ?></td>
-                                            <td><?php
                                                 echo number_format($projects->budget)."<br>";
-                                                ?></td>
-                                            <td><?php
-                                                echo number_format($projects->economic)."<br>";
                                                 ?></td>
 
                                             <td>{{$projects->percent}}%</td>
-                                            <td>{{$projects->firstname}}</td>
 
                                             <td>{{$projects->end_date}} </td>
                                             <td width="45px">{{$projects->prend_date}}</td>

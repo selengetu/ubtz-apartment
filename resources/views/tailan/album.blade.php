@@ -87,8 +87,8 @@
                                             @foreach($project as $projects)
                                                 <tr><td colspan="4" bgcolor="#89c2ff"><center><b>{{$no}}. {{$projects->department_name}}  {{$projects->project_name}}</b></center></td></tr>
                                                 <tr>
-                                                    <td colspan="2"><center><img src="{{asset('profile_images/img/').'/'.$projects->image_b1}}" alt="profile Pic" height="350"></center></td>
-                                                    <td colspan="2"><center><img src="{{asset('profile_images/img/').'/'.$projects->image_b2}}" alt="profile Pic" height="350"></center></td>
+                                                    <td colspan="2" width="400px"><center><img src="{{asset('profile_images/img/').'/'.$projects->image_b1}}" alt="profile Pic" height="350"></center></td>
+                                                    <td colspan="2" width="400px"><center><img src="{{asset('profile_images/img/').'/'.$projects->image_b2}}" alt="profile Pic" height="350"></center></td>
                                                 <tr>
                                                 <tr>
                                                     <td><b>Төлөвлөгөө:</b></td>

@@ -114,7 +114,7 @@
                                                     <td><?php
                                                         echo number_format($projects->diff)."<br>";
                                                         ?></td>
-                                                    <td></td>
+                                                    <td>{{$projects->rpercent}}%</td>
 
 
                                                 </tr>
@@ -267,7 +267,7 @@
                         yAxes: [{
                             ticks: $.extend({
                                 beginAtZero: true,
-                                suggestedMax: 200
+                                suggestedMax: 110
                             }, ticksStyle)
                         }],
                         xAxes: [{

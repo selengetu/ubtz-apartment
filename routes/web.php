@@ -11,9 +11,12 @@
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::group(['middleware' => 'locale'], function () {
+    Route::get('/', 'HomeController@index')->name('home');
 
-Auth::routes();
+    Auth::routes();
+});
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -131,4 +134,14 @@ Route::get('/getexec/{id?}',function($id = 0){
         return $dt;
     }
 
+});
+
+
+Route::get('/chartfill/{id?}',function($id = 0){
+    $dt=DB::table('V_TAILAN_PROJ_CHILD')->where('department_id','=',$id)->get();
+    return $dt;
+});
+Route::get('setlocale/{locale}',function($locale){
+    Session::put('locale', $locale);
+    return redirect()->route('home');
 });

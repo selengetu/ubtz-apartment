@@ -23,8 +23,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $t =DB::select('select  * from TAILAN_PROJECT t');
+        $t =DB::select('select * from TAILAN_PROJECT t');
 
-        return view('welcome')->with(['t'=>$t]);
+        $t2 =DB::select("select d.executor_name, t.department_child,d.executor_abbr,t.department_id, t.department_name ,sum(t.plan) as plan, sum(t.budget) as budget, sum(t.estimation) as estimation,  (sum(t.estimation)/sum(t.plan))*100 as percent, sum(t.estimation)-sum(t.plan) as diff,count(t.executor_id)as niit, (sum(t.percent)/count(t.percent)) as rpercent from V_PROJECT t , CONST_EXECUTOR d
+where t.department_child=d.executor_id and t.department_id=6
+group by t.department_child,d.executor_name,t.department_id, t.department_name,d.executor_abbr");
+
+        return view('welcome')->with(['t'=>$t,'t2'=>$t2]);
     }
 }
