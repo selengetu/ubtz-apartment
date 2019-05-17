@@ -15,7 +15,7 @@ Route::group(['middleware' => 'locale'], function () {
     Route::get('/', 'HomeController@index')->name('home');
 
     Auth::routes();
-});
+
 
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -144,4 +144,5 @@ Route::get('/chartfill/{id?}',function($id = 0){
 Route::get('setlocale/{locale}',function($locale){
     Session::put('locale', $locale);
     return redirect()->route('home');
+});
 });

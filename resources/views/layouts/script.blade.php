@@ -39,7 +39,7 @@
     function updateproj($id){
 
         var title = document.getElementById("modal-title");
-        title.innerHTML = "Их барилга, их засварын ажил засварлах цонх";
+        title.innerHTML = "{{ trans('messages.tsonhzas') }}";
         document.getElementById('form1').action = "updateproject";
         document.getElementById('form1').method ="post"
         var itag=$id;
@@ -73,7 +73,7 @@
     function updateproc($id){
 
         var title = document.getElementById("modal-title1");
-        title.innerHTML = "Их барилга, их засварын ажлын гүйцэтгэл засварлах цонх";
+        title.innerHTML = "{{ trans('messages.guitszas') }}";
         document.getElementById('form2').action = "updateprocess";
         document.getElementById('form2').method ="post"
         var itag=$id;

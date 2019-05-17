@@ -24,7 +24,7 @@
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <h3 class="card-title">Хайлт </h3>
+                                        <h3 class="card-title">{{ trans('messages.hailt') }} </h3>
                                     </div>
 
                                 </div>
@@ -37,14 +37,14 @@
                                         <div class="row" >
                                             <div class="form-group col-md-2">
 
-                                                <label for="inputEmail4">Ажлын сар</label>
+                                                <label for="inputEmail4">{{ trans('messages.sar') }}</label>
                                                 <input type="text" name="month"  id="month" value="" class="form-control" maxlength="2">
 
 
                                             </div>
                                             <div class="form-group col-md-2">
 
-                                                <label for="inputEmail4">Ажлын төрөл</label>
+                                                <label for="inputEmail4">{{ trans('messages.ajliinturul') }}</label>
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <select class="form-control select2" id="sproject_type" name="sproject_type" >
                                                     <option value= "0">Бүгд</option>
@@ -56,7 +56,7 @@
                                             </div>
                                             <div class="form-group col-md-2">
 
-                                                <label for="inputEmail4">Ажлын төлөв</label>
+                                                <label for="inputEmail4">{{ trans('messages.ajliintuluv') }}</label>
                                                 <select class="form-control select2" id="sstate_id" name="sstate_id" >
                                                     <option value= "0">Бүгд</option>
                                                     @foreach($state as $states)
@@ -65,7 +65,7 @@
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-2">
-                                                <label for="inputEmail4">Захиалагч</label>
+                                                <label for="inputEmail4">{{ trans('messages.zahialagch') }}</label>
                                                 <select class="form-control select2" id="sconstructor_id" name="sconstructor_id">
                                                     <option value= "0">Бүгд</option>
                                                     @foreach($constructor as $constructors)
@@ -78,7 +78,7 @@
 
                                             <div class="form-group col-md-2">
                                                 <label for="inputZip"><span>.</span></label><br>
-                                                <button type="submit" class="btn btn-primary" >Хайх</button>
+                                                <button type="submit" class="btn btn-primary" >{{ trans('messages.haih') }}</button>
 
                                             </div>
 
@@ -126,20 +126,20 @@
                                         <?php $sum_runningtotal = 0 ?>
                                         <tr role="row">
                                             <th>#</th>
-                                            <th>Захиалагч</th>
-                                            <th>Гүйцэтгэгч</th>
-                                            <th>Ажлын нэр</th>
-                                            <th>Төлөвлөгөө</th>
+                                            <th>{{ trans('messages.zahialagch') }}</th>
+                                            <th>{{ trans('messages.guitsetgegch') }}</th>
+                                            <th>{{ trans('messages.ajliinner') }}</th>
+                                            <th>{{ trans('messages.tuluwluguu') }}</th>
 
-                                            <th>Төсөв</th>
-                                            <th>Эхний {{$month -1 }} сарын </th>
-                                            <th>Энэ {{$month}} сарын </th>
-                                            <th>Эхний {{$month}} сарын өссөн дүн </th>
-                                            <th>Үүнээс хаасан</th>
-                                            <th>Биелэлт</th>
-                                            <th>Хариуцагч инженер</th>
-                                            <th>Тайлбар</th>
-                                            <th colspan="2">Зурган тайлан</th>
+                                            <th>{{ trans('messages.tusuv') }}</th>
+                                            <th>{{ trans('messages.enesar') }} {{$month -1 }} {{ trans('messages.ussundun1') }} </th>
+                                            <th>{{ trans('messages.enesar') }} {{$month}} {{ trans('messages.ussundun1') }} </th>
+                                            <th>{{ trans('messages.ussundun') }} {{$month}} {{ trans('messages.ussundun1') }} </th>
+                                            <th>{{ trans('messages.uunees') }}</th>
+                                            <th>{{ trans('messages.biylelt') }}</th>
+                                            <th>{{ trans('messages.hariutsagch') }}</th>
+                                            <th>{{ trans('messages.tailbar') }}</th>
+                                            <th colspan="2">{{ trans('messages.photoalbum') }}</th>
 
                                         </tr>
                                         </thead>
@@ -198,8 +198,8 @@
                                                     color="white"
                                                 >    <font  @if($projects->state_id==1)
                                                             color="black"; @else color="white"; @endif >{{$projects->state_name_mn}}</font></td></td>
-                                                <td><img src="<?php echo asset("profile_images/img/$projects->image_b1")?>" alt="profile Pic" height="100" width="100"></td>
-                                                <td><img src="<?php echo asset("profile_images/img/$projects->image_b2")?>" alt="profile Pic" height="100" width="100"></td>
+                                                <td><img src="<?php echo asset("profile_images/img/$projects->image_b1")?>"  height="100" width="100"></td>
+                                                <td><img src="<?php echo asset("profile_images/img/$projects->image_b2")?>" height="100" width="100"></td>
                                             </tr>
                                             <?php $no++; ?>
                                         @endforeach

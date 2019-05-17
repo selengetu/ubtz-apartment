@@ -24,7 +24,7 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h3 class="card-title">Хайлт </h3>
+                                    <h3 class="card-title">{{ trans('messages.hailt') }} </h3>
                                 </div>
 
                             </div>
@@ -37,7 +37,7 @@
                                     <div class="row" >
                                         <div class="form-group col-md-2">
 
-                                            <label for="inputEmail4">Ажлын төрөл</label>
+                                            <label for="inputEmail4">{{ trans('messages.ajliinturul') }}</label>
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                             <select class="form-control select2" id="sproject_type" name="sproject_type" >
                                                 <option value= "0">Бүгд</option>
@@ -51,7 +51,7 @@
                                         <div class="form-group col-md-2">
                                         <div class="form-group col-md-2">
                                             <label for="inputZip"><span>.</span></label><br>
-                                            <button type="submit" class="btn btn-primary" >Хайх</button>
+                                            <button type="submit" class="btn btn-primary" >{{ trans('messages.haih') }}</button>
 
                                         </div>
 
@@ -67,7 +67,7 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h3 class="card-title">2019 оны их барилга, их засварын ажлууд </h3>
+                                    <h3 class="card-title">{{ trans('messages.ibiz') }} </h3>
                                 </div>
 
                             </div>
@@ -84,11 +84,11 @@
                                             <thead>
                                             <tr role="row">
                                                 <th>#</th>
-                                                <th>Байгууллага</th>
-                                                <th>Төлөвлөгөө</th>
-                                                <th>Гүйцэтгэл</th>
-                                                <th>Биелэлт</th>
-                                                <th>Зөрүү</th>
+                                                <th>{{ trans('messages.zahialagch') }}</th>
+                                                <th>{{ trans('messages.tuluwluguu') }}</th>
+                                                <th>{{ trans('messages.guitsetgel') }}</th>
+                                                <th>{{ trans('messages.biylelt') }}</th>
+                                                <th>{{ trans('messages.zuruu') }}</th>
                                                 <th>%</th>
 
 
@@ -114,7 +114,7 @@
                                                     <td><?php
                                                         echo number_format($projects->diff)."<br>";
                                                         ?></td>
-                                                    <td>{{$projects->rpercent}}%</td>
+                                                    <td>{{number_format($projects->rpercent, 2, ',', '.')}}%</td>
 
 
                                                 </tr>
@@ -286,7 +286,21 @@
                     labels: stack,
                     datasets: [{
                         label: "Албаны нэр",
-                        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+                        backgroundColor: ["#63b598", "#ce7d78", "#ea9e70", "#a48a9e", "#c6e1e8", "#648177" ,"#0d5ac1" ,
+                            "#f205e6" ,"#1c0365" ,"#14a9ad" ,"#4ca2f9" ,"#a4e43f" ,"#d298e2" ,"#6119d0",
+                            "#d2737d" ,"#c0a43c" ,"#f2510e" ,"#651be6" ,"#79806e" ,"#61da5e" ,"#cd2f00" ,
+                            "#9348af" ,"#01ac53" ,"#c5a4fb" ,"#996635","#b11573" ,"#4bb473" ,"#75d89e" ,
+                            "#2f3f94" ,"#2f7b99" ,"#da967d" ,"#34891f" ,"#b0d87b" ,"#ca4751" ,"#7e50a8" ,
+                            "#c4d647" ,"#e0eeb8" ,"#11dec1" ,"#289812" ,"#566ca0" ,"#ffdbe1" ,"#2f1179" ,
+                            "#935b6d" ,"#916988" ,"#513d98" ,"#aead3a", "#9e6d71", "#4b5bdc", "#0cd36d",
+                            "#250662", "#cb5bea", "#228916", "#ac3e1b", "#df514a", "#539397", "#880977",
+                            "#f697c1", "#ba96ce", "#679c9d", "#c6c42c", "#5d2c52", "#48b41b", "#e1cf3b",
+                            "#5be4f0", "#57c4d8", "#a4d17a", "#225b8", "#be608b", "#96b00c", "#088baf",
+                            "#f158bf", "#e145ba", "#ee91e3", "#05d371", "#5426e0", "#4834d0", "#802234",
+                            "#6749e8", "#0971f0", "#8fb413", "#b2b4f0", "#c3c89d", "#c9a941", "#41d158",
+                            "#fb21a3", "#51aed9", "#5bb32d", "#807fb", "#21538e", "#89d534", "#d36647",
+                            "#7fb411", "#0023b8", "#3b8c2a", "#986b53", "#f50422", "#983f7a", "#ea24a3",
+                            "#79352c", "#521250", "#c79ed2", "#d6dd92", "#e33e52", "#b2be57", "#fa06ec"],
                         data: zuuchQnt2
                     }]
                 },

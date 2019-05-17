@@ -15,8 +15,8 @@
             <div class="row">
                 <nav>
                     <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Ажил</a>
-                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Гүйцэтгэл</a>
+                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">{{ trans('messages.ajil') }}</a>
+                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">{{ trans('messages.guitsetgel') }}</a>
 
                     </div>
                 </nav>
@@ -26,7 +26,7 @@
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <h3 class="card-title">Хайлт </h3>
+                                        <h3 class="card-title">{{ trans('messages.hailt') }} </h3>
                                     </div>
 
                                 </div>
@@ -39,7 +39,7 @@
                                     <div class="row">
                                         <div class="form-group col-md-2">
 
-                                            <label for="inputEmail4">Ажлын төрөл</label>
+                                            <label for="inputEmail4">{{ trans('messages.ajliinturul') }}</label>
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                             <input type="hidden" name="projtype" id="projtype" value="{{$sprojecttype}}">
                                             <input type="hidden" name="stat" id="stat" value="{{$sstate_id}}">
@@ -58,7 +58,7 @@
                                         </div>
                                         <div class="form-group col-md-2">
 
-                                            <label for="inputEmail4">Ажлын арга</label>
+                                            <label for="inputEmail4">{{ trans('messages.ajliinarga') }}</label>
                                             <select class="form-control select2" id="smethod_id" name="smethod_id" >
                                                 <option value= "0">Бүгд</option>
                                                 @foreach($method as $methods)
@@ -68,7 +68,7 @@
                                         </div>
                                         <div class="form-group col-md-2">
 
-                                            <label for="inputEmail4">Ажлын төлөв</label>
+                                            <label for="inputEmail4">{{ trans('messages.ajliintuluv') }}</label>
                                             <select class="form-control select2" id="sstate_id" name="sstate_id" >
                                                 <option value= "0">Бүгд</option>
                                                 @foreach($state as $states)
@@ -77,7 +77,7 @@
                                             </select>
                                         </div>
                                         <div class="form-group col-md-2">
-                                            <label for="inputEmail4">Захиалагч</label>
+                                            <label for="inputEmail4">{{ trans('messages.zahialagch') }}</label>
                                             <select class="form-control select2" id="sconstructor_id" name="sconstructor_id">
                                                 <option value= "0">Бүгд</option>
                                                 @foreach($constructor as $constructors)
@@ -87,7 +87,7 @@
 
                                         </div>
                                         <div class="form-group col-md-2">
-                                            <label for="inputEmail4">Захиалагч нэгж</label>
+                                            <label for="inputEmail4">{{ trans('messages.zahialagchnegj') }}</label>
                                             <select class="form-control select2" id="schildabbr_id" name="schildabbr_id">
                                                 <option value= "0">Бүгд</option>
                                                 @foreach($executor as $executors)
@@ -97,7 +97,7 @@
 
                                         </div>
                                         <div class="form-group col-md-2">
-                                            <label for="inputPassword4">Гүйцэтгэгч</label>
+                                            <label for="inputPassword4">{{ trans('messages.guitsetgegch') }}</label>
                                             <select class="form-control select2" id="sexecutor_id" name="sexecutor_id" >
                                                 <option value= "0">Бүгд</option>
                                                 @foreach($executor as $executors)
@@ -107,7 +107,7 @@
 
                                         </div>
                                         <div class="form-group col-md-2">
-                                            <label for="inputZip">Хариуцагч</label>
+                                            <label for="inputZip">{{ trans('messages.hariutsagch') }}</label>
                                             <select class="form-control select2" id="srespondent_emp_id" name="srespondent_emp_id" >
                                                 <option value= "0">Бүгд</option>
                                                 @foreach($employee as $employees)
@@ -117,7 +117,7 @@
                                         </div>
                                         <div class="form-group col-md-1">
                                             <label for="inputZip"><span>.</span></label><br>
-                                            <button type="submit" class="btn btn-primary form-control" >Хайх</button>
+                                            <button type="submit" class="btn btn-primary form-control" >{{ trans('messages.haih') }}</button>
 
                                         </div>
 
@@ -133,11 +133,11 @@
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <h3 class="card-title">2019 оны их барилга, их засварын ажлууд </h3>
+                                        <h3 class="card-title">{{ trans('messages.ibiz') }} </h3>
                                     </div>
                                     <div class="col-md-4">
                                         <button type="button" class="btn btn-primary add" data-toggle="modal" data-target="#exampleModal" id="addproj">
-                                            <i class="fa fa-plus" style="color: rgb(255, 255, 255);"> Их барилга, их засварын ажил бүртгэх</i>
+                                            <i class="fa fa-plus" style="color: rgb(255, 255, 255);"> {{ trans('messages.burtgeh') }}</i>
                                         </button>
                                     </div>
                                 </div>
@@ -156,20 +156,20 @@
                                             <?php $sum_percent = 0 ?>
 
                                             <th>#</th>
-                                            <th>Захиалагч</th>
-                                            <th>Гүйцэтгэгч</th>
-                                            <th width="400px">Ажлын нэр</th>
-                                            <th>Төлөвлөгөө</th>
+                                            <th>{{ trans('messages.zahialagch') }}</th>
+                                            <th>{{ trans('messages.guitsetgegch') }}</th>
+                                            <th width="400px">{{ trans('messages.ajliinner') }}</th>
+                                            <th>{{ trans('messages.tuluwluguu') }}</th>
 
-                                            <th>Төсөв</th>
-                                            <th>Гүйцэтгэл</th>
-                                            <th>Үүнээс хаасан</th>
-                                            <th>Биелэлт</th>
-                                            <th>Хариуцагч инженер</th>
-                                            <th>Эхлэх огноо</th>
-                                            <th>Дуусах огноо</th>
+                                            <th>{{ trans('messages.tusuv') }}</th>
+                                            <th>{{ trans('messages.guitsetgel') }}</th>
+                                            <th>{{ trans('messages.uunees') }}</th>
+                                            <th>{{ trans('messages.biylelt') }}</th>
+                                            <th>{{ trans('messages.hariutsagch') }}</th>
+                                            <th>{{ trans('messages.ehelsen') }}</th>
+                                            <th>{{ trans('messages.duussan') }}</th>
 
-                                            <th>Тайлбар</th>
+                                            <th>{{ trans('messages.tailbar') }}</th>
                                             <th></th>
                                             <th></th>
                                         </tr>
@@ -243,7 +243,7 @@
                                         </tbody>
                                         <tr>
 
-                                            <td><b>Нийт</b></td>
+                                            <td><b>{{ trans('messages.niit') }}</b></td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
@@ -285,7 +285,7 @@
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <h3 class="card-title">Их барилга, их засварын ажил </h3>
+                                        <h3 class="card-title"> {{ trans('messages.ibiz') }}</h3>
                                     </div>
 
                                 </div>
@@ -299,18 +299,18 @@
                                             <thead>
                                             <tr role="row">
 
-                                                <th>Байгууллага</th>
-                                                <th>Гүйцэтгэгч</th>
-                                                <th width="400px">Ажлын нэр</th>
-                                                <th width="85px">Төлөвлөгөө</th>
-                                                <th width="85px">Төсөв</th>
-                                                <th width="85px">Гүйцэтгэл</th>
-                                                <th width="85px">Үүнээс</th>
-                                                <th>Биелэлт</th>
-                                                <th>Хариуцагч инженер</th>
-                                                <th>Эхлэх огноо</th>
-                                                <th>Дуусах огноо</th>
-                                                <th width="100px">Тайлбар</th>
+                                                <th>{{ trans('messages.hariutsagch') }}</th>
+                                                <th>{{ trans('messages.guitsetgegch') }}</th>
+                                                <th width="400px">{{ trans('messages.ajliinner') }}</th>
+                                                <th width="85px">{{ trans('messages.tuluwluguu') }}</th>
+                                                <th width="85px">{{ trans('messages.tusuv') }}</th>
+                                                <th width="85px">{{ trans('messages.guitsetgel') }}</th>
+                                                <th width="85px">{{ trans('messages.uunees') }}</th>
+                                                <th>{{ trans('messages.biylelt') }}</th>
+                                                <th>{{ trans('messages.hariutsagch') }}</th>
+                                                <th>{{ trans('messages.tuvehleh') }}</th>
+                                                <th>{{ trans('messages.tuvduusah') }}</th>
+                                                <th width="100px">{{ trans('messages.tailbar') }}</th>
 
                                             </tr>
                                             </thead>
@@ -328,11 +328,11 @@
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <h3 class="card-title">Их барилга, их засварын ажлын гүйцэтгэл</h3>
+                                        <h3 class="card-title">{{ trans('messages.ajliinguits') }}</h3>
                                     </div>
                                     <div class="col-md-4">
                                         <button type="button" class="btn btn-primary add" data-toggle="modal" data-target="#processmodal" id="addproc">
-                                            <i class="fa fa-plus" style="color: rgb(255, 255, 255);"> Гүйцэтгэл бүртгэх</i>
+                                            <i class="fa fa-plus" style="color: rgb(255, 255, 255);"> {{ trans('messages.guitsnemeh') }}</i>
                                         </button>
                                     </div>
                                 </div>
@@ -346,10 +346,10 @@
                                         <thead>
                                         <tr role="row">
 
-                                            <th>Тооцох он сар</th>
-                                            <th>Гүйцэтгэл</th>
-                                            <th>Тайлбар</th>
-                                            <th>Зураг</th>
+                                            <th>{{ trans('messages.tootsoh') }}</th>
+                                            <th>{{ trans('messages.guitsetgel') }}</th>
+                                            <th>{{ trans('messages.tailbar') }}</th>
+                                            <th>{{ trans('messages.ajliinguits') }}</th>
                                             <th></th>
 
                                         </tr>
@@ -365,34 +365,7 @@
                         <!-- /.card-body -->
                     </div>
                     </div>
-                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-profile-tab">
-                        <table class="table" cellspacing="0">
-                            <thead>
-                            <tr>
-                                <th>Project Name2</th>
-                                <th>Employer</th>
-                                <th>Time</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td><a href="#">Work 1</a></td>
-                                <td>Doe</td>
-                                <td>john@example.com</td>
-                            </tr>
-                            <tr>
-                                <td><a href="#">Work 2</a></td>
-                                <td>Moe</td>
-                                <td>mary@example.com</td>
-                            </tr>
-                            <tr>
-                                <td><a href="#">Work 3</a></td>
-                                <td>Dooley</td>
-                                <td>july@example.com</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
+
 
 
                             <div class="row">
@@ -423,7 +396,7 @@
             <div class="modal-content">
                 <form id="form1" method="post" action="addproject">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modal-title">Их барилга, их засварын ажил бүртгэх цонх</h5>
+                    <h5 class="modal-title" id="modal-title">{{ trans('messages.tsonh') }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -434,7 +407,7 @@
                             <div class="form-group col-md-4">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <input type="hidden" class="form-control" id="id" name="id">
-                                <label for="inputEmail4">Ажлын төрөл</label>
+                                <label for="inputEmail4">{{ trans('messages.ajliinturul') }}</label>
                                 <select class="form-control select2" id="project_type" name="project_type">
                                     @foreach($projecttype as $projecttypes)
                                         <option value= "{{$projecttypes->project_type_id}}">{{$projecttypes->project_type_name_mn}}</option>
@@ -443,7 +416,7 @@
 
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="inputEmail4">Ажлын арга</label>
+                                <label for="inputEmail4">{{ trans('messages.ajliinarga') }}</label>
                                 <select class="form-control select2" id="method_code" name="method_code">
                                     @foreach($method as $methods)
                                         <option value= "{{$methods->method_code}}">{{$methods->method_name}}</option>
@@ -452,7 +425,7 @@
 
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="inputEmail4">Захиалагч</label>
+                                <label for="inputEmail4">{{ trans('messages.zahialagch') }}</label>
                                 <select class="form-control select2" id="constructor_id" name="constructor_id">
                                     @foreach($constructor as $constructors)
                                         <option value= "{{$constructors->department_id}}">{{$constructors->department_name}}</option>
@@ -461,7 +434,7 @@
 
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="inputEmail4">Захиалагч нэгж</label>
+                                <label for="inputEmail4">{{ trans('messages.zahialagchnegj') }}</label>
                                 <select class="form-control select2" id="childabbr_id" name="childabbr_id">
                                     <option value= "0">Бүгд</option>
                                     @foreach($executor as $executors)
@@ -471,7 +444,7 @@
 
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="inputPassword4">Гүйцэтгэгч</label>
+                                <label for="inputPassword4">{{ trans('messages.guitsetgegch') }}</label>
                                 <select class="form-control select2" id="executor_id" name="executor_id">
                                     <option value= "999">Тодорхойгүй</option>
                                     @foreach($executor as $executors)
@@ -483,12 +456,12 @@
 
 
                             <div class="form-group col-md-9">
-                                <label for="inputAddress">Ажлын нэр</label>
+                                <label for="inputAddress">{{ trans('messages.ajliinner') }}</label>
                                 <textarea class="form-control" rows="1" id="project_name" name="project_name"></textarea>
                             </div>
 
                             <div class="form-group col-md-3">
-                                <label for="inputZip">Хариуцагч</label>
+                                <label for="inputZip">{{ trans('messages.hariutsagch') }}</label>
                                 <select class="form-control select2" id="respondent_emp_id" name="respondent_emp_id" @if(Auth::user()->user_grant == 6) disabled="true"@endif>
                                     <option value= "999">Тодорхойгүй</option>
                                 @foreach($employee as $employees)
@@ -497,22 +470,22 @@
                                 </select>
                             </div>
                             <div class="form-group col-md-9">
-                                <label for="inputAddress">Ажлын нэр /Орос/</label>
+                                <label for="inputAddress">{{ trans('messages.ajliinner') }} /Русс/</label>
                                 <textarea class="form-control" rows="1" id="project_name_ru" name="project_name_ru"></textarea>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputAddress2">Төлөвлөгөө</label>
+                                <label for="inputAddress2">{{ trans('messages.tuluwluguu') }}</label>
                                 <input type="text" class="form-control money" id="plan" name="plan" placeholder="" maxlength="14">
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputZip">Үүнээс хаасан</label>
+                                <label for="inputZip">{{ trans('messages.uunees') }}</label>
                                 <input type="text" class="form-control money" id="economic" name="economic" maxlength="14">
                             </div>
 
                         </div>
 
                     <div class="form-group col-md-6">
-                        <label for="inputCity">Төсөв</label>
+                        <label for="inputCity">{{ trans('messages.tusuv') }}</label>
                         <input type="text" class="form-control money" id="estimation" name="estimation" maxlength="14">
                     </div>
 
@@ -521,12 +494,12 @@
 
 
                             <div class="form-group col-md-6">
-                                <label for="inputAddress2">Төлөвлөгөөт эхлэх огноо</label>
+                                <label for="inputAddress2">{{ trans('messages.ehelsen') }}</label>
                                 <input class="form-control form-control-inline input-medium date-picker" name="date1" id="date1"
                                        size="16" type="text" value="">
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputCity">Төлөвлөгөөт дуусах огноо</label>
+                                <label for="inputCity">{{ trans('messages.duussan') }}</label>
                                 <input class="form-control form-control-inline input-medium date-picker" name="date2" id="date2"
                                        size="16" type="text" value="">
                             </div>
@@ -535,7 +508,7 @@
                         </div>
                     <div class="form-row">
                         <div class="form-group col-md-12 col-xs-12">
-                            <label for="inputZip">Тайлбар</label>
+                            <label for="inputZip">{{ trans('messages.tailbar') }}</label>
                             <textarea class="form-control" rows="2" id="description" name="description" maxlength="500"></textarea>
                         </div>
                     </div>
@@ -543,11 +516,11 @@
                 </div>
                     <div class="modal-footer">
                         <div class="col-md-5">
-                            <button type="button" class="btn btn-danger delete" id="deleteproj">Устгах</button>
-                            <button type="submit" class="btn btn-primary">Хадгалах</button>
+                            <button type="button" class="btn btn-danger delete" id="deleteproj">{{ trans('messages.ustgah') }}</button>
+                            <button type="submit" class="btn btn-primary">{{ trans('messages.hadgalah') }}</button>
                         </div>
                         <div class="col-md-7" style="display: inline-block; text-align: right;" >
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Хаах</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('messages.haah') }}</button>
 
                         </div>
                     </div>
@@ -560,7 +533,7 @@
             <div class="modal-content">
                 <form id="form2" method="post" action="addprocess" enctype="multipart/form-data">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modal-title1">Их барилга, их засварын ажлын гүйцэтгэл бүртгэх цонх</h5>
+                        <h5 class="modal-title" id="modal-title1">{{ trans('messages.tsonh') }}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -572,22 +545,22 @@
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <input type="hidden" class="form-control" id="gprocess_id" name="gprocess_id">
                                 <input type="hidden" class="form-control" id="gproject_id" name="gproject_id">
-                                <label for="inputEmail4">Тооцох он</label>
+                                <label for="inputEmail4">{{ trans('messages.tootsoh') }}</label>
                                 <input type="text"  class="form-control year" id="gyear" name="gyear">
 
                             </div>
                             <div class="form-group col-md-2">
-                                <label for="inputEmail4">Сар</label>
+                                <label for="inputEmail4">{{ trans('messages.sar') }}</label>
                                 <input type="text"  class="form-control month" id="gmonth" name="gmonth">
 
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="inputEmail4">Гүйцэтгэл</label>
+                                <label for="inputEmail4">{{ trans('messages.guitsetgel') }}</label>
                                 <input type="text" class="form-control money" id="gbudget" name="gbudget" maxlength="14">
 
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputZip">Төлөв</label>
+                                <label for="inputZip">{{ trans('messages.ajliintuluv') }}</label>
                                 <select class="form-control select2" id="gstate_id" name="gstate_id" >
                                     @foreach($state as $states)
                                         <option value= "{{$states->state_id}}">{{$states->state_name_mn}}</option>
@@ -595,15 +568,15 @@
                                 </select>
                             </div>
                             <div class="form-group col-md-3" id="gpercentdiv">
-                                <label for="inputZip">Биелэлт</label>
+                                <label for="inputZip">{{ trans('messages.biylelt') }}</label>
                                 <input type="text" class="form-control" id="gpercent" name="gpercent" placeholder="99.9" maxlength="4">
                             </div>
                             <div class="form-group col-md-3" id="gdatediv">
-                                <label for="inputZip">Дууссан огноо</label>
+                                <label for="inputZip">{{ trans('messages.duusah') }}</label>
                                 <input class="form-control form-control-inline input-medium date-picker" name="gdate" id="gdate" placeholder="2019-04-15">
                             </div>
                             <div class="form-group col-md-8">
-                                <label for="inputZip">Тайлбар</label>
+                                <label for="inputZip">{{ trans('messages.tailbar') }}</label>
                                 <textarea class="form-control" rows="2" id="gdescription" name="gdescription" maxlength="500"></textarea>
                             </div>
 
@@ -655,12 +628,12 @@
                     </div>
                     <div class="modal-footer">
                         <div class="col-md-5">
-                            <button type="button" id="deleteproc" class="btn btn-danger delete">Устгах</button>
-                            <button type="button" id="approveproc" class="btn btn-info">Батлах</button>
-                            <button type="submit" class="btn btn-primary" id="addprocessbutton">Хадгалах</button>
+                            <button type="button" id="deleteproc" class="btn btn-danger delete">{{ trans('messages.ustgah') }}</button>
+                            <button type="button" id="approveproc" class="btn btn-info">{{ trans('messages.batal') }}</button>
+                            <button type="submit" class="btn btn-primary" id="addprocessbutton">{{ trans('messages.hadgalah') }}</button>
                         </div>
                         <div class="col-md-7" style="display: inline-block; text-align: right;" >
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Хаах</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('messages.haah') }}</button>
 
                         </div>
                     </div>
@@ -741,7 +714,7 @@
                         "previous":   "Өмнөх"
                     },
                 },
-                "pageLength": 50
+                "pageLength": 10
             } );
             $('#export-btn').on('click', function(e){
                 $("#example").table2excel({

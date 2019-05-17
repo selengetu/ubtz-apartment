@@ -24,7 +24,7 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h3 class="card-title">Хайлт </h3>
+                                    <h3 class="card-title">{{ trans('messages.hailt') }} </h3>
                                 </div>
 
                             </div>
@@ -43,7 +43,7 @@
                                             <input type="hidden" name="exec" id="exec" value="{{$sexecutor}}">
                                             <input type="hidden" name="resp" id="resp" value="{{$srespondent_emp_id}}">
 
-                                            <label for="inputEmail4">Ажлын төрөл</label>
+                                            <label for="inputEmail4">{{ trans('messages.ajliinturul') }}</label>
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                             <select class="form-control select2" id="sproject_type" name="sproject_type" >
                                                 <option value= "0">Бүгд</option>
@@ -55,7 +55,7 @@
                                         </div>
                                         <div class="form-group col-md-2">
 
-                                            <label for="inputEmail4">Ажлын төлөв</label>
+                                            <label for="inputEmail4">{{ trans('messages.ajliintuluv') }}</label>
                                             <select class="form-control select2" id="sstate_id" name="sstate_id" >
                                                 <option value= "0">Бүгд</option>
                                                 @foreach($state as $states)
@@ -64,7 +64,7 @@
                                             </select>
                                         </div>
                                         <div class="form-group col-md-2">
-                                            <label for="inputEmail4">Захиалагч</label>
+                                            <label for="inputEmail4">{{ trans('messages.zahialagch') }}</label>
                                             <select class="form-control select2" id="sconstructor_id" name="sconstructor_id">
                                                 <option value= "0">Бүгд</option>
                                                 @foreach($constructor as $constructors)
@@ -74,7 +74,7 @@
 
                                         </div>
                                         <div class="form-group col-md-2">
-                                            <label for="inputPassword4">Гүйцэтгэгч</label>
+                                            <label for="inputPassword4">{{ trans('messages.guitsetgegch') }}</label>
                                             <select class="form-control select2" id="sexecutor_id" name="sexecutor_id" >
                                                 <option value= "0">Бүгд</option>
                                                 @foreach($executor as $executors)
@@ -84,7 +84,7 @@
 
                                         </div>
                                         <div class="form-group col-md-2">
-                                            <label for="inputZip">Хариуцагч</label>
+                                            <label for="inputZip">{{ trans('messages.hariutsagch') }}</label>
                                             <select class="form-control select2" id="srespondent_emp_id" name="srespondent_emp_id" >
                                                 <option value= "0">Бүгд</option>
                                                 @foreach($employee as $employees)
@@ -94,7 +94,7 @@
                                         </div>
                                         <div class="form-group col-md-2">
                                             <label for="inputZip"><span>.</span></label><br>
-                                            <button type="submit" class="btn btn-primary" >Хайх</button>
+                                            <button type="submit" class="btn btn-primary" >{{ trans('messages.haih') }}</button>
 
                                         </div>
 
@@ -109,7 +109,7 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h3 class="card-title">Ажлын хугацааны тайлан </h3>
+                                    <h3 class="card-title">{{ trans('messages.tailantime') }} </h3>
                                 </div>
 
                             </div>
@@ -134,18 +134,18 @@
                                     <thead>
                                     <tr role="row">
                                         <th>#</th>
-                                        <th>Байгууллага</th>
-                                        <th>Гүйцэтгэгч</th>
-                                        <th width="400px">Ажлын нэр</th>
-                                        <th >Төлөвлөгөө</th>
+                                        <th>{{ trans('messages.zahialagch') }}</th>
+                                        <th>{{ trans('messages.guitsetgegch') }}</th>
+                                        <th width="400px">{{ trans('messages.ajliinner') }}</th>
+                                        <th >{{ trans('messages.tuluwluguu') }}</th>
 
-                                        <th>Гэрээний дүн</th>
+                                        <th>{{ trans('messages.geree') }}</th>
 
-                                        <th>Биелэлт</th>
-                                        <th style="width: 55px">Графикийн дагуу дуусах огноо</th>
-                                        <th style="width: 55px">Дууссан огноо</th>
-                                        <th style="width: 55px">Хэтэрсэн хоног</th>
-                                        <th>Тайлбар</th>
+                                        <th>{{ trans('messages.biylelt') }}</th>
+                                        <th style="width: 55px">{{ trans('messages.graphduusah') }}</th>
+                                        <th style="width: 55px">{{ trans('messages.duusah') }}</th>
+                                        <th style="width: 55px">{{ trans('messages.hetersen') }}</th>
+                                        <th>{{ trans('messages.tailbar') }}</th>
 
                                     </tr>
                                     </thead>
