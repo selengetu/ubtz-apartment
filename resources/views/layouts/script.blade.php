@@ -53,6 +53,7 @@
                 $('#budget').val(qwe.budget);
                 $('#estimation').val(qwe.estimation);
                 $('#plan').val(qwe.plan);
+                $('#geree').val(qwe.contract);
                 $('#constructor_id').val(qwe.department_id);
                 $('#childabbr_id').val(qwe.department_child);
                 $('#project_type').val(qwe.project_type);

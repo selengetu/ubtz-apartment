@@ -481,13 +481,17 @@
                                 <label for="inputZip">{{ trans('messages.uunees') }}</label>
                                 <input type="text" class="form-control money" id="economic" name="economic" maxlength="14">
                             </div>
-
+                            <div class="form-group col-md-6">
+                                <label for="inputCity">{{ trans('messages.tusuv') }}</label>
+                                <input type="text" class="form-control money" id="estimation" name="estimation" maxlength="14">
+                            </div>
+                            <div class="form-group col-md-6" id="gereediv" style="display: none;">
+                                <label for="inputCity">{{ trans('messages.geree') }}</label>
+                                <input type="text" class="form-control money" id="geree" name="geree" maxlength="14">
+                            </div>
                         </div>
 
-                    <div class="form-group col-md-6">
-                        <label for="inputCity">{{ trans('messages.tusuv') }}</label>
-                        <input type="text" class="form-control money" id="estimation" name="estimation" maxlength="14">
-                    </div>
+
 
                         <div class="form-row">
 
@@ -649,7 +653,13 @@
     <script>
         $("#method_code").on('change', function() {
             var itag =$(this).val();
+            if(itag == 3){
 
+                $('#gereediv').show();
+                }
+            else{
+                $('#gereediv').hide();
+            }
             $.get('getexec/'+itag,function(data){
                 $('#executor_id').empty();
 
