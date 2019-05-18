@@ -1,7 +1,7 @@
 <div class="body"></div>
 <div class="grad"></div>
 <div class="header">
-    <div><span>ИХ БАРИЛГА</span> <br><span>ИХ ЗАСВАРЫН</span> <br><span>ГҮЙЦЭТГЭЛИЙН</span> <br><span>ТАЙЛАН</span></div>
+    <div><span>ИХ БАРИЛГА</span> <br><span>ИХ ЗАСВАРЫН</span> <br><span>ГҮЙЦЭТГЭЛИЙН</span> <br><span>ПРОГРАМ ХАНГАМЖ</span></div>
 </div>
 <br>
 <div class="login">
@@ -78,7 +78,8 @@
     .header{
         position: absolute;
         top: calc(60% - 60px);
-        left: calc(57% - 180px);
+        left: calc(57% - 210px);
+        text-align: center;
         z-index: 2;
     }
 

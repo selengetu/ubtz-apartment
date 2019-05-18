@@ -12,22 +12,45 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'ЗТҮС') }}</title>
+    <title>{{ config('app.name', 'ИБИЗ') }}</title>
 
     <!-- Theme style -->
-  <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('dist/css/adminlte.css') }}">
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css">
   <link rel="stylesheet" href="{{ asset('plugins/font-awesome/css/font-awesome.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('/css/datatable.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
     <link rel="stylesheet" href="//jonthornton.github.io/jquery-timepicker/jquery.timepicker.css">
     <link href="{{ asset('css/ptsans.css') }}" rel="stylesheet">
 
     @yield('style')
+
   <style>
-    table{
-      font-size: 12px;
+    .icon-drop
+    {
+      height:30px;
+      margin:0;
+      padding:0;
+      border:0;
     }
 
+    .icon-medium
+    {
+      height:30px;
+      margin:0;
+      padding:0;
+      background-color: #EDEDED;
+      border:0;
+    }
+    table{
+      font-size: 12px;
+      text-align:left;
+
+    }
+    table td{
+      padding: .45em;
+
+    }
   </style>
 </head>
 <body class="hold-transition sidebar-mini @if(Auth::user()->menucollapse==1) sidebar-collapse @else sidebar-open @endif">
@@ -57,8 +80,44 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="{{ route('logout') }}" class="nav-link">Системээс гарах</a>
+
+      <li class="nav-item dropdown">
+        @if ( Config::get('app.locale') == 'en')
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img id="imgNavSel" src="{{URL::asset('/images/Rus.png')}}" alt="..." class="img-thumbnail icon-medium">  <span id="lanNavSel"></span> <span class="caret"></span></a>
+
+
+        @elseif ( Config::get('app.locale') == 'mn' )
+
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img id="imgNavSel" src="{{URL::asset('/images/Mon.png')}}" alt="..." class="img-thumbnail icon-medium">  <span id="lanNavSel"></span> <span class="caret"></span></a>
+
+        @endif
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+
+          <a href="{{ url('setlocale/en')}}" id="navRus" class="dropdown-item language"> <img id="imgNavRus" src="{{URL::asset('/images/Rus.png')}}"  class="img-thumbnail icon-drop">   Русский</a>
+          <div class="dropdown-divider"></div>
+          <a href="{{ url('setlocale/mn')}}" id="navMon" class="dropdown-item language"> <img id="imgNavMon" src="{{URL::asset('/images/Mon.png')}}"  class="img-thumbnail icon-drop">   Монгол</a>
+
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="fa fa-user-circle fa-2x"></i>
+
+        </a>
+
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+
+          <a href="{{ route('profile') }}" class="dropdown-item">
+            <i class="fa fa-envelope mr-2"></i> {{ trans('messages.password') }}
+
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="{{ route('logout') }}" class="dropdown-item">
+            <i class="fa fa-users mr-2"></i> {{ trans('messages.logout') }}
+
+          </a>
+
+        </div>
       </li>
 
     </ul>
@@ -94,7 +153,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-dashboard"></i>
               <p>
-                Бүртгэл
+                  {{ trans('messages.burtgel') }}
                 <i class="right fa fa-angle-left"></i>
               </p>
             </a>
@@ -102,18 +161,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <li class="nav-item">
                       <a href="{{ route('barilga') }}" class="nav-link">
                         <i class="fa fa-circle-o nav-icon"></i>
-                        <p>Их барилга</p>
+                        <p>ИБИЗ</p>
                       </a>
                     </li>
 
             </ul>
           </li>
-
+          @if ( Auth::user()->id ==47 or Auth::user()->id ==46)
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-dashboard"></i>
               <p>
-                Тохиргоо
+                  {{ trans('messages.setting') }}
                 <i class="right fa fa-angle-left"></i>
               </p>
             </a>
@@ -121,52 +180,91 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <li class="nav-item">
                 <a href="{{ route('prof') }}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Албан тушаал</p>
+                  <p>{{ trans('messages.albantushaal') }}</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('employee') }}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Ажилтан</p>
+                  <p>{{ trans('messages.ajiltan') }}</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('state') }}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Ажлын төлөв</p>
+                  <p>{{ trans('messages.ajliintuluv') }}</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('method') }}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Ажлын арга</p>
+                  <p>{{ trans('messages.ajliinarga') }}</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('projecttype') }}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Ажлын төрөл</p>
+                  <p>{{ trans('messages.ajliinturul') }}</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('executor') }}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Гүйцэтгэгч</p>
+                  <p>{{ trans('messages.guitsetgegch') }}</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('constructor') }}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Захиалагч</p>
+                  <p>{{ trans('messages.zahialagch') }}</p>
                 </a>
               </li>
 
 
 
-
             </ul>
           </li>
+          @endif
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa fa-dashboard"></i>
+              <p>
+                  {{ trans('messages.tailan') }}
+                <i class="right fa fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('main') }}" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>ИБИЗ</p>
+                </a>
+              </li>
 
+              <li class="nav-item">
+                <a href="{{ route('time') }}" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>  {{ trans('messages.tailantime') }}</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('album') }}" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>  {{ trans('messages.tailanphoto') }}</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="{{ route('analyse') }}" class="nav-link">
+              <i class="nav-icon fa fa-dashboard"></i>
+              <p>
+                Анализ
+                <i class="right fa fa-angle-left"></i>
+              </p>
+            </a>
+
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -193,9 +291,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Main Footer -->
   <footer class="main-footer">
     <!-- To the right -->
-    <div class="float-right d-none d-sm-inline">
-      Anything you want
-    </div>
+
     <!-- Default to the left -->
     <strong>Copyright &copy; 2019 СБМТА <a href="">НЧи Т.Сэлэнгэ</a></strong> 88877833
   </footer>
@@ -215,9 +311,38 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
 <script src="//jonthornton.github.io/jquery-timepicker/jquery.timepicker.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
 @yield('script')
+<script type="text/javascript">
+
+    $(document).ready(function(){
+
+        var rusImgLink = "{{URL::asset('/images/Rus.png')}}"
+        var monImgLink = "{{URL::asset('/images/Mon.png')}}"
+        var imgNavSel = $('#imgNavSel');
+        var imgNavRus = $('#imgNavRus');
+        var imgNavMon = $('#imgNavMon');
+        var spanNavSel = $('#lanNavSel');
+        imgNavRus.attr("src",rusImgLink);
+        imgNavMon.attr("src",monImgLink);
+
+
+        $( ".language" ).on( "click", function( event ) {
+
+            var currentId = $(this).attr('id');
+            if(currentId == "navRus") {
+                imgNavSel.attr("src",rusImgLink);
+
+            } else if (currentId == "navMon") {
+                imgNavSel.attr("src",monImgLink);
+
+            }
+
+        });
+    });
+</script>
 <script>
     function number_format(number, decimals, decPoint, thousandsSep){
         decimals = decimals || 0;

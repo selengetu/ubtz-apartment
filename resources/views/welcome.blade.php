@@ -22,47 +22,24 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card">
+                    <div class="card card-default">
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-md-9">
-                                    <h4 class="m-0">Их барилга хөрөнгө, оруулалтын хэлтэс</h4>
+                                    <h4 class="m-0">{{ trans('messages.ner') }}</h4>
                                 </div>
                                 <div class="col-md-3">
+                                    <i class="fa fa-calendar" aria-hidden="true">
                                     <?php
-                                    echo "Today is " . date("Y-m-d") . "<br>";
+                                    echo "" . date("Y-m-d") . "<br>";
 
                                     ?>
+                                    </i>
                                 </div>
                             </div>
 
                         </div>
-                        <!-- /.card-header -->
-                        <div class="card-body text-center">
-                            <div class="m-scrollable" data-scrollable="true" data-height="400" >
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <iframe
-                                                style="width:270px;font-size:11px;height:210px;border: none;overflow:hidden;"
-                                                src="//monxansh.appspot.com/xansh.html?currency=USD|EUR|JPY|GBP|RUB|CNY|KRW&conv_tool=1"></iframe>
-                                        <br>
-                                        <iframe id="forecast_embed" type="text/html" frameborder="0" height="310" width="370" src="http://tsag-agaar.gov.mn/embed/?name=292&color=228ad4&color2=2179b8&color3=ffffff&color4=ffffff&type=vertical&tdegree=cwidth=370"> </iframe>
-                                    </div>
-                                    <div class="col-md-1">
 
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <canvas id="bar-chart-grouped" width="600" height="450"></canvas>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <canvas id="pie-chart" width="800" height="450"></canvas>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <!-- /.card-body -->
                     </div>
                     <!-- /.card -->
                 </div>
@@ -80,108 +57,329 @@
             </div>
         </div>
     </section>
-    <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <form id="form1" action="post">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modal-title">Шинэ ажилтан бүртгэх цонх</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
 
-                        <div class="form-row">
+                <!-- /.col (LEFT) -->
+                <div class="col-md-4">
+                    <!-- LINE CHART -->
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">{{ trans('messages.medeelel') }}</h3>
 
-                            <div class="form-group col-md-4">
-                                <label for="inputAddress">Овог</label>
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <input type="hidden" class="form-control" id="id" name="id">
-                                <input type="text" class="form-control" id="lastname" name="lastname" placeholder="" maxlength="50">
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="inputAddress2">Нэр</label>
-                                <input type="text" class="form-control" id="firstname" name="firstname" placeholder="" maxlength="50">
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="inputCity">Албан тушаал</label>
 
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label for="inputAddress2">Хариуцах ажлын үндсэн чиглэл</label>
-                                <textarea class="form-control" rows="2" id="mainduty" name="mainduty"></textarea>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="inputAddress2">Ажилд орсон огноо</label>
-                                <input class="form-control form-control-inline input-medium date-picker" name="date1" id="date1"
-                                       size="16" type="text" value="" required>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="inputCity">Ажлаас гарсан огноо</label>
-                                <input class="form-control form-control-inline input-medium date-picker" name="date2" id="date2"
-                                       size="16" type="text" value="" required>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart">
+                                <iframe
+                                        style="width:270px;font-size:11px;height:250px;border: none;overflow:hidden;"
+                                        src="//monxansh.appspot.com/xansh.html?currency=USD|EUR|JPY|GBP|RUB|CNY|KRW&conv_tool=1"></iframe>
+                                <br>
+                                <iframe id="forecast_embed" type="text/html" frameborder="0" height="280" width="370" src="http://tsag-agaar.gov.mn/embed/?name=292&color=228ad4&color2=2179b8&color3=ffffff&color4=ffffff&type=vertical&tdegree=cwidth=370"> </iframe>
+
+
                             </div>
                         </div>
+                        <!-- /.card-body -->
+                    </div>
+
+                    <!-- /.card -->
+
+                </div>
+                <div class="col-md-8">
+                    <!-- LINE CHART -->
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">{{ trans('messages.uzuulelt') }}</h3>
 
 
-                    </div>
-                    <div class="modal-footer">
-                        <div class="col-md-5">
-                            <button type="button" class="btn btn-danger delete">Устгах</button>
                         </div>
-                        <div class="col-md-7" style="display: inline-block; text-align: right;" >
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Хаах</button>
-                            <button type="submit" class="btn btn-primary">Хадгалах</button>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <canvas id="piechart" width="800" height="450"></canvas>
+                                    <br><br>
+                                    <canvas id="visitors-chart" width="800" height="450"></canvas>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <canvas id="percentchart" width="800" height="450"></canvas>
+                                    <br><br>
+                                    <canvas id="detailchart" width="800" height="450"></canvas>
+
+
+                                </div>
+                            </div>
+
                         </div>
+
+                        <!-- /.card-body -->
                     </div>
-                </form>
+
+                    <!-- /.card -->
+
+                </div>
+                <!-- /.col (RIGHT) -->
             </div>
-        </div>
-    </div>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+        <div>
+        </div></section>
 @endsection
 
 @section('script')
+
+    <?php
+    $stack = array();
+    $stackValue = array();
+    $stackValue2 = array();
+    $depname = array();
+    $percent = array();
+    $depaname = array();
+    $rpercent = array();
+    $exec = array();
+    $execplan = array();
+    $execestim= array();
+
+    foreach($t as $wag)
+
+    {array_push($stack,$wag->department_name); array_push($stackValue,$wag->plan);array_push($stackValue2,$wag->budget);
+        ;array_push($percent,$wag->estimation); array_push($rpercent,$wag->rpercent);array_push($depaname,$wag->department_id);}
+
+
+    ?>
+
+
     <script>
-        new Chart(document.getElementById("bar-chart-grouped"), {
+
+
+    $(function () {
+        'use strict'
+
+        var ticksStyle = {
+            fontColor: '#495057',
+            fontStyle: 'bold',
+            autoSkip: false
+        }
+
+        var mode = 'index'
+        var intersect = true
+
+
+        var zuuchName = <?php echo json_encode($stack); ?>;
+        var depaname = <?php echo json_encode($depaname); ?>;
+        var zuuchQnt = <?php echo json_encode($stackValue); ?>;
+        var zuuchQnt2 = <?php echo json_encode($stackValue2); ?>;
+        var percent = <?php echo json_encode($percent); ?>;
+        var salesChart = $('#visitors-chart')
+        var myChart = new Chart(salesChart, {
             type: 'bar',
+            scaleOverride : true,
+            scaleSteps : 10,
+            scaleStepWidth : 50,
+            scaleStartValue : 0,
             data: {
-                labels: ["1900", "1950", "1999", "2050"],
-                datasets: [
+                labels:  zuuchName,
+                id:depaname,
+                datasets: [{
+                    backgroundColor: '#007bff',
+                    borderColor: '#007bff',
+                    data: zuuchQnt
+                },
                     {
-                        label: "Africa",
-                        backgroundColor: "#3e95cd",
-                        data: [133,221,783,2478]
-                    }, {
-                        label: "Europe",
-                        backgroundColor: "#8e5ea2",
-                        data: [408,547,675,734]
-                    }
+                        backgroundColor: '#ff8400',
+                        borderColor: '#ff8400',
+                        data: zuuchQnt2
+                    },
                 ]
             },
             options: {
-                title: {
-                    display: true,
-                    text: 'Population growth (millions)'
+                maintainAspectRatio: true,
+
+                legend: {
+                    display: false
+                },
+
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        ticks: ticksStyle
+                    }],
+                    yAxes: [
+                        {
+                            ticks: {
+                                callback: function(label, index, labels) {
+                                    return label/1000+' мян';
+                                }
+                            },
+                            scaleLabel: {
+                                display: true,
+                                labelString: '1мян = 1000'
+                            }
+                        }
+                    ]
+                },
+
+            }
+        })
+
+        $("#visitors-chart").click(function(e) {
+            var activePoints = myChart.getElementAtEvent(e);
+            if(activePoints.length > 0)
+            {
+                //get the internal index of slice in pie chart
+                var clickedElementindex = activePoints[0]["_index"];
+
+                //get specific label by index
+                var label = myChart.data.labels[clickedElementindex];
+
+                //get value by index
+                var value = myChart.data.id[clickedElementindex];
+                console.log(value);
+                drawchart(value);
+                /* other stuff that requires slice's label and value */
+
+            }
+
+        });
+
+        function drawchart($id) {
+            var plans=[];
+            var est=[];
+            var exec=[];
+            $.get('chartfill/'+$id,function(data){
+                $.each(data,function(i,qwe){
+
+                    plans.push(qwe.plan);
+                    est.push(qwe.estimation);
+                    exec.push(qwe.executor_abbr);
+
+                });
+
+                var $salesChartt = $('#detailchart')
+                var detailchart = new Chart($salesChartt, {
+                    type: 'bar',
+                    scaleSteps: 10,
+                    scaleStepWidth: 50,
+                    scaleStartValue: 0,
+                    data: {
+                        labels: exec,
+                        datasets: [
+                            {
+                            backgroundColor: '#007bff',
+                            borderColor: '#007bff',
+                            data: plans
+                            },
+                            {
+                                backgroundColor: '#ff8400',
+                                borderColor: '#ff8400',
+                                data:est
+                            },
+                        ]
+                    },
+                    options: {
+                        maintainAspectRatio: true,
+                        legend: {
+                            display: false
+                        },
+                        scales: {
+                            xAxes: [{
+                                display: true,
+                                ticks: ticksStyle
+                            }],
+                            yAxes: [
+                                {
+
+                                }
+                            ]
+                        }
+                    }
+                })
+
+            });
+        }
+
+
+        var $visitorsChart = $('#percentchart')
+        var stack = <?php echo json_encode($stack); ?>;
+        var stackValue = <?php echo json_encode($rpercent); ?>;
+        var visitorsChart = new Chart($visitorsChart, {
+            data: {
+                labels: stack,
+                datasets: [{
+                    type: 'line',
+                    data: stackValue,
+                    backgroundColor: 'transparent',
+                    borderColor: '#007bff',
+                    pointBorderColor: '#007bff',
+                    pointBackgroundColor: '#007bff',
+                    fill: false
+                },
+                ]
+            },
+            options: {
+                maintainAspectRatio: true,
+                legend: {
+                    display: false
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: $.extend({
+                            beginAtZero: true,
+                            suggestedMax: 120
+                        }, ticksStyle)
+                    }],
+                    xAxes: [{
+                        display: true,
+                        gridLines: {
+                            display: false
+                        },
+                        ticks: ticksStyle
+                    }]
                 }
             }
-        });
-        new Chart(document.getElementById("pie-chart"), {
+        })
+        var dynamicColors = function() {
+            var r = Math.floor(Math.random() * 255);
+            var g = Math.floor(Math.random() * 255);
+            var b = Math.floor(Math.random() * 255);
+            return "rgb(" + r + "," + g + "," + b + ")";
+        };
+
+        new Chart(document.getElementById("piechart"), {
             type: 'pie',
             data: {
-                labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+                labels: stack,
                 datasets: [{
-                    label: "Population (millions)",
-                    backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-                    data: [2478,5267,734,784,433]
+                    label: "Албаны нэр",
+                    backgroundColor:  ["#63b598", "#ce7d78", "#ea9e70", "#a48a9e", "#c6e1e8", "#648177" ,"#0d5ac1" ,
+                        "#f205e6" ,"#1c0365" ,"#14a9ad" ,"#4ca2f9" ,"#a4e43f" ,"#d298e2" ,"#6119d0",
+                        "#d2737d" ,"#c0a43c" ,"#f2510e" ,"#651be6" ,"#79806e" ,"#61da5e" ,"#cd2f00" ,
+                        "#9348af" ,"#01ac53" ,"#c5a4fb" ,"#996635","#b11573" ,"#4bb473" ,"#75d89e" ,
+                        "#2f3f94" ,"#2f7b99" ,"#da967d" ,"#34891f" ,"#b0d87b" ,"#ca4751" ,"#7e50a8" ,
+                        "#c4d647" ,"#e0eeb8" ,"#11dec1" ,"#289812" ,"#566ca0" ,"#ffdbe1" ,"#2f1179" ,
+                        "#935b6d" ,"#916988" ,"#513d98" ,"#aead3a", "#9e6d71", "#4b5bdc", "#0cd36d",
+                        "#250662", "#cb5bea", "#228916", "#ac3e1b", "#df514a", "#539397", "#880977",
+                        "#f697c1", "#ba96ce", "#679c9d", "#c6c42c", "#5d2c52", "#48b41b", "#e1cf3b",
+                        "#5be4f0", "#57c4d8", "#a4d17a", "#225b8", "#be608b", "#96b00c", "#088baf",
+                        "#f158bf", "#e145ba", "#ee91e3", "#05d371", "#5426e0", "#4834d0", "#802234",
+                        "#6749e8", "#0971f0", "#8fb413", "#b2b4f0", "#c3c89d", "#c9a941", "#41d158",
+                        "#fb21a3", "#51aed9", "#5bb32d", "#807fb", "#21538e", "#89d534", "#d36647",
+                        "#7fb411", "#0023b8", "#3b8c2a", "#986b53", "#f50422", "#983f7a", "#ea24a3",
+                        "#79352c", "#521250", "#c79ed2", "#d6dd92", "#e33e52", "#b2be57", "#fa06ec"],
+                    data: zuuchQnt2
                 }]
             },
             options: {
                 title: {
                     display: true,
-                    text: 'Predicted world population (millions) in 2050'
+                    text: 'Гүйцэтгэлийн үнийн дүнгээр авч үзвэл'
                 }
             }
         });
-    </script>
+    })
+
+</script>
+
 @endsection

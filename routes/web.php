@@ -11,9 +11,12 @@
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::group(['middleware' => 'locale'], function () {
+    Route::get('/', 'HomeController@index')->name('home');
 
-Auth::routes();
+    Auth::routes();
+
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -30,7 +33,7 @@ Route::match(['get', 'post'],'/barilga', 'BarilgaController@index')->name('baril
 Route::post('/addproject','BarilgaController@store');
 Route::get('/project/delete/{id}', 'BarilgaController@destroy');
 Route::post('/updateproject','BarilgaController@update');
-
+Route::post('/approveproj','BarilgaController@approve');
 Route::get('/projectfill/{id?}',function($id = 0){
     $dt=DB::table('V_PROJECT')->where('project_id','=',$id)->get();
     return $dt;
@@ -39,6 +42,7 @@ Route::get('/process', 'ProcessController@index')->name('process');
 Route::post('/addprocess','ProcessController@store');
 Route::get('/process/delete/{id}/{id1}', 'ProcessController@destroy');
 Route::post('/updateprocess','ProcessController@update');
+Route::post('/approveproc','ProcessController@approve');
 Route::get('/processfill/{id?}',function($id = 0){
     $dt=App\Process::where('process_id','=',$id)->get();
     return $dt;
@@ -109,5 +113,36 @@ Route::get('/projecttypefill/{id?}',function($id = 0){
     $dt=App\Projecttype::where('project_type_id','=',$id)->get();
     return $dt;
 });
-Route::get('image-upload', 'ImageUploadController@imageUpload')->name('image.upload');
-Route::post('image-upload', 'ImageUploadController@imageUploadPost')->name('image.upload.post');
+Route::match(['get', 'post'],'/main', 'TailanController@index')->name('main');
+Route::match(['get', 'post'],'/time', 'TailanController@time')->name('time');
+Route::get('/analyse', 'TailanController@analyse')->name('analyse');
+Route::post('/searchanalyse', 'TailanController@analyse')->name('searchanalyse');
+Route::match(['get', 'post'],'/album', 'TailanController@album')->name('album');
+
+Route::get('/profile', 'UserController@index')->name('profile');
+Route::post('/changePassword','UserController@postCredentials');
+Route::get('/getexec/{id?}',function($id = 0){
+    if ($id == 3)
+    {
+        $dt=DB::table('CONST_EXECUTOR')
+            ->where('is_ubtz','=',0)->orderby('executor_name')->get();
+        return $dt;
+
+    } else{
+        $dt=DB::table('CONST_EXECUTOR')
+            ->where('is_ubtz','=',1)->orderby('executor_name')->get();
+        return $dt;
+    }
+
+});
+
+
+Route::get('/chartfill/{id?}',function($id = 0){
+    $dt=DB::table('V_TAILAN_PROJ_CHILD')->where('department_id','=',$id)->get();
+    return $dt;
+});
+Route::get('setlocale/{locale}',function($locale){
+    Session::put('locale', $locale);
+    return redirect()->route('home');
+});
+});
