@@ -13,7 +13,7 @@
 
         <div class="container-fluid">
             <div class="row">
-                <nav>
+                <nav style="width:500px">
                     <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                         <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">{{ trans('messages.ajil') }}</a>
                         <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">{{ trans('messages.guitsetgel') }}</a>
@@ -203,21 +203,7 @@
                                                 <td>{{$projects->firstname}}</td>
                                                 <td width="45px">{{$projects->start_date}}
                                                 <td>{{$projects->end_date}}
-                                                <td @if($projects->state_id==2)
-                                                    bgcolor="#ff8c00";
-                                                    @elseif($projects->state_id==1)
-                                                    bgcolor="yellow";
-                                                    @elseif($projects->state_id==3)
-                                                    bgcolor="green";
-                                                    @elseif($projects->state_id==4)
-                                                    bgcolor="lightgreen";
-                                                    @elseif($projects->state_id==5)
-                                                    bgcolor="#8a2be2";
-                                                    @elseif($projects->state_id==6)
-                                                    bgcolor="blue";
-                                                    @else
-                                                    bgcolor="red";
-                                                        @endif
+                                                <td 10
                                                 >
                                                     <font  @if($projects->state_id==1)
                                                            color="black"; @else color="white"; @endif >{{$projects->state_name_mn}}</font></td>

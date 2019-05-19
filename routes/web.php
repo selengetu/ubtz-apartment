@@ -115,6 +115,7 @@ Route::get('/projecttypefill/{id?}',function($id = 0){
 });
 Route::match(['get', 'post'],'/main', 'TailanController@index')->name('main');
 Route::match(['get', 'post'],'/time', 'TailanController@time')->name('time');
+Route::match(['get', 'post'],'/geree', 'TailanController@geree')->name('geree');
 Route::get('/analyse', 'TailanController@analyse')->name('analyse');
 Route::post('/searchanalyse', 'TailanController@analyse')->name('searchanalyse');
 Route::match(['get', 'post'],'/album', 'TailanController@album')->name('album');

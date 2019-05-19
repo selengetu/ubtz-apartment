@@ -277,8 +277,96 @@ order by u.report_rowno");
             $gproject_id = Session::get('gproject_id');
         }
         $data= Request::input('gproject_id');
-        $project =DB::select("select  * from V_PROJECT t  where 1=1 and t.method_code=3 " .$query. " order by project_id");
+        $project =DB::select("select  * from V_PROJECT t  where 1=1 " .$query. " order by project_id");
         return view('tailan.time')->with(['sstate_id'=>$sstate_id,'srespondent_emp_id'=>$srespondent_emp_id,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'sprojecttype'=>$sprojecttype,'gproject_id'=>$gproject_id,'data'=>$data,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype]);
+    }
+    public function geree()
+    {
+        $query = "";
+        $state = State::orderby('state_name_mn')->get();
+        $method = Method::orderby('method_name')->get();
+        $projecttype = Projecttype::orderby('project_type_name_mn')->get();
+        $constructor = Constructor::orderby('department_abbr')->get();
+        $executor = Executor::orderby('executor_abbr')->get();
+
+        $employee =DB::select('select  * from V_CONST_EMPLOYEE t where t.is_engineer=1 order by firstname');
+
+        $sstate_id= Input::get('sstate_id');
+        $sexecutor = Input::get('sexecutor_id');
+        $sconstructor = Input::get('sconstructor_id');
+        $srespondent_emp_id = Input::get('srespondent_emp_id');
+        $sprojecttype= Input::get('sproject_type');
+        $startdate= Input::get('date1');
+        $enddate = Input::get('date2');
+
+        if ($startdate !=0 && $startdate && $enddate !=0 && $enddate !=NULL) {
+            $query.=" where start_date between '".$startdate."' and '".$enddate." 23:59:59'";
+
+        }
+        else
+        {
+            $query.=" ";
+
+        }
+        if ($sprojecttype!=NULL && $sprojecttype !=0) {
+            $query.=" and project_type = '".$sprojecttype."'";
+
+        }
+        else
+        {
+            $sprojecttype=0;
+            $query.=" ";
+
+
+        }
+        if ($sexecutor!=NULL && $sexecutor !=0) {
+            $query.=" and executor_id = '".$sexecutor."'";
+
+        }
+        else
+        {
+            $sexecutor=0;
+            $query.=" ";
+
+        }
+        if ($sconstructor!=NULL && $sconstructor !=0) {
+            $query.=" and department_id = '".$sconstructor."'";
+
+        }
+        else
+        {
+            $sconstructor=0;
+            $query.=" ";
+
+        }
+
+        if ($srespondent_emp_id!=NULL && $srespondent_emp_id !=0) {
+            $query.=" and respondent_emp_id = '".$srespondent_emp_id."'";
+
+        }
+        else
+        {
+            $srespondent_emp_id=0;
+            $query.=" ";
+
+        }
+        if ($sstate_id!=NULL && $sstate_id !=0) {
+            $query.=" and state_id = '".$sstate_id."'";
+
+        }
+        else
+        {
+            $sstate_id=0;
+            $query.=" ";
+
+        }
+        $gproject_id = 0;
+        if( Session::has('gproject_id') ) {
+            $gproject_id = Session::get('gproject_id');
+        }
+        $data= Request::input('gproject_id');
+        $project =DB::select("select  * from V_PROJECT t  where 1=1 and t.method_code=3 " .$query. " order by project_id");
+        return view('tailan.geree')->with(['sstate_id'=>$sstate_id,'srespondent_emp_id'=>$srespondent_emp_id,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'sprojecttype'=>$sprojecttype,'gproject_id'=>$gproject_id,'data'=>$data,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype]);
     }
     public function analyse()
     {
