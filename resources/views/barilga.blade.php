@@ -477,13 +477,30 @@
                                 <input type="text" class="form-control money" id="plan" name="plan" placeholder="" maxlength="14">
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputZip">{{ trans('messages.uunees') }}</label>
-                                <input type="text" class="form-control money" id="economic" name="economic" maxlength="14">
-                            </div>
-                            <div class="form-group col-md-6">
                                 <label for="inputCity">{{ trans('messages.tusuv') }}</label>
                                 <input type="text" class="form-control money" id="estimation" name="estimation" maxlength="14">
                             </div>
+                            <div class="form-group col-md-3">
+                                <label for="inputAddress2">{{ trans('messages.tuluwluguu1') }}</label>
+                                <input type="text" class="form-control money" id="plan1" name="plan1" placeholder="" maxlength="14">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="inputAddress2">{{ trans('messages.tuluwluguu2') }}</label>
+                                <input type="text" class="form-control money" id="plan2" name="plan2" placeholder="" maxlength="14">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="inputAddress2">{{ trans('messages.tuluwluguu3') }}</label>
+                                <input type="text" class="form-control money" id="plan3" name="plan3" placeholder="" maxlength="14">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="inputAddress2">{{ trans('messages.tuluwluguu4') }}</label>
+                                <input type="text" class="form-control money" id="plan4" name="plan4" placeholder="" maxlength="14">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputZip">{{ trans('messages.uunees') }}</label>
+                                <input type="text" class="form-control money" id="economic" name="economic" maxlength="14">
+                            </div>
+
                             <div class="form-group col-md-6" id="gereediv" style="display: none;">
                                 <label for="inputCity">{{ trans('messages.geree') }}</label>
                                 <input type="text" class="form-control money" id="geree" name="geree" maxlength="14">

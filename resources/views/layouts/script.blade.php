@@ -1,16 +1,5 @@
 <script type="text/javascript">
-    $('#gstate_id').change(function() {
-        var item=$(this).val();
 
-      if(item == 1 || item == 2){
-          $('#gpercentdiv').show();
-          $('#gdatediv').show();
-      }
-      else{
-          $('#gpercentdiv').hide();
-          $('#gdatediv').hide();
-      }
-    });
     $('#estate_id').change(function() {
         var item=$(this).val();
 
