@@ -203,8 +203,21 @@
                                                 <td>{{$projects->firstname}}</td>
                                                 <td width="45px">{{$projects->start_date}}
                                                 <td>{{$projects->end_date}}
-                                                <td 10
-                                                >
+                                                <td @if($projects->state_id==2)
+                                                    bgcolor="#ff8c00";
+                                                    @elseif($projects->state_id==1)
+                                                    bgcolor="yellow";
+                                                    @elseif($projects->state_id==3)
+                                                    bgcolor="green";
+                                                    @elseif($projects->state_id==4)
+                                                    bgcolor="lightgreen";
+                                                    @elseif($projects->state_id==5)
+                                                    bgcolor="#8a2be2";
+                                                    @elseif($projects->state_id==6)
+                                                    bgcolor="blue";
+                                                    @else
+                                                    bgcolor="red";
+                                                @endif>
                                                     <font  @if($projects->state_id==1)
                                                            color="black"; @else color="white"; @endif >{{$projects->state_name_mn}}</font></td>
                                                 <td>
