@@ -108,7 +108,7 @@
 
                                         </div>
                                         <div class="col-md-2">
-                                            <button class="btn btn-info" id="export-btn" onclick="tableToExcel('example', 'Export HTML Table to Excel')"><i class="fa fa-print" aria-hidden="true"></i> Excel</button>
+                                            <button class="btn btn-info" id="export-btn" onclick="tableToExcel('example2', 'Export HTML Table to Excel')"><i class="fa fa-print" aria-hidden="true"></i> Excel</button>
 
 
                                         </div>
@@ -232,6 +232,129 @@
                                                     ?></b></td>
                                             <td></td>
                                             <td></td>
+                                            <td></td>
+                                            <td></td>
+
+
+
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <table class="table table-bordered" id="example2" border="1" style="font-size:12px; width:100%; border-collapse: collapse;">
+                                        <thead>
+                                        <?php $sum_plan = 0 ?>
+                                        <?php $sum_estimation = 0 ?>
+                                        <?php $sum_bud = 0 ?>
+                                        <?php $sum_economic = 0 ?>
+                                        <?php $sum_percent = 0 ?>
+                                        <?php $sum_bud = 0 ?>
+                                        <?php $sum_diff = 0 ?>
+                                        <?php $sum_runningtotal = 0 ?>
+                                        <tr role="row">
+                                            <th>#</th>
+                                            <th>{{ trans('messages.zahialagch') }}</th>
+                                            <th>{{ trans('messages.guitsetgegch') }}</th>
+                                            <th>{{ trans('messages.ajliinner') }}</th>
+                                            <th>{{ trans('messages.tuluwluguu') }}</th>
+
+                                            <th>{{ trans('messages.tusuv') }}</th>
+                                            <th>{{ trans('messages.enesar') }} {{$month -1 }} {{ trans('messages.ussundun1') }} </th>
+                                            <th>{{ trans('messages.enesar') }} {{$month}} {{ trans('messages.ussundun1') }} </th>
+                                            <th>{{ trans('messages.ussundun') }} {{$month}} {{ trans('messages.ussundun1') }} </th>
+                                            <th>{{ trans('messages.uunees') }}</th>
+                                            <th>{{ trans('messages.biylelt') }}</th>
+                                            <th>{{ trans('messages.hariutsagch') }}</th>
+                                            <th>{{ trans('messages.tailbar') }}</th>
+
+
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php $no = 1; ?>
+                                        @foreach($project as $projects)
+                                            <tr >
+                                                <td>{{$no}}</td>
+                                                <td>{{$projects->department_name}}</td>
+                                                <td>{{$projects->executor_abbr}}</td>
+                                                <td>{{$projects->project_name}}</td>
+                                                <td><?php
+                                                    echo number_format($projects->plan)."<br>";
+                                                    ?></td>
+                                                <?php $sum_plan += ($projects->plan) ?>
+                                                <td><?php
+                                                    echo number_format($projects->estimation)."<br>";
+                                                    ?></td>
+                                                <?php $sum_estimation += ($projects->estimation) ?>
+                                                <td><?php
+                                                    echo number_format($projects->diff)."<br>";
+                                                    ?></td>
+                                                <?php $sum_diff += ($projects->diff) ?>
+                                                <td><?php
+                                                    echo number_format($projects->bud)."<br>";
+                                                    ?></td>
+                                                <?php $sum_bud += ($projects->bud) ?>
+                                                <td><?php
+                                                    echo number_format($projects->runningtotal)."<br>";
+                                                    ?></td>
+                                                <?php $sum_runningtotal += ($projects->runningtotal) ?>
+
+                                                <td><?php
+                                                    echo number_format($projects->economic)."<br>";
+                                                    ?></td>
+                                                <?php $sum_economic += ($projects->economic) ?>
+                                                <td>{{$projects->percent}}%</td>
+                                                <?php $sum_percent += ($projects->percent) ?>
+                                                <td>{{$projects->firstname}}</td>
+
+                                                <td @if($projects->state_id==2)
+                                                    bgcolor="#ff8c00";
+                                                    @elseif($projects->state_id==1)
+                                                    bgcolor="yellow";
+                                                    @elseif($projects->state_id==3)
+                                                    bgcolor="green";
+                                                    @elseif($projects->state_id==4)
+                                                    bgcolor="lightgreen";
+                                                    @elseif($projects->state_id==5)
+                                                    bgcolor="#8a2be2";
+                                                    @elseif($projects->state_id==6)
+                                                    bgcolor="blue";
+                                                    @else
+                                                    bgcolor="red";
+                                                    @endif
+                                                    color="white"
+                                                >    <font  @if($projects->state_id==1)
+                                                            color="black"; @else color="white"; @endif >{{$projects->state_name_mn}}</font></td></td>
+
+                                            </tr>
+                                            <?php $no++; ?>
+                                        @endforeach
+                                        <tr>
+
+                                            <td><b>Нийт</b></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><b><?php
+                                                    echo number_format($sum_plan)."<br>";
+                                                    ?></b></td>
+                                            <td><b><?php
+                                                    echo number_format($sum_estimation)."<br>";
+                                                    ?></b></td>
+                                            <td><b><?php
+                                                    echo number_format($sum_diff)."<br>";
+                                                    ?></b></td>
+                                            <td><b><?php
+                                                    echo number_format($sum_bud)."<br>";
+                                                    ?></b></td>
+                                            <td><b><?php
+                                                    echo number_format($sum_runningtotal)."<br>";
+                                                    ?></b></td>
+                                            <td><b><?php
+                                                    echo number_format($sum_economic)."<br>";
+                                                    ?></b></td>
+                                            <td><b><?php
+                                                    echo $no-1 == 0 ? 0 : number_format($sum_percent/($no-1),2,",",".")."%<br>";
+                                                    ?></b></td>
                                             <td></td>
                                             <td></td>
 
