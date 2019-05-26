@@ -111,7 +111,7 @@ class ProcessController extends Controller
 
             $plan = DB::select("select plan from V_PROJECT t where t.project_id=".$data."");
 
-            if($plan[0]->estimation != 0) {
+            if($plan[0]->plan != 0) {
 
                 $budget = DB::select("select sum(t.budget) as totalbudget from V_PROCESS t where t.project_id=" . $data . "");
                 $percent = ($budget[0]->totalbudget / $plan[0]->plan) * 100;
@@ -142,9 +142,9 @@ class ProcessController extends Controller
 
         $state = DB::select("select t.state_id as state from V_PROCESS t where t.process_id = (select max(v.process_id) from V_PROCESS v where v.project_id=".$data.")");
         if(Request::input('gmonth') == 1 or Request::input('gmonth') == 2 or Request::input('gmonth') == 3) {
-            $budget = DB::select("select sum(t.budget) as totalbudget from V_PROCESS t where t.project_id=" . $data . " and t.month =>1 and t.month <4");
-            $plan = DB::select("select plan1 from V_PROJECT t where t.project_id=".$data."");
-            $percent = ($budget[0]->totalbudget / $plan[0]->plan1) * 100;
+            $budget = DB::select("select sum(t.budget) as totalbudget from V_PROCESS t where t.project_id=" . $data . "");
+            $plan = DB::select("select plan from V_PROJECT t where t.project_id=".$data."");
+            $percent = ($budget[0]->totalbudget / $plan[0]->plan) * 100;
         }
 
         if(Request::input('gpercent') == NULL){

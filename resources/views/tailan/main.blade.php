@@ -240,7 +240,7 @@
                                         </tr>
                                         </tbody>
                                     </table>
-                                    <table class="table table-bordered" id="example2" border="1" style="font-size:12px; width:100%; border-collapse: collapse;">
+                                    <table class="table table-bordered" id="example2" border="1" style="font-size:12px; width:100%; border-collapse: collapse; display: none">
                                         <thead>
                                         <?php $sum_plan = 0 ?>
                                         <?php $sum_estimation = 0 ?>

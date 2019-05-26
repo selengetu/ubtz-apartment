@@ -115,6 +115,16 @@
                                                 @endforeach
                                             </select>
                                         </div>
+                                        <div class="form-group col-md-2">
+                                            <label for="inputAddress2">{{ trans('messages.ehelsen') }}</label>
+                                            <input class="form-control form-control-inline input-medium date-picker" name="sdate1" id="sdate1"
+                                                   size="16" type="text" value="">
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label for="inputCity">{{ trans('messages.duussan') }}</label>
+                                            <input class="form-control form-control-inline input-medium date-picker" name="sdate2" id="sdate2"
+                                                   size="16" type="text" value="">
+                                        </div>
                                         <div class="form-group col-md-1">
                                             <label for="inputZip"><span>.</span></label><br>
                                             <button type="submit" class="btn btn-primary form-control" >{{ trans('messages.haih') }}</button>

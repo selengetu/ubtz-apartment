@@ -151,7 +151,7 @@
     foreach($t as $wag)
 
     {array_push($stack,$wag->department_name); array_push($stackValue,$wag->plan);array_push($stackValue2,$wag->budget);
-        ;array_push($percent,$wag->estimation); array_push($rpercent,$wag->rpercent);array_push($depaname,$wag->department_id);}
+        ;array_push($percent,$wag->estimation); array_push($rpercent,$wag->ajliintoo);array_push($depaname,$wag->department_id);}
 
 
     ?>

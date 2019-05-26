@@ -51,11 +51,11 @@ class BarilgaController extends Controller
         $srespondent_emp_id = Input::get('srespondent_emp_id');
         $sprojecttype= Input::get('sproject_type');
 
-        $startdate= Input::get('date1');
-        $enddate = Input::get('date2');
+        $startdate= Input::get('sdate1');
+        $enddate = Input::get('sdate2');
 
         if ($startdate !=0 && $startdate && $enddate !=0 && $enddate !=NULL) {
-            $query.=" where start_date between '".$startdate."' and '".$enddate." 23:59:59'";
+            $query.="and end_date between '".$startdate."' and '".$enddate." 23:59:59'";
 
         }
         else
