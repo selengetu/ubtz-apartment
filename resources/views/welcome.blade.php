@@ -160,6 +160,7 @@
     <script>
         $(document).ready(function(){
             drawchart(1);
+            var detailchart=null;
             function drawchart($id) {
                 var plans=[];
                 var est=[];
@@ -173,8 +174,11 @@
 
                     });
 
-                    var $salesChartt = $('#detailchart')
-                    var detailchart = new Chart($salesChartt, {
+                    if(detailchart!=null){
+                        detailchart.destroy();
+                    }
+                    var salesChartt = $('#detailchart')
+                    detailchart = new Chart(salesChartt, {
                         type: 'bar',
                         scaleSteps: 10,
                         scaleStepWidth: 50,
@@ -183,6 +187,7 @@
                             labels: exec,
                             datasets: [
                                 {
+
                                     backgroundColor: '#007bff',
                                     borderColor: '#007bff',
                                     data: plans
@@ -285,9 +290,11 @@
                 })
 
                 $("#visitors-chart").click(function(e) {
+
                     var activePoints = myChart.getElementAtEvent(e);
                     if(activePoints.length > 0)
                     {
+
                         //get the internal index of slice in pie chart
                         var clickedElementindex = activePoints[0]["_index"];
 
@@ -296,7 +303,7 @@
 
                         //get value by index
                         var value = myChart.data.id[clickedElementindex];
-                        console.log(value);
+
                         drawchart(value);
                         /* other stuff that requires slice's label and value */
 
