@@ -84,7 +84,7 @@
                                             <thead>
                                             <tr role="row">
                                                 <th>#</th>
-                                                <th>{{ trans('messages.zahialagch') }}</th>
+                                                <th>{{ trans('messages.alba') }}</th>
                                                 <th>{{ trans('messages.tuluwluguu') }}</th>
                                                 <th>{{ trans('messages.guitsetgel') }}</th>
                                                 <th>{{ trans('messages.biylelt') }}</th>
@@ -97,7 +97,7 @@
                                             <tbody>
                                             <?php $no = 1; ?>
                                             @foreach($t as $projects)
-                                                <tr >
+                                                <tr id="{{$projects->department_id}}">
                                                     <td>{{$no}}</td>
                                                     <td>{{$projects->department_name}}</td>
 
@@ -191,6 +191,9 @@
 
     ?>
     <script>
+        $("#example").delegate('tr', 'click', function() {
+            alert($(this).attr('id'));
+        });
         $(function () {
             'use strict'
 
@@ -229,6 +232,10 @@
                     ]
                 },
                 options: {
+                    title: {
+                        display: true,
+                        text: 'Албадын төлөвлөгөө болон гүйцэтгэл'
+                    },
                     maintainAspectRatio: true,
                     legend: {
                         display: false
@@ -259,6 +266,10 @@
                     ]
                 },
                 options: {
+                    title: {
+                        display: true,
+                        text: 'Гүйцэтгэлийн хувиар авч үзвэл'
+                    },
                     maintainAspectRatio: true,
                     legend: {
                         display: false

@@ -42,18 +42,7 @@
 
 
                                             </div>
-                                            <div class="form-group col-md-2">
 
-                                                <label for="inputEmail4">{{ trans('messages.ajliinturul') }}</label>
-                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                <select class="form-control select2" id="sproject_type" name="sproject_type" >
-                                                    <option value= "0">Бүгд</option>
-                                                    @foreach($projecttype as $projecttypes)
-                                                        <option value= "{{$projecttypes->project_type_id}}">{{$projecttypes->project_type_name_mn}}</option>
-                                                    @endforeach
-                                                </select>
-
-                                            </div>
                                             <div class="form-group col-md-2">
 
                                                 <label for="inputEmail4">{{ trans('messages.ajliintuluv') }}</label>

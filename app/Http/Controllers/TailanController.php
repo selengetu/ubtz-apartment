@@ -15,6 +15,7 @@ use DB;
 use Carbon\Carbon;
 use Auth;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Route;
 class TailanController extends Controller
 {
     /**
@@ -34,6 +35,14 @@ class TailanController extends Controller
      */
     public function index()
     {
+        if(Route::getFacadeRoot()->current()->uri()== 'main'){
+            $sprojecttype=1;
+        }
+
+        if(Route::getFacadeRoot()->current()->uri()== 'mainib'){
+            $sprojecttype=2;
+        }
+
         $date = "";
         $date1 = "";
         $query = "";
@@ -49,7 +58,6 @@ class TailanController extends Controller
         $sexecutor = Input::get('sexecutor_id');
         $sconstructor = Input::get('sconstructor_id');
         $srespondent_emp_id = Input::get('srespondent_emp_id');
-        $sprojecttype= Input::get('sproject_type');
         $startdate= Input::get('date1');
         $enddate = Input::get('date2');
 
@@ -391,9 +399,10 @@ order by u.report_rowno");
 
         }
 
-        $t =DB::select("select d.department_name, t.department_id,d.department_type, sum(t.plan) as plan, sum(t.budget) as budget, sum(t.estimation) as estimation,  (sum(t.estimation)/sum(t.plan))*100 as percent, sum(t.estimation)-sum(t.plan) as diff, (sum(t.percent)/count(percent)) as rpercent , count(t.project_id) as ajliintoo from V_PROJECT t , CONST_DEPARTMENT d
+        $t =DB::select("select d.department_name, t.department_id,d.department_type, sum(t.plan) as plan, sum(t.budget) as budget, sum(t.estimation) as estimation,  (sum(t.budget)/sum(t.plan))*100 as percent, sum(t.budget)-sum(t.plan) as diff, (sum(t.percent)/count(percent)) as rpercent , count(t.project_id) as ajliintoo from V_PROJECT t , CONST_DEPARTMENT d
 where t.department_id=d.department_id ".$query. "
-group by d.department_type,t.department_id, d.department_name");
+group by d.department_type,t.department_id, d.department_name
+order by t.department_id");
         $t2 =DB::select("select d.executor_name, t.department_child,d.executor_abbr,t.department_id, t.department_name ,sum(t.plan) as plan, sum(t.budget) as budget, sum(t.estimation) as estimation,  (sum(t.estimation)/sum(t.plan))*100 as percent, sum(t.estimation)-sum(t.plan) as diff,count(t.executor_id)as niit, (sum(t.percent)/count(t.percent)) as rpercent from V_PROJECT t , CONST_EXECUTOR d
 where t.department_child=d.executor_id and t.department_id=2 ".$query. "
 group by t.department_child,d.executor_name,t.department_id, t.department_name,d.executor_abbr");

@@ -27,9 +27,11 @@ Route::get('/collapsemenu/{val}', function($val){
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/blank', 'HomeController@blank')->name('blank');
-Route::get('/zaswar', 'ZaswarController@index')->name('zaswar');
 
-Route::match(['get', 'post'],'/barilga', 'BarilgaController@index')->name('barilga');
+
+
+Route::match(['get', 'post'],'/barilga/', 'BarilgaController@index')->name('barilga');
+Route::match(['get', 'post'],'/zaswar', 'BarilgaController@index')->name('zaswar');
 Route::post('/addproject','BarilgaController@store');
 Route::get('/project/delete/{id}', 'BarilgaController@destroy');
 Route::post('/updateproject','BarilgaController@update');
@@ -38,6 +40,10 @@ Route::get('/projectfill/{id?}',function($id = 0){
     $dt=DB::table('V_PROJECT')->where('project_id','=',$id)->get();
     return $dt;
 });
+
+Route::match(['get', 'post'],'/zaswar', 'BarilgaController@index')->name('zaswar');
+
+
 Route::get('/process', 'ProcessController@index')->name('process');
 Route::post('/addprocess','ProcessController@store');
 Route::get('/process/delete/{id}/{id1}', 'ProcessController@destroy');
@@ -114,6 +120,7 @@ Route::get('/projecttypefill/{id?}',function($id = 0){
     return $dt;
 });
 Route::match(['get', 'post'],'/main', 'TailanController@index')->name('main');
+Route::match(['get', 'post'],'/mainib', 'TailanController@index')->name('mainib');
 Route::match(['get', 'post'],'/time', 'TailanController@time')->name('time');
 Route::match(['get', 'post'],'/geree', 'TailanController@geree')->name('geree');
 Route::get('/analyse', 'TailanController@analyse')->name('analyse');

@@ -98,15 +98,15 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <canvas id="piechart" width="800" height="450"></canvas>
+                                    <canvas id="piechart" width="800" height="600"></canvas>
                                     <br><br>
-                                    <canvas id="visitors-chart" width="800" height="450"></canvas>
+                                    <canvas id="visitors-chart" width="800" height="600"></canvas>
 
                                 </div>
                                 <div class="col-md-6">
-                                    <canvas id="percentchart" width="800" height="450"></canvas>
+                                    <canvas id="percentchart" width="800" height="600"></canvas>
                                     <br><br>
-                                    <canvas id="detailchart" width="800" height="450"></canvas>
+                                    <canvas id="detailchart" width="800" height="600"></canvas>
 
 
                                 </div>
@@ -151,7 +151,7 @@
     foreach($t as $wag)
 
     {array_push($stack,$wag->department_name); array_push($stackValue,$wag->plan);array_push($stackValue2,$wag->budget);
-        ;array_push($percent,$wag->estimation); array_push($rpercent,$wag->ajliintoo);array_push($depaname,$wag->department_id);}
+        ;array_push($percent,$wag->estimation); array_push($rpercent,$wag->rpercent);array_push($depaname,$wag->department_id);}
 
 
     ?>
@@ -200,6 +200,10 @@
                             ]
                         },
                         options: {
+                            title: {
+                                display: true,
+                                text: 'Албадын нэгжийн төлөвлөгөө болон гүйцэтгэл'
+                            },
                             maintainAspectRatio: true,
                             legend: {
                                 display: false
@@ -211,7 +215,15 @@
                                 }],
                                 yAxes: [
                                     {
-
+                                        ticks: {
+                                            callback: function(label, index, labels) {
+                                                return label/1000+' мян';
+                                            }
+                                        },
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: '1мян = 1000'
+                                        }
                                     }
                                 ]
                             }
@@ -260,6 +272,10 @@
                         ]
                     },
                     options: {
+                        title: {
+                            display: true,
+                            text: 'Албадын төлөвлөгөө болон гүйцэтгэл'
+                        },
                         maintainAspectRatio: true,
 
                         legend: {
@@ -332,6 +348,10 @@
                         ]
                     },
                     options: {
+                        title: {
+                            display: true,
+                            text: 'Гүйцэтгэлийн хувиар авч үзвэл'
+                        },
                         maintainAspectRatio: true,
                         legend: {
                             display: false
@@ -340,7 +360,7 @@
                             yAxes: [{
                                 ticks: $.extend({
                                     beginAtZero: true,
-                                    suggestedMax: 120
+                                    suggestedMax: 100
                                 }, ticksStyle)
                             }],
                             xAxes: [{
@@ -349,7 +369,8 @@
                                     display: false
                                 },
                                 ticks: ticksStyle
-                            }]
+                            }],
+
                         }
                     }
                 })

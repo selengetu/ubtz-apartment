@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Projecttype;
+use Illuminate\Support\Facades\Route;
 use Carbon\Carbon;
 use Request;
 use Session;
@@ -11,6 +12,7 @@ use App\Executor;
 use App\Employee;
 use App\Project;
 use App\Method;
+
 use App\Process;
 use App\State;
 use DB;
@@ -35,6 +37,15 @@ class BarilgaController extends Controller
      */
     public function index()
     {
+          if(Route::getFacadeRoot()->current()->uri()== 'zaswar'){
+              $sprojecttype=1;
+          }
+
+              if(Route::getFacadeRoot()->current()->uri()== 'barilga'){
+                  $sprojecttype=2;
+              }
+
+
         $query = "";
         $state = State::orderby('state_name_mn')->get();
         $method = Method::orderby('method_name')->get();
@@ -49,7 +60,7 @@ class BarilgaController extends Controller
         $sexecutor = Input::get('sexecutor_id');
         $sconstructor = Input::get('sconstructor_id');
         $srespondent_emp_id = Input::get('srespondent_emp_id');
-        $sprojecttype= Input::get('sproject_type');
+
 
         $startdate= Input::get('sdate1');
         $enddate = Input::get('sdate2');
@@ -69,7 +80,7 @@ class BarilgaController extends Controller
         }
         else
         {
-            $sprojecttype=0;
+
             $query.=" ";
 
 
@@ -134,6 +145,7 @@ class BarilgaController extends Controller
             $query.=" ";
 
         }
+
         $gproject_id = 0;
         if( Session::has('gproject_id') ) {
             $gproject_id = Session::get('gproject_id');
@@ -145,12 +157,20 @@ class BarilgaController extends Controller
     public function store()
     {
 
+        if(Request::input('proj')== 1){
+            $sprojecttype=1;
+        }
+
+        if(Request::input('proj')==2){
+            $sprojecttype=2;
+        }
         $project = new Project;
         $project->plan_year = 2019;
         $project->project_name = Request::input('project_name');
         $project->project_name_ru = Request::input('project_name_ru');
         $project->budget =preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('budget'));
         $project->contract =preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('geree'));
+        $project->contractnum =Request::input('gereenum');
         $project->estimation = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('estimation'));
         $project->plan = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan'));
         $project->plan1 = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan1'));
@@ -158,7 +178,7 @@ class BarilgaController extends Controller
         $project->plan3 = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan3'));
         $project->plan4 = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan4'));
         $project->department_id = Request::input('constructor_id');
-        $project->project_type = Request::input('project_type');
+        $project->project_type =$sprojecttype;
         if (Request::input('respondent_emp_id')!=NULL && Request::input('respondent_emp_id') !=0) {
 
             $project->respondent_emp_id = Request::input('respondent_emp_id');
@@ -179,36 +199,33 @@ class BarilgaController extends Controller
         $project->description = Request::input('description');
         $project->start_date = Request::input('date1');
         $project->end_date = Request::input('date2');
+        $project->prstart_date = Request::input('prdate1');
+        $project->prend_date = Request::input('prdate2');
         $project->save();
-        $LastInsertId = $project->project_id;
-        $LastEmpId = $project->respondent_emp_id;
 
-        $month = DB::select("select  * from CONST_MONTH");
-        foreach ($month as $row) {
-            $process = new Process;
-            $process ->project_id = $LastInsertId;
-            $process ->budget = 0;
-            $process ->month =$row->month_num;
-            $process ->register_date = Carbon::now();
-            $process ->respondent_emp_id = $LastEmpId;
-            $process ->year = Carbon::now()->format('Y');
-            $process ->state_id = 15;
-            $process->save();
-
-        }
         activity()->performedOn($project)->log('Project added');
-        return Redirect('barilga');
+        if(Request::input('proj')== 1){
+            return Redirect('zaswar');
+        }
+
+        if(Request::input('proj')== 2){
+            return Redirect('barilga');
+        }
+
+
     }
 
     public function update(Request $request)
     {
+
         $project = DB::table('Project')
             ->where('project_id', Request::input('id'))
             ->update(['plan_year' => Request::input('plan_year'),'project_name' => Request::input('project_name'),'project_name_ru' => Request::input('project_name_ru'),'budget' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('budget'))
-               , 'contract' =>preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('geree')) ,'estimation' =>preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('estimation')) ,'plan' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan')),'department_id' => Request::input('constructor_id'),'department_child' => Request::input('childabbr_id')
+               , 'contract' =>preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('geree')) ,'contract_num' =>Request::input('gereenum') ,'estimation' =>preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('estimation')) ,
+                'plan' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan')),'department_id' => Request::input('constructor_id'),'department_child' => Request::input('childabbr_id')
                 ,'plan1' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan1')),'plan2' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan2'))
                 ,'plan3' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan3')),'plan4' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan4'))
-                ,'project_type' => Request::input('project_type'),'start_date' => Request::input('date1'),'end_date' => Request::input('date2')
+                ,'project_type' => Request::input('project_type'),'start_date' => Request::input('date1'),'end_date' => Request::input('date2'),'prstart_date' => Request::input('prdate1'),'prend_date' => Request::input('prdate2')
                 ,'method_code' => Request::input('method_code'),'percent' => Request::input('percent'),'executor_id' => Request::input('executor_id')
                 ,'project_name_ru' => Request::input('project_name_ru'),'economic' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('economic')),'description' => Request::input('description')]);
 
@@ -233,7 +250,15 @@ class BarilgaController extends Controller
             }
         }
 
-        return Redirect('barilga');
+        if(Request::input('proj')== 1){
+            return Redirect('zaswar');
+        }
+
+        if(Request::input('proj')== 2){
+            return Redirect('barilga');
+        }
+
+
     }
     public function approve(Request $request)
     {
@@ -241,12 +266,24 @@ class BarilgaController extends Controller
             ->where('project_id', Request::input('id'))
             ->update(['is_approved' =>1,'approved_date' =>Carbon::today(),'approved_id' =>Auth::user()->id]);
         activity()->performedOn($project)->log('Project approved');
-        return Redirect('barilga');
+        if(Request::input('proj')== 1){
+            return Redirect('zaswar');
+        }
+
+        if(Request::input('proj')== 2){
+            return Redirect('barilga');
+        }
     }
     public function destroy($id)
     {
         Project::where('project_id', '=', $id)->delete();
         Process::where('project_id', '=', $id)->delete();
-        return Redirect('barilga');
+        if(Request::input('proj')== 1){
+            return Redirect('zaswar');
+        }
+
+        if(Request::input('proj')== 2){
+            return Redirect('barilga');
+        }
     }
 }

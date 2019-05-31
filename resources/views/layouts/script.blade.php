@@ -43,9 +43,14 @@
                 $('#estimation').val(qwe.estimation);
                 $('#plan').val(qwe.plan);
                 $('#geree').val(qwe.contract);
+                $('#gereenum').val(qwe.contract_num);
                 $('#constructor_id').val(qwe.department_id);
                 $('#childabbr_id').val(qwe.department_child);
+                if(qwe.method_code == 3){
+                    checkgeree(3);
+                }
                 $('#project_type').val(qwe.project_type);
+
                 $('#respondent_emp_id').val(qwe.respondent_emp_id);
                 $('#state_id').val(qwe.state_id);
                 $('#method_code').val(qwe.method_code);
@@ -55,6 +60,8 @@
                 $('#description').val(qwe.description);
                 $('#date1').val(qwe.start_date);
                 $('#date2').val(qwe.end_date);
+                $('#prdate1').val(qwe.prstart_date);
+                $('#prdate2').val(qwe.prend_date);
             });
 
         });
@@ -90,6 +97,7 @@
         var itag = $id;
         $.get('projectfill/'+itag,function(data){
             $("#projecttable tbody").empty();
+            $("#plantable tbody").empty();
             $.each(data,function(i,qwe){
                 var $type;
                 var $type1;
@@ -158,7 +166,16 @@
                     "</tr>";
 
                 $("#projecttable tbody").append(sHtml);
+                var sHtml1 = " <tr class='table-row' >" +
 
+                    "   <td class='m1'>" + qwe.plancomma + "</td>" +
+                    "   <td class='m1'>" + qwe.plan1comma + "</td>" +
+                    "   <td class='m1'>" + qwe.plan2comma + "</td>" +
+                    "   <td class='m1'>" + qwe.plan3comma + "</td>" +
+                    "   <td class='m1'>" + qwe.plan4comma + "</td>" +
+                    "</tr>";
+
+                $("#plantable tbody").append(sHtml1);
 
             });
 
@@ -169,8 +186,13 @@
         getproject(itag);
         getproc(itag);
     });
+    $('#nav-home-tab').on('click',function(){
+        $( "#nav-profile-tab" ).addClass("disabled disabledTab");
+    });
     function processClicked( processid) {
+        $( "#nav-profile-tab" ).removeClass("disabled disabledTab");
         $('#nav-profile-tab').trigger('click');
+
         getproject(processid);
         getproc(processid);
     }

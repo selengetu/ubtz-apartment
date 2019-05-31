@@ -161,10 +161,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <li class="nav-item">
                       <a href="{{ route('barilga') }}" class="nav-link">
                         <i class="fa fa-circle-o nav-icon"></i>
-                        <p>ИБИЗ</p>
+                        <p>Их барилга</p>
                       </a>
                     </li>
-
+              <li class="nav-item">
+                <a href="{{ route('zaswar') }}" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Их засвар</p>
+                </a>
+              </li>
             </ul>
           </li>
           @if ( Auth::user()->id ==47 or Auth::user()->id ==46)
@@ -237,7 +242,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <li class="nav-item">
                 <a href="{{ route('main') }}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>ИБИЗ</p>
+                  <p>Их засвар</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('mainib') }}" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Их барилга</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -246,12 +257,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <p>{{ trans('messages.tailangeree') }}</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="{{ route('time') }}" class="nav-link">
-                  <i class="fa fa-circle-o nav-icon"></i>
-                  <p>  {{ trans('messages.tailantime') }}</p>
-                </a>
-              </li>
+
               <li class="nav-item">
                 <a href="{{ route('album') }}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>

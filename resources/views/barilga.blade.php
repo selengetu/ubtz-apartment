@@ -16,7 +16,7 @@
                 <nav style="width:500px">
                     <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                         <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">{{ trans('messages.ajil') }}</a>
-                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">{{ trans('messages.guitsetgel') }}</a>
+                        <a class="nav-item nav-link disabled disabledTab" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">{{ trans('messages.guitsetgel') }}</a>
 
                     </div>
                 </nav>
@@ -37,9 +37,9 @@
                             <form method="post" action="barilga">
                                 <div class="col-md-12" data-scrollable="true" data-height="400" >
                                     <div class="row">
+
                                         <div class="form-group col-md-2">
 
-                                            <label for="inputEmail4">{{ trans('messages.ajliinturul') }}</label>
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                             <input type="hidden" name="projtype" id="projtype" value="{{$sprojecttype}}">
                                             <input type="hidden" name="stat" id="stat" value="{{$sstate_id}}">
@@ -48,16 +48,6 @@
                                             <input type="hidden" name="resp" id="resp" value="{{$srespondent_emp_id}}">
                                             <input type="hidden" name="meth" id="meth" value="{{$smethod_id}}">
                                             <input type="hidden" name="child" id="child" value="{{$schildabbr}}">
-                                            <select class="form-control select2" id="sproject_type" name="sproject_type">
-                                                <option value= "0">Бүгд</option>
-                                                @foreach($projecttype as $projecttypes)
-                                                    <option value= "{{$projecttypes->project_type_id}}">{{$projecttypes->project_type_name_mn}}</option>
-                                                @endforeach
-                                            </select>
-
-                                        </div>
-                                        <div class="form-group col-md-2">
-
                                             <label for="inputEmail4">{{ trans('messages.ajliinarga') }}</label>
                                             <select class="form-control select2" id="smethod_id" name="smethod_id" >
                                                 <option value= "0">Бүгд</option>
@@ -304,6 +294,7 @@
                             <div class="card-body text-center" >
                                 <div class="col-md-12">
                                     <div class="table-responsive" data-scrollable="true" data-height="400" >
+
                                         <table class="table table-striped table-bordered" id="projecttable">
                                             <thead>
                                             <tr role="row">
@@ -327,6 +318,23 @@
 
                                             </tbody>
                                         </table>
+                                        <br>
+                                        <table class="table table-striped table-bordered" id="plantable">
+                                            <thead>
+                                            <tr role="row">
+
+                                                <th>Жилийн төлөвлөгөө</th>
+                                                <th>1-р улирал</th>
+                                                <th>2-р улирал</th>
+                                                <th>3-р улирал</th>
+                                                <th>4-р улирал</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            </tbody>
+                                        </table>
+
                                     </div>
                                 </div>
 
@@ -416,6 +424,7 @@
                             <div class="form-group col-md-4">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <input type="hidden" class="form-control" id="id" name="id">
+                                <input type="hidden" class="form-control" id="proj" name="proj" value="{{$sprojecttype}}">
                                 <label for="inputEmail4">{{ trans('messages.ajliinturul') }}</label>
                                 <select class="form-control select2" id="project_type" name="project_type">
                                     @foreach($projecttype as $projecttypes)
@@ -511,14 +520,29 @@
                                 <input type="text" class="form-control money" id="economic" name="economic" maxlength="14">
                             </div>
 
-                            <div class="form-group col-md-6" id="gereediv" style="display: none;">
-                                <label for="inputCity">{{ trans('messages.geree') }}</label>
-                                <input type="text" class="form-control money" id="geree" name="geree" maxlength="14">
-                            </div>
+
                         </div>
 
-
-
+                    <div class="form-row" id="gereediv" style="display: none;">
+                        <div class="form-group col-md-6">
+                            <label for="inputCity">Гэрээний дугаар</label>
+                            <input type="text" class="form-control" id="gereenum" name="gereenum" maxlength="14">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputCity">{{ trans('messages.geree') }}</label>
+                            <input type="text" class="form-control money" id="geree" name="geree" maxlength="14">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputAddress2">Эхэлсэн</label>
+                            <input class="form-control form-control-inline input-medium date-picker" name="prdate1" id="prdate1"
+                                   size="16" type="text" value="">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputCity">Дууссан</label>
+                            <input class="form-control form-control-inline input-medium date-picker" name="prdate2" id="prdate2"
+                                   size="16" type="text" value="">
+                        </div>
+                    </div>
                         <div class="form-row">
 
 
@@ -672,20 +696,20 @@
             </div>
         </div>
     </div>
-
+<style>
+    .disabledTab {
+        pointer-events: none;
+    }
+</style>
 @endsection
 
 @section('script')
     <script>
         $("#method_code").on('change', function() {
             var itag =$(this).val();
-            if(itag == 3){
+            checkgeree(itag);
 
-                $('#gereediv').show();
-                }
-            else{
-                $('#gereediv').hide();
-            }
+
             $.get('getexec/'+itag,function(data){
                 $('#executor_id').empty();
 
@@ -700,6 +724,15 @@
             });
 
         });
+        function checkgeree($id) {
+            if($id == 3){
+
+                $('#gereediv').show();
+            }
+            else{
+                $('#gereediv').hide();
+            }
+        }
 
         $(function() {
             $("#date1").datepicker({
@@ -721,7 +754,7 @@
         });
         $(document).ready(function() {
             $('#smethod_id').val($('#meth').val()).trigger('change');
-            $('#sproject_type').val($('#projtype').val()).trigger('change');
+
             $('#sexecutor_id').val($('#exec').val()).trigger('change');
             $('#srespondent_emp_id').val($('#resp').val()).trigger('change');
             $('#sconstructor_id').val($('#construc').val()).trigger('change');
@@ -732,6 +765,7 @@
                 processClicked( gproject_id);
             }
             $('#example').dataTable( {
+                stateSave: true,
                 dom: 'Bfrtip',
                 buttons: [
                     'copy', 'excel', 'pdf'

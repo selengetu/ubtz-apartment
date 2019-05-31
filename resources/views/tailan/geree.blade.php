@@ -32,7 +32,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body text-center">
-                            <form method="post" action="time">
+                            <form method="post" action="geree">
                                 <div class="col-md-12" data-scrollable="true" data-height="400" >
                                     <div class="row" >
                                         <div class="form-group col-md-2">
@@ -137,13 +137,15 @@
                                         <th>{{ trans('messages.zahialagch') }}</th>
                                         <th>{{ trans('messages.guitsetgegch') }}</th>
                                         <th width="400px">{{ trans('messages.ajliinner') }}</th>
+                                        <th width="400px">{{ trans('messages.gereenum') }}</th>
                                         <th >{{ trans('messages.tuluwluguu') }}</th>
 
                                         <th>{{ trans('messages.geree') }}</th>
-
-                                        <th>{{ trans('messages.biylelt') }}</th>
-                                        <th style="width: 55px">{{ trans('messages.graphduusah') }}</th>
-                                        <th style="width: 55px">{{ trans('messages.duusah') }}</th>
+                                        <th>{{ trans('messages.guitsetgel') }}</th>
+                                        <th style="width: 55px">{{ trans('messages.tuvehleh') }}</th>
+                                        <th style="width: 55px">{{ trans('messages.tuvduusah') }}</th>
+                                        <th style="width: 55px">{{ trans('messages.ehelsen') }}</th>
+                                        <th style="width: 55px">{{ trans('messages.duussan') }}</th>
                                         <th style="width: 55px">{{ trans('messages.hetersen') }}</th>
                                         <th>{{ trans('messages.tailbar') }}</th>
 
@@ -157,17 +159,21 @@
                                             <td>{{$projects->department_name}}</td>
                                             <td>{{$projects->executor_abbr}}</td>
                                             <td>{{$projects->project_name}}</td>
+                                            <td>{{$projects->contract_num}}</td>
                                             <td><?php
                                                 echo number_format($projects->plan)."<br>";
                                                 ?></td>
 
                                             <td><?php
-                                                echo number_format($projects->budget)."<br>";
+                                                echo number_format($projects->contract)."<br>";
                                                 ?></td>
 
-                                            <td>{{$projects->percent}}%</td>
-
+                                            <td><?php
+                                                echo number_format($projects->budget)."<br>";
+                                                ?></td>
+                                            <td>{{$projects->start_date}} </td>
                                             <td>{{$projects->end_date}} </td>
+                                            <td>{{$projects->prstart_date}} </td>
                                             <td width="45px">{{$projects->prend_date}}</td>
                                             <td> {{$projects->diff}}</td>
                                             <td @if($projects->state_id==2)
@@ -247,7 +253,7 @@
 
                     exclude: ".noExl",
                     name: "Worksheet Name",
-                    filename: "SomeFile" //do not include extension
+                    filename: "Gereetailan" //do not include extension
                 });
             });
 
