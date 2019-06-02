@@ -378,6 +378,14 @@ order by u.report_rowno");
     }
     public function analyse()
     {
+
+        if(Route::getFacadeRoot()->current()->uri()== 'analyseib'){
+            $sprojecttype=2;
+        }
+
+        if(Route::getFacadeRoot()->current()->uri()== 'analyseiz'){
+            $sprojecttype=1;
+        }
         $query = "";
         $state = State::orderby('state_name_mn')->get();
         $method = Method::orderby('method_name')->get();
@@ -387,7 +395,7 @@ order by u.report_rowno");
 
         $employee =DB::select('select  * from V_CONST_EMPLOYEE t where t.is_engineer=1 order by firstname');
 
-        $sprojecttype= Input::get('sproject_type');
+
 
         if ($sprojecttype!=NULL && $sprojecttype !=0) {
             $query.=" and project_type = ".$sprojecttype."";
@@ -408,7 +416,7 @@ where t.department_child=d.executor_id and t.department_id=2 ".$query. "
 group by t.department_child,d.executor_name,t.department_id, t.department_name,d.executor_abbr");
 
         $project =DB::select("select  * from V_PROJECT t  order by project_id");
-        return view('tailan.analyse')->with(['t'=>$t,'t2'=>$t2,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype]);
+        return view('tailan.analyse')->with(['t'=>$t,'t2'=>$t2,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype,'sprojecttype'=>$sprojecttype]);
 
 
     }

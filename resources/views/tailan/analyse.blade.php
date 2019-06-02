@@ -32,7 +32,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body text-center">
-                            <form method="post" action="searchanalyse">
+                            <form method="post" action="analyse">
                                 <div class="col-md-12" data-scrollable="true" data-height="400" >
                                     <div class="row" >
                                         <div class="form-group col-md-2">
@@ -82,6 +82,11 @@
                                     <div class="col-md-7">
                                         <table class="table table-bordered" id="example" border="1" style="font-size:12px; width:100%; border-collapse: collapse;">
                                             <thead>
+                                            <?php $sum_plan = 0 ?>
+                                            <?php $sum_percent = 0 ?>
+                                            <?php $sum_rpercent = 0 ?>
+                                            <?php $sum_budget = 0 ?>
+                                            <?php $sum_diff = 0 ?>
                                             <tr role="row">
                                                 <th>#</th>
                                                 <th>{{ trans('messages.alba') }}</th>
@@ -104,22 +109,40 @@
                                                     <td><?php
                                                         echo number_format($projects->plan)."<br>";
                                                         ?></td>
-
+                                                    <?php $sum_plan += ($projects->plan) ?>
                                                     <td><?php
                                                         echo number_format($projects->budget)."<br>";
                                                         ?></td>
-
+                                                    <?php $sum_budget += ($projects->budget) ?>
 
                                                     <td>{{number_format($projects->percent, 2, ',', '.')}}%</td>
+                                                    <?php $sum_percent += ($projects->percent) ?>
                                                     <td><?php
                                                         echo number_format($projects->diff)."<br>";
                                                         ?></td>
+                                                    <?php $sum_diff += ($projects->diff) ?>
                                                     <td>{{number_format($projects->rpercent, 2, ',', '.')}}%</td>
-
+                                                    <?php $sum_rpercent += ($projects->rpercent) ?>
 
                                                 </tr>
                                                 <?php $no++; ?>
                                             @endforeach
+                                            <tr>
+                                                <td colspan="2">Нийт </td>
+                                                <td><?php
+                                                    echo number_format($sum_plan)."<br>";
+                                                    ?></td>
+                                                <td><?php
+                                                    echo number_format($sum_budget)."<br>";
+                                                    ?></td>
+                                                <td>{{number_format($sum_percent/($no-1), 2, ',', '.')}}%</td>
+                                                <td><?php
+                                                    echo number_format($sum_diff)."<br>";
+                                                    ?></td>
+
+                                                <td>{{number_format($sum_rpercent/($no-1), 2, ',', '.')}}%</td>
+
+                                            </tr>
                                             </tbody>
                                         </table>
                                     </div>

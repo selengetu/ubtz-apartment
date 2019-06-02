@@ -57,6 +57,18 @@ Route::get('/projectprocessfill/{id?}',function($id = 0){
     $dt=DB::table('V_PROCESS')->where('project_id','=',$id)->orderby('process_id')->get();
     return $dt;
 });
+
+    Route::get('/hurungu', 'HurunguController@index')->name('hurungu');
+    Route::get('hurungu/delete/{id}', 'HurunguController@destroy');
+    Route::post('/addhurungu','HurunguController@store');
+    Route::post('/updatehurungu','HurunguController@update');
+    Route::get('/hurungufill/{id?}',function($id = 0){
+        $dt=App\Hurungu::where('hurungu_id','=',$id)->get();
+        return $dt;
+    });
+
+
+
 Route::get('/executor', 'ExecutorController@index')->name('executor');
 Route::get('/executor/delete/{id}', 'ExecutorController@destroy');
 Route::post('/addexecutor','ExecutorController@store');
@@ -121,10 +133,12 @@ Route::get('/projecttypefill/{id?}',function($id = 0){
 });
 Route::match(['get', 'post'],'/main', 'TailanController@index')->name('main');
 Route::match(['get', 'post'],'/mainib', 'TailanController@index')->name('mainib');
+Route::match(['get', 'post'],'/mainhu', 'TailanController@hurungu')->name('mainhu');
 Route::match(['get', 'post'],'/time', 'TailanController@time')->name('time');
 Route::match(['get', 'post'],'/geree', 'TailanController@geree')->name('geree');
-Route::get('/analyse', 'TailanController@analyse')->name('analyse');
-Route::post('/searchanalyse', 'TailanController@analyse')->name('searchanalyse');
+Route::match(['get', 'post'],'/analyseib', 'TailanController@analyse')->name('analyseib');
+Route::match(['get', 'post'],'/analyseiz', 'TailanController@analyse')->name('analyseiz');
+Route::match(['get', 'post'],'/analysehu', 'TailanController@analysehu')->name('analysehu');
 Route::match(['get', 'post'],'/album', 'TailanController@album')->name('album');
 
 Route::get('/profile', 'UserController@index')->name('profile');

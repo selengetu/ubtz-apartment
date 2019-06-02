@@ -170,6 +170,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <p>Их засвар</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{ route('hurungu') }}" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Хөрөнгө оруулалт</p>
+                </a>
+              </li>
             </ul>
           </li>
           @if ( Auth::user()->id ==47 or Auth::user()->id ==46)
@@ -252,6 +258,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </a>
               </li>
               <li class="nav-item">
+                <a href="{{ route('mainhu') }}" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Хөрөнгө оруулалт</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="{{ route('geree') }}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>{{ trans('messages.tailangeree') }}</p>
@@ -268,14 +280,33 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </ul>
           </li>
           <li class="nav-item has-treeview">
-            <a href="{{ route('analyse') }}" class="nav-link">
+            <a href="" class="nav-link">
               <i class="nav-icon fa fa-dashboard"></i>
               <p>
                 Анализ
                 <i class="right fa fa-angle-left"></i>
               </p>
             </a>
-
+              <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                      <a href="{{ route('analyseiz') }}" class="nav-link">
+                          <i class="fa fa-circle-o nav-icon"></i>
+                          <p>Их засвар</p>
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="{{ route('analyseib') }}" class="nav-link">
+                          <i class="fa fa-circle-o nav-icon"></i>
+                          <p>Их барилга</p>
+                      </a>
+                  </li>
+                <li class="nav-item">
+                  <a href="{{ route('analysehu') }}" class="nav-link">
+                    <i class="fa fa-circle-o nav-icon"></i>
+                    <p>Хөрөнгө оруулалт</p>
+                  </a>
+                </li>
+              </ul>
           </li>
         </ul>
       </nav>
