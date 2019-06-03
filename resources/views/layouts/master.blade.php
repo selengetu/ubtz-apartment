@@ -171,7 +171,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('hurungu') }}" class="nav-link">
+                <a  class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>Хөрөнгө оруулалт</p>
                 </a>
@@ -258,7 +258,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('mainhu') }}" class="nav-link">
+                <a class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p>Хөрөнгө оруулалт</p>
                 </a>
@@ -301,7 +301,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       </a>
                   </li>
                 <li class="nav-item">
-                  <a href="{{ route('analysehu') }}" class="nav-link">
+                  <a  class="nav-link">
                     <i class="fa fa-circle-o nav-icon"></i>
                     <p>Хөрөнгө оруулалт</p>
                   </a>
