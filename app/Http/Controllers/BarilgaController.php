@@ -170,7 +170,7 @@ class BarilgaController extends Controller
         $project->project_name_ru = Request::input('project_name_ru');
         $project->budget =preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('budget'));
         $project->contract =preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('geree'));
-        $project->contractnum =Request::input('gereenum');
+        $project->contract_num =Request::input('gereenum');
         $project->estimation = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('estimation'));
         $project->plan = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan'));
         $project->plan1 = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan1'));
