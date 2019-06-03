@@ -600,12 +600,12 @@
                                 <input type="hidden" class="form-control" id="gprocess_id" name="gprocess_id">
                                 <input type="hidden" class="form-control" id="gproject_id" name="gproject_id">
                                 <label for="inputEmail4">{{ trans('messages.tootsoh') }}</label>
-                                <input type="text"  class="form-control year" id="gyear" name="gyear">
+                                <input type="text"  class="form-control year" id="gyear" name="gyear" required="true">
 
                             </div>
                             <div class="form-group col-md-2">
                                 <label for="inputEmail4">{{ trans('messages.sar') }}</label>
-                                <input type="text"  class="form-control month" id="gmonth" name="gmonth">
+                                <input type="text"  class="form-control month" id="gmonth" name="gmonth" required="true">
 
                             </div>
                             <div class="form-group col-md-4">
