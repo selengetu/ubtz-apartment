@@ -34,7 +34,7 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body text-center">
-                            <form method="post" action="barilga">
+                            <form method="post" @if($sprojecttype ==1 ) action="zaswar"  @elseif($sprojecttype ==2 ) action="barilga" @endif>
                                 <div class="col-md-12" data-scrollable="true" data-height="400" >
                                     <div class="row">
 
