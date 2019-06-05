@@ -117,8 +117,9 @@ class ProcessController extends Controller
                 $percent = ($budget[0]->totalbudget / $plan[0]->plan) * 100;
                 $process = DB::table('Project')
                     ->where('project_id', $data)
-                    ->update(['budget' => $budget[0]->totalbudget, 'state_id' => $states[0]->state, 'percent' => $percent, 'prend_date' => Request::input('gdate')]);
+                    ->update(['budget' => $budget[0]->totalbudget, 'percent' => $percent, 'prend_date' => Request::input('gdate')]);
             }
+
         }
         else{
             $st = DB::select("select t.state_id as state from V_PROCESS t where t.process_id = (select max(v.process_id) from V_PROCESS v where v.project_id=".$data.")");

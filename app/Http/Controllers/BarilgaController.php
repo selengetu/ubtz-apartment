@@ -220,7 +220,7 @@ class BarilgaController extends Controller
 
         $project = DB::table('Project')
             ->where('project_id', Request::input('id'))
-            ->update(['plan_year' => Request::input('plan_year'),'project_name' => Request::input('project_name'),'project_name_ru' => Request::input('project_name_ru'),'budget' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('budget'))
+            ->update(['plan_year' => Request::input('plan_year'),'project_name' => Request::input('project_name'),'project_name_ru' => Request::input('project_name_ru')
                , 'contract' =>preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('geree')) ,'contract_num' =>Request::input('gereenum') ,'estimation' =>preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('estimation')) ,
                 'plan' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan')),'department_id' => Request::input('constructor_id'),'department_child' => Request::input('childabbr_id')
                 ,'plan1' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan1')),'plan2' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan2'))
@@ -247,6 +247,12 @@ class BarilgaController extends Controller
                 $process = DB::table('Project')
                     ->where('project_id', $data)
                     ->update(['budget' => $budget[0]->totalbudget, 'state_id' => $state[0]->state, 'percent' => $percent]);
+            }
+            if ($state[0]->state != NULL && $state[0]->state != 0) {
+
+                $process = DB::table('Project')
+                    ->where('project_id', $data)
+                    ->update(['state_id' => $state[0]->state]);
             }
         }
 
