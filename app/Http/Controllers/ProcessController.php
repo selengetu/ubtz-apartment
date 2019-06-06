@@ -111,7 +111,7 @@ class ProcessController extends Controller
 
             $plan = DB::select("select plan from V_PROJECT t where t.project_id=".$data."");
 
-            if($plan[0]->plan != 0) {
+            if($plan[0]->plan != NULL) {
 
                 $budget = DB::select("select sum(t.budget) as totalbudget from V_PROCESS t where t.project_id=" . $data . "");
                 $percent = ($budget[0]->totalbudget / $plan[0]->plan) * 100;
@@ -119,16 +119,35 @@ class ProcessController extends Controller
                     ->where('project_id', $data)
                     ->update(['budget' => $budget[0]->totalbudget, 'percent' => $percent, 'prend_date' => Request::input('gdate')]);
             }
+            if($states != NULL){
+                $process = DB::table('Project')
+                    ->where('project_id',$data)
+                    ->update(['state_id' => $states[0]->state]);
+            }
 
         }
         else{
-            $st = DB::select("select t.state_id as state from V_PROCESS t where t.process_id = (select max(v.process_id) from V_PROCESS v where v.project_id=".$data.")");
+            $budget = DB::select("select sum(t.budget) as totalbudget from V_PROCESS t where t.project_id=" . $data . "");
+            if($states != NULL){
+                $process = DB::table('Project')
+                    ->where('project_id',$data)
+                    ->update(['budget' => $budget[0]->totalbudget,'state_id' => $states[0]->state,'percent' => Request::input('gpercent'),'prend_date' => Request::input('gdate')]);
+            }
 
-            $process = DB::table('Project')
-                ->where('project_id',$data)
-                ->update(['state_id' => $st[0]->state,'percent' => Request::input('gpercent')]);
+            if($states == NULL){
+                $process = DB::table('Project')
+                    ->where('project_id',$data)
+                    ->update(['budget' => $budget[0]->totalbudget,'percent' => Request::input('gpercent'),'prend_date' => Request::input('gdate')]);
+            }
+
         }
-        return redirect('barilga');
+        if(Request::input('proc')== 1){
+            return Redirect('zaswar');
+        }
+
+        if(Request::input('proc')== 2){
+            return Redirect('barilga');
+        }
 
 
     }
@@ -142,32 +161,42 @@ class ProcessController extends Controller
                 ,'description' => Request::input('gdescription'),'state_id' => Request::input('gstate_id')]);
 
         $state = DB::select("select t.state_id as state from V_PROCESS t where t.process_id = (select max(v.process_id) from V_PROCESS v where v.project_id=".$data.")");
-        if(Request::input('gmonth') == 1 or Request::input('gmonth') == 2 or Request::input('gmonth') == 3) {
+        $description = DB::select("select t.description as description from V_PROCESS t where t.process_id = (select max(v.process_id) from V_PROCESS v where v.project_id=".$data.")");
             $budget = DB::select("select sum(t.budget) as totalbudget from V_PROCESS t where t.project_id=" . $data . "");
             $plan = DB::select("select plan from V_PROJECT t where t.project_id=".$data."");
-            $percent = ($budget[0]->totalbudget / $plan[0]->plan) * 100;
-        }
+
+
 
         if(Request::input('gpercent') == NULL){
 
-            $plan = DB::select("select plan from V_PROJECT t where t.project_id=".$data."");
+            if($plan != NULL ) {
+                if ($plan[0]->plan != NULL) {
 
-            if($plan[0]->plan != NULL) {
-
-                $budget = DB::select("select sum(t.budget) as totalbudget from V_PROCESS t where t.project_id=" . $data . "");
-
-                $percent = ($budget[0]->totalbudget / $plan[0]->plan) * 100;
-                $process = DB::table('Project')
-                    ->where('project_id', $data)
-                    ->update(['budget' => $budget[0]->totalbudget, 'state_id' => $state[0]->state, 'percent' => $percent, 'prend_date' => Request::input('gdate')]);
+                    $percent = ($budget[0]->totalbudget / $plan[0]->plan) * 100;
+                    $process = DB::table('Project')
+                        ->where('project_id', $data)
+                        ->update(['budget' => $budget[0]->totalbudget, 'percent' => $percent]);
+                    if($state != NULL) {
+                        $process = DB::table('Project')
+                            ->where('project_id', $data)
+                            ->update(['state_id' => $state[0]->state,'description' => $description[0]->description]);
+                    }
+                }
             }
         }
         else{
-            $st = DB::select("select t.state_id as state from V_PROCESS t where t.process_id = (select max(v.process_id) from V_PROCESS v where v.project_id=".$data.")");
+            $budget = DB::select("select sum(t.budget) as totalbudget from V_PROCESS t where t.project_id=" . $data . "");
+            if($state != NULL){
+                $process = DB::table('Project')
+                    ->where('project_id',$data)
+                    ->update(['budget' => $budget[0]->totalbudget,'state_id' => $state[0]->state,'percent' => Request::input('gpercent'),'prend_date' => Request::input('gdate')]);
+            }
 
-            $process = DB::table('Project')
-                ->where('project_id',$data)
-                ->update(['state_id' => $st[0]->state,'percent' => Request::input('gpercent')]);
+            if($state == NULL){
+                $process = DB::table('Project')
+                    ->where('project_id',$data)
+                    ->update(['budget' => $budget[0]->totalbudget,'percent' => Request::input('gpercent'),'prend_date' => Request::input('gdate')]);
+            }
         }
        if (Request::hasFile('image')) {
 
@@ -206,21 +235,53 @@ class ProcessController extends Controller
                 ->update(['image_b' => $filenametostoreb , 'image_s' => $filenametostore]);
         }
         Session::flash('gproject_id',Request::input('gproject_id'));
-        return Redirect('barilga');
+        if(Request::input('proc')== 1){
+            return Redirect('zaswar');
+        }
+
+        if(Request::input('proc')== 2){
+            return Redirect('barilga');
+        }
     }
 
     public function destroy($id,$id1)
     {
+
         $data= $id1;
+
         Process::where('process_id', '=', $id)->delete();
         $state = DB::select("select t.state_id as state from V_PROCESS t where t.process_id = (select max(v.process_id) from V_PROCESS v where v.project_id=".$data.")");
-        $est = DB::select("select estimation from V_PROJECT t where t.project_id=".$data."");
+        $plan = DB::select("select plan from V_PROJECT t where t.project_id=".$data."");
 
         $budget = DB::select("select sum(t.budget) as totalbudget from V_PROCESS t where t.project_id=".$data."");
-        $percent=($budget[0]->totalbudget / $est[0]->estimation)*100;
-        $process = DB::table('Project')
-            ->where('project_id',$data)
-            ->update(['budget' => $budget[0]->totalbudget ,'state_id' => $state[0]->state,'percent' => $percent]);
+        $description = DB::select("select t.description as description from V_PROCESS t where t.process_id = (select max(v.process_id) from V_PROCESS v where v.project_id=".$data.")");
+
+        if($plan != NULL ) {
+            if ($plan[0]->plan != NULL) {
+                $percent=($budget[0]->totalbudget / $plan[0]->plan)*100;
+                $process = DB::table('Project')
+                    ->where('project_id', $data)
+                    ->update(['budget' => $budget[0]->totalbudget, 'percent' => $percent]);
+
+            }
+
+        }
+        if($state != NULL) {
+            $process = DB::table('Project')
+                ->where('project_id', $data)
+                ->update(['state_id' => $state[0]->state,'description' => $description[0]->description]);
+        }
+        if($state == NULL){
+            $process = DB::table('Project')
+                ->where('project_id', $data)
+                ->update(['state_id' => 15]);
+        }
+        if($budget[0]->totalbudget == NULL) {
+            $process = DB::table('Project')
+                ->where('project_id', $data)
+                ->update(['budget' => 0,'percent' => 0]);
+        }
+
         return Redirect('barilga');
     }
     public function approve(Request $request)
@@ -229,6 +290,12 @@ class ProcessController extends Controller
             ->where('process_id', Request::input('gprocess_id'))
             ->update(['is_approved' =>1,'approved_date' =>Carbon::today(),'approved_id' =>Auth::user()->id]);
 
-        return Redirect('barilga');
+        if(Request::input('proc')== 1){
+            return Redirect('zaswar');
+        }
+
+        if(Request::input('proc')== 2){
+            return Redirect('barilga');
+        }
     }
 }

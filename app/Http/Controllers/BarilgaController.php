@@ -218,9 +218,20 @@ class BarilgaController extends Controller
     public function update(Request $request)
     {
 
+        $schildabbr= Input::get('schildabbr_id');
+        $smethod_id= Input::get('smethod_id');
+        $sstate_id= Input::get('sstate_id');
+        $sexecutor = Input::get('sexecutor_id');
+        $sconstructor = Input::get('sconstructor_id');
+        $srespondent_emp_id = Input::get('srespondent_emp_id');
+
+
+        $startdate= Input::get('sdate1');
+        $enddate = Input::get('sdate2');
+
         $project = DB::table('Project')
             ->where('project_id', Request::input('id'))
-            ->update(['plan_year' => Request::input('plan_year'),'project_name' => Request::input('project_name'),'project_name_ru' => Request::input('project_name_ru')
+            ->update(['project_name' => Request::input('project_name'),'project_name_ru' => Request::input('project_name_ru')
                , 'contract' =>preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('geree')) ,'contract_num' =>Request::input('gereenum') ,'estimation' =>preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('estimation')) ,
                 'plan' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan')),'department_id' => Request::input('constructor_id'),'department_child' => Request::input('childabbr_id')
                 ,'plan1' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan1')),'plan2' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan2'))
@@ -241,20 +252,38 @@ class BarilgaController extends Controller
         $plan = DB::select("select plan from V_PROJECT t where t.project_id=".$data."");
 
         $budget = DB::select("select sum(t.budget) as totalbudget from V_PROCESS t where t.project_id=".$data."");
-        if($plan[0]->plan != 0) {
-            if ($budget[0]->totalbudget != NULL && $budget[0]->totalbudget != 0) {
-                $percent = ($budget[0]->totalbudget / $plan[0]->plan) * 100;
-                $process = DB::table('Project')
-                    ->where('project_id', $data)
-                    ->update(['budget' => $budget[0]->totalbudget, 'state_id' => $state[0]->state, 'percent' => $percent]);
-            }
-            if ($state[0]->state != NULL && $state[0]->state != 0) {
+        $state = DB::select("select t.state_id as state from V_PROCESS t where t.process_id = (select max(v.process_id) from V_PROCESS v where v.project_id=".$data.")");
+        $plan = DB::select("select plan from V_PROJECT t where t.project_id=".$data."");
 
+        $budget = DB::select("select sum(t.budget) as totalbudget from V_PROCESS t where t.project_id=".$data."");
+        $description = DB::select("select t.description as description from V_PROCESS t where t.process_id = (select max(v.process_id) from V_PROCESS v where v.project_id=".$data.")");
+
+        if($plan != NULL ) {
+            if ($plan[0]->plan != NULL) {
+                $percent=($budget[0]->totalbudget / $plan[0]->plan)*100;
                 $process = DB::table('Project')
                     ->where('project_id', $data)
-                    ->update(['state_id' => $state[0]->state]);
+                    ->update(['budget' => $budget[0]->totalbudget, 'percent' => $percent]);
+
             }
+
         }
+        if($state != NULL) {
+            $process = DB::table('Project')
+                ->where('project_id', $data)
+                ->update(['state_id' => $state[0]->state,'description' => $description[0]->description]);
+        }
+        if($state == NULL){
+            $process = DB::table('Project')
+                ->where('project_id', $data)
+                ->update(['state_id' => 15]);
+        }
+        if($budget[0]->totalbudget == NULL) {
+            $process = DB::table('Project')
+                ->where('project_id', $data)
+                ->update(['budget' => 0,'percent' => 0]);
+        }
+
 
         if(Request::input('proj')== 1){
             return Redirect('zaswar');

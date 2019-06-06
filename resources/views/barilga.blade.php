@@ -597,6 +597,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-2">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <input type="hidden" class="form-control" id="proc" name="proc" value="{{$sprojecttype}}">
                                 <input type="hidden" class="form-control" id="gprocess_id" name="gprocess_id">
                                 <input type="hidden" class="form-control" id="gproject_id" name="gproject_id">
                                 <label for="inputEmail4">{{ trans('messages.tootsoh') }}</label>
@@ -683,7 +684,6 @@
                     <div class="modal-footer">
                         <div class="col-md-5">
                             <button type="button" id="deleteproc" class="btn btn-danger delete">{{ trans('messages.ustgah') }}</button>
-                            <button type="button" id="approveproc" class="btn btn-info">{{ trans('messages.batal') }}</button>
                             <button type="submit" class="btn btn-primary" id="addprocessbutton">{{ trans('messages.hadgalah') }}</button>
                         </div>
                         <div class="col-md-7" style="display: inline-block; text-align: right;" >
