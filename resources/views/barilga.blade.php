@@ -411,7 +411,7 @@
     <div class="modal fade " id="exampleModal" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <form id="form1" method="post" action="addproject">
+                <form id="form1" method="post">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modal-title">{{ trans('messages.tsonh') }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -423,6 +423,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <input type="hidden" class="form-control" id="type" name="type">
                                 <input type="hidden" class="form-control" id="id" name="id">
                                 <input type="hidden" class="form-control" id="proj" name="proj" value="{{$sprojecttype}}">
                                 <label for="inputEmail4">{{ trans('messages.ajliinturul') }}</label>

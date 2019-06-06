@@ -286,11 +286,11 @@ class BarilgaController extends Controller
 
 
         if(Request::input('proj')== 1){
-            return Redirect('zaswar');
+            return back()->withInput();
         }
 
         if(Request::input('proj')== 2){
-            return Redirect('barilga');
+            return back()->withInput();
         }
 
 

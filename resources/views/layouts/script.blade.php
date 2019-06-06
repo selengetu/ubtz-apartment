@@ -29,8 +29,8 @@
 
         var title = document.getElementById("modal-title");
         title.innerHTML = "{{ trans('messages.tsonhzas') }}";
-        document.getElementById('form1').action = "updateproject";
-        document.getElementById('form1').method ="post"
+
+        $('#type').val('2');
         var itag=$id;
 
         $.get('projectfill/'+itag,function(data){
@@ -201,9 +201,9 @@
 
     $('#addproj').on('click',function(){
         var title = document.getElementById("modal-title");
+        $('#type').val('1');
         title.innerHTML = "Их барилга, их засварын ажил бүртгэх цонх";
-        document.getElementById('form1').action = "addproject"
-        document.getElementById('form1').method ="post"
+
         $('#id').val('');
         $('#budget').val('');
         $('#project_name_ru').val('');
@@ -328,7 +328,55 @@
         getproc(tag);
         $('#processmodal').modal('hide');
     });
+    $('#form1').submit(function(event){
+        var itag = $('#type').val();
 
+        event.preventDefault();
+
+
+        if(itag == 1){
+            $.ajax({
+                type: 'POST',
+                url: 'addproject',
+                data: $('form#form1').serialize(),
+                success: function(){
+                    alert('Ажил нэмэгдлээ');
+                    location.reload();
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    if (jqXHR.status == 500) {
+                        alert('Internal error: ' + jqXHR.responseText);
+                    } else {
+                        alert('Unexpected error.');
+                    }
+                }
+            })
+
+        }
+        if(itag == 2){
+            $.ajax({
+                type: 'POST',
+                url: 'updateproject',
+                data: $('form#form1').serialize(),
+                success: function(){
+                    alert('Ажил засварлагдлаа');
+                    location.reload();
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    if (jqXHR.status == 500) {
+                        alert('Internal error: ' + jqXHR.responseText);
+                    } else {
+                        alert('Unexpected error.');
+                    }
+                }
+            })
+
+        }
+
+
+
+    });
     function getproc($id){
         $.get('projectprocessfill/'+$id,function(data){
             $("#processtable tbody").empty();
