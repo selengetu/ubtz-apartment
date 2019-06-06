@@ -105,7 +105,7 @@ class ProcessController extends Controller
         $process->save();
         Session::flash('gproject_id',Request::input('gproject_id'));
         $states = DB::select("select t.state_id as state from V_PROCESS t where t.process_id = (select max(v.process_id) from V_PROCESS v where v.project_id=".$data.")");
-
+        $description = DB::select("select t.description as description from V_PROCESS t where t.process_id = (select max(v.process_id) from V_PROCESS v where v.project_id=".$data.")");
 
         if(Request::input('gpercent') == NULL){
 
@@ -122,7 +122,7 @@ class ProcessController extends Controller
             if($states != NULL){
                 $process = DB::table('Project')
                     ->where('project_id',$data)
-                    ->update(['state_id' => $states[0]->state]);
+                    ->update(['state_id' => $states[0]->state,'description' => $description[0]->description]);
             }
 
         }
@@ -131,7 +131,7 @@ class ProcessController extends Controller
             if($states != NULL){
                 $process = DB::table('Project')
                     ->where('project_id',$data)
-                    ->update(['budget' => $budget[0]->totalbudget,'state_id' => $states[0]->state,'percent' => Request::input('gpercent'),'prend_date' => Request::input('gdate')]);
+                    ->update(['budget' => $budget[0]->totalbudget,'state_id' => $states[0]->state,'percent' => Request::input('gpercent'),'prend_date' => Request::input('gdate'),'description' => $description[0]->description]);
             }
 
             if($states == NULL){
@@ -189,7 +189,7 @@ class ProcessController extends Controller
             if($state != NULL){
                 $process = DB::table('Project')
                     ->where('project_id',$data)
-                    ->update(['budget' => $budget[0]->totalbudget,'state_id' => $state[0]->state,'percent' => Request::input('gpercent'),'prend_date' => Request::input('gdate')]);
+                    ->update(['budget' => $budget[0]->totalbudget,'state_id' => $state[0]->state,'percent' => Request::input('gpercent'),'prend_date' => Request::input('gdate'),'description' => $description[0]->description]);
             }
 
             if($state == NULL){

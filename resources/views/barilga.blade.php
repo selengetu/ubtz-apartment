@@ -203,7 +203,7 @@
                                                 <td>{{$projects->firstname}}</td>
                                                 <td width="45px">{{$projects->start_date}}
                                                 <td>{{$projects->end_date}}
-                                                <td @if($projects->state_id==2)
+                                                <td width="102px" @if($projects->state_id==2)
                                                     bgcolor="#ff8c00";
                                                     @elseif($projects->state_id==1)
                                                     bgcolor="yellow";
@@ -219,7 +219,7 @@
                                                     bgcolor="red";
                                                 @endif>
                                                     <font  @if($projects->state_id==1)
-                                                           color="black"; @else color="white"; @endif >{{$projects->state_name_mn}}</font></td>
+                                                           color="black"; @else color="white"; @endif >{{$projects->state_name_mn}}<br>{{$projects->description}}</font></td>
                                                 <td>
                                                     @if (Auth::user()->user_grant !=6 or Auth::user()->id ==$projects->added_user_id or Auth::user()->emp_id ==$projects->respondent_emp_id)
                                                         <button onclick="processClicked({{$projects->project_id}})"{{-- onclick="$('#nav-profile-tab').trigger('click')" --}} data-id="{{$projects->project_id}}" tag="{{$projects->project_id}}" class="btn btn-primary btn-sm process"> <i class="fa fa-plus" style="color: rgb(255, 255, 255);"></i></button>
