@@ -33,6 +33,7 @@
                         <!-- /.card-header -->
                         <div class="card-body text-center">
                             <form method="post" action="geree">
+                                @csrf
                                 <div class="col-md-12" data-scrollable="true" data-height="400" >
                                     <div class="row" >
                                         <div class="form-group col-md-2">
