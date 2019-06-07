@@ -115,6 +115,15 @@ class TailanController extends Controller
             $query.=" ";
 
         }
+        if ($srespondent_emp_id!=NULL && $srespondent_emp_id !=0) {
+            $query.=" and respondent_emp_id = '".$srespondent_emp_id."'";
+
+        }
+        else
+        {
+            $query.=" ";
+
+        }
         if ($month!=NULL && $month !=0) {
             $date.=" and month <= ".$month."";
             $date1.=" and par.month =".$month."";

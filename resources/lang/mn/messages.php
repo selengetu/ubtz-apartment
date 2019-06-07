@@ -66,6 +66,6 @@ return [
     'tuluwluguu2' => '2-р улир.төл',
     'tuluwluguu3' => '3-р улир.төл',
     'tuluwluguu4' => '4-р улир.төл',
-
+    'hurungu' => 'Хөрөнгө оруулалт',
 
 ];

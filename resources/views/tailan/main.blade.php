@@ -64,7 +64,15 @@
                                                 </select>
 
                                             </div>
-
+                                            <div class="form-group col-md-2">
+                                                <label for="inputZip">{{ trans('messages.hariutsagch') }}</label>
+                                                <select class="form-control select2" id="srespondent_emp_id" name="srespondent_emp_id" >
+                                                    <option value= "0">Бүгд</option>
+                                                    @foreach($employee as $employees)
+                                                        <option value= "{{$employees->emp_id}}">{{$employees->firstname}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
 
                                             <div class="form-group col-md-2">
                                                 <label for="inputZip"><span>.</span></label><br>

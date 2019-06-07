@@ -66,4 +66,5 @@ return [
     'tuluwluguu2' => 'План на 2 квар',
     'tuluwluguu3' => 'План на 3 квар',
     'tuluwluguu4' => 'План на 4 квар',
+    'hurungu' => 'Инвестиции',
 ];

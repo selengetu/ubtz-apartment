@@ -711,7 +711,16 @@
             checkgeree(itag);
 
 
-            $.get('getexec/'+itag,function(data){
+        });
+        function checkgeree($id) {
+            if($id == 3){
+
+                $('#gereediv').show();
+            }
+            else{
+                $('#gereediv').hide();
+            }
+            $.get('getexec/'+$id,function(data){
                 $('#executor_id').empty();
 
                 $.each(data,function(i,qwe){
@@ -723,16 +732,6 @@
                     $('#executor_id').focus();
                 });
             });
-
-        });
-        function checkgeree($id) {
-            if($id == 3){
-
-                $('#gereediv').show();
-            }
-            else{
-                $('#gereediv').hide();
-            }
         }
 
         $(function() {
