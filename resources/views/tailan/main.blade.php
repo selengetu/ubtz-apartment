@@ -32,7 +32,7 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body text-center">
-                                <form method="post" action="main">
+                                <form method="post"  @if($sprojecttype ==1 ) action="main"  @elseif($sprojecttype ==2 ) action="mainib" @endif>
                                     @csrf
                                     <div class="col-md-12" data-scrollable="true" data-height="400" >
                                         <div class="row" >
