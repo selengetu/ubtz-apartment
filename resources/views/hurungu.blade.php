@@ -28,7 +28,7 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body text-center">
-                                <form method="post">
+                                <form method="post" action="addhurungu">
                                     <div class="col-md-12" data-scrollable="true" data-height="400" >
                                         <div class="row">
 
@@ -70,8 +70,8 @@
                                         <h3 class="card-title">{{ trans('messages.ibiz') }} </h3>
                                     </div>
                                     <div class="col-md-4">
-                                        <button type="button" class="btn btn-primary add" data-toggle="modal" data-target="#exampleModal" id="addproj">
-                                            <i class="fa fa-plus" style="color: rgb(255, 255, 255);"> {{ trans('messages.burtgeh') }}</i>
+                                        <button type="button" class="btn btn-primary add" data-toggle="modal" data-target="#hurungumodal" id="addproj">
+                                            <i class="fa fa-plus" style="color: rgb(255, 255, 255);"> {{ trans('messages.hurnemeh') }}</i>
                                         </button>
                                     </div>
                                 </div>
@@ -145,9 +145,109 @@
         <!-- row 2 dood-->
 
         </div>
+
     </section>
 
+    <div class="modal fade " id="hurungumodal" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <form id="form2" method="post" action="addprocess" enctype="multipart/form-data">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modal-title1">{{ trans('messages.tsonh') }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
 
+                        <div class="form-row">
+
+                            <div class="form-group col-md-4">
+                                <label for="inputEmail4">{{ trans('messages.zahialagch') }}</label>
+                                <select class="form-control select2" id="constructor_id" name="constructor_id">
+                                    @foreach($constructor as $constructors)
+                                        <option value= "{{$constructors->department_id}}">{{$constructors->department_name}}</option>
+                                    @endforeach
+                                </select>
+
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputEmail4">{{ trans('messages.zahialagchnegj') }}</label>
+                                <select class="form-control select2" id="childabbr_id" name="childabbr_id">
+                                    <option value= "0">Бүгд</option>
+                                    @foreach($executor as $executors)
+                                        <option value= "{{$executors->executor_id}}">{{$executors->executor_abbr}}</option>
+                                    @endforeach
+                                </select>
+
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputEmail4">Төлөвлөгөө</label>
+                                <input type="text"  class="form-control month" id="plan" name="plan" required="true">
+
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="inputEmail4">{{ trans('messages.tuluwluguu1') }}</label>
+                                <input type="text" class="form-control money" id="plan1" name="plan1" maxlength="14">
+
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="inputEmail4">{{ trans('messages.tuluwluguu2') }}</label>
+                                <input type="text" class="form-control money" id="plan2" name="plan2" maxlength="14">
+
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="inputEmail4">{{ trans('messages.tuluwluguu3') }}</label>
+                                <input type="text" class="form-control money" id="plan3" name="plan3" maxlength="14">
+
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="inputEmail4">{{ trans('messages.tuluwluguu4') }}</label>
+                                <input type="text" class="form-control money" id="plan4" name="plan4" maxlength="14">
+
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="inputZip">{{ trans('messages.guitsetgel1') }}</label>
+                                <input type="text" class="form-control money" id="budget1" name="budget1" maxlength="14">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="inputZip">{{ trans('messages.guitsetgel2') }}</label>
+                                <input type="text" class="form-control money" id="budget2" name="budget2" maxlength="14">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="inputZip">{{ trans('messages.guitsetgel3') }}</label>
+                                <input type="text" class="form-control money" id="budget3" name="budget3" maxlength="14">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="inputZip">{{ trans('messages.guitsetgel4') }}</label>
+                                <input type="text" class="form-control money" id="budget4" name="budget4" maxlength="14">
+                            </div>
+
+                            <div class="form-group col-md-8">
+                                <label for="inputZip">{{ trans('messages.tailbar') }}</label>
+                                <textarea class="form-control" rows="2" id="description" name="description" maxlength="500"></textarea>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-md-5">
+                            <button type="button" id="deleteproc" class="btn btn-danger delete">{{ trans('messages.ustgah') }}</button>
+                            <button type="submit" class="btn btn-primary" id="addprocessbutton">{{ trans('messages.hadgalah') }}</button>
+                        </div>
+                        <div class="col-md-7" style="display: inline-block; text-align: right;" >
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('messages.haah') }}</button>
+
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('script')

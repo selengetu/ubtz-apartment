@@ -66,5 +66,10 @@ return [
     'tuluwluguu2' => 'План на 2 квар',
     'tuluwluguu3' => 'План на 3 квар',
     'tuluwluguu4' => 'План на 4 квар',
+    'guitsetgel1' => 'Вып на 1 квар',
+    'guitsetgel2' => 'Вып на 2 квар',
+    'guitsetgel3' => 'Вып на 3 квар',
+    'guitsetgel4' => 'Вып на 4 квар',
     'hurungu' => 'Инвестиции',
+    'hurnemeh' => 'Регистрация инвестиции',
 ];

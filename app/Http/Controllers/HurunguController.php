@@ -6,6 +6,7 @@ use Request;
 use App\Constructor;
 use App\Employee;
 use App\Prof;
+use App\Executor;
 use DB;
 class HurunguController extends Controller
 {
@@ -27,21 +28,27 @@ class HurunguController extends Controller
     public function index()
     {
 
-        return view('hurungu');
+        $executor = Executor::orderby('executor_abbr')->get();
+        $constructor = Constructor::orderby('department_abbr')->get();
+        return view('hurungu')->with(['executor'=>$executor,'constructor'=>$constructor]);
     }
     public function store()
     {
-        $employee = new Employee;
-        $employee->firstname = Request::input('firstname');
-        $employee->depart_id = 22;
-        $employee->prof_id = Request::input('prof_id');
-        $employee->lastname = Request::input('lastname');
-        $employee->hired_date = Request::input('date1');
-        $employee->fired_date = Request::input('date2');
-        $employee->mainduty = Request::input('mainduty');
-        $employee->phone = Request::input('phone');
-        $employee->save();
-        return Redirect('employee');
+        $hurungu = new Hurungu;
+        $hurungu->depart_id = Request::input('sconstructor_id');
+        $hurungu->depart_child = Request::input('schildabbr_id');
+        $hurungu->plan = Request::input('plan');
+        $hurungu->plan1 = Request::input('plan1');
+        $hurungu->plan2 = Request::input('plan2');
+        $hurungu->plan3 = Request::input('plan3');
+        $hurungu->plan4 = Request::input('plan4');
+        $hurungu->budget1 = Request::input('budget1');
+        $hurungu->budget2 = Request::input('budget2');
+        $hurungu->budget3 = Request::input('budget3');
+        $hurungu->budget4 = Request::input('budget4');
+        $hurungu->description = Request::input('description');
+        $hurungu->save();
+        return Redirect('hurungu');
     }
 
     public function update(Request $request)
