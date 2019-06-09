@@ -102,11 +102,44 @@
 
                                             <th width="150px">{{ trans('messages.tailbar') }}</th>
                                             <th></th>
-                                            <th></th>
+
                                         </tr>
                                         </thead>
                                         <tbody>
+                                        <?php $no = 1; ?>
+                                        @foreach($hurungu as $hurungus)
+                                            <tr >
+                                                <td>{{$no}}</td>
+                                                <td>{{$hurungus->department_name}}-{{$hurungus->executor_name}}</td>
+                                                <td><?php
+                                                    echo number_format($hurungus->plan)."<br>";
+                                                    ?></td>
+                                                <td><?php
+                                                    echo number_format($hurungus->plan1)."<br>";
+                                                    ?></td>
+                                                <td><?php
+                                                    echo number_format($hurungus->plan2)."<br>";
+                                                    ?></td>
+                                                <td><?php
+                                                    echo number_format($hurungus->plan3)."<br>";
+                                                    ?></td>
 
+                                                <td><?php
+                                                    echo number_format($hurungus->plan4)."<br>";
+                                                    ?></td>
+
+                                                <td><?php
+                                                    echo number_format($hurungus->budget)."<br>";
+                                                    ?></td>
+                                                <td>{{number_format($hurungus->percent, 2, ',', '.')}}%</td>
+                                                <td>{{$hurungus->diff}}</td>
+                                                <td>{{$hurungus->description}}</td>
+                                                <td><button type="button" class="btn btn-warning btn-sm update" data-toggle="modal"  data-id="{{$hurungus->investment_id}}" tag="{{$hurungus->investment_id}}"  data-target="#hurungumodal" id="updatehurungu" onclick="updatehurungu({{$hurungus->investment_id}})">
+                                                        <i class="fa fa-pencil" style="color: rgb(255, 255, 255);"></i>
+                                                    </button></td>
+                                            </tr>
+                                            <?php $no++; ?>
+                                        @endforeach
 
                                         </tbody>
 
@@ -151,9 +184,10 @@
     <div class="modal fade " id="hurungumodal" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <form id="form2" method="post" action="addprocess" enctype="multipart/form-data">
+                <form id="form2" method="post" action="addhurungu" enctype="multipart/form-data">
+                    @csrf
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modal-title1">{{ trans('messages.tsonh') }}</h5>
+                        <h5 class="modal-title" id="modal-title">{{ trans('messages.tsonh') }}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -174,7 +208,7 @@
                             <div class="form-group col-md-4">
                                 <label for="inputEmail4">{{ trans('messages.zahialagchnegj') }}</label>
                                 <select class="form-control select2" id="childabbr_id" name="childabbr_id">
-                                    <option value= "0">Бүгд</option>
+                                    <option value= "0">Бүгд</option>childabbr_id
                                     @foreach($executor as $executors)
                                         <option value= "{{$executors->executor_id}}">{{$executors->executor_abbr}}</option>
                                     @endforeach
@@ -190,6 +224,7 @@
                             <div class="form-group col-md-3">
                                 <label for="inputEmail4">{{ trans('messages.tuluwluguu1') }}</label>
                                 <input type="text" class="form-control money" id="plan1" name="plan1" maxlength="14">
+                                <input type="hidden" class="form-control" id="id" name="id" maxlength="14">
 
                             </div>
                             <div class="form-group col-md-3">
@@ -251,7 +286,36 @@
 @endsection
 
 @section('script')
+<script>
+    function updatehurungu($id){
+        document.getElementById('form2').action = "updatehurungu";
+        var title = document.getElementById("modal-title");
+        title.innerHTML = "{{ trans('messages.tsonhhurungu') }}";
 
+        $.get('hurungufill/'+$id,function(data){
+            $.each(data,function(i,qwe){
+
+                $('#id').val(qwe.investment_id);
+                $('#constructor_id').val(qwe.depart_id);
+                $('#childabbr_id').val(qwe.depart_child);
+                $('#budget1').val(qwe.budget1);
+                $('#budget2').val(qwe.budget2);
+                $('#budget3').val(qwe.budget3);
+                $('#budget4').val(qwe.budget4);
+                $('#plan').val(qwe.plan);
+                $('#plan1').val(qwe.plan1);
+                $('#plan2').val(qwe.plan2);
+                $('#plan3').val(qwe.plan3);
+                $('#plan4').val(qwe.plan4);
+                $('#description').val(qwe.description);
+
+
+            });
+
+        });
+
+    };
+</script>
     <script type='text/javascript' src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
 
     @include('layouts.script')

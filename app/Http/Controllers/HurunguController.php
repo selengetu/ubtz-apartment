@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Request;
 use App\Constructor;
 use App\Employee;
-use App\Prof;
+use App\Hurungu;
 use App\Executor;
 use DB;
 class HurunguController extends Controller
@@ -30,22 +30,23 @@ class HurunguController extends Controller
 
         $executor = Executor::orderby('executor_abbr')->get();
         $constructor = Constructor::orderby('department_abbr')->get();
-        return view('hurungu')->with(['executor'=>$executor,'constructor'=>$constructor]);
+        $hurungu =  DB::select("select * from V_INVESTMENT order by investment_id");
+        return view('hurungu')->with(['executor'=>$executor,'constructor'=>$constructor,'hurungu'=>$hurungu]);
     }
     public function store()
     {
         $hurungu = new Hurungu;
-        $hurungu->depart_id = Request::input('sconstructor_id');
-        $hurungu->depart_child = Request::input('schildabbr_id');
-        $hurungu->plan = Request::input('plan');
-        $hurungu->plan1 = Request::input('plan1');
-        $hurungu->plan2 = Request::input('plan2');
-        $hurungu->plan3 = Request::input('plan3');
-        $hurungu->plan4 = Request::input('plan4');
-        $hurungu->budget1 = Request::input('budget1');
-        $hurungu->budget2 = Request::input('budget2');
-        $hurungu->budget3 = Request::input('budget3');
-        $hurungu->budget4 = Request::input('budget4');
+        $hurungu->depart_id = Request::input('constructor_id');
+        $hurungu->depart_child = Request::input('childabbr_id');
+        $hurungu->plan = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan'));
+        $hurungu->plan1 = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan1'));
+        $hurungu->plan2 = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan2'));
+        $hurungu->plan3 = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan3'));
+        $hurungu->plan4 = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan4'));
+        $hurungu->budget1 = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('budget1'));
+        $hurungu->budget2 = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('budget2'));
+        $hurungu->budget3 = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('budget3'));
+        $hurungu->budget4 = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('budget4'));
         $hurungu->description = Request::input('description');
         $hurungu->save();
         return Redirect('hurungu');
@@ -53,16 +54,17 @@ class HurunguController extends Controller
 
     public function update(Request $request)
     {
-        $employee = DB::table('CONST_Employee')
-            ->where('emp_id', Request::input('id'))
-            ->update(['firstname' => Request::input('firstname'),'lastname' => Request::input('lastname'),'prof_id' => Request::input('prof_id')
-                ,'hired_date' => Request::input('date1'),'fired_date' => Request::input('date2'),'mainduty' => Request::input('mainduty'),'phone' => Request::input('phone')]);
-        return Redirect('employee');
+        $hurungu = DB::table('INVESTMENT')
+            ->where('investment_id', Request::input('id'))
+            ->update(['depart_id' => Request::input('constructor_id'),'depart_child' => Request::input('childabbr_id'),'plan' => Request::input('plan')
+                ,'plan1' => Request::input('plan1'),'plan2' => Request::input('plan2'),'plan3' => Request::input('plan3'),'plan4' => Request::input('plan4')
+                ,'budget1' => Request::input('budget1') ,'budget2' => Request::input('budget2'),'budget3' => Request::input('budget3') ,'budget4' => Request::input('budget4')
+                ,'description' => Request::input('description')]);
+        return Redirect('hurungu');
     }
 
     public function destroy($id)
     {
-        Employee::where('emp_id', '=', $id)->delete();
-        return Redirect('employee');
+
     }
 }

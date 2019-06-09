@@ -63,7 +63,7 @@ Route::get('/projectprocessfill/{id?}',function($id = 0){
     Route::post('/addhurungu','HurunguController@store');
     Route::post('/updatehurungu','HurunguController@update');
     Route::get('/hurungufill/{id?}',function($id = 0){
-        $dt=App\Hurungu::where('hurungu_id','=',$id)->get();
+        $dt=App\Hurungu::where('investment_id','=',$id)->get();
         return $dt;
     });
 
