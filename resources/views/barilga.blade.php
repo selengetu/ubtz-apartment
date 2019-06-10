@@ -172,6 +172,8 @@
                                             <th>{{ trans('messages.tailbar') }}</th>
                                             <th></th>
                                             <th></th>
+                                            <th></th>
+
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -236,6 +238,7 @@
                                                     @endif
                                                         @endif
                                                 </td>
+                                                <td><button type="button" class="btn btn-danger delete btn-sm" id="deleteproj" onclick="deleteproj({{$projects->project_id}})">  <i class="fa fa-trash" style="color: rgb(255, 255, 255);"></i></button></td>
                                             </tr>
                                             <?php $no++; ?>
 
@@ -270,7 +273,7 @@
                                             <td></td>
                                             <td></td>
                                             <td></td>
-
+                                            <td></td>
                                         </tr>
                                     </table>
                                 </div>
@@ -573,7 +576,7 @@
                 </div>
                     <div class="modal-footer">
                         <div class="col-md-5">
-                            <button type="button" class="btn btn-danger delete" id="deleteproj">{{ trans('messages.ustgah') }}</button>
+
                             <button type="submit" class="btn btn-primary">{{ trans('messages.hadgalah') }}</button>
                         </div>
                         <div class="col-md-7" style="display: inline-block; text-align: right;" >

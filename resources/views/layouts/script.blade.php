@@ -233,16 +233,15 @@
         $('#gstate_id').val('1');
         $('.delete').hide();
     });
-    $('#deleteproj').on('click',function(){
-        var itag = $('#id').val();
+    function deleteproj($id){
 
         $.ajax(
             {
-                url: "project/delete/" + itag,
+                url: "project/delete/" + $id,
                 type: 'GET',
                 dataType: "JSON",
                 data: {
-                    "id": itag,
+                    "id": $id,
                     "_method": 'DELETE',
                 },
                 success: function () {
@@ -250,9 +249,11 @@
                 }
 
             });
-
+        alert('Их барилга, их засварын ажил устгагдлаа');
         location.reload();
-    });
+
+    }
+
 
     $('#deleteproc').on('click',function(){
 

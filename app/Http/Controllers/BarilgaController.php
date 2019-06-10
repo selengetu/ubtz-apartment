@@ -311,8 +311,8 @@ class BarilgaController extends Controller
     }
     public function destroy($id)
     {
-        Project::where('project_id', '=', $id)->delete();
-        Process::where('project_id', '=', $id)->delete();
+
+        Project::where('project_id', '=', $id) ->update(['is_del' =>1]);
         if(Request::input('proj')== 1){
             return Redirect('zaswar');
         }
