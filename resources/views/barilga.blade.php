@@ -413,7 +413,7 @@
     <div class="modal fade " id="exampleModal" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <form id="form3" method="post" action="updateproject">
+                <form id="form1" method="post">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modal-title">{{ trans('messages.tsonh') }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
