@@ -221,7 +221,7 @@
                                                     bgcolor="red";
                                                 @endif>
                                                     <font  @if($projects->state_id==1)
-                                                           color="black"; @else color="white"; @endif >{{$projects->state_name_mn}}<br>{{$projects->description}}</font></td>
+                                                           color="black"; @else color="white"; @endif >{{$projects->state_name_mn}}<br> {{$projects->state_name_ru}}<br>{{$projects->description}}</font></td>
                                                 <td>
                                                     @if (Auth::user()->user_grant !=6 or Auth::user()->id ==$projects->added_user_id or Auth::user()->emp_id ==$projects->respondent_emp_id)
                                                         <button onclick="processClicked({{$projects->project_id}})"{{-- onclick="$('#nav-profile-tab').trigger('click')" --}} data-id="{{$projects->project_id}}" tag="{{$projects->project_id}}" class="btn btn-primary btn-sm process"> <i class="fa fa-plus" style="color: rgb(255, 255, 255);"></i></button>
@@ -312,7 +312,7 @@
                                                 <th>{{ trans('messages.hariutsagch') }}</th>
                                                 <th>{{ trans('messages.tuvehleh') }}</th>
                                                 <th>{{ trans('messages.tuvduusah') }}</th>
-                                                <th width="100px">{{ trans('messages.tailbar') }}</th>
+                                                <th>{{ trans('messages.tailbar') }}</th>
 
                                             </tr>
                                             </thead>
@@ -413,7 +413,7 @@
     <div class="modal fade " id="exampleModal" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <form id="form1" method="post">
+                <form id="form3" method="post" action="updateproject">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modal-title">{{ trans('messages.tsonh') }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
