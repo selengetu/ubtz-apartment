@@ -28,7 +28,8 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body text-center">
-                                <form method="post" action="addhurungu">
+                                <form method="post" action="hurungu">
+                                    @csrf
                                     <div class="col-md-12" data-scrollable="true" data-height="400" >
                                         <div class="row">
 
@@ -36,6 +37,9 @@
                                                 <label for="inputEmail4">{{ trans('messages.zahialagch') }}</label>
                                                 <select class="form-control select2" id="sconstructor_id" name="sconstructor_id">
                                                     <option value= "0">Бүгд</option>
+                                                    @foreach($constructor as $constructors)
+                                                        <option value= "{{$constructors->department_id}}">{{$constructors->department_name}}</option>
+                                                    @endforeach
                                                 </select>
 
                                             </div>
@@ -43,7 +47,9 @@
                                                 <label for="inputEmail4">{{ trans('messages.zahialagchnegj') }}</label>
                                                 <select class="form-control select2" id="schildabbr_id" name="schildabbr_id">
                                                     <option value= "0">Бүгд</option>
-
+                                                    @foreach($executor as $executors)
+                                                        <option value= "{{$executors->executor_id}}">{{$executors->executor_abbr}}</option>
+                                                    @endforeach
                                                 </select>
 
                                             </div>
@@ -67,7 +73,7 @@
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <h3 class="card-title">{{ trans('messages.ibiz') }} </h3>
+                                        <h3 class="card-title">{{ trans('messages.hurungu') }} </h3>
                                     </div>
                                     <div class="col-md-4">
                                         <button type="button" class="btn btn-primary add" data-toggle="modal" data-target="#hurungumodal" id="addproj">
@@ -129,7 +135,7 @@
                                                     ?></td>
 
                                                 <td><?php
-                                                    echo number_format($hurungus->budget)."<br>";
+                                                    echo number_format($hurungus->sbudget)."<br>";
                                                     ?></td>
                                                 <td>{{number_format($hurungus->percent, 2, ',', '.')}}%</td>
                                                 <td>{{$hurungus->diff}}</td>
@@ -270,7 +276,7 @@
                     </div>
                     <div class="modal-footer">
                         <div class="col-md-5">
-                            <button type="button" id="deleteproc" class="btn btn-danger delete">{{ trans('messages.ustgah') }}</button>
+                            <button type="button" id="deletehurungu" class="btn btn-danger delete">{{ trans('messages.ustgah') }}</button>
                             <button type="submit" class="btn btn-primary" id="addprocessbutton">{{ trans('messages.hadgalah') }}</button>
                         </div>
                         <div class="col-md-7" style="display: inline-block; text-align: right;" >
@@ -315,6 +321,30 @@
         });
 
     };
+    $('#deletehurungu').on('click',function(){
+
+        var itag = $('#id').val();
+
+
+        $.ajax(
+            {
+                url: "hurungu/delete/" + itag,
+                type: 'GET',
+                dataType: "JSON",
+                data: {
+                    "id": itag,
+                    "_method": 'DELETE',
+                },
+                success: function () {
+                    alert('Хөрөнгө оруулалт устгагдлаа');
+                }
+
+            });
+        alert('Хөрөнгө оруулалт устгагдлаа');
+        location.reload();
+
+
+    });
 </script>
     <script type='text/javascript' src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
 

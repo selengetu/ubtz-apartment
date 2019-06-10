@@ -190,6 +190,8 @@
                                                     bgcolor="#8a2be2";
                                                     @elseif($projects->state_id==6)
                                                     bgcolor="blue";
+                                                    @elseif($projects->state_id==16)
+                                                    bgcolor="blue";
                                                     @else
                                                     bgcolor="red";
                                                     @endif

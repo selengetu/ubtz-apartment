@@ -58,7 +58,7 @@ Route::get('/projectprocessfill/{id?}',function($id = 0){
     return $dt;
 });
 
-    Route::get('/hurungu', 'HurunguController@index')->name('hurungu');
+    Route::match(['get', 'post'],'/hurungu', 'HurunguController@index')->name('hurungu');
     Route::get('hurungu/delete/{id}', 'HurunguController@destroy');
     Route::post('/addhurungu','HurunguController@store');
     Route::post('/updatehurungu','HurunguController@update');

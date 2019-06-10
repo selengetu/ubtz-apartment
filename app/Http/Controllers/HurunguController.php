@@ -8,6 +8,9 @@ use App\Employee;
 use App\Hurungu;
 use App\Executor;
 use DB;
+use Illuminate\Support\Facades\Input;
+
+
 class HurunguController extends Controller
 {
     /**
@@ -27,10 +30,33 @@ class HurunguController extends Controller
      */
     public function index()
     {
-
+        $query = "";
+        $sexecutor = Input::get('sexecutor_id');
+        $sconstructor = Input::get('sconstructor_id');
         $executor = Executor::orderby('executor_abbr')->get();
         $constructor = Constructor::orderby('department_abbr')->get();
-        $hurungu =  DB::select("select * from V_INVESTMENT order by investment_id");
+
+        if ($sexecutor!=NULL && $sexecutor !=0) {
+            $query.=" and depart_child = '".$sexecutor."'";
+
+        }
+        else
+        {
+            $sexecutor=0;
+            $query.=" ";
+
+        }
+        if ($sconstructor!=NULL && $sconstructor !=0) {
+            $query.=" and depart_id = '".$sconstructor."'";
+
+        }
+        else
+        {
+            $sconstructor=0;
+            $query.=" ";
+
+        }
+        $hurungu =  DB::select("select * from V_INVESTMENT where 1=1 " .$query. " order by investment_id");
         return view('hurungu')->with(['executor'=>$executor,'constructor'=>$constructor,'hurungu'=>$hurungu]);
     }
     public function store()
@@ -56,15 +82,16 @@ class HurunguController extends Controller
     {
         $hurungu = DB::table('INVESTMENT')
             ->where('investment_id', Request::input('id'))
-            ->update(['depart_id' => Request::input('constructor_id'),'depart_child' => Request::input('childabbr_id'),'plan' => Request::input('plan')
-                ,'plan1' => Request::input('plan1'),'plan2' => Request::input('plan2'),'plan3' => Request::input('plan3'),'plan4' => Request::input('plan4')
-                ,'budget1' => Request::input('budget1') ,'budget2' => Request::input('budget2'),'budget3' => Request::input('budget3') ,'budget4' => Request::input('budget4')
+            ->update(['depart_id' => Request::input('constructor_id'),'depart_child' => Request::input('childabbr_id'),'plan' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan'))
+                ,'plan1' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan1')),'plan2' =>preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan2')),'plan3' =>preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan3')),'plan4' =>preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan4'))
+                ,'budget1' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('budget1')),'budget2' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('budget2')),'budget3' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('budget3')) ,'budget4' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('budget4'))
                 ,'description' => Request::input('description')]);
         return Redirect('hurungu');
     }
 
     public function destroy($id)
     {
-
+        Hurungu::where('investment_id', '=', $id)->delete();
+        return Redirect('hurungu');
     }
 }
