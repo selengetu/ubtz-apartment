@@ -91,7 +91,7 @@
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <h3 class="card-title">2019 оны {{$month}} сарын их барилга, их засварын ажлууд </h3>
+                                        <h3 class="card-title"> @if($sprojecttype ==1 ) {{ trans('messages.zaswar') }}  @elseif($sprojecttype ==2 ) {{ trans('messages.barilga') }} @endif</h3>
                                     </div>
 
                                 </div>

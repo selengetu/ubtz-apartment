@@ -157,7 +157,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-dashboard"></i>
+              <i class="nav-icon fa fa-book"></i>
               <p>
                   {{ trans('messages.burtgel') }}
                 <i class="right fa fa-angle-left"></i>
@@ -167,19 +167,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <li class="nav-item">
                       <a href="{{ route('barilga') }}" class="nav-link">
                         <i class="fa fa-circle-o nav-icon"></i>
-                        <p>Их барилга</p>
+                        <p> {{ trans('messages.barilga') }}</p>
                       </a>
                     </li>
               <li class="nav-item">
                 <a href="{{ route('zaswar') }}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Их засвар</p>
+                  <p> {{ trans('messages.zaswar') }}</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a  href="{{ route('hurungu') }}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Хөрөнгө оруулалт</p>
+                  <p> {{ trans('messages.hurungu') }}</p>
                 </a>
               </li>
             </ul>
@@ -187,7 +187,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-dashboard"></i>
+              <i class="nav-icon fa fa-wrench"></i>
               <p>
                   {{ trans('messages.setting') }}
                 <i class="right fa fa-angle-left"></i>
@@ -244,7 +244,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-dashboard"></i>
+              <i class="nav-icon fa fa-newspaper-o"></i>
               <p>
                   {{ trans('messages.tailan') }}
                 <i class="right fa fa-angle-left"></i>
@@ -254,19 +254,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <li class="nav-item">
                 <a href="{{ route('main') }}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Их засвар</p>
+                  <p>{{ trans('messages.zaswar') }}</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('mainib') }}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Их барилга</p>
+                  <p>{{ trans('messages.barilga') }}</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Хөрөнгө оруулалт</p>
+                  <p>{{ trans('messages.hurungu') }}</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -287,7 +287,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           <li class="nav-item has-treeview">
             <a href="" class="nav-link">
-              <i class="nav-icon fa fa-dashboard"></i>
+              <i class="nav-icon fa fa-bar-chart"></i>
               <p>
                 Анализ
                 <i class="right fa fa-angle-left"></i>
@@ -297,22 +297,31 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <li class="nav-item">
                       <a href="{{ route('analyseiz') }}" class="nav-link">
                           <i class="fa fa-circle-o nav-icon"></i>
-                          <p>Их засвар</p>
+                          <p>{{ trans('messages.zaswar') }}</p>
                       </a>
                   </li>
                   <li class="nav-item">
                       <a href="{{ route('analyseib') }}" class="nav-link">
                           <i class="fa fa-circle-o nav-icon"></i>
-                          <p>Их барилга</p>
+                          <p>{{ trans('messages.barilga') }}</p>
                       </a>
                   </li>
                 <li class="nav-item">
                   <a  class="nav-link">
                     <i class="fa fa-circle-o nav-icon"></i>
-                    <p>Хөрөнгө оруулалт</p>
+                    <p>{{ trans('messages.hurungu') }}</p>
                   </a>
                 </li>
               </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="" class="nav-link">
+              <i class="nav-icon fa fa-book"></i>
+              <p>
+                {{ trans('messages.medeelel') }}
+
+              </p>
+            </a>
           </li>
         </ul>
       </nav>
