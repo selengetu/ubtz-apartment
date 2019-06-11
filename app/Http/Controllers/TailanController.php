@@ -146,7 +146,8 @@ class TailanController extends Controller
         $project =DB::select("select u.project_id,
        u.plan_year,
        u.project_name,
-       u.project_name_ru,
+       u.project_name_ru
+       ,
         to_char( u.budget,'999,999,999,999') as budgetcomma,
        u.budget,
        par.budget as bud,
