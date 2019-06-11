@@ -51,13 +51,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
       padding: .45em;
 
     }
+    .sidebar-dark-primary .sidebar a{
+      color: #fff;
+    }
+    .sidebar-dark-primary .nav-treeview > .nav-item > .nav-link{
+      color: #fff;
+    }
   </style>
 </head>
 <body class="hold-transition sidebar-mini @if(Auth::user()->menucollapse==1) sidebar-collapse @else sidebar-open @endif">
 <div class="wrapper" id="app">
 
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
+  <nav class="main-header navbar navbar-expand navbar-light border-bottom" >
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -125,11 +131,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #0e6674; color: #fff">
     <!-- Brand Logo -->
     <a href="{{ route('home') }}" class="brand-link">
     <img src="{{ asset('img/ubtz_logo_128.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" {{--style="opacity: .8"--}}>
-      <span class="brand-text font-weight-light">НОКС - ИБИЗ</span>
+      <span class="brand-text font-weight-light" style=" color: #fff">НОКС - ИБИЗ</span>
     </a>
 
     <!-- Sidebar -->
@@ -137,7 +143,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="dist/img/user8-128x128.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="dist/img/256-512.png" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block">{{ Auth::user()->name }}</a>
@@ -146,7 +152,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" style="color: #fff">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview">
