@@ -1,7 +1,9 @@
 @extends('layouts.master')
 
 @section('style')
-
+<style>
+    .highlight { background-color: lightskyblue }
+</style>
 @endsection
 
 @section('content')
@@ -37,15 +39,10 @@
                                     <div class="row" >
                                         <div class="form-group col-md-2">
 
-                                            <label for="inputEmail4">{{ trans('messages.ajliinturul') }}</label>
+                                            <label for="inputEmail4">{{ trans('messages.sar') }}</label>
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                            <select class="form-control select2" id="sproject_type" name="sproject_type" >
-                                                <option value= "0">Бүгд</option>
-                                                @foreach($projecttype as $projecttypes)
-                                                    <option value= "{{$projecttypes->project_type_id}}">{{$projecttypes->project_type_name_mn}}</option>
-                                                @endforeach
-                                            </select>
-
+                                            <input type="hidden" name="stype"  id="stype" class="form-control" value="{{$sprojecttype}}">
+                                            <input type="text" name="month"  id="stype" class="form-control" value="">
                                         </div>
 
                                         <div class="form-group col-md-2">
@@ -79,7 +76,7 @@
                             <div class="table-responsive">
                                 <div class="row">
 
-                                    <div class="col-md-7">
+                                    <div class="col-md-6">
                                         <table class="table table-bordered" id="example" border="1" style="font-size:12px; width:100%; border-collapse: collapse;">
                                             <thead>
                                             <?php $sum_plan = 0 ?>
@@ -146,9 +143,28 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div class="col-md-5">
+                                    <div class="col-md-6">
+                                        <table class="table table-bordered" id="child" border="1" style="font-size:12px; width:100%; border-collapse: collapse;">
+                                            <thead>
 
+                                            <tr role="row">
+
+                                                <th>{{ trans('messages.baiguullaga') }}</th>
+                                                <th>{{ trans('messages.tuluwluguu') }}</th>
+                                                <th>{{ trans('messages.guitsetgel') }}</th>
+                                                <th>{{ trans('messages.biylelt') }}</th>
+                                                <th>{{ trans('messages.zuruu') }}</th>
+                                                <th>%</th>
+
+
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            </tbody>
+                                        </table>
                                     </div>
+
                                     <div class="col-md-4">
                                         <canvas id="visitors-chart" width="400" height="250"></canvas>
                                     </div>
@@ -214,8 +230,31 @@
 
     ?>
     <script>
-        $("#example").delegate('tr', 'click', function() {
-            alert($(this).attr('id'));
+        $("#example tr").click(function() {
+            var selected = $(this).hasClass("highlight");
+            $("#example tr").removeClass("highlight");
+            var itag = $(this).attr('id');
+            var type = $('#stype').val();
+
+            if(!selected)
+                $(this).addClass("highlight");
+            $.get('chartfillt/'+itag+'/'+type,function(data){
+                $("#child tbody").empty();
+                $.each(data,function(i,qwe){
+
+                    var sHtmls = "<tr>" +
+                        "   <td class='m1'>" + qwe.executor_abbr + "</td>" +
+                        "   <td class='m2'>" + qwe.plancomma+ "</td>" +
+                        "   <td class='m3'>" + qwe.budgetcomma+ "</td>" +
+                        "   <td class='m3'>" + number_format(qwe.percent, 2, ',', '.')+ "</td>" +
+                        "   <td class='m3'>" + qwe.diffcomma+ "</td>" +
+                        "   <td class='m3'>" + number_format(qwe.rpercent, 2, ',', '.')+ "</td>" +
+                        "</tr>";
+
+                    $("#child tbody").append(sHtmls);
+                });
+
+            });
         });
         $(function () {
             'use strict'

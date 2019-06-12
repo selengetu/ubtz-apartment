@@ -76,4 +76,5 @@ return [
     'barilga' => 'Их засвар',
     'tailanzaswar' => 'Их барилгын ажлын тайлан',
     'tailanbarilga' => 'Их засварын ажлын тайлан',
+    'baiguullaga' => 'Байгууллага',
 ];

@@ -163,6 +163,10 @@ Route::get('/chartfill/{id?}',function($id = 0){
     $dt=DB::table('V_TAILAN_PROJ_CHILD')->where('department_id','=',$id)->get();
     return $dt;
 });
+    Route::get('/chartfillt/{id?}/{id1?}',function($id = 0,$id1 = 0){
+        $dt=DB::table('V_TAILAN_PROJ_CHILDTYPE')->where('department_id','=',$id)->where('project_type','=',$id1)->get();
+        return $dt;
+    });
 Route::get('setlocale/{locale}',function($locale){
     Session::put('locale', $locale);
     return redirect()->route('home');
