@@ -62,6 +62,10 @@
                 $('#date2').val(qwe.end_date);
                 $('#prdate1').val(qwe.prstart_date);
                 $('#prdate2').val(qwe.prend_date);
+                $('#plan1').val(qwe.plan1);
+                $('#plan2').val(qwe.plan2);
+                $('#plan3').val(qwe.plan3);
+                $('#plan4').val(qwe.plan4);
             });
 
         });
