@@ -158,7 +158,7 @@
                                             <th>#</th>
                                             <th>{{ trans('messages.zahialagch') }}</th>
                                             <th>{{ trans('messages.guitsetgegch') }}</th>
-                                            <th width="400px">{{ trans('messages.ajliinner') }}</th>
+                                            <th width="300px">{{ trans('messages.ajliinner') }}</th>
                                             <th>{{ trans('messages.tuluwluguu') }}</th>
 
                                             <th>{{ trans('messages.tusuv') }}</th>
@@ -169,7 +169,7 @@
                                             <th>{{ trans('messages.ehelsen') }}</th>
                                             <th>{{ trans('messages.duussan') }}</th>
 
-                                            <th>{{ trans('messages.tailbar') }}</th>
+                                            <th width="300px">{{ trans('messages.tailbar') }}</th>
                                             <th></th>
                                             <th></th>
                                             <th></th>
@@ -203,7 +203,7 @@
                                                 <td>{{$projects->percent}}%</td>
                                                 <?php $sum_percent += ($projects->percent) ?>
                                                 <td>{{$projects->firstname}}</td>
-                                                <td width="45px">{{$projects->start_date}}
+                                                <td >{{$projects->start_date}}
                                                 <td>{{$projects->end_date}}
                                                 <td width="102px" @if($projects->state_id==2)
                                                     bgcolor="#ff8c00";

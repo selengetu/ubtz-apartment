@@ -171,4 +171,13 @@ Route::get('setlocale/{locale}',function($locale){
     Session::put('locale', $locale);
     return redirect()->route('home');
 });
+
+    Route::get('/information', 'InformationController@index')->name('information');
+    Route::get('/information/delete/{id}', 'InformationController@destroy');
+    Route::post('/addinformation','InformationController@store');
+    Route::post('/updateinformation','InformationController@update');
+    Route::get('/informationfill/{id?}',function($id = 0){
+        $dt=App\Information::where('information_id','=',$id)->get();
+        return $dt;
+    });
 });
