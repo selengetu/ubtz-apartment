@@ -116,7 +116,7 @@
                                         @foreach($hurungu as $hurungus)
                                             <tr >
                                                 <td>{{$no}}</td>
-                                                <td>{{$hurungus->department_name}}-{{$hurungus->executor_name}}</td>
+                                                <td>{{$hurungus->department_name}}-{{$hurungus->executor_abbr}}</td>
                                                 <td><?php
                                                     echo number_format($hurungus->plan)."<br>";
                                                     ?></td>
@@ -193,7 +193,7 @@
                 <form id="form2" method="post" action="addhurungu" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modal-title">{{ trans('messages.tsonh') }}</h5>
+                        <h5 class="modal-title" id="modal-title">Хөрөнгө оруулалт </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -223,7 +223,7 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="inputEmail4">Төлөвлөгөө</label>
-                                <input type="text"  class="form-control month" id="plan" name="plan" required="true">
+                                <input type="text"  class="form-control money" id="plan" name="plan" required="true">
 
                             </div>
 
