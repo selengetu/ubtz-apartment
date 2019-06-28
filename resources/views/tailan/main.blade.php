@@ -162,14 +162,18 @@
                                         @if($p!=$projects->department_id and $p>0 )
 
                                             <tr>
-                                                <td colspan="4"><center>Дүн </center></td>
-                                                <td>{{ number_format($i1)}}</td>
-                                                <td> {{ number_format($i2)}}</td>
-                                                <td> {{number_format($i3)}}</td>
-                                                <td>{{number_format($i4)}}</td>
-                                                <td>{{number_format($i5)}}</td>
-                                                <td>{{number_format($i6)}}</td>
-                                                <td>{{number_format($i7/($no-1),2)}}%</td>
+                                                <td colspan="4"><center><b>Дүн</b> </center></td>
+
+
+
+
+                                                <td><b>{{ number_format($i1)}}</b></td>
+                                                <td><b>{{ number_format($i2)}}</b> </td>
+                                                <td><b>{{number_format($i3)}}</b> </td>
+                                                <td><b>{{number_format($i4)}}</b></td>
+                                                <td><b>{{number_format($i5)}}</b></td>
+                                                <td><b>{{number_format($i6)}}</b></td>
+                                                <td><b>{{number_format($i7/($no-1),2)}}%</b></td>
                                                 <td colspan="4"></td>
                                             </tr>
                                         @endif
@@ -334,18 +338,18 @@
                                         if(++$iall === $all) { ?>
 
                                         <tr>
-                                            <td colspan="4"><center>Дүн </center></td>
+                                            <td colspan="4"><center><b>Дүн</b> </center></td>
 
 
 
 
-                                            <td>{{ number_format($i1)}}</td>
-                                            <td> {{ number_format($i2)}}</td>
-                                            <td> {{number_format($i3)}}</td>
-                                            <td>{{number_format($i4)}}</td>
-                                            <td>{{number_format($i5)}}</td>
-                                            <td>{{number_format($i6)}}</td>
-                                            <td>{{$i7}}</td>
+                                            <td><b>{{ number_format($i1)}}</b></td>
+                                            <td><b>{{ number_format($i2)}}</b> </td>
+                                            <td><b>{{number_format($i3)}}</b> </td>
+                                            <td><b>{{number_format($i4)}}</b></td>
+                                            <td><b>{{number_format($i5)}}</b></td>
+                                            <td><b>{{number_format($i6)}}</b></td>
+                                            <td><b>{{number_format($i7/($no-1),2)}}%</b></td>
                                             <td colspan="4"></td>
                                         </tr>
 
@@ -440,14 +444,18 @@
                                         @if($p!=$projects->department_id and $p>0 )
 
                                             <tr>
-                                                <td colspan="4"><center>Дүн</center></td>
-                                                <td>{{number_format($i1)}}</td>
-                                                <td> {{number_format($i2)}}</td>
-                                                <td> {{number_format($i3)}}</td>
-                                                <td>{{number_format($i4)}}</td>
-                                                <td>{{number_format($i5)}}</td>
-                                                <td>{{number_format($i6)}}</td>
-                                                <td>{{number_format($i7/($no-1),2)}}%</td>
+                                                <td colspan="4"><center><b>Дүн</b> </center></td>
+
+
+
+
+                                                <td><b>{{ number_format($i1)}}</b></td>
+                                                <td><b>{{ number_format($i2)}}</b> </td>
+                                                <td><b>{{number_format($i3)}}</b> </td>
+                                                <td><b>{{number_format($i4)}}</b></td>
+                                                <td><b>{{number_format($i5)}}</b></td>
+                                                <td><b>{{number_format($i6)}}</b></td>
+                                                <td><b>{{number_format($i7/($no-1),2)}}%</b></td>
                                                 <td colspan="2"></td>
                                             </tr>
                                         @endif
@@ -608,18 +616,18 @@
                                         if(++$iall === $all) { ?>
 
                                         <tr>
-                                            <td colspan="4"><center>Дүн </center></td>
+                                            <td colspan="4"><center><b>Дүн</b> </center></td>
 
 
 
 
-                                            <td>{{ number_format($i1)}}</td>
-                                            <td> {{ number_format($i2)}}</td>
-                                            <td> {{number_format($i3)}}</td>
-                                            <td>{{number_format($i4)}}</td>
-                                            <td>{{number_format($i5)}}</td>
-                                            <td>{{number_format($i6)}}</td>
-                                            <td>{{$i7}}</td>
+                                            <td><b>{{ number_format($i1)}}</b></td>
+                                            <td><b>{{ number_format($i2)}}</b> </td>
+                                            <td><b>{{number_format($i3)}}</b> </td>
+                                            <td><b>{{number_format($i4)}}</b></td>
+                                            <td><b>{{number_format($i5)}}</b></td>
+                                            <td><b>{{number_format($i6)}}%</b></td>
+                                            <td><b>{{$i7}}</b></td>
                                             <td colspan="2"></td>
                                         </tr>
 
