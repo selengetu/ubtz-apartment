@@ -1,15 +1,15 @@
 <script type="text/javascript">
 
-    $('#estate_id').change(function() {
+    $('#gstate_id').change(function() {
         var item=$(this).val();
 
         if(item == 1 || item == 2){
-            $('#epercentdiv').show();
-            $('#edatediv').show();
+            $('#gpercentdiv').show();
+            $('#gdatediv').show();
         }
         else{
-            $('#epercentdiv').hide();
-            $('#edatediv').hide();
+            $('#gpercentdiv').hide();
+            $('#gdatediv').hide();
         }
     });
     $('.money').inputmask("numeric", {

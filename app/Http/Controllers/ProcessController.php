@@ -123,6 +123,12 @@ class ProcessController extends Controller
                 $process = DB::table('Project')
                     ->where('project_id',$data)
                     ->update(['state_id' => $states[0]->state,'description' => $description[0]->description]);
+                if( $states[0]->state == 1){
+                    $bud = DB::select("select t.budget from Project t where t.project_id=" . $data . "");
+                    $process = DB::table('Project')
+                        ->where('project_id',$data)
+                        ->update(['economic' => $bud]);
+                }
             }
 
         }

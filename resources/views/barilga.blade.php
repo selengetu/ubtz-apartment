@@ -182,7 +182,12 @@
                                             <tr >
                                                 <td>{{$no}}</td>
                                                 <td>{{$projects->department_name}} - {{$projects->childabbr}}</td>
-                                                <td>{{$projects->executor_abbr}}</td>
+                                                <td>@if($projects->method_code==3)
+                                                     По договору
+                                                    @else
+                                                    {{$projects->executor_abbr}}
+                                                        @endif
+                                                </td>
                                                 <td>{{$projects->project_name}}<br>{{$projects->project_name_ru}}</td>
                                                 <td><?php
                                                     echo number_format($projects->plan)."<br>";
@@ -238,7 +243,7 @@
                                                     @endif
                                                         @endif
                                                 </td>
-                                                <td><button type="button" class="btn btn-danger delete btn-sm" id="deleteproj" onclick="deleteproj({{$projects->project_id}})">  <i class="fa fa-trash" style="color: rgb(255, 255, 255);"></i></button></td>
+                                                <td><!-- <button type="button" class="btn btn-danger delete btn-sm" id="deleteproj" onclick="deleteproj({{$projects->project_id}})">  <i class="fa fa-trash" style="color: rgb(255, 255, 255);"></i></button> --> </td>
                                             </tr>
                                             <?php $no++; ?>
 
