@@ -30,7 +30,7 @@ Route::get('/blank', 'HomeController@blank')->name('blank');
 
 
 
-Route::match(['get', 'post'],'/barilga/', 'BarilgaController@index')->name('barilga');
+Route::match(['get', 'post'],'/barilga', 'BarilgaController@index')->name('barilga');
 Route::match(['get', 'post'],'/zaswar', 'BarilgaController@index')->name('zaswar');
 Route::post('/addproject','BarilgaController@store');
 Route::get('/project/delete/{id}', 'BarilgaController@destroy');

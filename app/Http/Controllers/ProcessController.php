@@ -49,7 +49,6 @@ class ProcessController extends Controller
     {
 
         $data= Request::input('gproject_id');
-
         $state = State::orderby('state_name_mn')->get();
         $method = Method::orderby('method_name')->get();
         $projecttype = Projecttype::orderby('project_type_name_mn')->get();
@@ -123,11 +122,17 @@ class ProcessController extends Controller
                 $process = DB::table('Project')
                     ->where('project_id',$data)
                     ->update(['state_id' => $states[0]->state,'description' => $description[0]->description]);
-                if( $states[0]->state == 1){
-                    $bud = DB::select("select t.budget from Project t where t.project_id=" . $data . "");
+                if($states[0]->state == 1){
+                    $bud = DB::select("select case when count(*)<1 then 0 else max(nvl(t.budget,0)) end budget from Project t where t.project_id=" . $data . "")[0]->budget;
                     $process = DB::table('Project')
                         ->where('project_id',$data)
                         ->update(['economic' => $bud]);
+                }
+                if( $state[0]->state != 1){
+                    $process = DB::table('Project')
+
+                        ->where('project_id',$data)
+                        ->update(['economic' => 0]);
                 }
             }
 
@@ -138,12 +143,27 @@ class ProcessController extends Controller
                 $process = DB::table('Project')
                     ->where('project_id',$data)
                     ->update(['budget' => $budget[0]->totalbudget,'state_id' => $states[0]->state,'percent' => Request::input('gpercent'),'prend_date' => Request::input('gdate'),'description' => $description[0]->description]);
+                if( $states[0]->state == 1){
+                    $bud = DB::select("select case when count(*)<1 then 0 else max(nvl(t.budget,0)) end budget from Project t where t.project_id=" . $data . "")[0]->budget;
+                    $process = DB::table('Project')
+
+                        ->where('project_id',$data)
+                        ->update(['economic' => $bud]);
+                }
+                if( $state[0]->state != 1){
+                    $process = DB::table('Project')
+
+                        ->where('project_id',$data)
+                        ->update(['economic' => 0]);
+                }
             }
 
             if($states == NULL){
                 $process = DB::table('Project')
                     ->where('project_id',$data)
                     ->update(['budget' => $budget[0]->totalbudget,'percent' => Request::input('gpercent'),'prend_date' => Request::input('gdate')]);
+
+
             }
 
         }
@@ -186,6 +206,18 @@ class ProcessController extends Controller
                         $process = DB::table('Project')
                             ->where('project_id', $data)
                             ->update(['state_id' => $state[0]->state,'description' => $description[0]->description]);
+                        if( $state[0]->state == 1){
+                            $bud = DB::select("select case when count(*)<1 then 0 else max(nvl(t.budget,0)) end budget from Project t where t.project_id=" . $data . "")[0]->budget;
+                            $process = DB::table('Project')
+                                ->where('project_id',$data)
+                                ->update(['economic' => $bud]);
+                        }
+                        if( $state[0]->state != 1){
+                            $process = DB::table('Project')
+
+                                ->where('project_id',$data)
+                                ->update(['economic' => 0]);
+                        }
                     }
                 }
             }
@@ -196,6 +228,18 @@ class ProcessController extends Controller
                 $process = DB::table('Project')
                     ->where('project_id',$data)
                     ->update(['budget' => $budget[0]->totalbudget,'state_id' => $state[0]->state,'percent' => Request::input('gpercent'),'prend_date' => Request::input('gdate'),'description' => $description[0]->description]);
+                if( $state[0]->state == 1){
+                    $bud = DB::select("select case when count(*)<1 then 0 else max(nvl(t.budget,0)) end budget from Project t where t.project_id=" . $data . "")[0]->budget;
+                    $process = DB::table('Project')
+
+                        ->where('project_id',$data)
+                        ->update(['economic' => $bud]);
+                }
+                if( $state[0]->state != 1){
+                    $process = DB::table('Project')
+                        ->where('project_id',$data)
+                        ->update(['economic' => 0]);
+                }
             }
 
             if($state == NULL){
@@ -276,6 +320,19 @@ class ProcessController extends Controller
             $process = DB::table('Project')
                 ->where('project_id', $data)
                 ->update(['state_id' => $state[0]->state,'description' => $description[0]->description]);
+            if( $state[0]->state == 1){
+                $bud = DB::select("select case when count(*)<1 then 0 else max(nvl(t.budget,0)) end budget from Project t where t.project_id=" . $data . "")[0]->budget;
+                $process = DB::table('Project')
+
+                    ->where('project_id',$data)
+                    ->update(['economic' => $bud]);
+            }
+            if( $state[0]->state != 1){
+                $process = DB::table('Project')
+
+                    ->where('project_id',$data)
+                    ->update(['economic' => 0]);
+            }
         }
         if($state == NULL){
             $process = DB::table('Project')

@@ -164,16 +164,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </p>
             </a>
             <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                      <a href="{{ route('barilga') }}" class="nav-link">
-                        <i class="fa fa-circle-o nav-icon"></i>
-                        <p> {{ trans('messages.barilga') }}</p>
-                      </a>
-                    </li>
+
               <li class="nav-item">
                 <a href="{{ route('zaswar') }}" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
                   <p> {{ trans('messages.zaswar') }}</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('barilga') }}" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p> {{ trans('messages.barilga') }}</p>
                 </a>
               </li>
               <li class="nav-item">
