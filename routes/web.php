@@ -140,6 +140,8 @@ Route::match(['get', 'post'],'/analyseib', 'TailanController@analyse')->name('an
 Route::match(['get', 'post'],'/analyseiz', 'TailanController@analyse')->name('analyseiz');
 Route::match(['get', 'post'],'/analysehu', 'TailanController@analysehu')->name('analysehu');
 Route::match(['get', 'post'],'/album', 'TailanController@album')->name('album');
+Route::match(['get', 'post'],'/detailib', 'TailanController@detail')->name('detailib');
+Route::match(['get', 'post'],'/detailiz', 'TailanController@detail')->name('detailiz');
 
 Route::get('/profile', 'UserController@index')->name('profile');
 Route::post('/changePassword','UserController@postCredentials');

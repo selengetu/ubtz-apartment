@@ -388,6 +388,7 @@ order by u.report_rowno");
         $project =DB::select("select  * from V_PROJECT t  where 1=1 and t.method_code=3 " .$query. " order by project_id");
         return view('tailan.geree')->with(['sstate_id'=>$sstate_id,'srespondent_emp_id'=>$srespondent_emp_id,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'sprojecttype'=>$sprojecttype,'gproject_id'=>$gproject_id,'data'=>$data,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype]);
     }
+
     public function analyse()
     {
 
@@ -426,9 +427,76 @@ order by t.department_id");
         $t2 =DB::select("select d.executor_name, t.department_child,d.executor_abbr,t.department_id, t.department_name ,sum(t.plan) as plan, sum(t.budget) as budget, sum(t.estimation) as estimation,  (sum(t.budget)/sum(t.plan))*100 as percent, sum(t.budget)-sum(t.plan) as diff,count(t.executor_id)as niit, (sum(t.percent)/count(t.percent)) as rpercent from V_PROJECT t , CONST_EXECUTOR d
 where t.department_child=d.executor_id and t.department_id=2 ".$query. "
 group by t.department_child,d.executor_name,t.department_id, t.department_name,d.executor_abbr");
-
+        $det= DB::select("select b.* ,q.* from 
+(select d.department_name, t.department_id,d.department_type, sum(t.plan) as plan, sum(t.budget) as budget, sum(t.estimation) as estimation,  (sum(t.budget)/sum(t.plan))*100 as percent, sum(t.budget)-sum(t.plan) as diff, (sum(t.percent)/count(percent)) as rpercent , count(t.project_id) as ajliintoo from V_PROJECT t , CONST_DEPARTMENT d
+where t.department_id=d.department_id  ".$query. "
+group by d.department_type,t.department_id, d.department_name
+order by t.department_id) b inner join 
+(SELECT * FROM 
+(
+SELECT department_id ,state_id
+        FROM project 
+        where 1=1  ".$query. "
+      )
+PIVOT  
+(count(state_id) FOR state_id IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)
+)
+ORDER BY department_id) q
+on q.department_id=b.department_id");;
         $project =DB::select("select  * from V_PROJECT t  order by project_id");
         return view('tailan.analyse')->with(['t'=>$t,'t2'=>$t2,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype,'sprojecttype'=>$sprojecttype]);
+
+
+    }
+    public function detail()
+    {
+
+        if(Route::getFacadeRoot()->current()->uri()== 'detailib'){
+            $sprojecttype=2;
+        }
+
+        if(Route::getFacadeRoot()->current()->uri()== 'detailiz'){
+            $sprojecttype=1;
+        }
+        $query = "";
+        $state = State::orderby('state_name_mn')->get();
+        $method = Method::orderby('method_name')->get();
+        $projecttype = Projecttype::orderby('project_type_name_mn')->get();
+        $constructor = Constructor::orderby('department_abbr')->get();
+        $executor = Executor::orderby('executor_abbr')->get();
+
+        $employee =DB::select('select  * from V_CONST_EMPLOYEE t where t.is_engineer=1 order by firstname');
+
+
+
+        if ($sprojecttype!=NULL && $sprojecttype !=0) {
+            $query.=" and project_type = ".$sprojecttype."";
+
+        }
+        else
+        {
+            $query.=" ";
+
+        }
+
+        $t= DB::select("select b.* ,q.* from 
+(select d.department_name, t.department_id,d.department_type, sum(t.plan) as plan, sum(t.budget) as budget, sum(t.estimation) as estimation,  (sum(t.budget)/sum(t.plan))*100 as percent, sum(t.budget)-sum(t.plan) as diff, (sum(t.percent)/count(percent)) as rpercent , count(t.project_id) as ajliintoo from V_PROJECT t , CONST_DEPARTMENT d
+where t.department_id=d.department_id  ".$query. "
+group by d.department_type,t.department_id, d.department_name
+order by t.department_id) b inner join 
+(SELECT * FROM 
+(
+SELECT department_id ,state_id
+        FROM project 
+        where 1=1  ".$query. "
+      )
+PIVOT  
+(count(state_id) FOR state_id IN (1 as haasan,2 as duussan ,3 as gdag,4 as ghots,5 as gadgeree ,6 as nem,7 as eune,8 as egeree,9 as ezurag,10 as etul,11 as emater,12 as esanh ,13 as eguits ,14 as etusuv,15 as ehleegui ,16 as boloogui)
+)
+ORDER BY department_id) q
+on q.department_id=b.department_id");;
+        $project =DB::select("select  * from V_PROJECT t  order by project_id");
+        return view('tailan.detail')->with(['t'=>$t,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype,'sprojecttype'=>$sprojecttype]);
 
 
     }

@@ -308,6 +308,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       </a>
                   </li>
                 <li class="nav-item">
+                  <a href="{{ route('detailiz') }}" class="nav-link">
+                    <i class="fa fa-circle-o nav-icon"></i>
+                    <p>{{ trans('messages.zaswar') }} /дет/</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ route('detailib') }}" class="nav-link">
+                    <i class="fa fa-circle-o nav-icon"></i>
+                    <p>{{ trans('messages.barilga') }} /дет/</p>
+                  </a>
+                </li>
+                <li class="nav-item">
                   <a  class="nav-link">
                     <i class="fa fa-circle-o nav-icon"></i>
                     <p>{{ trans('messages.hurungu') }}</p>
