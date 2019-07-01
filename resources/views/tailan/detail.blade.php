@@ -83,7 +83,14 @@
                                             <?php $sum_percent = 0 ?>
                                             <?php $sum_rpercent = 0 ?>
                                             <?php $sum_budget = 0 ?>
-                                            <?php $sum_diff = 0 ?>
+                                            <?php $sum_ajliintoo = 0 ?>
+                                            <?php $sum_haasan = 0 ?>
+                                            <?php $sum_duussan = 0 ?>
+                                            <?php $sum_gdag = 0 ?>
+                                            <?php $sum_ghots = 0 ?>
+                                            <?php $sum_gadgeree = 0 ?>
+                                            <?php $sum_nem = 0 ?>
+                                            <?php $sum_boloogui = 0 ?>
                                             <tr role="row">
                                                 <th>#</th>
                                                 <th>{{ trans('messages.alba') }}</th>
@@ -131,9 +138,9 @@
                                                     <td>{{$projects->gadgeree}}</td>
                                                     <?php $sum_gadgeree += ($projects->gadgeree) ?>
                                                     <td>{{$projects->nem}}</td>
-                                                    <?php $sum_nem += ($projects->rpercent) ?>
+                                                    <?php $sum_nem += ($projects->nem) ?>
                                                     <td>{{$projects->boloogui}}</td>
-                                                    <?php $sum_rpercent += ($projects->rpercent) ?>
+                                                    <?php $sum_boloogui += ($projects->boloogui) ?>
 
 
                                                 </tr>
@@ -149,11 +156,16 @@
                                                     ?></td>
                                                 <td>{{number_format($sum_percent/($no-1), 2, ',', '.')}}%</td>
                                                 <td><?php
-                                                    echo number_format($sum_diff)."<br>";
+                                                    echo number_format($sum_ajliintoo)."<br>";
                                                     ?></td>
 
-                                                <td>{{number_format($sum_rpercent/($no-1), 2, ',', '.')}}%</td>
-
+                                                <td>{{number_format($sum_haasan)}}</td>
+                                                <td>{{number_format($sum_duussan)}}</td>
+                                                <td>{{number_format($sum_gdag)}}</td>
+                                                <td>{{number_format($sum_ghots)}}</td>
+                                                <td>{{number_format($sum_gadgeree)}}</td>
+                                                <td>{{number_format($sum_nem)}}</td>
+                                                <td>{{number_format($sum_boloogui)}}</td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -165,7 +177,16 @@
                                             <?php $sum_percent = 0 ?>
                                             <?php $sum_rpercent = 0 ?>
                                             <?php $sum_budget = 0 ?>
-                                            <?php $sum_diff = 0 ?>
+                                            <?php $sum_eune = 0 ?>
+                                            <?php $sum_ezurag = 0 ?>
+                                            <?php $sum_etul = 0 ?>
+                                            <?php $sum_emater = 0 ?>
+                                            <?php $sum_esanh = 0 ?>
+                                            <?php $sum_eguits = 0 ?>
+                                            <?php $sum_etusuv = 0 ?>
+                                            <?php $sum_ehleegui = 0 ?>
+                                            <?php $sum_egeree = 0 ?>
+
                                             <tr role="row">
                                                 <th>#</th>
                                                 <th>{{ trans('messages.alba') }}</th>
@@ -188,23 +209,23 @@
                                                     <td>{{$no}}</td>
                                                     <td>{{$projects->department_name}}</td>
                                                     <td>{{$projects->eune}}</td>
-                                                    <?php $sum_rpercent += ($projects->rpercent) ?>
+                                                    <?php $sum_eune += ($projects->eune) ?>
                                                     <td>{{$projects->egeree}}</td>
-                                                    <?php $sum_rpercent += ($projects->rpercent) ?>
+                                                    <?php $sum_egeree += ($projects->egeree) ?>
                                                     <td>{{$projects->ezurag}}</td>
-                                                    <?php $sum_rpercent += ($projects->rpercent) ?>
+                                                    <?php $sum_ezurag += ($projects->ezurag) ?>
                                                     <td>{{$projects->etul}}</td>
-                                                    <?php $sum_rpercent += ($projects->rpercent) ?>
+                                                    <?php $sum_etul+= ($projects->etul) ?>
                                                     <td>{{$projects->emater}}</td>
-                                                    <?php $sum_rpercent += ($projects->rpercent) ?>
+                                                    <?php $sum_emater += ($projects->emater) ?>
                                                     <td>{{$projects->esanh}}</td>
-                                                    <?php $sum_rpercent += ($projects->rpercent) ?>
+                                                    <?php $sum_esanh += ($projects->esanh) ?>
                                                     <td>{{$projects->eguits}}</td>
-                                                    <?php $sum_rpercent += ($projects->rpercent) ?>
+                                                    <?php $sum_eguits += ($projects->eguits) ?>
                                                     <td>{{$projects->etusuv}}</td>
-                                                    <?php $sum_rpercent += ($projects->rpercent) ?>
+                                                    <?php $sum_etusuv += ($projects->etusuv) ?>
                                                     <td>{{$projects->ehleegui}}</td>
-                                                    <?php $sum_rpercent += ($projects->rpercent) ?>
+                                                    <?php $sum_ehleegui += ($projects->ehleegui) ?>
 
                                                 </tr>
                                                 <?php $no++; ?>
@@ -212,17 +233,33 @@
                                             <tr>
                                                 <td colspan="2">Нийт </td>
                                                 <td><?php
-                                                    echo number_format($sum_plan)."<br>";
-                                                    ?></td>
-                                                <td><?php
-                                                    echo number_format($sum_budget)."<br>";
-                                                    ?></td>
-                                                <td>{{number_format($sum_percent/($no-1), 2, ',', '.')}}%</td>
-                                                <td><?php
-                                                    echo number_format($sum_diff)."<br>";
+                                                    echo number_format($sum_eune)."<br>";
                                                     ?></td>
 
-                                                <td>{{number_format($sum_rpercent/($no-1), 2, ',', '.')}}%</td>
+                                                <td><?php
+                                                    echo number_format($sum_egeree)."<br>";
+                                                    ?></td>
+                                                <td><?php
+                                                    echo number_format($sum_ezurag)."<br>";
+                                                    ?></td>   <td><?php
+                                                    echo number_format($sum_etul)."<br>";
+                                                    ?></td>
+                                                <td><?php
+                                                    echo number_format($sum_emater)."<br>";
+                                                    ?></td>
+                                                <td><?php
+                                                    echo number_format($sum_esanh)."<br>";
+                                                    ?></td>
+                                                <td><?php
+                                                    echo number_format($sum_eguits)."<br>";
+                                                    ?></td>
+                                                <td><?php
+                                                    echo number_format($sum_etusuv)."<br>";
+                                                    ?></td>
+                                                <td><?php
+                                                    echo number_format($sum_ehleegui)."<br>";
+                                                    ?></td>
+
 
                                             </tr>
                                             </tbody>
