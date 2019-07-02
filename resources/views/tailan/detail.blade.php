@@ -34,15 +34,19 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body text-center">
-                            <form method="post" action="analyse">
+                            <form method="post"  @if($sprojecttype ==1 ) action="detailiz"  @elseif($sprojecttype ==2 ) action="detailib" @endif >
+                                @csrf
                                 <div class="col-md-12" data-scrollable="true" data-height="400" >
                                     <div class="row" >
                                         <div class="form-group col-md-2">
-
-                                            <label for="inputEmail4">{{ trans('messages.sar') }}</label>
-                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                            <input type="hidden" name="stype"  id="stype" class="form-control" value="{{$sprojecttype}}">
-                                            <input type="text" name="month"  id="stype" class="form-control" value="">
+                                            <label for="inputAddress2">{{ trans('messages.ehelsen') }}</label>
+                                            <input class="form-control form-control-inline input-medium date-picker" name="sdate1" id="sdate1"
+                                                   size="16" type="text" value="">
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label for="inputCity">{{ trans('messages.duussan') }}</label>
+                                            <input class="form-control form-control-inline input-medium date-picker" name="sdate2" id="sdate2"
+                                                   size="16" type="text" value="">
                                         </div>
 
                                         <div class="form-group col-md-2">

@@ -466,7 +466,18 @@ on q.department_id=b.department_id");;
         $executor = Executor::orderby('executor_abbr')->get();
 
         $employee =DB::select('select  * from V_CONST_EMPLOYEE t where t.is_engineer=1 order by firstname');
+        $startdate= Input::get('sdate1');
+        $enddate = Input::get('sdate2');
 
+        if ($startdate !=0 && $startdate && $enddate !=0 && $enddate !=NULL) {
+            $query.="and end_date between '".$startdate."' and '".$enddate." 23:59:59'";
+
+        }
+        else
+        {
+            $query.=" ";
+
+        }
 
 
         if ($sprojecttype!=NULL && $sprojecttype !=0) {

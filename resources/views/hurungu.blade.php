@@ -118,7 +118,7 @@
                                                 <td>{{$no}}</td>
                                                 <td>{{$hurungus->department_name}}-{{$hurungus->executor_abbr}}</td>
                                                 <td><?php
-                                                    echo number_format($hurungus->plan)."<br>";
+                                                    echo number_format($hurungus->splan)."<br>";
                                                     ?></td>
                                                 <td><?php
                                                     echo number_format($hurungus->plan1)."<br>";
@@ -222,8 +222,6 @@
 
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="inputEmail4">Төлөвлөгөө</label>
-                                <input type="text"  class="form-control money" id="plan" name="plan" required="true">
 
                             </div>
 
@@ -308,7 +306,6 @@
                 $('#budget2').val(qwe.budget2);
                 $('#budget3').val(qwe.budget3);
                 $('#budget4').val(qwe.budget4);
-                $('#plan').val(qwe.plan);
                 $('#plan1').val(qwe.plan1);
                 $('#plan2').val(qwe.plan2);
                 $('#plan3').val(qwe.plan3);
@@ -321,6 +318,28 @@
         });
 
     };
+    $('#example').dataTable( {
+        stateSave: true,
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'excel', 'pdf'
+        ],
+        "language": {
+            "lengthMenu": " _MENU_ бичлэг",
+            "zeroRecords": "Бичлэг олдсонгүй",
+            "info": "_PAGE_ ээс _PAGES_ хуудас" ,
+            "infoEmpty": "Бичлэг олдсонгүй",
+            "infoFiltered": "(filtered from _MAX_ total records)",
+            "search": "Хайлт:",
+            "paginate": {
+                "first":      "Эхнийх",
+                "last":       "Сүүлийнх",
+                "next":       "Дараагийнх",
+                "previous":   "Өмнөх"
+            },
+        },
+        "pageLength": 10
+    } );
     $('#deletehurungu').on('click',function(){
 
         var itag = $('#id').val();

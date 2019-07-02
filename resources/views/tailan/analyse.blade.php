@@ -34,7 +34,8 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body text-center">
-                            <form method="post" action="analyse">
+                            <form method="post" @if($sprojecttype ==1 ) action="analyseiz"  @elseif($sprojecttype ==2 ) action="analyseib" @endif>
+                                @csrf
                                 <div class="col-md-12" data-scrollable="true" data-height="400" >
                                     <div class="row" >
                                         <div class="form-group col-md-2">
