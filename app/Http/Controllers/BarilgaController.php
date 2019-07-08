@@ -168,15 +168,15 @@ class BarilgaController extends Controller
         $project->plan_year = 2019;
         $project->project_name = Request::input('project_name');
         $project->project_name_ru = Request::input('project_name_ru');
-        $project->budget =preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('budget'));
-        $project->contract =preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('geree'));
+        $project->budget =preg_replace('/[a-zZ-a,]/', '',Request::input('budget'));
+        $project->contract =preg_replace('/[a-zZ-a,]/', '',Request::input('geree'));
         $project->contract_num =Request::input('gereenum');
-        $project->estimation = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('estimation'));
-        $project->plan = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan'));
-        $project->plan1 = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan1'));
-        $project->plan2 = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan2'));
-        $project->plan3 = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan3'));
-        $project->plan4 = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan4'));
+        $project->estimation = preg_replace('/[a-zZ-a,]/', '',Request::input('estimation'));
+        $project->plan = preg_replace('/[a-zZ-a,]/', '',Request::input('plan'));
+        $project->plan1 = preg_replace('/[a-zZ-a,]/', '',Request::input('plan1'));
+        $project->plan2 = preg_replace('/[a-zZ-a,]/', '',Request::input('plan2'));
+        $project->plan3 = preg_replace('/[a-zZ-a,]/', '',Request::input('plan3'));
+        $project->plan4 = preg_replace('/[a-zZ-a,]/', '',Request::input('plan4'));
         $project->department_id = Request::input('constructor_id');
         $project->project_type =$sprojecttype;
         if (Request::input('respondent_emp_id')!=NULL && Request::input('respondent_emp_id') !=0) {
@@ -195,7 +195,7 @@ class BarilgaController extends Controller
         $project->department_child = Request::input('childabbr_id');
         $project->added_user_id = Auth::user()->id;
         $project->project_name_ru = Request::input('project_name_ru');
-        $project->economic = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('economic'));
+        $project->economic = preg_replace('/[a-zZ-a,]/', '',Request::input('economic'));
         $project->description = Request::input('description');
         $project->start_date = Request::input('date1');
         $project->end_date = Request::input('date2');
@@ -232,13 +232,13 @@ class BarilgaController extends Controller
         $project = DB::table('Project')
             ->where('project_id', Request::input('id'))
             ->update(['project_name' => Request::input('project_name'),'project_name_ru' => Request::input('project_name_ru')
-               , 'contract' =>preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('geree')) ,'contract_num' =>Request::input('gereenum') ,'estimation' =>preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('estimation')) ,
-                'plan' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan')),'department_id' => Request::input('constructor_id'),'department_child' => Request::input('childabbr_id')
-                ,'plan1' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan1')),'plan2' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan2'))
-                ,'plan3' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan3')),'plan4' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan4'))
+               , 'contract' =>preg_replace('/[a-zZ-a,]/', '',Request::input('geree')) ,'contract_num' =>Request::input('gereenum') ,'estimation' =>preg_replace('/[a-zZ-a,]/', '',Request::input('estimation')) ,
+                'plan' => preg_replace('/[a-zZ-a,]/', '',Request::input('plan')),'department_id' => Request::input('constructor_id'),'department_child' => Request::input('childabbr_id')
+                ,'plan1' => preg_replace('/[a-zZ-a,]/', '',Request::input('plan1')),'plan2' => preg_replace('/[a-zZ-a,]/', '',Request::input('plan2'))
+                ,'plan3' => preg_replace('/[a-zZ-a,]/', '',Request::input('plan3')),'plan4' => preg_replace('/[a-zZ-a,]/', '',Request::input('plan4'))
                 ,'project_type' => Request::input('project_type'),'start_date' => Request::input('date1'),'end_date' => Request::input('date2'),'prstart_date' => Request::input('prdate1'),'prend_date' => Request::input('prdate2')
                 ,'method_code' => Request::input('method_code'),'percent' => Request::input('percent'),'executor_id' => Request::input('executor_id')
-                ,'project_name_ru' => Request::input('project_name_ru'),'economic' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('economic')),'description' => Request::input('description')]);
+                ,'project_name_ru' => Request::input('project_name_ru'),'economic' => preg_replace('/[a-zZ-a,]/', '',Request::input('economic')),'description' => Request::input('description')]);
 
        if(Auth::user()->user_grant !=6 )
        {

@@ -47,7 +47,7 @@ class ProcessController extends Controller
     }
     public function store()
     {
-
+        dd( preg_replace('/[a-zZ-a,]/', '',Request::input('gbudget')));
         $data= Request::input('gproject_id');
         $state = State::orderby('state_name_mn')->get();
         $method = Method::orderby('method_name')->get();
@@ -57,7 +57,7 @@ class ProcessController extends Controller
         $employee =DB::select('select  * from V_CONST_EMPLOYEE t where t.is_engineer=1 order by firstname');
         $process = new Process;
         $process ->project_id = Request::input('gproject_id');
-        $process ->budget = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('gbudget'));
+        $process ->budget = preg_replace('/[a-zZ-a,]/', '',Request::input('gbudget'));
         $process ->month = Request::input('gmonth');
         $process ->register_date = Carbon::now();
         $process ->respondent_emp_id = Auth::user()->id;
@@ -106,7 +106,7 @@ class ProcessController extends Controller
         $states = DB::select("select t.state_id as state from V_PROCESS t where t.process_id = (select max(v.process_id) from V_PROCESS v where v.project_id=".$data.")");
         $description = DB::select("select t.description as description from V_PROCESS t where t.process_id = (select max(v.process_id) from V_PROCESS v where v.project_id=".$data.")");
 
-        if(Request::input('gpercent') == NULL){
+        if(Request::input('gstate_id') != 1){
 
             $plan = DB::select("select plan from V_PROJECT t where t.project_id=".$data."");
 
@@ -142,11 +142,10 @@ class ProcessController extends Controller
             if($states != NULL){
                 $process = DB::table('Project')
                     ->where('project_id',$data)
-                    ->update(['budget' => $budget[0]->totalbudget,'state_id' => $states[0]->state,'percent' => Request::input('gpercent'),'prend_date' => Request::input('gdate'),'description' => $description[0]->description]);
+                    ->update(['budget' => $budget[0]->totalbudget,'state_id' => $states[0]->state,'percent' => '100','prend_date' => Request::input('gdate'),'description' => $description[0]->description]);
                 if( $states[0]->state == 1){
                     $bud = DB::select("select case when count(*)<1 then 0 else max(nvl(t.budget,0)) end budget from Project t where t.project_id=" . $data . "")[0]->budget;
                     $process = DB::table('Project')
-
                         ->where('project_id',$data)
                         ->update(['economic' => $bud]);
                 }
@@ -161,7 +160,7 @@ class ProcessController extends Controller
             if($states == NULL){
                 $process = DB::table('Project')
                     ->where('project_id',$data)
-                    ->update(['budget' => $budget[0]->totalbudget,'percent' => Request::input('gpercent'),'prend_date' => Request::input('gdate')]);
+                    ->update(['budget' => $budget[0]->totalbudget,'percent' => '100','prend_date' => Request::input('gdate')]);
 
 
             }
@@ -183,7 +182,7 @@ class ProcessController extends Controller
         $data= Request::input('gproject_id');
         $process = DB::table('Project_process')
             ->where('process_id', Request::input('gprocess_id'))
-            ->update(['budget' =>  preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('gbudget')),'month' => Request::input('gmonth'),'year' => Request::input('gyear')
+            ->update(['budget' =>  preg_replace('/[a-zZ-a,]/', '',Request::input('gbudget')),'month' => Request::input('gmonth'),'year' => Request::input('gyear')
                 ,'description' => Request::input('gdescription'),'state_id' => Request::input('gstate_id')]);
 
         $state = DB::select("select t.state_id as state from V_PROCESS t where t.process_id = (select max(v.process_id) from V_PROCESS v where v.project_id=".$data.")");
@@ -193,7 +192,7 @@ class ProcessController extends Controller
 
 
 
-        if(Request::input('gpercent') == NULL){
+        if(Request::input('gstate_id') != 1){
 
             if($plan != NULL ) {
                 if ($plan[0]->plan != NULL) {
@@ -227,7 +226,7 @@ class ProcessController extends Controller
             if($state != NULL){
                 $process = DB::table('Project')
                     ->where('project_id',$data)
-                    ->update(['budget' => $budget[0]->totalbudget,'state_id' => $state[0]->state,'percent' => Request::input('gpercent'),'prend_date' => Request::input('gdate'),'description' => $description[0]->description]);
+                    ->update(['budget' => $budget[0]->totalbudget,'state_id' => $state[0]->state,'percent' => '100','prend_date' => Request::input('gdate'),'description' => $description[0]->description]);
                 if( $state[0]->state == 1){
                     $bud = DB::select("select case when count(*)<1 then 0 else max(nvl(t.budget,0)) end budget from Project t where t.project_id=" . $data . "")[0]->budget;
                     $process = DB::table('Project')
@@ -245,7 +244,7 @@ class ProcessController extends Controller
             if($state == NULL){
                 $process = DB::table('Project')
                     ->where('project_id',$data)
-                    ->update(['budget' => $budget[0]->totalbudget,'percent' => Request::input('gpercent'),'prend_date' => Request::input('gdate')]);
+                    ->update(['budget' => $budget[0]->totalbudget,'percent' => '100','prend_date' => Request::input('gdate')]);
             }
         }
        if (Request::hasFile('image')) {
@@ -325,7 +324,7 @@ class ProcessController extends Controller
                 $process = DB::table('Project')
 
                     ->where('project_id',$data)
-                    ->update(['economic' => $bud]);
+                    ->update(['economic' => $bud,'percent' => 100 ]);
             }
             if( $state[0]->state != 1){
                 $process = DB::table('Project')
