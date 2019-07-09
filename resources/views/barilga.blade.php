@@ -633,10 +633,10 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group col-md-3" id="gpercentdiv">
+                        <!--   <div class="form-group col-md-3" id="gpercentdiv" style="display:none">
                                 <label for="inputZip">{{ trans('messages.biylelt') }}</label>
                                 <input type="text" class="form-control" id="gpercent" name="gpercent" placeholder="99.9" maxlength="4">
-                            </div>
+                            </div> -->
                             <div class="form-group col-md-3" id="gdatediv">
                                 <label for="inputZip">{{ trans('messages.duusah') }}</label>
                                 <input class="form-control form-control-inline input-medium date-picker" name="gdate" id="gdate" placeholder="2019-04-15">
