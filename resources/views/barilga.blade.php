@@ -190,19 +190,19 @@
                                                 </td>
                                                 <td>{{$projects->project_name}}<br>{{$projects->project_name_ru}}</td>
                                                 <td><?php
-                                                    echo number_format($projects->plan)."<br>";
+                                                    echo number_format($projects->plan,2)."<br>";
                                                     ?></td>
                                                 <?php $sum_plan += ($projects->plan) ?>
                                                 <td><?php
-                                                    echo number_format($projects->estimation)."<br>";
+                                                    echo number_format($projects->estimation,2)."<br>";
                                                     ?></td>
                                                 <?php $sum_estimation += ($projects->estimation) ?>
                                                 <td><?php
-                                                    echo number_format($projects->budget)."<br>";
+                                                    echo number_format($projects->budget,2)."<br>";
                                                     ?></td>
                                                 <?php $sum_budget += ($projects->budget) ?>
                                                 <td><?php
-                                                    echo number_format($projects->economic)."<br>";
+                                                    echo number_format($projects->economic,2)."<br>";
                                                     ?></td>
                                                 <?php $sum_economic += ($projects->economic) ?>
                                                 <td>{{$projects->percent}}%</td>
@@ -257,16 +257,16 @@
                                             <td></td>
                                             <td></td>
                                             <td><b><?php
-                                                    echo number_format($sum_plan)."<br>";
+                                                    echo number_format($sum_plan,2)."<br>";
                                                     ?></b></td>
                                             <td><b><?php
-                                                    echo number_format($sum_estimation)."<br>";
+                                                    echo number_format($sum_estimation,2)."<br>";
                                                     ?></b></td>
                                             <td><b><?php
-                                                    echo number_format($sum_budget)."<br>";
+                                                    echo number_format($sum_budget,2)."<br>";
                                                     ?></b></td>
                                             <td><b><?php
-                                                    echo number_format($sum_economic)."<br>";
+                                                    echo number_format($sum_economic,2)."<br>";
                                                     ?></b></td>
                                             <td><b><?php
                                                     echo $no-1 == 0 ? 0 : number_format($sum_percent/($no-1),2,",",".")."%<br>";
