@@ -47,7 +47,7 @@ class ProcessController extends Controller
     }
     public function store()
     {
-        dd( preg_replace('/[a-zZ-a,]/', '',Request::input('gbudget')));
+
         $data= Request::input('gproject_id');
         $state = State::orderby('state_name_mn')->get();
         $method = Method::orderby('method_name')->get();
