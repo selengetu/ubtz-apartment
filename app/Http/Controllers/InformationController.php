@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Request;
-use App\Constructor;
-use App\Executor;
+use App\Information;
+use App\Informationtype;
 use DB;
 class InformationController extends Controller
 {
@@ -25,20 +25,26 @@ class InformationController extends Controller
      */
     public function index()
     {
-        $constructor = Constructor::orderby('department_name')->get();
-        $executor = Executor::all();
-        return view('information')->with(['constructor'=>$constructor,'executor'=>$executor]);
+        $information = Information::orderby('information_name')->get();
+        $type = Informationtype::all();
+        return view('information')->with(['information'=>$information,'type'=>$type]);
     }
 
     public function store()
     {
-
+        $inf= new Information();
+        $inf->information_name = Request::input('information_name');
+        $inf->img_path = Request::input('img_path');
+        $inf->information_type = Request::input('information_type');
+        $inf->save();
         return Redirect('information');
     }
 
     public function update(Request $request)
     {
-
+        $information= DB::table('INFORMATION')
+            ->where('information_id', Request::input('id'))
+            ->update(['information_name' => Request::input('information_name'),'information_type' => Request::input('information_type'),'img_path' => Request::input('img_path')]);
         return Redirect('information');
     }
 
@@ -50,7 +56,7 @@ class InformationController extends Controller
      */
     public function destroy($id)
     {
-        Executor::where('information_id', '=', $id)->delete();
+        Information::where('information_id', '=', $id)->delete();
         return Redirect('information');
     }
 }

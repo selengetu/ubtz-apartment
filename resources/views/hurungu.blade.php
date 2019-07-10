@@ -89,12 +89,14 @@
                                     <table class="table  table-bordered" id="example">
                                         <thead>
                                         <tr role="row">
-                                            <?php $sum_plan = 0 ?>
-                                            <?php $sum_estimation = 0 ?>
-                                            <?php $sum_budget = 0 ?>
-                                            <?php $sum_economic = 0 ?>
+                                            <?php $sum_splan = 0 ?>
+                                            <?php $sum_plan2 = 0 ?>
+                                            <?php $sum_plan1 = 0 ?>
+                                            <?php $sum_plan4 = 0 ?>
+                                            <?php $sum_plan3 = 0 ?>
+                                            <?php $sum_sbudget = 0 ?>
                                             <?php $sum_percent = 0 ?>
-
+                                            <?php $sum_diff = 0 ?>
                                             <th>#</th>
                                             <th width="140px">{{ trans('messages.zahialagch') }}</th>
                                             <th width="100px">{{ trans('messages.tuluwluguu') }}</th>
@@ -120,25 +122,31 @@
                                                 <td><?php
                                                     echo number_format($hurungus->splan)."<br>";
                                                     ?></td>
+                                                <?php $sum_splan += ($hurungus->splan) ?>
                                                 <td><?php
                                                     echo number_format($hurungus->plan1)."<br>";
                                                     ?></td>
+                                                <?php $sum_plan1 += ($hurungus->plan1) ?>
                                                 <td><?php
                                                     echo number_format($hurungus->plan2)."<br>";
                                                     ?></td>
+                                                <?php $sum_plan2 += ($hurungus->plan2) ?>
                                                 <td><?php
                                                     echo number_format($hurungus->plan3)."<br>";
                                                     ?></td>
-
+                                                <?php $sum_plan3 += ($hurungus->plan3) ?>
                                                 <td><?php
                                                     echo number_format($hurungus->plan4)."<br>";
                                                     ?></td>
-
+                                                <?php $sum_plan4 += ($hurungus->plan4) ?>
                                                 <td><?php
                                                     echo number_format($hurungus->sbudget)."<br>";
                                                     ?></td>
+                                                <?php $sum_sbudget += ($hurungus->sbudget) ?>
                                                 <td>{{number_format($hurungus->percent, 2, ',', '.')}}%</td>
+                                                <?php $sum_percent += ($hurungus->percent) ?>
                                                 <td>{{$hurungus->diff}}</td>
+                                                <?php $sum_diff += ($hurungus->diff) ?>
                                                 <td>{{$hurungus->description}}</td>
                                                 <td><button type="button" class="btn btn-warning btn-sm update" data-toggle="modal"  data-id="{{$hurungus->investment_id}}" tag="{{$hurungus->investment_id}}"  data-target="#hurungumodal" id="updatehurungu" onclick="updatehurungu({{$hurungus->investment_id}})">
                                                         <i class="fa fa-pencil" style="color: rgb(255, 255, 255);"></i>
@@ -146,7 +154,32 @@
                                             </tr>
                                             <?php $no++; ?>
                                         @endforeach
-
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td><b><?php
+                                                            echo number_format($sum_splan,2)."<br>";
+                                                            ?></b></td>
+                                                    <td><b><?php
+                                                            echo number_format($sum_plan1,2)."<br>";
+                                                            ?></b></td>
+                                                    <td><b><?php
+                                                            echo number_format($sum_plan2,2)."<br>";
+                                                            ?></b></td>
+                                                    <td><b><?php
+                                                            echo number_format($sum_plan3,2)."<br>";
+                                                            ?></b></td>
+                                                    <td><b><?php
+                                                            echo number_format($sum_plan4,2)."<br>";
+                                                            ?></b></td>
+                                                    <td><b><?php
+                                                            echo number_format($sum_percent,2)."<br>";
+                                                            ?></b></td>
+                                                    <td><b><?php
+                                                            echo number_format($sum_diff,2)."<br>";
+                                                            ?></b></td>
+                                                    <td></td>
+                                                </tr>
                                         </tbody>
 
                                     </table>

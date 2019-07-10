@@ -40,13 +40,9 @@
                                 <thead>
                                 <tr role="row" bgcolor="#d3d3d3">
                                     <th>#</th>
-                                    <th>Албан тушаал</th>
-                                    <th>Ажилтны овог</th>
-                                    <th>Ажилтны нэр</th>
-                                    <th>Хариуцах ажлын үндсэн чиглэл</th>
-                                    <th>Утасны дугаар</th>
-                                    <th>Ажилд орсон огноо</th>
-                                    <th>Ажлаас гарсан огноо</th>
+                                    <th>Төрөл</th>
+                                    <th>Товч утга</th>
+                                    <th>Зураг</th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -87,41 +83,24 @@
                 <div class="modal-body">
 
                     <div class="form-row">
-
                         <div class="form-group col-md-4">
-                            <label for="inputAddress">Овог</label>
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <input type="hidden" class="form-control" id="id" name="id">
-                            <input type="text" class="form-control" id="lastname" name="lastname" placeholder="" maxlength="50">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="inputAddress2">Нэр</label>
-                            <input type="text" class="form-control" id="firstname" name="firstname" placeholder="" maxlength="50">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="inputCity">Албан тушаал</label>
+                            <label for="inputCity">Төрөл</label>
                             <select class="form-control select2" id="prof_id" name="prof_id" >
 
                             </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="inputAddress2">Утасны дугаар</label>
-                            <input type="number" class="form-control" id="phone" name="phone" placeholder="" maxlength="8">
-                        </div>
-                        <div class="form-group col-md-12">
-                            <label for="inputAddress2">Хариуцах ажлын үндсэн чиглэл</label>
-                            <textarea class="form-control" rows="2" id="mainduty" name="mainduty"></textarea>
+                            <label for="inputAddress">Товч утга</label>
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <input type="hidden" class="form-control" id="id" name="id">
+                            <input type="text" class="form-control" id="lastname" name="lastname" placeholder="" maxlength="50">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="inputAddress2">Ажилд орсон огноо</label>
-                            <input class="form-control form-control-inline input-medium date-picker" name="date1" id="date1"
-                                   size="16" type="text" value="" required>
+                            <label for="inputAddress2">Зураг</label>
+                            <input type="text" class="form-control" id="firstname" name="firstname" placeholder="" maxlength="50">
                         </div>
-                        <div class="form-group col-md-4">
-                            <label for="inputCity">Ажлаас гарсан огноо</label>
-                            <input class="form-control form-control-inline input-medium date-picker" name="date2" id="date2"
-                                   size="16" type="text" value="" required>
-                        </div>
+
+
                     </div>
 
 
