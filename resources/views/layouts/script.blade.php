@@ -405,6 +405,7 @@
 
                     "   <td class='m1'>" + qwe.year + " - " + qwe.month+"</td>" +
                     "   <td class='m1'>" + qwe.budgetcomma+ "</td>" +
+                    "   <td class='m1'>" + qwe.state_name_mn+ "</td>" +
                     "   <td class='m1'>" + $type + "</td>" +
                     "   <td class='m1'><img src='/ibiz/public/profile_images/thumbnail/" +qwe.image_s + "'></td>" +
                     "   <td class='m1'>"+ $approve + "</td>" +
