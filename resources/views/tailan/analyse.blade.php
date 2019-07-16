@@ -73,13 +73,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body text-center">
-                            <button type="button" id="download-pdf" >
-                                Download PDF
-                            </button>
 
-                            <button type="button" id="download-pdf2" >
-                                Download Higher Quality PDF
-                            </button>
                             <div class="table-responsive">
                                 <div class="row">
 

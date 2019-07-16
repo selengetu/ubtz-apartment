@@ -236,7 +236,7 @@ class BarilgaController extends Controller
                 'plan' => preg_replace('/[a-zZ-a,]/', '',Request::input('plan')),'department_id' => Request::input('constructor_id'),'department_child' => Request::input('childabbr_id')
                 ,'plan1' => preg_replace('/[a-zZ-a,]/', '',Request::input('plan1')),'plan2' => preg_replace('/[a-zZ-a,]/', '',Request::input('plan2'))
                 ,'plan3' => preg_replace('/[a-zZ-a,]/', '',Request::input('plan3')),'plan4' => preg_replace('/[a-zZ-a,]/', '',Request::input('plan4'))
-                ,'project_type' => Request::input('project_type'),'start_date' => Request::input('date1'),'end_date' => Request::input('date2'),'prstart_date' => Request::input('prdate1'),'prend_date' => Request::input('prdate2')
+                ,'project_type' => Request::input('project_type'),'start_date' => Request::input('date1'),'end_date' => Request::input('date2'),'prstart_date' => Request::input('prdate1')
                 ,'method_code' => Request::input('method_code'),'percent' => Request::input('percent'),'executor_id' => Request::input('executor_id')
                 ,'project_name_ru' => Request::input('project_name_ru'),'economic' => preg_replace('/[a-zZ-a,]/', '',Request::input('economic')),'description' => Request::input('description')]);
 

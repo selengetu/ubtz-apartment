@@ -85,6 +85,7 @@
                 $('#gprocess_id').val(qwe.process_id);
                 $('#gproject_id').val(qwe.project_id);
                 $('#gbudget').val(qwe.budget);
+                $('#gdate').val(qwe.prend_date);
                 $('#gmonth').val(qwe.month);
                 $('#gdescription').val(qwe.description);
                 $('#gyear').val(qwe.year);
@@ -387,6 +388,7 @@
             $("#processtable tbody").empty();
             $.each(data,function(i,qwe){
                 var $approve;
+                var $date;
                 if(qwe.is_approved == 1){
                     $approve=''
                 }
@@ -401,11 +403,18 @@
                 else{
                     $type= qwe.description;
                 }
+                if(qwe.state_id != 1 || qwe.prend_date == null){
+                    $date= ''
+                }
+                else{
+
+                    $date= qwe.prend_date;
+                }
                 var sHtml = " <tr class='table-row' >" +
 
                     "   <td class='m1'>" + qwe.year + " - " + qwe.month+"</td>" +
                     "   <td class='m1'>" + qwe.budgetcomma+ "</td>" +
-                    "   <td class='m1'>" + qwe.state_name_mn+ "</td>" +
+                    "   <td class='m1'>" + qwe.state_name_mn+ " "+ $date+"</td>" +
                     "   <td class='m1'>" + $type + "</td>" +
                     "   <td class='m1'><img src='/ibiz/public/profile_images/thumbnail/" +qwe.image_s + "'></td>" +
                     "   <td class='m1'>"+ $approve + "</td>" +

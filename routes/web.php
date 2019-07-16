@@ -50,7 +50,7 @@ Route::get('/process/delete/{id}/{id1}', 'ProcessController@destroy');
 Route::post('/updateprocess','ProcessController@update');
 Route::post('/approveproc','ProcessController@approve');
 Route::get('/processfill/{id?}',function($id = 0){
-    $dt=App\Process::where('process_id','=',$id)->get();
+    $dt=DB::table('V_PROCESS')->where('process_id','=',$id)->get();
     return $dt;
 });
 Route::get('/projectprocessfill/{id?}',function($id = 0){
