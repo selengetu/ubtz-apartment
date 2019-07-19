@@ -38,7 +38,7 @@
                         <div class="m-scrollable" data-scrollable="true" data-height="400" >
                             <table class="table table-striped table-bordered" id="example">
                                 <thead>
-                                <tr role="row" bgcolor="#d3d3d3">
+                                <tr>
                                     <th>#</th>
                                     <th>Төрөл</th>
                                     <th>Товч утга</th>
@@ -47,6 +47,19 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                <?php $no = 1; ?>
+                                @foreach($information as $informations)
+                                    <tr>
+                                        <td>{{$no}}</td>
+                                        <td>{{$informations->type_name}}</td>
+                                        <td>{{$informations->information_name}}</td>
+                                        <td><a class='btn btn-xs btn-info see' data-toggle='modal' data-target='#photomodal' data-id="{{$informations->img_path}}" tag='{{$informations->img_path}}'><i class="fa fa-pencil-square-o" style="color: rgb(255, 255, 255); ">Зураг</i></a></td>
+                                        <td class='m1'> <a class='btn btn-xs btn-info update' data-toggle='modal' data-target='#exampleModal' data-id="{{$informations->information_id}}" tag='{{$informations->information_id}}'><i class="fa fa-pencil-square-o" style="color: rgb(255, 255, 255); "></i></a> </td>
+                                    </tr>
+                                    <?php $no++; ?>
+                                @endforeach
+
+
 
                                 </tbody>
                             </table>
@@ -70,12 +83,39 @@
         </div>
     </div>
 </section>
+<div class="modal fade " id="photomodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <form id="form2" action="post" enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-title">Зураг харах</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-row">
+
+                        <img id="imgpath" width="500px">
+
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <form id="form1" action="post">
+            <form id="form1" action="post" enctype="multipart/form-data">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modal-title">Шинэ ажилтан бүртгэх цонх</h5>
+                    <h5 class="modal-title" id="modal-title">Шинэ мэдээлэл цонх</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -85,19 +125,56 @@
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="inputCity">Төрөл</label>
-                            <select class="form-control select2" id="prof_id" name="prof_id" >
-
+                            <select class="form-control select2" id="information_type" name="information_type" >
+                                @foreach($type as $types)
+                                    <option value= "{{$types->type_id}}">{{$types->type_name}}</option>
+                                @endforeach
                             </select>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-8">
                             <label for="inputAddress">Товч утга</label>
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <input type="hidden" class="form-control" id="id" name="id">
-                            <input type="text" class="form-control" id="lastname" name="lastname" placeholder="" maxlength="50">
+                            <input type="text" class="form-control" id="information_name" name="information_name" placeholder="" maxlength="50">
                         </div>
-                        <div class="form-group col-md-4">
-                            <label for="inputAddress2">Зураг</label>
-                            <input type="text" class="form-control" id="firstname" name="firstname" placeholder="" maxlength="50">
+                        <div class="col-md-6">
+                            @if ($message = Session::get('success'))
+
+                                <div class="alert alert-success alert-block">
+
+                                    <button type="button" class="close" data-dismiss="alert">×</button>
+
+                                    <strong>{{ $message }}</strong>
+
+                                </div>
+
+                                <img src="images/{{ Session::get('image') }}">
+
+                            @endif
+
+
+
+                            @if (count($errors) > 0)
+
+                                <div class="alert alert-danger">
+
+                                    <strong>Whoops!</strong> There were some problems with your input.
+
+                                    <ul>
+
+                                        @foreach ($errors->all() as $error)
+
+                                            <li>{{ $error }}</li>
+
+                                        @endforeach
+
+                                    </ul>
+
+                                </div>
+
+                            @endif
+                            <input type="file" name="image" class="form-control">
+                                <img id="imgpath1" width="500px">
                         </div>
 
 
@@ -151,48 +228,41 @@
 <script>
     $('.update').on('click',function(){
         var title = document.getElementById("modal-title");
-        title.innerHTML = "Албан ажилтан засварлах цонх";
-        document.getElementById('form1').action = "updateemployee";
+        title.innerHTML = "Мэдээлэл засварлах цонх";
+        document.getElementById('form1').action = "updateinformation";
         document.getElementById('form1').method ="post"
         var itag=$(this).attr('tag');
-        $.get('employeefill/'+itag,function(data){
+        $.get('informationfill/'+itag,function(data){
             $.each(data,function(i,qwe){
-                $('#id').val(qwe.emp_id);
-                $('#firstname').val(qwe.firstname);
-                $('#lastname').val(qwe.lastname);
-                $('#date1').val(qwe.hired_date);
-                $('#date2').val(qwe.fired_date);
-                $('#prof_id').val(qwe.prof_id);
-                $('#mainduty').val(qwe.mainduty);
-                $('#phone').val(qwe.phone);
+                $('#id').val(qwe.information_id);
+                $('#information_name').val(qwe.information_name);
+                $('#information_type').val(qwe.information_type);
+                $("#imgpath1").attr('src',"http://192.168.4.176/barilga/public/profile_images/inf/"+qwe.img_path+"");
             });
 
         });
         $('.delete').show();
     });
+    $('.see').on('click',function(){
+        var itag=$(this).attr('tag');
+                $("#imgpath").attr('src',"http://192.168.4.176/barilga/public/profile_images/inf/"+itag+"");
+    });
 </script>
 <script>
     $('.add').on('click',function(){
         var title = document.getElementById("modal-title");
-        title.innerHTML = "Шинэ ажилтан бүртгэх цонх";
-        document.getElementById('form1').action = "addemployee"
+        title.innerHTML = "Шинэ мэдээлэл бүртгэх цонх";
+        document.getElementById('form1').action = "addinformation"
         document.getElementById('form1').method ="post"
         $('#id').val('');
-        $('#firstname').val('');
-        $('#lastname').val('');
-        $('#date1').val('');
-        $('#date2').val('');
-        $('#prof_id').val(1);
-        $('#mainduty').val('');
-        $('#phone').val('');
-        $('.delete').hide();
+        $('#information_name').val('');
     });
     $('.delete').on('click',function(){
         var itag = $('#id').val();
 
         $.ajax(
             {
-                url: "employee/delete/" + itag,
+                url: "information/delete/" + itag,
                 type: 'GET',
                 dataType: "JSON",
                 data: {
@@ -200,11 +270,11 @@
                     "_method": 'DELETE',
                 },
                 success: function () {
-                    alert('Ажилтан устгагдлаа');
+                    alert('Мэдээлэл устгагдлаа');
                 }
 
             });
-        alert('Ажилтан устгагдлаа');
+        alert('Мэдээлэл устгагдлаа');
         location.reload();
     });
 </script>

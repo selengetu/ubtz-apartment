@@ -6,6 +6,9 @@ use Request;
 use App\Information;
 use App\Informationtype;
 use DB;
+use Session;
+use Image;
+use Illuminate\Support\Facades\Storage;
 class InformationController extends Controller
 {
     /**
@@ -25,26 +28,85 @@ class InformationController extends Controller
      */
     public function index()
     {
-        $information = Information::orderby('information_name')->get();
-        $type = Informationtype::all();
+        $information = DB::table('V_information')->orderby('information_name')->get();
+        $type = Informationtype::orderby('type_name')->get();
         return view('information')->with(['information'=>$information,'type'=>$type]);
     }
 
     public function store()
     {
+
         $inf= new Information();
         $inf->information_name = Request::input('information_name');
-        $inf->img_path = Request::input('img_path');
         $inf->information_type = Request::input('information_type');
+        if (Request::hasFile('image')) {
+            $file = request()->file('image');
+            $filenamewithextension = $file->getClientOriginalName();
+
+            //get filename without extension
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+
+            //get file extension
+            $extension = $file->getClientOriginalExtension();
+
+            //filename to store
+            $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+
+            Storage::put('profile_images/inf/'. $filenametostore, fopen($file, 'r+'));
+
+            //Resize image here
+            $thumbnailpath = public_path('profile_images/inf/'.$filenametostore);
+
+            $img1 = Image::make($file->getRealPath())->resize(400, 150, function($constraint) {
+                $constraint->aspectRatio();
+            });
+
+            $img1->save($thumbnailpath);
+            $imgpath = public_path('profile_images/inf/'.$filenametostore);
+            $img = Image::make($file->getRealPath())->save($filenametostore);
+            $img->save($imgpath);
+            $inf ->img_path =$filenametostore;
+        }
         $inf->save();
         return Redirect('information');
     }
 
     public function update(Request $request)
     {
+
         $information= DB::table('INFORMATION')
             ->where('information_id', Request::input('id'))
-            ->update(['information_name' => Request::input('information_name'),'information_type' => Request::input('information_type'),'img_path' => Request::input('img_path')]);
+            ->update(['information_name' => Request::input('information_name'),'information_type' => Request::input('information_type')]);
+
+        if (Request::hasFile('image')) {
+            $file = request()->file('image');
+            $filenamewithextension = $file->getClientOriginalName();
+
+            //get filename without extension
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+
+            //get file extension
+            $extension = $file->getClientOriginalExtension();
+
+            //filename to store
+            $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+            Storage::put('profile_images/inf/'. $filenametostore, fopen($file, 'r+'));
+
+            //Resize image here
+            $thumbnailpath = public_path('profile_images/inf/'.$filenametostore);
+
+            $img1 = Image::make($file->getRealPath())->resize(400, 150, function($constraint) {
+                $constraint->aspectRatio();
+            });
+
+            $img1->save($thumbnailpath);
+            $imgpath = public_path('profile_images/inf/'.$filenametostore);
+            $img = Image::make($file->getRealPath())->save($filenametostore);
+            $img->save($imgpath);
+            $process = DB::table('Information')
+                ->where('information_id', Request::input('id'))
+                ->update(['img_path' => $filenametostore]);
+        }
         return Redirect('information');
     }
 

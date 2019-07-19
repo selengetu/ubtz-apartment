@@ -155,6 +155,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" style="color: #fff">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+          @if (Auth::user()->dep_id ==22 )
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-book"></i>
@@ -242,7 +243,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             </ul>
           </li>
-
+          @endif
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-newspaper-o"></i>
@@ -327,8 +328,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </li>
               </ul>
           </li>
+          @if (Auth::user()->dep_id ==22 )
           <li class="nav-item has-treeview">
-            <a href="" class="nav-link">
+            <a href="{{ route('information') }}" class="nav-link">
               <i class="nav-icon fa fa-book"></i>
               <p>
                 {{ trans('messages.medeelel') }}
@@ -336,6 +338,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </p>
             </a>
           </li>
+            @endif
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

@@ -65,6 +65,16 @@
 
                                         </div>
                                         <div class="form-group col-md-2">
+                                            <label for="inputEmail4">{{ trans('messages.zahialagchnegj') }}</label>
+                                            <select class="form-control select2" id="schildabbr_id" name="schildabbr_id">
+                                                <option value= "0">Бүгд</option>
+                                                @foreach($executor as $executors)
+                                                    <option value= "{{$executors->executor_id}}">{{$executors->executor_abbr}}</option>
+                                                @endforeach
+                                            </select>
+
+                                        </div>
+                                        <div class="form-group col-md-2">
                                             <label for="inputZip">{{ trans('messages.hariutsagch') }}</label>
                                             <select class="form-control select2" id="srespondent_emp_id" name="srespondent_emp_id" >
                                                 <option value= "0">Бүгд</option>
@@ -194,7 +204,7 @@
                                             <?php $s++; ?>
                                             <tr >
                                                 <td>{{$no}}</td>
-                                                <td>{{$projects->department_name}}</td>
+                                                <td>{{$projects->department_name}} - {{$projects->childabbr}}</td>
                                                 <td>@if($projects->method_code==3)
                                                         По договору
                                                     @else
@@ -260,7 +270,7 @@
 
                                             <tr >
                                                 <td>{{$no}}</td>
-                                                <td>{{$projects->department_name}}</td>
+                                                <td>{{$projects->department_name}} - {{$projects->childabbr}}</td>
                                                 <td>@if($projects->method_code==3)
                                                         По договору
                                                     @else
@@ -476,7 +486,7 @@
                                             <?php $s++; ?>
                                             <tr >
                                                 <td>{{$no}}</td>
-                                                <td>{{$projects->department_name}}</td>
+                                                <td>{{$projects->department_name}} - {{$projects->childabbr}}</td>
                                                 <td>@if($projects->method_code==3)
                                                         По договору
                                                     @else
@@ -540,7 +550,7 @@
 
                                             <tr >
                                                 <td>{{$no}}</td>
-                                                <td>{{$projects->department_name}}</td>
+                                                <td>{{$projects->department_name}} - {{$projects->childabbr}}</td>
                                                 <td>@if($projects->method_code==3)
                                                         По договору
                                                     @else

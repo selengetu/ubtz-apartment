@@ -53,7 +53,7 @@ class TailanController extends Controller
         $executor = Executor::orderby('executor_abbr')->get();
         $month = Input::get('month');
         $employee =DB::select('select  * from V_CONST_EMPLOYEE t where t.is_engineer=1 order by firstname');
-
+        $schildabbr= Input::get('schildabbr_id');
         $sstate_id= Input::get('sstate_id');
         $sexecutor = Input::get('sexecutor_id');
         $sconstructor = Input::get('sconstructor_id');
@@ -94,6 +94,16 @@ class TailanController extends Controller
         }
         else
         {
+            $query.=" ";
+
+        }
+        if ($schildabbr!=NULL && $schildabbr !=0) {
+            $query.=" and department_child = '".$schildabbr."'";
+
+        }
+        else
+        {
+            $schildabbr=0;
             $query.=" ";
 
         }
@@ -165,6 +175,7 @@ class TailanController extends Controller
        u.project_type,
        u.project_type_name_mn,
        u.added_user_id,
+         u.childabbr,
        u.name,
        u.respondent_emp_id,
        u.firstname   ,

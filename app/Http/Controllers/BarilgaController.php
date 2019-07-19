@@ -6,6 +6,7 @@ use App\Projecttype;
 use Illuminate\Support\Facades\Route;
 use Carbon\Carbon;
 use Request;
+
 use Session;
 use App\Constructor;
 use App\Executor;
@@ -37,6 +38,8 @@ class BarilgaController extends Controller
      */
     public function index()
     {
+
+
           if(Route::getFacadeRoot()->current()->uri()== 'zaswar'){
               $sprojecttype=1;
           }
@@ -64,7 +67,15 @@ class BarilgaController extends Controller
 
         $startdate= Input::get('sdate1');
         $enddate = Input::get('sdate2');
+        if (Auth::user()->dep_id == 22) {
+            $query.="";
 
+        }
+        else
+        {
+            $query.=" and department_id = '".Auth::user()->dep_id."'";
+
+        }
         if ($startdate !=0 && $startdate && $enddate !=0 && $enddate !=NULL) {
             $query.="and end_date between '".$startdate."' and '".$enddate." 23:59:59'";
 
