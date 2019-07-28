@@ -741,7 +741,7 @@
                     $('#executor_id').append($('<option>', {
                         value: qwe.executor_id,
                         id: qwe.executor_id,
-                        text: qwe.executor_name
+                        text: qwe.executor_abbr
                     }));
                     $('#executor_id').focus();
                 });

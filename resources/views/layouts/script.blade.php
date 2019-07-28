@@ -397,11 +397,18 @@
                 }
 
                 var $type;
+                var $im;
                 if(qwe.description == null){
                     $type= ''
                 }
                 else{
                     $type= qwe.description;
+                }
+                if(qwe.image_s == null){
+                    $im= ''
+                }
+                else{
+                    $im= "<img src='/ibiz/public/profile_images/thumbnail/" +qwe.image_s + "'>";
                 }
                 if(qwe.state_id != 1 || qwe.prend_date == null){
                     $date= ''
@@ -416,7 +423,7 @@
                     "   <td class='m1'>" + qwe.budgetcomma+ "</td>" +
                     "   <td class='m1'>" + qwe.state_name_mn+ " "+ $date+"</td>" +
                     "   <td class='m1'>" + $type + "</td>" +
-                    "   <td class='m1'><img src='/ibiz/public/profile_images/thumbnail/" +qwe.image_s + "'></td>" +
+                    "   <td class='m1'>" + $im + "</td>" +
                     "   <td class='m1'>"+ $approve + "</td>" +
 
                     "</tr>";

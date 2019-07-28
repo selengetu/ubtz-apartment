@@ -345,7 +345,15 @@ order by u.report_rowno");
         $sprojecttype= Input::get('sproject_type');
         $startdate= Input::get('date1');
         $enddate = Input::get('date2');
+        if (Auth::user()->dep_id == 22) {
+            $query.="";
 
+        }
+        else
+        {
+            $query.=" and department_id = '".Auth::user()->dep_id."'";
+
+        }
         if ($startdate !=0 && $startdate && $enddate !=0 && $enddate !=NULL) {
             $query.=" where start_date between '".$startdate."' and '".$enddate." 23:59:59'";
 
@@ -540,6 +548,7 @@ on q.department_id=b.department_id");;
     }
     public function album()
     {
+
         $query = "";
         $state = State::orderby('state_name_mn')->get();
         $method = Method::orderby('method_name')->get();
@@ -550,7 +559,15 @@ on q.department_id=b.department_id");;
         $employee =DB::select('select  * from V_CONST_EMPLOYEE t where t.is_engineer=1 order by firstname');
 
         $sprojecttype= Input::get('sproject_type');
+        if (Auth::user()->dep_id == 22) {
+            $query.="";
 
+        }
+        else
+        {
+            $query.=" and department_id = '".Auth::user()->dep_id."'";
+
+        }
         if ($sprojecttype!=NULL && $sprojecttype !=0) {
             $query.=" and project_type = ".$sprojecttype."";
 
