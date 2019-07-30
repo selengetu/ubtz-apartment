@@ -328,8 +328,8 @@
                                                 >    <font  @if($projects->state_id==1)
                                                             color="black"; @else color="white"; @endif >{{$projects->state_name_mn}}<br>{{$projects->state_name_ru}}</font></td></td>
 
-                                                <td><img src="<?php echo asset("profile_images/img/$projects->image_b1")?>"  height="100" width="100"></td>
-                                                <td><img src="<?php echo asset("profile_images/img/$projects->image_b2")?>" height="100" width="100"></td>
+                                                <td>@if($projects->image_b1!=null)<img src="<?php echo asset("profile_images/img/$projects->image_b1")?>"  height="100" width="100">@endif</td>
+                                                <td>@if($projects->image_b2!=null)<img src="<?php echo asset("profile_images/img/$projects->image_b2")?>" height="100" width="100">@endif</td>
                                             </tr>
                                             <?php $no++; ?>
                                             <?php $no1++; ?>

@@ -77,6 +77,7 @@ return [
     'tailanzaswar' => 'Их барилгын ажлын тайлан',
     'tailanbarilga' => 'Их засварын ажлын тайлан',
     'baiguullaga' => 'Байгууллага',
+    'photoalbum' => 'Фото альбом',
     'ajliintoo' => 'Ажлын тоо',
     'duussant' => 'Дууссан',
     'graphdaguu' => 'Графикийн дагуу',

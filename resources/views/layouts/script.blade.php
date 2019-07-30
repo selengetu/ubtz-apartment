@@ -194,7 +194,7 @@
     $('#nav-home-tab').on('click',function(){
         $( "#nav-profile-tab" ).addClass("disabled disabledTab");
     });
-    function processClicked( processid) {
+    function processClicked(processid) {
         $( "#nav-profile-tab" ).removeClass("disabled disabledTab");
         $('#nav-profile-tab').trigger('click');
 
