@@ -100,6 +100,7 @@
                                             <label for="inputZip">{{ trans('messages.hariutsagch') }}</label>
                                             <select class="form-control select2" id="srespondent_emp_id" name="srespondent_emp_id" >
                                                 <option value= "0">Бүгд</option>
+                                                <option value= "999">Тодорхойгүй</option>
                                                 @foreach($employee as $employees)
                                                     <option value= "{{$employees->emp_id}}">{{$employees->firstname}}</option>
                                                 @endforeach
