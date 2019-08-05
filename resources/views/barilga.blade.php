@@ -116,6 +116,22 @@
                                             <input class="form-control form-control-inline input-medium date-picker" name="sdate2" id="sdate2"
                                                    size="16" type="text" value="">
                                         </div>
+
+                                        <div class="form-group col-md-2">
+                                            <label for="inputCity">Төлөвлөгөө</label>
+                                            <input class="form-control money" name="stuluvluguu" id="stuluvluguu"
+                                                   size="16" type="text" value="{{$stuluvluguu}}">
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label for="inputCity">Төсөв</label>
+                                            <input class="form-control money" name="stusuv" id="stusuv"
+                                                   size="16" type="text" value="{{$stusuv}}">
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label for="inputCity">Гүйцэтгэл</label>
+                                            <input class="form-control money" name="sguitsetgel" id="sguitsetgel"
+                                                   size="16" type="text" value="{{$sguitsetgel}}">
+                                        </div>
                                         <div class="form-group col-md-1">
                                             <label for="inputZip"><span>.</span></label><br>
                                             <button type="submit" class="btn btn-primary form-control" >{{ trans('messages.haih') }}</button>
@@ -509,31 +525,31 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputAddress2">{{ trans('messages.tuluwluguu') }}</label>
-                                <input type="text" class="form-control money" id="plan" name="plan" placeholder="" maxlength="14">
+                                <input type="text" class="form-control money" id="plan" name="plan" placeholder="" maxlength="20">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputCity">{{ trans('messages.tusuv') }}</label>
-                                <input type="text" class="form-control money" id="estimation" name="estimation" maxlength="14">
+                                <input type="text" class="form-control money" id="estimation" name="estimation" maxlength="20">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="inputAddress2">{{ trans('messages.tuluwluguu1') }}</label>
-                                <input type="text" class="form-control money" id="plan1" name="plan1" placeholder="" maxlength="14">
+                                <input type="text" class="form-control money" id="plan1" name="plan1" placeholder="" maxlength="20">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="inputAddress2">{{ trans('messages.tuluwluguu2') }}</label>
-                                <input type="text" class="form-control money" id="plan2" name="plan2" placeholder="" maxlength="14">
+                                <input type="text" class="form-control money" id="plan2" name="plan2" placeholder="" maxlength="20">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="inputAddress2">{{ trans('messages.tuluwluguu3') }}</label>
-                                <input type="text" class="form-control money" id="plan3" name="plan3" placeholder="" maxlength="14">
+                                <input type="text" class="form-control money" id="plan3" name="plan3" placeholder="" maxlength="20">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="inputAddress2">{{ trans('messages.tuluwluguu4') }}</label>
-                                <input type="text" class="form-control money" id="plan4" name="plan4" placeholder="" maxlength="14">
+                                <input type="text" class="form-control money" id="plan4" name="plan4" placeholder="" maxlength="20">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputZip">{{ trans('messages.uunees') }}</label>
-                                <input type="text" class="form-control money" id="economic" name="economic" maxlength="14">
+                                <input type="text" class="form-control money" id="economic" name="economic" maxlength="20">
                             </div>
 
 
@@ -542,11 +558,11 @@
                     <div class="form-row" id="gereediv" style="display: none;">
                         <div class="form-group col-md-6">
                             <label for="inputCity">Гэрээний дугаар</label>
-                            <input type="text" class="form-control" id="gereenum" name="gereenum" maxlength="14">
+                            <input type="text" class="form-control" id="gereenum" name="gereenum" maxlength="20">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputCity">{{ trans('messages.geree') }}</label>
-                            <input type="text" class="form-control money" id="geree" name="geree" maxlength="14">
+                            <input type="text" class="form-control money" id="geree" name="geree" maxlength="20">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputAddress2">Эхэлсэн</label>
@@ -627,7 +643,7 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="inputEmail4">{{ trans('messages.guitsetgel') }}</label>
-                                <input type="text" class="form-control money" id="gbudget" name="gbudget" maxlength="14">
+                                <input type="text" class="form-control money" id="gbudget" name="gbudget" maxlength="20">
 
                             </div>
                             <div class="form-group col-md-6">

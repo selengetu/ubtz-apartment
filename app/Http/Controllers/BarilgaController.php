@@ -63,7 +63,9 @@ class BarilgaController extends Controller
         $sexecutor = Input::get('sexecutor_id');
         $sconstructor = Input::get('sconstructor_id');
         $srespondent_emp_id = Input::get('srespondent_emp_id');
-
+        $stusuv = preg_replace('/[a-zZ-a,]/', '',Request::input('stusuv'));
+        $stuluvluguu = preg_replace('/[a-zZ-a,]/', '',Request::input('stuluvluguu'));
+        $sguitsetgel = preg_replace('/[a-zZ-a,]/', '',Request::input('sguitsetgel'));
 
         $startdate= Input::get('sdate1');
         $enddate = Input::get('sdate2');
@@ -156,14 +158,44 @@ class BarilgaController extends Controller
             $query.=" ";
 
         }
+        if ($sguitsetgel!=NULL && $sguitsetgel !=0) {
+            $query.=" and budget = ".$sguitsetgel."";
 
+        }
+        else
+        {
+            $sstate_id=0;
+            $query.=" ";
+
+        }
+        if ($stusuv!=NULL && $stusuv !=0) {
+            $query.=" and estimation = ".$stusuv."";
+
+        }
+        else
+        {
+
+            $query.=" ";
+
+        }
+        if ($stuluvluguu!=NULL && $stuluvluguu !=0) {
+            $query.=" and plan= ".$stuluvluguu."";
+
+        }
+        else
+        {
+
+            $query.=" ";
+
+        }
         $gproject_id = 0;
         if( Session::has('gproject_id') ) {
             $gproject_id = Session::get('gproject_id');
         }
 
         $project =DB::select("select  * from V_PROJECT t  where 1=1 " .$query. " order by report_rowno");
-        return view('barilga')->with(['schildabbr'=>$schildabbr,'smethod_id'=>$smethod_id,'sstate_id'=>$sstate_id,'srespondent_emp_id'=>$srespondent_emp_id,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'sprojecttype'=>$sprojecttype,'gproject_id'=>$gproject_id,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'employee'=>$employee,'method'=>$method,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype]);
+        return view('barilga')->with(['schildabbr'=>$schildabbr,'smethod_id'=>$smethod_id,'sstate_id'=>$sstate_id,'srespondent_emp_id'=>$srespondent_emp_id,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'sprojecttype'=>$sprojecttype,'gproject_id'=>$gproject_id,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'employee'=>$employee,
+            'stusuv'=>$stusuv,'stuluvluguu'=>$stuluvluguu,'sguitsetgel'=>$sguitsetgel,  'method'=>$method,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype]);
     }
     public function store()
     {
@@ -235,8 +267,6 @@ class BarilgaController extends Controller
         $sexecutor = Input::get('sexecutor_id');
         $sconstructor = Input::get('sconstructor_id');
         $srespondent_emp_id = Input::get('srespondent_emp_id');
-
-
         $startdate= Input::get('sdate1');
         $enddate = Input::get('sdate2');
 

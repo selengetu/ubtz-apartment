@@ -194,6 +194,15 @@ class ProcessController extends Controller
 
     public function update(Request $request)
     {
+        $schildabbr= Input::get('schildabbr_id');
+        $smethod_id= Input::get('smethod_id');
+        $sstate_id= Input::get('sstate_id');
+        $sexecutor = Input::get('sexecutor_id');
+        $sconstructor = Input::get('sconstructor_id');
+        $srespondent_emp_id = Input::get('srespondent_emp_id');
+        $startdate= Input::get('sdate1');
+        $enddate = Input::get('sdate2');
+
         $data= Request::input('gproject_id');
         $process = DB::table('Project_process')
             ->where('process_id', Request::input('gprocess_id'))
@@ -310,12 +319,13 @@ class ProcessController extends Controller
         }
         Session::flash('gproject_id',Request::input('gproject_id'));
         if(Request::input('proc')== 1){
-            return Redirect('zaswar');
+            return back()->withInput();
         }
 
         if(Request::input('proc')== 2){
-            return Redirect('barilga');
+            return back()->withInput();
         }
+
     }
 
     public function destroy($id,$id1)
