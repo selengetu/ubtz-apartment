@@ -257,37 +257,7 @@
 
             });
         });
-        document.getElementById('download-pdf').addEventListener("click", printDiv);
 
-        //donwload pdf from original canvas
-        function printDiv() {
-            var printContents = document.getElementById('example').innerHTML;
-            var originalContents = document.body.innerHTML;
-
-            document.body.innerHTML = printContents;
-
-            window.print();
-
-            document.body.innerHTML = originalContents;
-        }
-
-        //add event listener to 2nd button
-        document.getElementById('download-pdf2').addEventListener("click", downloadPDF2);
-
-        //download pdf form hidden canvas
-        function downloadPDF2() {
-            var newCanvas = document.querySelector('#example');
-
-            //create image from dummy canvas
-            var newCanvasImg = newCanvas.toDataURL("image/jpeg", 1.0);
-
-            //creates PDF from img
-            var doc = new jsPDF('landscape');
-            doc.setFontSize(20);
-            doc.text(15, 15, "Super Cool Chart");
-            doc.addImage(newCanvasImg, 'JPEG', 10, 10, 280, 150 );
-            doc.save('new-canvas.pdf');
-        }
         $(function () {
             'use strict'
 
