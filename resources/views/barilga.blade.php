@@ -289,8 +289,7 @@
                                                     echo number_format($sum_economic,2)."<br>";
                                                     ?></b></td>
                                             <td><b><?php
-                                                    echo $no-1 == 0 ? 0 : number_format($sum_percent/($no-1),2,",",".")."%<br>";
-
+                                                    echo number_format((($sum_budget)/($sum_plan)*100), 2, ',', ' ')."%<br>";
                                                     ?></b></td>
                                             <td></td>
                                             <td></td>
