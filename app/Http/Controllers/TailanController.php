@@ -540,9 +540,13 @@ PIVOT
 (count(state_id) FOR state_id IN (1 as haasan,2 as duussan ,3 as gdag,4 as ghots,5 as gadgeree ,6 as nem,7 as eune,8 as egeree,9 as ezurag,10 as etul,11 as emater,12 as esanh ,13 as eguits ,14 as etusuv,15 as ehleegui ,16 as boloogui)
 )
 ORDER BY department_id) q
-on q.department_id=b.department_id");;
+on q.department_id=b.department_id");
+        $t2= DB::select("select  state_id ,count(project_name) as niit 
+from project t 
+where t.state_id in (7,8,9,10,11,12,13,14,15) ".$query. "
+group by state_id");
         $project =DB::select("select  * from V_PROJECT t  order by project_id");
-        return view('tailan.detail')->with(['t'=>$t,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype,'sprojecttype'=>$sprojecttype]);
+        return view('tailan.detail')->with(['t'=>$t,'t2'=>$t2,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype,'sprojecttype'=>$sprojecttype]);
 
 
     }

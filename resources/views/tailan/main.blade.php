@@ -392,7 +392,7 @@
                                                 echo number_format($sum_economic)."<br>";
                                                 ?></b></td>
                                         <td><b><?php
-                                                echo $no1-1 == 0 ? 0 : number_format($sum_percent/($no1-1),2,",",".")."%<br>";
+                                                echo number_format((($sum_runningtotal)/($sum_plan)*100), 2, ',', ' ')."%<br>";
                                                 ?></b></td>
                                         <td></td>
                                         <td></td>
@@ -669,7 +669,7 @@
                                                 echo number_format($sum_economic)."<br>";
                                                 ?></b></td>
                                         <td><b><?php
-                                                echo $no1-1 == 0 ? 0 : number_format($sum_percent/($no1-1),2,",",".")."%<br>";
+                                                echo number_format((($sum_runningtotal)/($sum_plan)*100), 2, ',', ' ')."%<br>";
                                                 ?></b></td>
                                         <td></td>
                                         <td></td>
