@@ -269,7 +269,6 @@ class BarilgaController extends Controller
         $srespondent_emp_id = Input::get('srespondent_emp_id');
         $startdate= Input::get('sdate1');
         $enddate = Input::get('sdate2');
-
         $project = DB::table('Project')
             ->where('project_id', Request::input('id'))
             ->update(['project_name' => Request::input('project_name'),'project_name_ru' => Request::input('project_name_ru')

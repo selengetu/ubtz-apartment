@@ -101,7 +101,7 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h3 class="card-title"> @if($sprojecttype ==1 ) {{ trans('messages.tailanzaswar') }}  @elseif($sprojecttype ==2 ) {{ trans('messages.tailanbarilga') }} @endif</h3>
+                                    <h3 class="card-title"> @if($sprojecttype ==1 ) {{ trans('messages.tailanbarilga') }}  @elseif($sprojecttype ==2 ) {{ trans('messages.tailanzaswar') }} @endif</h3>
                                 </div>
 
                             </div>

@@ -524,7 +524,6 @@ on q.department_id=b.department_id");;
             $query.=" ";
 
         }
-
         $t= DB::select("select b.* ,q.* from 
 (select d.department_name, t.department_id,d.department_type, sum(t.plan) as plan, sum(t.budget) as budget, sum(t.estimation) as estimation,  (sum(t.budget)/sum(t.plan))*100 as percent, sum(t.budget)-sum(t.plan) as diff, (sum(t.percent)/count(percent)) as rpercent , count(t.project_id) as ajliintoo from V_PROJECT t , CONST_DEPARTMENT d
 where t.department_id=d.department_id  ".$query. "
@@ -533,7 +532,7 @@ order by t.department_id) b inner join
 (SELECT * FROM 
 (
 SELECT department_id ,state_id
-        FROM project 
+        FROM v_project 
         where 1=1  ".$query. "
       )
 PIVOT  
@@ -541,12 +540,18 @@ PIVOT
 )
 ORDER BY department_id) q
 on q.department_id=b.department_id");
-        $t2= DB::select("select  state_id ,count(project_name) as niit 
-from project t 
-where t.state_id in (7,8,9,10,11,12,13,14,15) ".$query. "
-group by state_id");
+        $t2= DB::select("select  state_name_mn ,count(project_name) as niit 
+from v_project t 
+where t.state_id in (1,2,3,4,5,6) ".$query. "
+group by state_name_mn");
+        $t3= DB::select("select d.department_name, t.department_id, count(t.project_id) as ajliintoo from V_PROJECT t , CONST_DEPARTMENT d
+where t.department_id=d.department_id and t.state_id in (7,8,9,10,11,12,13,14,15)  ".$query. "
+group by t.department_id, d.department_name
+order by t.department_id
+");
+
         $project =DB::select("select  * from V_PROJECT t  order by project_id");
-        return view('tailan.detail')->with(['t'=>$t,'t2'=>$t2,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype,'sprojecttype'=>$sprojecttype]);
+        return view('tailan.detail')->with(['t'=>$t,'t2'=>$t2,'t3'=>$t3,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype,'sprojecttype'=>$sprojecttype]);
 
 
     }
