@@ -1,5 +1,3 @@
 <?php
-
-header('Location: /barilga/public/');
-
+    header('Location: /ibiz/public/');
 ?>
