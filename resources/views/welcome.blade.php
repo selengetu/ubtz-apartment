@@ -190,12 +190,14 @@
 
                                     backgroundColor: '#007bff',
                                     borderColor: '#007bff',
-                                    data: plans
+                                    data: plans,
+                                    options: options
                                 },
                                 {
                                     backgroundColor: '#ff8400',
                                     borderColor: '#ff8400',
-                                    data:est
+                                    data:est,
+                                    options: options
                                 },
                             ]
                         },
@@ -262,7 +264,8 @@
                         datasets: [{
                             backgroundColor: '#007bff',
                             borderColor: '#007bff',
-                            data: zuuchQnt
+                            data: zuuchQnt,
+                            options: options
                         },
                             {
                                 backgroundColor: '#ff8400',
@@ -380,7 +383,13 @@
                     var b = Math.floor(Math.random() * 255);
                     return "rgb(" + r + "," + g + "," + b + ")";
                 };
-
+            var options = {
+                animation : {
+                    onComplete : function(){
+                        URI = pieChart.toBase64Image();
+                    }
+                }
+            };
                 new Chart(document.getElementById("piechart"), {
                     type: 'pie',
                     data: {
@@ -402,7 +411,8 @@
                                 "#fb21a3", "#51aed9", "#5bb32d", "#807fb", "#21538e", "#89d534", "#d36647",
                                 "#7fb411", "#0023b8", "#3b8c2a", "#986b53", "#f50422", "#983f7a", "#ea24a3",
                                 "#79352c", "#521250", "#c79ed2", "#d6dd92", "#e33e52", "#b2be57", "#fa06ec"],
-                            data: zuuchQnt2
+                            data: zuuchQnt2,
+                            options: options
                         }]
                     },
                     options: {
