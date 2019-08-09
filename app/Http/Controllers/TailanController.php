@@ -220,14 +220,14 @@ select t.project_id , t.month, t.budget
 from PROJECT_PROCESS t 
 union all    
 select t.project_id , m.id month , 0 budget
-from PROJECT t , CONST_MONTH m 
+from V_PROJECT t , CONST_MONTH m 
 order by project_id, month
 )
 group by project_id, month
 order by project_id, month) q
 order by q.project_id, q.month ) par
 where q.project_id(+)=u.project_id and par.project_id=u.project_id ".$date1." ".$query."
-order by u.report_rowno");
+order by report_rowno, ex_report_no");
 
         return view('tailan.main')->with(['month'=>$month,'gproject_id'=>$gproject_id,'data'=>$data,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype,'sprojecttype'=>$sprojecttype]);
     }
@@ -527,13 +527,14 @@ on q.department_id=b.department_id");;
         $t= DB::select("select b.* ,q.* from 
 (select d.department_name, t.department_id,d.department_type, sum(t.plan) as plan, sum(t.budget) as budget, sum(t.estimation) as estimation,  (sum(t.budget)/sum(t.plan))*100 as percent, sum(t.budget)-sum(t.plan) as diff, (sum(t.percent)/count(percent)) as rpercent , count(t.project_id) as ajliintoo from V_PROJECT t , CONST_DEPARTMENT d
 where t.department_id=d.department_id  ".$query. "
-group by d.department_type,t.department_id, d.department_name
-order by t.department_id) b inner join 
+group by d.department_type,t.department_id, d.department_name) b inner join 
+
 (SELECT * FROM 
 (
 SELECT department_id ,state_id
-        FROM v_project 
+        FROM v_project  
         where 1=1  ".$query. "
+      
       )
 PIVOT  
 (count(state_id) FOR state_id IN (1 as haasan,2 as duussan ,3 as gdag,4 as ghots,5 as gadgeree ,6 as nem,7 as eune,8 as egeree,9 as ezurag,10 as etul,11 as emater,12 as esanh ,13 as eguits ,14 as etusuv,15 as ehleegui ,16 as boloogui)
