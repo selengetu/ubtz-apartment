@@ -140,7 +140,7 @@
                                         <th>{{ trans('messages.tuluwluguu') }}</th>
 
                                         <th>{{ trans('messages.tusuv') }}</th>
-                                        <th>{{ trans('messages.enesar') }} {{$month -1 }} {{ trans('messages.ussundun1') }} </th>
+                                        <th>{{ trans('messages.ussundun') }} {{$month -1 }} {{ trans('messages.ussundun1') }} </th>
                                         <th>{{ trans('messages.enesar') }} {{$month}} {{ trans('messages.ussundun1') }} </th>
                                         <th>{{ trans('messages.ussundun') }} {{$month}} {{ trans('messages.ussundun1') }} </th>
                                         <th>{{ trans('messages.uunees') }}</th>
