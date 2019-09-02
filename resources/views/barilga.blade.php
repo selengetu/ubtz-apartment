@@ -289,7 +289,8 @@
                                                     echo number_format($sum_economic,2)."<br>";
                                                     ?></b></td>
                                             <td><b><?php
-                                                    echo number_format((($sum_budget)/($sum_plan)*100), 2, ',', ' ')."%<br>";
+                                                    if($sum_budget > 0 && $sum_plan){
+                                                    echo number_format((($sum_budget)/($sum_plan)*100), 2, ',', ' ')."%<br>"; }
                                                     ?></b></td>
                                             <td></td>
                                             <td></td>
