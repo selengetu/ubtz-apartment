@@ -159,7 +159,7 @@
                                             <td>{{$no}}</td>
                                             <td>{{$projects->department_name}}</td>
                                             <td>{{$projects->executor_abbr}}</td>
-                                            <td>{{$projects->project_name}}</td>
+                                            <td>{{$projects->project_name}}<br>{{$projects->project_name_ru}}<br></td>
                                             <td>{{$projects->contract_num}}</td>
                                             <td><?php
                                                 echo number_format($projects->plan)."<br>";

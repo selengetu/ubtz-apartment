@@ -112,7 +112,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     @foreach($t3 as $name)
-                                       <h5> {{$name->project_type_name_mn}} - {{number_format($name->niit, 2, ',', '.')}}% </h5>
+                                       <h5> @if ( Config::get('app.locale') == 'mn')  {{$name->project_type_name_mn}}  @elseif (Config::get('app.locale') == 'en')  {{$name->project_type_name_ru}}  @endif  - {{number_format($name->niit, 2, ',', '.')}}% </h5>
                                         @endforeach
 
                                 </div>
