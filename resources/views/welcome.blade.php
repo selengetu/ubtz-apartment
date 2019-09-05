@@ -204,7 +204,7 @@
                         options: {
                             title: {
                                 display: true,
-                                text: 'Албадын нэгжийн төлөвлөгөө болон гүйцэтгэл'
+                                text: '{{ trans('messages.a4') }}'
                             },
                             maintainAspectRatio: true,
                             legend: {
@@ -277,7 +277,7 @@
                     options: {
                         title: {
                             display: true,
-                            text: 'Албадын төлөвлөгөө болон гүйцэтгэл'
+                            text: '{{ trans('messages.a1') }}'
                         },
                         maintainAspectRatio: true,
 
@@ -353,7 +353,7 @@
                     options: {
                         title: {
                             display: true,
-                            text: 'Гүйцэтгэлийн хувиар авч үзвэл'
+                            text: '{{ trans('messages.a2') }}'
                         },
                         maintainAspectRatio: true,
                         legend: {
@@ -395,7 +395,7 @@
                     data: {
                         labels: stack,
                         datasets: [{
-                            label: "Албаны нэр",
+                            label: "{{ trans('messages.alba') }}",
                             backgroundColor:  ["#63b598", "#ce7d78", "#ea9e70", "#a48a9e", "#c6e1e8", "#648177" ,"#0d5ac1" ,
                                 "#f205e6" ,"#1c0365" ,"#14a9ad" ,"#4ca2f9" ,"#a4e43f" ,"#d298e2" ,"#6119d0",
                                 "#d2737d" ,"#c0a43c" ,"#f2510e" ,"#651be6" ,"#79806e" ,"#61da5e" ,"#cd2f00" ,
@@ -418,7 +418,7 @@
                     options: {
                         title: {
                             display: true,
-                            text: 'Гүйцэтгэлийн үнийн дүнгээр авч үзвэл'
+                            text: '{{ trans('messages.a3') }}'
                         }
                     }
                 });

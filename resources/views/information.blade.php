@@ -25,10 +25,10 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-md-4">
-                                <h4 class="m-0">Мэдээ мэдээлэл</h4>
+                                <h4 class="m-0">{{ trans('messages.medeelel') }}</h4>
                             </div>
                             <div class="col-md-2 col-xs-5">
-                                <button data-toggle="modal" data-target="#exampleModal" class="btn btn-primary  add" style="padding-bottom: 10px;"><i class="fa fa-plus" style="color: rgb(255, 255, 255);"> Мэдээлэл нэмэх</i></button>
+                                <button data-toggle="modal" data-target="#exampleModal" class="btn btn-primary  add" style="padding-bottom: 10px;"><i class="fa fa-plus" style="color: rgb(255, 255, 255);"></i></button>
                             </div>
                         </div>
 

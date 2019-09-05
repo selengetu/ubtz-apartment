@@ -11,7 +11,7 @@
 
         <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
             <div class="col-md-6">
-                <input id="email" type="text" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus placeholder="Нэвтрэх код">
+                <input id="username" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" required autofocus placeholder="Нэвтрэх код">
                 @if ($errors->has('username'))
                     <span class="help-block">
                 <strong>{{ $errors->first('username') }}</strong>
@@ -24,7 +24,6 @@
 
             <div class="col-md-6">
                 <input id="password" type="password" class="form-control" name="password" required placeholder="Нууц үг">
-
                 @if ($errors->has('password'))
                     <span class="help-block">
                                         <strong>{{ $errors->first('password') }}</strong>

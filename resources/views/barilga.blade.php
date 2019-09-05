@@ -118,17 +118,17 @@
                                         </div>
 
                                         <div class="form-group col-md-2">
-                                            <label for="inputCity">Төлөвлөгөө</label>
+                                            <label for="inputCity">{{ trans('messages.tuluwluguu') }}</label>
                                             <input class="form-control money" name="stuluvluguu" id="stuluvluguu"
                                                    size="16" type="text" value="{{$stuluvluguu}}">
                                         </div>
                                         <div class="form-group col-md-2">
-                                            <label for="inputCity">Төсөв</label>
+                                            <label for="inputCity">{{ trans('messages.tusuv') }}</label>
                                             <input class="form-control money" name="stusuv" id="stusuv"
                                                    size="16" type="text" value="{{$stusuv}}">
                                         </div>
                                         <div class="form-group col-md-2">
-                                            <label for="inputCity">Гүйцэтгэл</label>
+                                            <label for="inputCity">{{ trans('messages.guitsetgel') }}</label>
                                             <input class="form-control money" name="sguitsetgel" id="sguitsetgel"
                                                    size="16" type="text" value="{{$sguitsetgel}}">
                                         </div>
@@ -289,7 +289,8 @@
                                                     echo number_format($sum_economic,2)."<br>";
                                                     ?></b></td>
                                             <td><b><?php
-                                                    echo number_format((($sum_budget)/($sum_plan)*100), 2, ',', ' ')."%<br>";
+                                                    if($sum_budget > 0 && $sum_plan){
+                                                    echo number_format((($sum_budget)/($sum_plan)*100), 2, ',', ' ')."%<br>"; }
                                                     ?></b></td>
                                             <td></td>
                                             <td></td>
