@@ -185,6 +185,7 @@ class TailanController extends Controller
        u.added_user_id,
          u.childabbr,
        u.name,
+       u.fletter,
        u.respondent_emp_id,
        u.firstname   ,
       u.state_id,
@@ -227,7 +228,7 @@ group by project_id, month
 order by project_id, month) q
 order by q.project_id, q.month ) par
 where q.project_id(+)=u.project_id and par.project_id=u.project_id ".$date1." ".$query."
-order by report_rowno, ex_report_no");
+order by report_rowno, ex_report_no, xex_report_no");
 
         return view('tailan.main')->with(['month'=>$month,'gproject_id'=>$gproject_id,'data'=>$data,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype,'sprojecttype'=>$sprojecttype]);
     }

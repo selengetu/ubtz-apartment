@@ -158,7 +158,7 @@ class BarilgaController extends Controller
             $query.=" ";
 
         }
-        if ($sguitsetgel!=NULL && $sguitsetgel !=0) {
+        if ($sguitsetgel!=NULL) {
             $query.=" and budget = ".$sguitsetgel."";
 
         }
@@ -168,7 +168,7 @@ class BarilgaController extends Controller
             $query.=" ";
 
         }
-        if ($stusuv!=NULL && $stusuv !=0) {
+        if ($stusuv!=NULL) {
             $query.=" and estimation = ".$stusuv."";
 
         }
@@ -178,7 +178,7 @@ class BarilgaController extends Controller
             $query.=" ";
 
         }
-        if ($stuluvluguu!=NULL && $stuluvluguu !=0) {
+        if ($stuluvluguu!=NULL) {
             $query.=" and plan= ".$stuluvluguu."";
 
         }

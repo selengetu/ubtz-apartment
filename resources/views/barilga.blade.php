@@ -102,7 +102,7 @@
                                                 <option value= "0">Бүгд</option>
                                                 <option value= "999">Тодорхойгүй</option>
                                                 @foreach($employee as $employees)
-                                                    <option value= "{{$employees->emp_id}}">{{$employees->firstname}}</option>
+                                                    <option value= "{{$employees->emp_id}}">{{$employees->fletter}}.{{$employees->firstname}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -224,7 +224,7 @@
                                                 <?php $sum_economic += ($projects->economic) ?>
                                                 <td>{{$projects->percent}}%</td>
                                                 <?php $sum_percent += ($projects->percent) ?>
-                                                <td>{{$projects->firstname}}</td>
+                                                <td>{{$projects->fletter}}.{{$projects->firstname}}</td>
                                                 <td >{{$projects->start_date}}
                                                 <td>{{$projects->end_date}}
                                                 <td width="102px" @if($projects->state_id==2)

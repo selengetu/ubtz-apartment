@@ -62,7 +62,7 @@
             <div class="row">
 
                 <!-- /.col (LEFT) -->
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <!-- LINE CHART -->
                     <div class="card card-info">
                         <div class="card-header">
@@ -87,7 +87,7 @@
                     <!-- /.card -->
 
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-9">
                     <!-- LINE CHART -->
                     <div class="card card-info">
                         <div class="card-header">

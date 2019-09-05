@@ -79,7 +79,7 @@
                                             <select class="form-control select2" id="srespondent_emp_id" name="srespondent_emp_id" >
                                                 <option value= "0">Бүгд</option>
                                                 @foreach($employee as $employees)
-                                                    <option value= "{{$employees->emp_id}}">{{$employees->firstname}}</option>
+                                                    <option value= "{{$employees->emp_id}}">{{$employees->fletter}}.{{$employees->firstname}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -183,7 +183,9 @@
                                                 <td><b>{{number_format($i4)}}</b></td>
                                                 <td><b>{{number_format($i5)}}</b></td>
                                                 <td><b>{{number_format($i6)}}</b></td>
-                                                <td><b>{{number_format($i7/($no-1),2)}}%</b></td>
+                                                <td><b>@if($i7> 0 && $no>0){
+                                                        {{number_format($i7/($no-1),2)}}%
+                                                    @endif</b></td>
                                                 <td colspan="4"></td>
                                             </tr>
                                         @endif
@@ -239,7 +241,7 @@
                                                 <?php $sum_economic += ($projects->economic) ?>
                                                 <td>{{$projects->percent}}%</td>
                                                 <?php $sum_percent += ($projects->percent) ?>
-                                                <td>{{$projects->firstname}}</td>
+                                                <td>{{$projects->fletter}}.{{$projects->firstname}}</td>
 
                                                 <td @if($projects->state_id==2)
                                                     bgcolor="#ff8c00";
@@ -305,7 +307,7 @@
                                                 <?php $sum_economic += ($projects->economic) ?>
                                                 <td>{{$projects->percent}}%</td>
                                                 <?php $sum_percent += ($projects->percent) ?>
-                                                <td>{{$projects->firstname}}</td>
+                                                <td>{{$projects->fletter}}.{{$projects->firstname}}</td>
 
                                                 <td @if($projects->state_id==2)
                                                     bgcolor="#ff8c00";
@@ -359,7 +361,9 @@
                                             <td><b>{{number_format($i4)}}</b></td>
                                             <td><b>{{number_format($i5)}}</b></td>
                                             <td><b>{{number_format($i6)}}</b></td>
-                                            <td><b>{{number_format($i7/($no-1),2)}}%</b></td>
+                                            <td><b>@if($i7> 0 && $no>0){
+                                                    {{number_format($i7/($no-1),2)}}%
+                                                    @endif</b></td>
                                             <td colspan="4"></td>
                                         </tr>
 
@@ -392,7 +396,8 @@
                                                 echo number_format($sum_economic)."<br>";
                                                 ?></b></td>
                                         <td><b><?php
-                                                echo number_format((($sum_runningtotal)/($sum_plan)*100), 2, ',', ' ')."%<br>";
+                                                if($sum_runningtotal > 0 && $sum_plan){
+                                                echo number_format((($sum_runningtotal)/($sum_plan)*100), 2, ',', ' ')."%}<br>";
                                                 ?></b></td>
                                         <td></td>
                                         <td></td>
@@ -465,7 +470,9 @@
                                                 <td><b>{{number_format($i4)}}</b></td>
                                                 <td><b>{{number_format($i5)}}</b></td>
                                                 <td><b>{{number_format($i6)}}</b></td>
-                                                <td><b>{{number_format($i7/($no-1),2)}}%</b></td>
+                                                <td><b>@if($i7> 0 && $no>0){
+                                                        {{number_format($i7/($no-1),2)}}%
+                                                        @endif</b></td>
                                                 <td colspan="2"></td>
                                             </tr>
                                         @endif
@@ -521,7 +528,7 @@
                                                 <?php $sum_economic += ($projects->economic) ?>
                                                 <td>{{$projects->percent}}%</td>
                                                 <?php $sum_percent += ($projects->percent) ?>
-                                                <td>{{$projects->firstname}}</td>
+                                                <td>{{$projects->fletter}}.{{$projects->firstname}}</td>
 
                                                 <td @if($projects->state_id==2)
                                                     bgcolor="#ff8c00";
@@ -585,7 +592,7 @@
                                                 <?php $sum_economic += ($projects->economic) ?>
                                                 <td>{{$projects->percent}}%</td>
                                                 <?php $sum_percent += ($projects->percent) ?>
-                                                <td>{{$projects->firstname}}</td>
+                                                <td>{{$projects->fletter}}.{{$projects->firstname}}</td>
 
                                                 <td @if($projects->state_id==2)
                                                     bgcolor="#ff8c00";
@@ -669,7 +676,9 @@
                                                 echo number_format($sum_economic)."<br>";
                                                 ?></b></td>
                                         <td><b><?php
-                                                echo number_format((($sum_runningtotal)/($sum_plan)*100), 2, ',', ' ')."%<br>";
+                                                if($sum_runningtotal > 0 && $sum_plan){
+                                                    echo number_format((($sum_runningtotal)/($sum_plan)*100), 2, ',', ' ')."%}<br>";}}
+
                                                 ?></b></td>
                                         <td></td>
                                         <td></td>
