@@ -79,7 +79,9 @@
 
                             <div class="table-responsive">
                                 <div class="row">
-
+                                    <div class="col-md-12">
+                                    <h3>{{ trans('messages.ywts') }} </h3>
+                                    </div>
                                     <div class="col-md-12">
                                         <table class="table table-bordered" id="example" border="1" style="font-size:12px; border-collapse: collapse;">
                                             <thead>
@@ -95,6 +97,7 @@
                                             <?php $sum_gadgeree = 0 ?>
                                             <?php $sum_nem = 0 ?>
                                             <?php $sum_boloogui = 0 ?>
+                                            <?php $sum_ehleegui = 0 ?>
                                             <tr role="row">
                                                 <th>#</th>
                                                 <th>{{ trans('messages.alba') }}</th>
@@ -109,6 +112,7 @@
                                                 <th>{{ trans('messages.gadgeree') }}</th>
                                                 <th>{{ trans('messages.tuvnemelt') }}</th>
                                                 <th>{{ trans('messages.uliral') }}</th>
+                                                <th>{{ trans('messages.ehleegui') }}</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -145,7 +149,8 @@
                                                     <?php $sum_nem += ($projects->nem) ?>
                                                     <td>{{$projects->boloogui}}</td>
                                                     <?php $sum_boloogui += ($projects->boloogui) ?>
-
+                                                    <td>{{$projects->ehleegui}}</td>
+                                                    <?php $sum_ehleegui += ($projects->ehleegui) ?>
 
                                                 </tr>
                                                 <?php $no++; ?>
@@ -170,9 +175,15 @@
                                                 <td>{{number_format($sum_gadgeree)}}</td>
                                                 <td>{{number_format($sum_nem)}}</td>
                                                 <td>{{number_format($sum_boloogui)}}</td>
+                                                <td><?php
+                                                    echo number_format($sum_ehleegui)."<br>";
+                                                    ?></td>
                                             </tr>
                                             </tbody>
                                         </table>
+                                    </div>
+                                    <div class="col-md-12">
+                                    <h3>{{ trans('messages.ehuwi') }} </h3>
                                     </div>
                                     <div class="col-md-12">
                                         <table class="table table-bordered" id="example" border="1" style="font-size:12px; border-collapse: collapse;">
@@ -202,7 +213,7 @@
                                                 <th>{{ trans('messages.esan') }}</th>
                                                 <th>{{ trans('messages.eguits') }}</th>
                                                 <th>{{ trans('messages.etusuv') }}</th>
-                                                <th>{{ trans('messages.ehleegui') }}</th>
+
 
                                             </tr>
                                             </thead>
@@ -228,8 +239,6 @@
                                                     <?php $sum_eguits += ($projects->eguits) ?>
                                                     <td>{{$projects->etusuv}}</td>
                                                     <?php $sum_etusuv += ($projects->etusuv) ?>
-                                                    <td>{{$projects->ehleegui}}</td>
-                                                    <?php $sum_ehleegui += ($projects->ehleegui) ?>
 
                                                 </tr>
                                                 <?php $no++; ?>
@@ -260,9 +269,7 @@
                                                 <td><?php
                                                     echo number_format($sum_etusuv)."<br>";
                                                     ?></td>
-                                                <td><?php
-                                                    echo number_format($sum_ehleegui)."<br>";
-                                                    ?></td>
+
 
 
                                             </tr>
@@ -325,6 +332,7 @@
 
     <?php
     $stack = array();
+    $stack1 = array();
     $stackValue = array();
     $stackValue2 = array();
     $depname = array();
@@ -333,7 +341,7 @@
 
     foreach($t2 as $wag)
 
-    {array_push($stack,$wag->state_name_mn); array_push($stackValue,$wag->niit);}
+    {array_push($stack,$wag->state_name_mn); array_push($stackValue,$wag->niit);array_push($stack1,$wag->state_name_ru); }
 
 
     ?>
@@ -424,10 +432,12 @@
 
             var $visitorsChart = $('#percentchart')
             var stack = <?php echo json_encode($stack); ?>;
+            var stack1 = <?php echo json_encode($stack1); ?>;
             var stackValue = <?php echo json_encode($stackValue2); ?>;
             var visitorsChart = new Chart($visitorsChart, {
+
                 data: {
-                    labels: stack,
+                    labels: stack1,
                     datasets: [{
                         type: 'line',
                         data: stackValue,
@@ -472,8 +482,40 @@
                 var b = Math.floor(Math.random() * 255);
                 return "rgb(" + r + "," + g + "," + b + ")";
             };
-
-            new Chart(document.getElementById("piechart"), {
+                @if ( Config::get('app.locale') == 'en'){
+                new Chart(document.getElementById("piechart"), {
+                    type: 'pie',
+                    data: {
+                        labels: stack1,
+                        datasets: [{
+                            label: zuuchName,
+                            backgroundColor:  ["#63b598", "#ce7d78", "#ea9e70", "#a48a9e", "#c6e1e8", "#648177" ,"#0d5ac1" ,
+                                "#f205e6" ,"#1c0365" ,"#14a9ad" ,"#4ca2f9" ,"#a4e43f" ,"#d298e2" ,"#6119d0",
+                                "#d2737d" ,"#c0a43c" ,"#f2510e" ,"#651be6" ,"#79806e" ,"#61da5e" ,"#cd2f00" ,
+                                "#9348af" ,"#01ac53" ,"#c5a4fb" ,"#996635","#b11573" ,"#4bb473" ,"#75d89e" ,
+                                "#2f3f94" ,"#2f7b99" ,"#da967d" ,"#34891f" ,"#b0d87b" ,"#ca4751" ,"#7e50a8" ,
+                                "#c4d647" ,"#e0eeb8" ,"#11dec1" ,"#289812" ,"#566ca0" ,"#ffdbe1" ,"#2f1179" ,
+                                "#935b6d" ,"#916988" ,"#513d98" ,"#aead3a", "#9e6d71", "#4b5bdc", "#0cd36d",
+                                "#250662", "#cb5bea", "#228916", "#ac3e1b", "#df514a", "#539397", "#880977",
+                                "#f697c1", "#ba96ce", "#679c9d", "#c6c42c", "#5d2c52", "#48b41b", "#e1cf3b",
+                                "#5be4f0", "#57c4d8", "#a4d17a", "#225b8", "#be608b", "#96b00c", "#088baf",
+                                "#f158bf", "#e145ba", "#ee91e3", "#05d371", "#5426e0", "#4834d0", "#802234",
+                                "#6749e8", "#0971f0", "#8fb413", "#b2b4f0", "#c3c89d", "#c9a941", "#41d158",
+                                "#fb21a3", "#51aed9", "#5bb32d", "#807fb", "#21538e", "#89d534", "#d36647",
+                                "#7fb411", "#0023b8", "#3b8c2a", "#986b53", "#f50422", "#983f7a", "#ea24a3",
+                                "#79352c", "#521250", "#c79ed2", "#d6dd92", "#e33e52", "#b2be57", "#fa06ec"],
+                            data: zuuchQnt
+                        }]
+                    },
+                    options: {
+                        title: {
+                            display: true,
+                            text: '{{ trans('messages.ibiztailbar') }}'
+                        }
+                    }
+                });
+            }
+            @else{new Chart(document.getElementById("piechart"), {
                 type: 'pie',
                 data: {
                     labels: stack,
@@ -500,10 +542,19 @@
                 options: {
                     title: {
                         display: true,
-                        text: 'Гүйцэтгэлийн үнийн дүнгээр авч үзвэл'
+                        text: '{{ trans('messages.ibiztailbar') }}'
                     }
                 }
             });
+
+                }
+            @endif
+
+
+
+
+
+
 
         });
 

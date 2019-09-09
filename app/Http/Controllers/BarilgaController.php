@@ -54,8 +54,7 @@ class BarilgaController extends Controller
         $method = Method::orderby('method_name')->get();
         $projecttype = Projecttype::orderby('project_type_name_mn')->get();
         $constructor = Constructor::orderby('department_abbr')->get();
-        $executor = Executor::orderby('executor_abbr')->get();
-
+        $executor = DB::select("select * from V_EXECUTOR t, CONST_DEPARTMENT d where t.executor_par = d.department_id order by t.executor_par ,t.executor_type,t.executor_abbr");
         $employee =DB::select('select  * from V_CONST_EMPLOYEE t where t.is_engineer=1 order by firstname');
         $schildabbr= Input::get('schildabbr_id');
         $smethod_id= Input::get('smethod_id');
@@ -108,19 +107,17 @@ class BarilgaController extends Controller
             $query.=" ";
 
         }
-        if ($sconstructor!=NULL && $sconstructor !=0) {
-            $query.=" and department_id = '".$sconstructor."'";
 
-        }
-        else
-        {
-            $sconstructor=0;
-            $query.=" ";
-
-        }
         if ($schildabbr!=NULL && $schildabbr !=0) {
-            $query.=" and department_child = '".$schildabbr."'";
+            $type =DB::select('select t.executor_type from V_EXECUTOR t where t.executor_id =  '. $schildabbr.'');
+            if ($type[0]->executor_type ==1){
+                $dep =DB::select('select t.department_id from V_EXECUTOR t where t.executor_id =  '. $schildabbr.'');
 
+                $query.=" and department_id = '".$dep[0]->department_id."'";
+            }
+            else{
+                $query.=" and department_child = '".$schildabbr."'";
+            }
         }
         else
         {
@@ -220,7 +217,13 @@ class BarilgaController extends Controller
         $project->plan2 = preg_replace('/[a-zZ-a,]/', '',Request::input('plan2'));
         $project->plan3 = preg_replace('/[a-zZ-a,]/', '',Request::input('plan3'));
         $project->plan4 = preg_replace('/[a-zZ-a,]/', '',Request::input('plan4'));
-        $project->department_id = Request::input('constructor_id');
+        $project->department_child = Request::input('childabbr_id');
+        if (Request::input('childabbr_id')!=NULL && Request::input('childabbr_id') !=0) {
+                $dep =DB::select('select t.department_id from V_EXECUTOR t where t.executor_id =  '. Request::input('childabbr_id').'');
+
+                $project->department_id = $dep[0]->department_id;
+            }
+
         $project->project_type =$sprojecttype;
         if (Request::input('respondent_emp_id')!=NULL && Request::input('respondent_emp_id') !=0) {
 
@@ -235,7 +238,6 @@ class BarilgaController extends Controller
         $project->method_code = Request::input('method_code');
         $project->percent = Request::input('percent');
         $project->executor_id = Request::input('executor_id');
-        $project->department_child = Request::input('childabbr_id');
         $project->added_user_id = Auth::user()->id;
         $project->project_name_ru = Request::input('project_name_ru');
         $project->economic = preg_replace('/[a-zZ-a,]/', '',Request::input('economic'));

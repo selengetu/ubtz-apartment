@@ -66,22 +66,14 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="form-group col-md-2">
-                                            <label for="inputEmail4">{{ trans('messages.zahialagch') }}</label>
-                                            <select class="form-control select2" id="sconstructor_id" name="sconstructor_id">
-                                                <option value= "0">Бүгд</option>
-                                                @foreach($constructor as $constructors)
-                                                    <option value= "{{$constructors->department_id}}">{{$constructors->department_name}}</option>
-                                                @endforeach
-                                            </select>
 
-                                        </div>
                                         <div class="form-group col-md-2">
                                             <label for="inputEmail4">{{ trans('messages.zahialagchnegj') }}</label>
                                             <select class="form-control select2" id="schildabbr_id" name="schildabbr_id">
                                                 <option value= "0">Бүгд</option>
                                                 @foreach($executor as $executors)
-                                                    <option value= "{{$executors->executor_id}}">{{$executors->executor_abbr}}</option>
+                                                    <option value= "{{$executors->executor_id}}"> @if($executors->executor_type == 2){{$executors->department_abbr}} - {{$executors->executor_abbr}}
+                                                        @else {{$executors->executor_abbr}}@endif</option>
                                                 @endforeach
                                             </select>
 
@@ -91,7 +83,8 @@
                                             <select class="form-control select2" id="sexecutor_id" name="sexecutor_id" >
                                                 <option value= "0">Бүгд</option>
                                                 @foreach($executor as $executors)
-                                                    <option value= "{{$executors->executor_id}}">{{$executors->executor_abbr}}</option>
+                                                    <option value= "{{$executors->executor_id}}"> @if($executors->executor_type == 2){{$executors->department_abbr}} - {{$executors->executor_abbr}}
+                                                        @else {{$executors->executor_abbr}}@endif</option>
                                                 @endforeach
                                             </select>
 
@@ -198,7 +191,7 @@
                                         @foreach($project as $projects)
                                             <tr >
                                                 <td>{{$no}}</td>
-                                                <td>{{$projects->department_name}} - {{$projects->childabbr}}</td>
+                                                <td>@if($projects->executor_type !=2) {{$projects->childabbr}} @else {{$projects->department_name}} - {{$projects->childabbr}}  @endif</td>
                                                 <td>@if($projects->method_code==3)
                                                      По договору
                                                     @else
@@ -206,9 +199,9 @@
                                                         @endif
                                                 </td>
                                                 <td>{{$projects->project_name}}<br>{{$projects->project_name_ru}}</td>
-                                                <td><?php
+                                                <td> <a href="#" title="{{$projects->plan1." ,". $projects->plan2." ,". $projects->plan3." ,". $projects->plan4}}"><?php
                                                     echo number_format($projects->plan,2)."<br>";
-                                                    ?></td>
+                                                    ?></a></td>
                                                 <?php $sum_plan += ($projects->plan) ?>
                                                 <td><?php
                                                     echo number_format($projects->estimation,2)."<br>";
@@ -474,21 +467,14 @@
                                 </select>
 
                             </div>
-                            <div class="form-group col-md-4">
-                                <label for="inputEmail4">{{ trans('messages.zahialagch') }}</label>
-                                <select class="form-control select2" id="constructor_id" name="constructor_id">
-                                    @foreach($constructor as $constructors)
-                                        <option value= "{{$constructors->department_id}}">{{$constructors->department_name}}</option>
-                                    @endforeach
-                                </select>
 
-                            </div>
                             <div class="form-group col-md-4">
                                 <label for="inputEmail4">{{ trans('messages.zahialagchnegj') }}</label>
                                 <select class="form-control select2" id="childabbr_id" name="childabbr_id">
                                     <option value= "0">Бүгд</option>
                                     @foreach($executor as $executors)
-                                        <option value= "{{$executors->executor_id}}">{{$executors->executor_abbr}}</option>
+                                        <option value= "{{$executors->executor_id}}"> @if($executors->executor_type == 2){{$executors->department_abbr}} - {{$executors->executor_abbr}}
+                                            @else {{$executors->executor_abbr}}@endif</option>
                                     @endforeach
                                 </select>
 
@@ -497,8 +483,10 @@
                                 <label for="inputPassword4">{{ trans('messages.guitsetgegch') }}</label>
                                 <select class="form-control select2" id="executor_id" name="executor_id">
                                     <option value= "999">Тодорхойгүй</option>
+                                    <option value= "0">Бүгд</option>
                                     @foreach($executor as $executors)
-                                        <option value= "{{$executors->executor_id}}">{{$executors->executor_abbr}}</option>
+                                        <option value= "{{$executors->executor_id}}"> @if($executors->executor_type == 2){{$executors->department_abbr}} - {{$executors->executor_abbr}}
+                                            @else {{$executors->executor_abbr}}@endif</option>
                                     @endforeach
                                 </select>
 

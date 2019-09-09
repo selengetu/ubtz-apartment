@@ -138,10 +138,9 @@
                                         <th>{{ trans('messages.guitsetgegch') }}</th>
                                         <th>{{ trans('messages.ajliinner') }}</th>
                                         <th>{{ trans('messages.tuluwluguu') }}</th>
-
                                         <th>{{ trans('messages.tusuv') }}</th>
                                         <th>{{ trans('messages.ussundun') }} {{$month -1 }} {{ trans('messages.ussundun1') }} </th>
-                                        <th>{{ trans('messages.enesar') }} {{$month}} {{ trans('messages.ussundun1') }} </th>
+                                        <th>{{ trans('messages.enesar') }} {{$month}} {{ trans('messages.ussundun2') }} </th>
                                         <th>{{ trans('messages.ussundun') }} {{$month}} {{ trans('messages.ussundun1') }} </th>
                                         <th>{{ trans('messages.uunees') }}</th>
                                         <th>{{ trans('messages.biylelt') }}</th>
@@ -172,18 +171,15 @@
                                         @if($p!=$projects->department_id and $p>0 )
 
                                             <tr>
-                                                <td colspan="4"><center><b>Дүн</b> </center></td>
-
-
-
-
-                                                <td><b>{{ number_format($i1)}}</b></td>
-                                                <td><b>{{ number_format($i2)}}</b> </td>
+                                                <td colspan="3"><center><b>{{ trans('messages.dun') }}</b> </center></td>
+                                                <td><b>{{number_format($no-1)}}</b></td>
+                                                <td><b>{{number_format($i1)}}</b></td>
+                                                <td><b>{{number_format($i2)}}</b> </td>
                                                 <td><b>{{number_format($i3)}}</b> </td>
                                                 <td><b>{{number_format($i4)}}</b></td>
                                                 <td><b>{{number_format($i5)}}</b></td>
                                                 <td><b>{{number_format($i6)}}</b></td>
-                                                <td><b>@if($i7> 0 && $no>0){
+                                                <td><b>@if($i7> 0 && $no>0)
                                                         {{number_format($i7/($no-1),2)}}%
                                                     @endif</b></td>
                                                 <td colspan="4"></td>
@@ -202,11 +198,11 @@
 
                                         @if($p!=$p1 and $p>0)
                                             <?php $no = 1; ?>
-                                            <Tr><td colspan="15" style="font-weight: bold;font-size: 12px;"> {{$projects->department_name}} алба</td></Tr>
+                                            <Tr><td colspan="15" style="font-weight: bold;font-size: 12px;"> {{$projects->department_name}} {{ trans('messages.alba') }}</td></Tr>
                                             <?php $s++; ?>
                                             <tr >
                                                 <td>{{$no}}</td>
-                                                <td>{{$projects->department_name}} - {{$projects->childabbr}}</td>
+                                                <td>@if($projects->executor_type !=2) {{$projects->childabbr}} @else {{$projects->department_name}} - {{$projects->childabbr}}  @endif</td>
                                                 <td>@if($projects->method_code==3)
                                                         По договору
                                                     @else
@@ -272,7 +268,8 @@
 
                                             <tr >
                                                 <td>{{$no}}</td>
-                                                <td>{{$projects->department_name}} - {{$projects->childabbr}}</td>
+                                                <td>@if($projects->executor_type !=2) {{$projects->childabbr}} @else {{$projects->department_name}} - {{$projects->childabbr}}  @endif</td>
+
                                                 <td>@if($projects->method_code==3)
                                                         По договору
                                                     @else
@@ -350,18 +347,15 @@
                                         if(++$iall === $all) { ?>
 
                                         <tr>
-                                            <td colspan="4"><center><b>Дүн</b> </center></td>
-
-
-
-
+                                            <td colspan="3"><center><b>Дүн</b> </center></td>
+                                            <td><b>{{number_format($no-1)}}</b></td>
                                             <td><b>{{ number_format($i1)}}</b></td>
                                             <td><b>{{ number_format($i2)}}</b> </td>
                                             <td><b>{{number_format($i3)}}</b> </td>
                                             <td><b>{{number_format($i4)}}</b></td>
                                             <td><b>{{number_format($i5)}}</b></td>
                                             <td><b>{{number_format($i6)}}</b></td>
-                                            <td><b>@if($i7> 0 && $no>0){
+                                            <td><b>@if($i7> 0 && $no>0)
                                                     {{number_format($i7/($no-1),2)}}%
                                                     @endif</b></td>
                                             <td colspan="4"></td>
@@ -373,7 +367,7 @@
                                     <tr>
 
 
-                                        <td><b>Нийт</b></td>
+                                        <td><b>{{ trans('messages.niit') }}</b></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
@@ -470,7 +464,7 @@
                                                 <td><b>{{number_format($i4)}}</b></td>
                                                 <td><b>{{number_format($i5)}}</b></td>
                                                 <td><b>{{number_format($i6)}}</b></td>
-                                                <td><b>@if($i7> 0 && $no>0){
+                                                <td><b>@if($i7> 0 && $no>0)
                                                         {{number_format($i7/($no-1),2)}}%
                                                         @endif</b></td>
                                                 <td colspan="2"></td>
@@ -489,11 +483,12 @@
 
                                         @if($p!=$p1 and $p>0)
                                             <?php $no = 1; ?>
-                                            <Tr><td colspan="13" style="font-weight: bold;font-size: 12px;"> {{$projects->department_name}} алба</td></Tr>
+                                            <Tr><td colspan="13" style="font-weight: bold;font-size: 12px;"> {{$projects->department_name}} {{ trans('messages.alba') }}</td></Tr>
                                             <?php $s++; ?>
                                             <tr >
                                                 <td>{{$no}}</td>
-                                                <td>{{$projects->department_name}} - {{$projects->childabbr}}</td>
+                                                <td>@if($projects->executor_type !=2) {{$projects->childabbr}} @else {{$projects->department_name}} - {{$projects->childabbr}}  @endif</td>
+
                                                 <td>@if($projects->method_code==3)
                                                         По договору
                                                     @else
@@ -557,7 +552,8 @@
 
                                             <tr >
                                                 <td>{{$no}}</td>
-                                                <td>{{$projects->department_name}} - {{$projects->childabbr}}</td>
+                                                <td>@if($projects->executor_type !=2) {{$projects->childabbr}} @else {{$projects->department_name}} - {{$projects->childabbr}}  @endif</td>
+
                                                 <td>@if($projects->method_code==3)
                                                         По договору
                                                     @else
@@ -633,10 +629,7 @@
                                         if(++$iall === $all) { ?>
 
                                         <tr>
-                                            <td colspan="4"><center><b>Дүн</b> </center></td>
-
-
-
+                                            <td colspan="4"><center><b>{{ trans('messages.dun') }}</b> </center></td>
 
                                             <td><b>{{ number_format($i1)}}</b></td>
                                             <td><b>{{ number_format($i2)}}</b> </td>
@@ -653,7 +646,7 @@
                                     @endforeach
                                     <tr>
 
-                                        <td><b>Нийт</b></td>
+                                        <td><b>{{ trans('messages.niit') }}</b></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
