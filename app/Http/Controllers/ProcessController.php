@@ -142,8 +142,10 @@ class ProcessController extends Controller
             }
 
         }
-        else{
+        if(Request::input('gstate_id') == 1){
+
             $budget = DB::select("select sum(t.budget) as totalbudget from V_PROCESS t where t.project_id=" . $data . "");
+
             if($states != NULL){
                 $process = DB::table('Project')
                     ->where('project_id',$data)
@@ -156,16 +158,12 @@ class ProcessController extends Controller
 
                 if( $states[0]->state == 1){
                     $bud = DB::select("select case when count(*)<1 then 0 else max(nvl(t.budget,0)) end budget from Project t where t.project_id=" . $data . "")[0]->budget;
+
                     $process = DB::table('Project')
                         ->where('project_id',$data)
                         ->update(['economic' => $bud]);
                 }
-                if( $state[0]->state != 1){
-                    $process = DB::table('Project')
 
-                        ->where('project_id',$data)
-                        ->update(['economic' => 0]);
-                }
             }
 
             if($states == NULL){
@@ -245,19 +243,23 @@ class ProcessController extends Controller
                 }
             }
         }
-        else{
+        if(Request::input('gstate_id') == 1){
+
             $budget = DB::select("select sum(t.budget) as totalbudget from V_PROCESS t where t.project_id=" . $data . "");
+
             if($state != NULL){
                 $process = DB::table('Project')
                     ->where('project_id',$data)
-                    ->update(['budget' => $budget[0]->totalbudget,'state_id' => $state[0]->state,'percent' => '100','description' => $description[0]->description]);
+                    ->update(['budget' => $budget[0]->totalbudget,'state_id' => Request::input('gstate_id'),'percent' => '100','description' => $description[0]->description]);
                 if(Request::input('gdate') != NULL) {
                     $process = DB::table('Project')
                         ->where('project_id', $data)
                         ->update(['prend_date' => Request::input('gdate')]);
                 }
+
                 if( $state[0]->state == 1){
                     $bud = DB::select("select case when count(*)<1 then 0 else max(nvl(t.budget,0)) end budget from Project t where t.project_id=" . $data . "")[0]->budget;
+
                     $process = DB::table('Project')
 
                         ->where('project_id',$data)

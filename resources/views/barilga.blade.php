@@ -730,6 +730,7 @@
             checkgeree(itag);
 
 
+
         });
         function checkgeree($id) {
             if($id == 3){
@@ -751,6 +752,11 @@
                     $('#executor_id').focus();
                 });
             });
+            if($id == 1) {
+                var child = $("#childabbr_id").val();
+
+                $("#executor_id").val(child).trigger('change');
+            }
         }
 
         $(function() {

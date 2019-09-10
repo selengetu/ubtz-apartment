@@ -140,7 +140,34 @@
                                         <th>{{ trans('messages.tuluwluguu') }}</th>
                                         <th>{{ trans('messages.tusuv') }}</th>
                                         <th>{{ trans('messages.ussundun') }} {{$month -1 }} {{ trans('messages.ussundun1') }} </th>
-                                        <th>{{ trans('messages.enesar') }} {{$month}} {{ trans('messages.ussundun2') }} </th>
+                                        <th>   @if ( Config::get('app.locale') == 'mn'){{ trans('messages.enesar') }} {{$month}} {{ trans('messages.ussundun2') }}
+                                            @elseif ( Config::get('app.locale') == 'en')
+                                                @if($month == 1)
+                                                    За январь
+                                                @elseif($month == 2)
+                                                        За февраль
+                                                    @elseif($month == 3)
+                                                            За март
+                                                        @elseif($month == 4)
+                                                          За  апрель
+                                                            @elseif($month == 5)
+                                                        За май
+                                                                @elseif($month == 6)
+                                                        За  июнь
+                                                                    @elseif($month == 7)
+                                                       За июль
+                                                                        @elseif($month == 8)
+                                                       За август
+                                                                            @elseif($month == 9)
+                                                       За сентябрь
+                                                                                @elseif($month == 10)
+                                                       За  октябрь
+                                                                                    @elseif($month == 11)
+                                                       За  ноябрь
+                                                @elseif($month == 12)
+                                                      За  декабрь
+                                                    @endif
+                                            @endif </th>
                                         <th>{{ trans('messages.ussundun') }} {{$month}} {{ trans('messages.ussundun1') }} </th>
                                         <th>{{ trans('messages.uunees') }}</th>
                                         <th>{{ trans('messages.biylelt') }}</th>

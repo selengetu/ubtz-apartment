@@ -148,12 +148,12 @@ Route::post('/changePassword','UserController@postCredentials');
 Route::get('/getexec/{id?}',function($id = 0){
     if ($id == 3)
     {
-        $dt=DB::table('CONST_EXECUTOR')
+        $dt=DB::table('V_EXECUTOR')
             ->where('is_ubtz','=',0)->orderby('executor_name')->get();
         return $dt;
 
     } else{
-        $dt=DB::table('CONST_EXECUTOR')
+        $dt=DB::table('V_EXECUTOR')
             ->where('is_ubtz','=',1)->orderby('executor_name')->get();
         return $dt;
     }
