@@ -170,7 +170,6 @@
                                             <th>{{ trans('messages.guitsetgegch') }}</th>
                                             <th width="300px">{{ trans('messages.ajliinner') }}</th>
                                             <th>{{ trans('messages.tuluwluguu') }}</th>
-
                                             <th>{{ trans('messages.tusuv') }}</th>
                                             <th>{{ trans('messages.guitsetgel') }}</th>
                                             <th>{{ trans('messages.uunees') }}</th>
@@ -218,8 +217,9 @@
                                                 <td>{{$projects->percent}}%</td>
                                                 <?php $sum_percent += ($projects->percent) ?>
                                                 <td>{{$projects->fletter}}.{{$projects->firstname}}</td>
-                                                <td >{{$projects->start_date}}
-                                                <td>{{$projects->end_date}}
+                                                <td> <a href="#" title="Төлөвлөгөөт улирал : {{$projects->season_name}}">
+                                                        {{$projects->start_date}}</a></td>
+                                                <td>{{$projects->end_date}}</td>
                                                 <td width="102px" @if($projects->state_id==2)
                                                     bgcolor="#ff8c00";
                                                     @elseif($projects->state_id==1)
@@ -460,7 +460,7 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="inputEmail4">{{ trans('messages.ajliinarga') }}</label>
-                                <select class="form-control select2" id="method_code" name="method_code">
+                                <select class="form-control" id="method_code" name="method_code">
                                     @foreach($method as $methods)
                                         <option value= "{{$methods->method_code}}">{{$methods->method_name}}</option>
                                     @endforeach
@@ -470,7 +470,7 @@
 
                             <div class="form-group col-md-4">
                                 <label for="inputEmail4">{{ trans('messages.zahialagchnegj') }}</label>
-                                <select class="form-control select2" id="childabbr_id" name="childabbr_id">
+                                <select class="form-control" id="childabbr_id" name="childabbr_id">
                                     <option value= "0">Бүгд</option>
                                     @foreach($executor as $executors)
                                         <option value= "{{$executors->executor_id}}"> @if($executors->executor_type == 2){{$executors->department_abbr}} - {{$executors->executor_abbr}}
@@ -481,7 +481,7 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="inputPassword4">{{ trans('messages.guitsetgegch') }}</label>
-                                <select class="form-control select2" id="executor_id" name="executor_id">
+                                <select class="form-control" id="executor_id" name="executor_id">
                                     <option value= "999">Тодорхойгүй</option>
                                     <option value= "0">Бүгд</option>
                                     @foreach($executor as $executors)
@@ -729,9 +729,22 @@
             var itag =$(this).val();
             checkgeree(itag);
 
-
-
+            var dep = $("#childabbr_id").val();
+           console.log(dep);
+            if(itag == 1) {
+                $('#executor_id').val(dep).prop('selected', true);
+            }
         });
+        $("#childabbr_id").on('change', function() {
+            var itag =$(this).val();
+            var type = $("#method_code").val();
+            if(type == 1) {
+
+                $('#executor_id').val(itag).prop('selected', true);
+
+            }
+        });
+
         function checkgeree($id) {
             if($id == 3){
 
@@ -746,17 +759,11 @@
                 $.each(data,function(i,qwe){
                     $('#executor_id').append($('<option>', {
                         value: qwe.executor_id,
-                        id: qwe.executor_id,
                         text: qwe.executor_abbr
                     }));
-                    $('#executor_id').focus();
                 });
             });
-            if($id == 1) {
-                var child = $("#childabbr_id").val();
 
-                $("#executor_id").val(child).trigger('change');
-            }
         }
 
         $(function() {
