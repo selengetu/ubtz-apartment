@@ -234,7 +234,7 @@ class BarilgaController extends Controller
             $project->respondent_emp_id =999;
         }
 
-        $project->state_id = 15;
+        $project->state_id = 16;
         $project->method_code = Request::input('method_code');
         $project->percent = Request::input('percent');
         $project->executor_id = Request::input('executor_id');
