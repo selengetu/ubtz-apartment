@@ -50,7 +50,7 @@ class TailanController extends Controller
         $method = Method::orderby('method_name')->get();
         $projecttype = Projecttype::orderby('project_type_name_mn')->get();
         $constructor = Constructor::orderby('department_abbr')->get();
-        $executor = Executor::orderby('executor_abbr')->get();
+        $executor = DB::select("select * from V_EXECUTOR t, CONST_DEPARTMENT d where t.executor_par = d.department_id order by t.executor_par ,t.executor_type,t.executor_abbr");
         $month = Input::get('month');
         $employee =DB::select('select  * from V_CONST_EMPLOYEE t where t.is_engineer=1 order by firstname');
         $schildabbr= Input::get('schildabbr_id');
@@ -106,8 +106,15 @@ class TailanController extends Controller
 
         }
         if ($schildabbr!=NULL && $schildabbr !=0) {
-            $query.=" and department_child = '".$schildabbr."'";
+            $type =DB::select('select t.executor_type from V_EXECUTOR t where t.executor_id =  '. $schildabbr.'');
+            if ($type[0]->executor_type ==1){
+                $dep =DB::select('select t.department_id from V_EXECUTOR t where t.executor_id =  '. $schildabbr.'');
 
+                $query.=" and department_id = '".$dep[0]->department_id."'";
+            }
+            else{
+                $query.=" and department_child = '".$schildabbr."'";
+            }
         }
         else
         {
@@ -180,6 +187,10 @@ class TailanController extends Controller
          to_char(u.economic,'999,999,999,999') as economiccomma,
        u.department_id,
        u.department_name,
+       u.plan1,
+       u.plan2,
+       u.plan3,
+       u.plan4,
        u.project_type,
        u.project_type_name_mn,
        u.added_user_id,

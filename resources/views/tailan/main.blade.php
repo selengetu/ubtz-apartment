@@ -55,21 +55,23 @@
                                             </select>
                                         </div>
                                         <div class="form-group col-md-2">
-                                            <label for="inputEmail4">{{ trans('messages.zahialagch') }}</label>
-                                            <select class="form-control select2" id="sconstructor_id" name="sconstructor_id">
+                                            <label for="inputEmail4">{{ trans('messages.zahialagchnegj') }}</label>
+                                            <select class="form-control select2" id="schildabbr_id" name="schildabbr_id">
                                                 <option value= "0">Бүгд</option>
-                                                @foreach($constructor as $constructors)
-                                                    <option value= "{{$constructors->department_id}}">{{$constructors->department_name}}</option>
+                                                @foreach($executor as $executors)
+                                                    <option value= "{{$executors->executor_id}}"> @if($executors->executor_type == 2){{$executors->department_abbr}} - {{$executors->executor_abbr}}
+                                                        @else {{$executors->executor_abbr}}@endif</option>
                                                 @endforeach
                                             </select>
 
                                         </div>
                                         <div class="form-group col-md-2">
-                                            <label for="inputEmail4">{{ trans('messages.zahialagchnegj') }}</label>
-                                            <select class="form-control select2" id="schildabbr_id" name="schildabbr_id">
+                                            <label for="inputPassword4">{{ trans('messages.guitsetgegch') }}</label>
+                                            <select class="form-control select2" id="sexecutor_id" name="sexecutor_id" >
                                                 <option value= "0">Бүгд</option>
                                                 @foreach($executor as $executors)
-                                                    <option value= "{{$executors->executor_id}}">{{$executors->executor_abbr}}</option>
+                                                    <option value= "{{$executors->executor_id}}"> @if($executors->executor_type == 2){{$executors->department_abbr}} - {{$executors->executor_abbr}}
+                                                        @else {{$executors->executor_abbr}}@endif</option>
                                                 @endforeach
                                             </select>
 
@@ -237,9 +239,9 @@
                                                     @endif
                                                 </td>
                                                 <td>{{$projects->project_name}}<br>{{$projects->project_name_ru}}</td>
-                                                <td><?php
-                                                    echo number_format($projects->plan)."<br>";
-                                                    ?></td>
+                                                <td> <a href="#" title="{{$projects->plan1." ,". $projects->plan2." ,". $projects->plan3." ,". $projects->plan4}}"><?php
+                                                        echo number_format($projects->plan,2)."<br>";
+                                                        ?></a></td>
                                                 <?php $sum_plan += ($projects->plan) ?>
                                                 <td><?php
                                                     echo number_format($projects->estimation)."<br>";
@@ -304,9 +306,9 @@
                                                     @endif
                                                 </td>
                                                 <td>{{$projects->project_name}}<br>{{$projects->project_name_ru}}</td>
-                                                <td><?php
-                                                    echo number_format($projects->plan)."<br>";
-                                                    ?></td>
+                                                <td> <a href="#" title="{{$projects->plan1." ,". $projects->plan2." ,". $projects->plan3." ,". $projects->plan4}}"><?php
+                                                        echo number_format($projects->plan,2)."<br>";
+                                                        ?></a></td>
                                                 <?php $sum_plan += ($projects->plan) ?>
                                                 <td><?php
                                                     echo number_format($projects->estimation)."<br>";
