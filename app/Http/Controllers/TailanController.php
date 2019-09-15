@@ -69,7 +69,7 @@ class TailanController extends Controller
             $query.=" and department_id = '".Auth::user()->dep_id."'";
 
         }
-        if ($startdate !=0 && $startdate && $enddate !=0 && $enddate !=NULL) {
+        if ($startdate !=0 && $startdate && $enddate !=0 && $enddate !=0-NULL) {
             $query.=" where start_date between '".$startdate."' and '".$enddate." 23:59:59'";
 
         }
