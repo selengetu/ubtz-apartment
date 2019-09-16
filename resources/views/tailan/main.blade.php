@@ -211,7 +211,7 @@
                                                 <td><b>@if($i7> 0 && $no>0)
                                                         {{number_format($i7/($no-1),2)}}%
                                                     @endif</b></td>
-                                                <td colspan="4"></td>
+                                                <td colspan="3"></td>
                                             </tr>
                                         @endif
                                         <?php if($p!=$projects->department_id) { $p=$projects->department_id;
@@ -227,7 +227,7 @@
 
                                         @if($p!=$p1 and $p>0)
                                             <?php $no = 1; ?>
-                                            <Tr><td colspan="15" style="font-weight: bold;font-size: 12px;"> {{$projects->department_name}} {{ trans('messages.alba') }}</td></Tr>
+                                            <Tr><td colspan="14" style="font-weight: bold;font-size: 12px;"> {{$projects->department_name}} {{ trans('messages.alba') }}</td></Tr>
                                             <?php $s++; ?>
                                             <tr >
                                                 <td>{{$no}}</td>
@@ -387,7 +387,7 @@
                                             <td><b>@if($i7> 0 && $no>0)
                                                     {{number_format($i7/($no-1),2)}}%
                                                     @endif</b></td>
-                                            <td colspan="4"></td>
+                                            <td colspan="3"></td>
                                         </tr>
 
                                                 <?php } ?>
@@ -425,7 +425,7 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
-                                        <td></td>
+
                                     </tr>
                                     </tbody>
 
@@ -512,7 +512,7 @@
 
                                         @if($p!=$p1 and $p>0)
                                             <?php $no = 1; ?>
-                                            <Tr><td colspan="13" style="font-weight: bold;font-size: 12px;"> {{$projects->department_name}} {{ trans('messages.alba') }}</td></Tr>
+                                            <Tr><td colspan="12" style="font-weight: bold;font-size: 12px;"> {{$projects->department_name}} {{ trans('messages.alba') }}</td></Tr>
                                             <?php $s++; ?>
                                             <tr >
                                                 <td>{{$no}}</td>
