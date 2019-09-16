@@ -105,7 +105,7 @@ class HurunguController extends Controller
                 $query.=" and depart_id = '".$dep[0]->department_id."'";
             }
             else{
-                $query.=" and departs_child = '".$schildabbr."'";
+                $query.=" and depart_child = '".$schildabbr."'";
             }
         }
         else
