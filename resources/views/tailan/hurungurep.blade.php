@@ -32,23 +32,13 @@
                                     @csrf
                                     <div class="col-md-12" data-scrollable="true" data-height="400" >
                                         <div class="row">
-
-                                            <div class="form-group col-md-3">
-                                                <label for="inputEmail4">{{ trans('messages.zahialagch') }}</label>
-                                                <select class="form-control select2" id="sconstructor_id" name="sconstructor_id">
-                                                    <option value= "0">Бүгд</option>
-                                                    @foreach($constructor as $constructors)
-                                                        <option value= "{{$constructors->department_id}}">{{$constructors->department_name}}</option>
-                                                    @endforeach
-                                                </select>
-
-                                            </div>
                                             <div class="form-group col-md-3">
                                                 <label for="inputEmail4">{{ trans('messages.zahialagchnegj') }}</label>
                                                 <select class="form-control select2" id="schildabbr_id" name="schildabbr_id">
                                                     <option value= "0">Бүгд</option>
                                                     @foreach($executor as $executors)
-                                                        <option value= "{{$executors->executor_id}}">{{$executors->executor_abbr}}</option>
+                                                        <option value= "{{$executors->executor_id}}"> @if($executors->executor_type == 2){{$executors->department_abbr}} - {{$executors->executor_abbr}}
+                                                            @else {{$executors->executor_abbr}}@endif</option>
                                                     @endforeach
                                                 </select>
 
