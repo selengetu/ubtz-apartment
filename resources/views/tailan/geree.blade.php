@@ -139,7 +139,7 @@
                                         <th>{{ trans('messages.zahialagch') }}</th>
                                         <th>{{ trans('messages.guitsetgegch') }}</th>
                                         <th width="400px">{{ trans('messages.ajliinner') }}</th>
-                                        <th width="400px">{{ trans('messages.gereenum') }}</th>
+                                        <th>{{ trans('messages.gereenum') }}</th>
                                         <th >{{ trans('messages.tuluwluguu') }}</th>
 
                                         <th>{{ trans('messages.geree') }}</th>
