@@ -173,7 +173,10 @@ Route::get('setlocale/{locale}',function($locale){
     Session::put('locale', $locale);
     return redirect()->route('home');
 });
-
+    Route::get('/getimage/{id?}',function($id = 0){
+        $dt=DB::table('CUSTOMER_FILES')->where('customerid','=',$id)->get();
+        return $dt;
+    });
     Route::get('/information', 'InformationController@index')->name('information');
     Route::get('/information/delete/{id}', 'InformationController@destroy');
     Route::post('/addinformation','InformationController@store');

@@ -288,7 +288,7 @@
                                                     color="white"
                                                 >    <font  @if($projects->state_id==1)
                                                             color="black"; @else color="white"; @endif >{{$projects->state_name_mn}}<br>{{$projects->state_name_ru}}</font></td></td>
-                                                <td><img src="<?php echo asset("profile_images/img/$projects->image_b1")?>"  height="100" width="100"></td>
+                                                <td><img src="<?php echo asset("profile_images/img/$projects->image_b1")?>"  height="100" width="100" onclick="preview_image({{$projects->project_id}})" data-toggle="modal" data-target="#photomodal"></td>
                                                 <td><img src="<?php echo asset("profile_images/img/$projects->image_b2")?>" height="100" width="100"></td>
                                             </tr>
                                             <?php $no++; ?>
@@ -356,7 +356,7 @@
                                                 >    <font  @if($projects->state_id==1)
                                                             color="black"; @else color="white"; @endif >{{$projects->state_name_mn}}<br>{{$projects->state_name_ru}}</font></td></td>
 
-                                                <td>@if($projects->image_b1!=null)<img src="<?php echo asset("profile_images/img/$projects->image_b1")?>"  height="100" width="100" class="zoom">@endif</td>
+                                                <td>@if($projects->image_b1!=null)<img src="<?php echo asset("profile_images/img/$projects->image_b1")?>"  height="100" width="100" onclick="preview_image({{$projects->project_id}})" data-toggle="modal" data-target="#photomodal">@endif</td>
                                                 <td>@if($projects->image_b2!=null)<img src="<?php echo asset("profile_images/img/$projects->image_b2")?>" height="100" width="100" class="zoom">@endif</td>
                                             </tr>
                                             <?php $no++; ?>
@@ -740,12 +740,28 @@
         <!-- row 2 dood-->
 
         </div>
+        <div id="photomodal" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">Хавсаргасан зураг
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button></div>
+                    <div class="modal-body">
+                        <div class="col-md-12">
+                            <div id="image_preview"></div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </section>
-<style>
-    .zoom:hover {
-        transform: scale(3); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
-    }
-</style>
+
 @endsection
 
 @section('script')
@@ -799,6 +815,14 @@
             newWin.document.write(divToPrint.outerHTML);
             newWin.print();
             newWin.close();
+        }
+        function preview_image($id){
+            $('#image_preview').empty();
+            $.get('getimage/'+$id,function(data){
+                $.each(data,function(i,qwe){
+                    $('#image_preview').append('<img width="100%" src="/profile_images/img' + qwe.image_b1 + '" />');
+                });
+            });
         }
     </script>
     <script type='text/javascript' src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
