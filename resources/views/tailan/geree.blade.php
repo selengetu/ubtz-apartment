@@ -40,7 +40,7 @@
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                             <input type="hidden" name="projtype" id="projtype" value="{{$sprojecttype}}">
                                             <input type="hidden" name="stat" id="stat" value="{{$sstate_id}}">
-                                            <input type="hidden" name="construc" id="construc" value="{{$sconstructor}}">
+                                            <input type="hidden" name="construc" id="construc" value="{{$schildabbr}}">
                                             <input type="hidden" name="exec" id="exec" value="{{$sexecutor}}">
                                             <input type="hidden" name="resp" id="resp" value="{{$srespondent_emp_id}}">
 
@@ -65,11 +65,12 @@
                                             </select>
                                         </div>
                                         <div class="form-group col-md-2">
-                                            <label for="inputEmail4">{{ trans('messages.zahialagch') }}</label>
-                                            <select class="form-control select2" id="sconstructor_id" name="sconstructor_id">
+                                            <label for="inputEmail4">{{ trans('messages.zahialagchnegj') }}</label>
+                                            <select class="form-control select2" id="schildabbr_id" name="schildabbr_id">
                                                 <option value= "0">Бүгд</option>
-                                                @foreach($constructor as $constructors)
-                                                    <option value= "{{$constructors->department_id}}">{{$constructors->department_name}}</option>
+                                                @foreach($executor as $executors)
+                                                    <option value= "{{$executors->executor_id}}"> @if($executors->executor_type == 2){{$executors->department_abbr}} - {{$executors->executor_abbr}}
+                                                        @else {{$executors->executor_abbr}}@endif</option>
                                                 @endforeach
                                             </select>
 
@@ -153,11 +154,16 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    <?php
+                                    $plan=0;
+                                    $contract=0;
+                                    $budget=0;
+                                    ?>
                                     <?php $no = 1; ?>
                                     @foreach($project as $projects)
                                         <tr >
                                             <td>{{$no}}</td>
-                                            <td>{{$projects->department_name}}</td>
+                                            <td>{{$projects->department_name}} - {{$projects->childabbr}} </td>
                                             <td>{{$projects->executor_abbr}}</td>
                                             <td>{{$projects->project_name}}<br>{{$projects->project_name_ru}}<br></td>
                                             <td>{{$projects->contract_num}}</td>
@@ -176,7 +182,7 @@
                                             <td>{{$projects->end_date}} </td>
                                             <td>{{$projects->prstart_date}} </td>
                                             <td width="45px">{{$projects->prend_date}}</td>
-                                            <td> {{$projects->diff}}</td>
+                                            <td> @if($projects->diff > 0){{$projects->diff}} @endif</td>
                                             <td @if($projects->state_id==2)
                                                 bgcolor="#ff8c00";
                                                 @elseif($projects->state_id==1)
@@ -199,8 +205,26 @@
                                                         color="black"; @else color="white"; @endif >{{$projects->state_name_mn}}</font></td>
 
                                         </tr>
+                                        <?php
+                                        $plan=$plan+$projects->plan;
+                                        $contract=$contract+$projects->contract;
+                                        $budget=$budget+$projects->budget;
+                                            ?>
                                         <?php $no++; ?>
                                     @endforeach
+                                    <tr>
+                                        <td colspan="4"><center><b>Нийт</b></center></td>
+                                        <td></td>
+                                        <td>{{number_format($plan)}}</td>
+                                        <td>{{number_format($contract)}}</td>
+                                        <td>{{number_format($budget)}}</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -245,7 +269,7 @@
             $('#sproject_type').val($('#projtype').val()).trigger('change');
             $('#sexecutor_id').val($('#exec').val()).trigger('change');
             $('#srespondent_emp_id').val($('#resp').val()).trigger('change');
-            $('#sconstructor_id').val($('#construc').val()).trigger('change');
+            $('#schildabbr_id').val($('#construc').val()).trigger('change');
             $('#sstate_id').val($('#stat').val()).trigger('change');
             const gproject_id = {{ $gproject_id }};
             if (gproject_id != 0) {

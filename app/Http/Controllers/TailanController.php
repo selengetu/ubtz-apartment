@@ -251,7 +251,7 @@ order by report_rowno, ex_report_no, xex_report_no");
         $method = Method::orderby('method_name')->get();
         $projecttype = Projecttype::orderby('project_type_name_mn')->get();
         $constructor = Constructor::orderby('department_abbr')->get();
-        $executor = Executor::orderby('executor_abbr')->get();
+        $executor = DB::select("select * from V_EXECUTOR t, CONST_DEPARTMENT d where t.executor_par = d.department_id order by t.executor_par ,t.executor_type,t.executor_abbr");
 
         $employee =DB::select('select  * from V_CONST_EMPLOYEE t where t.is_engineer=1 order by firstname');
 
@@ -347,13 +347,13 @@ order by report_rowno, ex_report_no, xex_report_no");
         $method = Method::orderby('method_name')->get();
         $projecttype = Projecttype::orderby('project_type_name_mn')->get();
         $constructor = Constructor::orderby('department_abbr')->get();
-        $executor = Executor::orderby('executor_abbr')->get();
+        $executor = DB::select("select * from V_EXECUTOR t, CONST_DEPARTMENT d where t.executor_par = d.department_id order by t.executor_par ,t.executor_type,t.executor_abbr");
 
         $employee =DB::select('select  * from V_CONST_EMPLOYEE t where t.is_engineer=1 order by firstname');
 
         $sstate_id= Input::get('sstate_id');
         $sexecutor = Input::get('sexecutor_id');
-        $sconstructor = Input::get('sconstructor_id');
+        $schildabbr = Input::get('schildabbr_id');
         $srespondent_emp_id = Input::get('srespondent_emp_id');
         $sprojecttype= Input::get('sproject_type');
         $startdate= Input::get('date1');
@@ -397,13 +397,20 @@ order by report_rowno, ex_report_no, xex_report_no");
             $query.=" ";
 
         }
-        if ($sconstructor!=NULL && $sconstructor !=0) {
-            $query.=" and department_id = '".$sconstructor."'";
+        if ($schildabbr!=NULL && $schildabbr !=0) {
+            $type =DB::select('select t.executor_type from V_EXECUTOR t where t.executor_id =  '. $schildabbr.'');
+            if ($type[0]->executor_type ==1){
+                $dep =DB::select('select t.department_id from V_EXECUTOR t where t.executor_id =  '. $schildabbr.'');
 
+                $query.=" and department_id = '".$dep[0]->department_id."'";
+            }
+            else{
+                $query.=" and department_child = '".$schildabbr."'";
+            }
         }
         else
         {
-            $sconstructor=0;
+            $schildabbr=0;
             $query.=" ";
 
         }
@@ -433,8 +440,8 @@ order by report_rowno, ex_report_no, xex_report_no");
             $gproject_id = Session::get('gproject_id');
         }
         $data= Request::input('gproject_id');
-        $project =DB::select("select  * from V_PROJECT t  where 1=1 and t.method_code=3 " .$query. " order by project_id");
-        return view('tailan.geree')->with(['sstate_id'=>$sstate_id,'srespondent_emp_id'=>$srespondent_emp_id,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'sprojecttype'=>$sprojecttype,'gproject_id'=>$gproject_id,'data'=>$data,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype]);
+        $project =DB::select("select  * from V_PROJECT t  where 1=1 and t.method_code=3 " .$query. " order by report_rowno, ex_report_no");
+        return view('tailan.geree')->with(['sstate_id'=>$sstate_id,'srespondent_emp_id'=>$srespondent_emp_id,'schildabbr'=>$schildabbr,'sexecutor'=>$sexecutor,'sprojecttype'=>$sprojecttype,'gproject_id'=>$gproject_id,'data'=>$data,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sexecutor'=>$sexecutor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype]);
     }
 
     public function analyse()
