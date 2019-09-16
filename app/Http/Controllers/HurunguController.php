@@ -31,28 +31,24 @@ class HurunguController extends Controller
     public function index()
     {
         $query = "";
-        $sexecutor = Input::get('sexecutor_id');
-        $sconstructor = Input::get('sconstructor_id');
-        $executor = Executor::orderby('executor_abbr')->get();
+        $schildabbr = Input::get('schildabbr_id');
+        $executor = DB::select("select * from V_EXECUTOR t, CONST_DEPARTMENT d where t.executor_par = d.department_id order by t.executor_par ,t.executor_type,t.executor_abbr");
         $constructor = Constructor::orderby('department_abbr')->get();
 
-        if ($sexecutor!=NULL && $sexecutor !=0) {
-            $query.=" and depart_child = '".$sexecutor."'";
+        if ($schildabbr!=NULL && $schildabbr !=0) {
+            $type =DB::select('select t.executor_type from V_EXECUTOR t where t.executor_id =  '. $schildabbr.'');
+            if ($type[0]->executor_type ==1){
+                $dep =DB::select('select t.department_id from V_EXECUTOR t where t.executor_id =  '. $schildabbr.'');
 
+                $query.=" and depart_id = '".$dep[0]->department_id."'";
+            }
+            else{
+                $query.=" and depart_child = '".$schildabbr."'";
+            }
         }
         else
         {
-            $sexecutor=0;
-            $query.=" ";
-
-        }
-        if ($sconstructor!=NULL && $sconstructor !=0) {
-            $query.=" and depart_id = '".$sconstructor."'";
-
-        }
-        else
-        {
-            $sconstructor=0;
+            $schildabbr=0;
             $query.=" ";
 
         }
@@ -93,5 +89,32 @@ class HurunguController extends Controller
     {
         Hurungu::where('investment_id', '=', $id)->delete();
         return Redirect('hurungu');
+    }
+    public function report()
+    {
+        $query = "";
+        $schildabbr = Input::get('schildabbr_id');
+        $executor = DB::select("select * from V_EXECUTOR t, CONST_DEPARTMENT d where t.executor_par = d.department_id order by t.executor_par ,t.executor_type,t.executor_abbr");
+        $constructor = Constructor::orderby('department_abbr')->get();
+
+        if ($schildabbr!=NULL && $schildabbr !=0) {
+            $type =DB::select('select t.executor_type from V_EXECUTOR t where t.executor_id =  '. $schildabbr.'');
+            if ($type[0]->executor_type ==1){
+                $dep =DB::select('select t.department_id from V_EXECUTOR t where t.executor_id =  '. $schildabbr.'');
+
+                $query.=" and depart_id = '".$dep[0]->department_id."'";
+            }
+            else{
+                $query.=" and departs_child = '".$schildabbr."'";
+            }
+        }
+        else
+        {
+            $schildabbr=0;
+            $query.=" ";
+
+        }
+        $hurungu =  DB::select("select * from V_INVESTMENT where 1=1 " .$query. " order by investment_id");
+        return view('tailan.hurungurep')->with(['executor'=>$executor,'constructor'=>$constructor,'hurungu'=>$hurungu]);
     }
 }

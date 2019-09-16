@@ -185,5 +185,5 @@ Route::get('setlocale/{locale}',function($locale){
         $dt=App\Information::where('information_id','=',$id)->get();
         return $dt;
     });
-
+    Route::match(['get', 'post'],'/hurungurep', 'HurunguController@report')->name('hurungurep');
 });
