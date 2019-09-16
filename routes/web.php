@@ -174,7 +174,11 @@ Route::get('setlocale/{locale}',function($locale){
     return redirect()->route('home');
 });
     Route::get('/getimage/{id?}',function($id = 0){
-        $dt=DB::table('PROJECT_PROCESS')->where('project_id','=',$id)->get();
+        $dt=DB::table('V_PROCESS_IMG')->where('project_id','=',$id)->get();
+        return $dt;
+    });
+    Route::get('/getimagedet/{id?}',function($id = 0){
+        $dt=DB::table('V_PROCESS_IMG')->where('process_id','=',$id)->get();
         return $dt;
     });
     Route::get('/information', 'InformationController@index')->name('information');

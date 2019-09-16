@@ -9,6 +9,7 @@ use Image;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use App\Constructor;
+use App\Imagefile;
 use App\Executor;
 use App\Employee;
 use App\Project;
@@ -47,7 +48,6 @@ class ProcessController extends Controller
     }
     public function store()
     {
-
         $data= Request::input('gproject_id');
         $state = State::orderby('state_name_mn')->get();
         $method = Method::orderby('method_name')->get();
@@ -63,45 +63,61 @@ class ProcessController extends Controller
         $process ->respondent_emp_id = Auth::user()->id;
         $process ->description = Request::input('gdescription');
         if (Request::hasFile('image')) {
-            $file = request()->file('image');
-            $filenamewithextension = $file->getClientOriginalName();
-
-            //get filename without extension
-            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-
-            //get file extension
-            $extension = $file->getClientOriginalExtension();
-
-            //filename to store
-            $filenametostore = $filename.'_'.uniqid().'.'.$extension;
-
-            $filenametostoreb = $filename.'_'.uniqid().'.'.$extension;
-
-            Storage::put('profile_images/'. $filenametostore, fopen($file, 'r+'));
-            Storage::put('profile_images/thumbnail/'. $filenametostore, fopen($file, 'r+'));
-
-            Storage::put('profile_images/'. $filenametostoreb, fopen($file, 'r+'));
-            Storage::put('profile_images/img/'. $filenametostoreb, fopen($file, 'r+'));
-            //Resize image here
-            $thumbnailpath = public_path('profile_images/thumbnail/'.$filenametostore);
-
-            $img1 = Image::make($file->getRealPath())->resize(400, 150, function($constraint) {
-                $constraint->aspectRatio();
-            });
-
-            $img1->save($thumbnailpath);
-            $imgpath = public_path('profile_images/img/'.$filenametostoreb);
-            $img = Image::make($file->getRealPath())->save($filenametostoreb);
-            $img->save($imgpath);
-            $process ->image_b =$filenametostoreb;
-            $process ->image_s =$filenametostore;
-
+            $process->image_b = 1;
         }
-
+        else{
+            $process->image_b = 0;
+        }
         $process ->year = Request::input('gyear');
         $process ->state_id = Request::input('gstate_id');
 
         $process->save();
+        if (Request::hasFile('image')) {
+            $photo = Input::file('image');
+
+            foreach ($photo as $photos) {
+
+                $file = request()->file('image');
+                $filenamewithextension = $photos->getClientOriginalName();
+
+                //get filename without extension
+                $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+
+                //get file extension
+                $extension = $photos->getClientOriginalExtension();
+                $size = $photos->getSize();
+                //filename to store
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
+
+                $filenametostoreb = $filename . '_' . uniqid() . '.' . $extension;
+
+                Storage::put('profile_images/' . $filenametostore, fopen($photos, 'r+'));
+                Storage::put('profile_images/thumbnail/' . $filenametostore, fopen($photos, 'r+'));
+
+                Storage::put('profile_images/' . $filenametostoreb, fopen($photos, 'r+'));
+                Storage::put('profile_images/img/' . $filenametostoreb, fopen($photos, 'r+'));
+                //Resize image here
+                $thumbnailpath = public_path('profile_images/thumbnail/' . $filenametostore);
+
+                $img1 = Image::make($photos->getRealPath())->resize(400, 150, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+
+                $img1->save($thumbnailpath);
+                $imgpath = public_path('profile_images/img/' . $filenametostoreb);
+                $img = Image::make($photos->getRealPath())->save($filenametostoreb);
+                $img->save($imgpath);
+
+                $img = new Imagefile;
+                $img->img_bname = $filenametostoreb;
+                $img->img_name = $filenametostore;
+                $img->img_ext = $extension;
+                $img->img_size = $size;
+                $img->process_id = $process->process_id;
+                $img->save();
+
+            }
+        }
         Session::flash('gproject_id',Request::input('gproject_id'));
         $states = DB::select("select t.state_id as state from V_PROCESS t where t.process_id = (select max(v.process_id) from V_PROCESS v where v.project_id=".$data.")");
         $description = DB::select("select t.description as description from V_PROCESS t where t.process_id = (select max(v.process_id) from V_PROCESS v where v.project_id=".$data.")");
@@ -295,7 +311,7 @@ class ProcessController extends Controller
 
                //get file extension
                $extension = $photos->getClientOriginalExtension();
-
+               $size = $photos->getSize();
                //filename to store
                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
@@ -313,9 +329,15 @@ class ProcessController extends Controller
                $imgpath = public_path('profile_images/img/' . $filenametostoreb);
                $img = Image::make($photos->getRealPath())->save($filenametostoreb);
                $img->save($imgpath);
-               $process = DB::table('Project_process')
-                   ->where('process_id', Request::input('gprocess_id'))
-                   ->update(['image_b' => $filenametostoreb, 'image_s' => $filenametostore]);
+
+               $img = new Imagefile;
+               $img->img_bname = $filenametostoreb;
+               $img->img_name = $filenametostore;
+               $img->img_ext = $extension;
+               $img->img_size = $size;
+               $img->process_id = $data;
+               $img->save();
+
            }
        }
         Session::flash('gproject_id',Request::input('gproject_id'));

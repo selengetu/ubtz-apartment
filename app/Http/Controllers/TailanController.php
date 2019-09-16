@@ -217,12 +217,11 @@ class TailanController extends Controller
        q.image_b2
        from
        v_project u,
-(select r.process_id, r.image_b as image_b1, e.process_id, e.image_b as image_b2, r.project_id
-from PROJECT_PROCESS r, PROJECT_PROCESS e,
-(select project_id, min(process_id) mi, max(process_id) ma from PROJECT_PROCESS
+(select e.img_id, e.img_bname as image_b1, img_name as image_b2, e.PROCESS_ID, e.project_id
+from V_PROCESS_IMG e,
+(select project_id, max(img_id) ma from V_PROCESS_IMG
 group by project_id) t
-where r.process_id = t.mi
-and e.process_id = t.ma
+where e.IMG_ID = t.ma
 ) q,
 (
 select q.project_id , q.month, q.budget,  SUM(q.budget) OVER (PARTITION BY q.project_id ORDER BY Month) AS RunningTotal,( SUM(q.budget) OVER (PARTITION BY q.project_id ORDER BY Month) )- q.budget as diff

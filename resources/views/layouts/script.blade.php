@@ -404,11 +404,11 @@
                 else{
                     $type= qwe.description;
                 }
-                if(qwe.image_s == null){
+                if(qwe.image_b == null){
                     $im= ''
                 }
                 else{
-                    $im= "<img src='/ibiz/public/profile_images/thumbnail/" +qwe.image_s + "'>";
+                    $im="<button type='button' class='btn btn-primary add' data-toggle='modal' data-target='#processimagemodal' onclick='preview_imagedet("+qwe.process_id+")'><i class='fa fa-picture-o' aria-hidden='true'></i></button>";
                 }
                 if(qwe.state_id != 1 || qwe.prend_date == null){
                     $date= ''

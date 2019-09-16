@@ -716,6 +716,26 @@
             </div>
         </div>
     </div>
+    <div id="processimagemodal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">Хавсаргасан зураг
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button></div>
+                <div class="modal-body">
+                    <div class="col-md-12">
+                        <div id="image_previewdet"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
 <style>
     .disabledTab {
         pointer-events: none;
@@ -744,7 +764,14 @@
 
             }
         });
-
+        function preview_imagedet($id){
+            $('#image_previewdet').empty();
+            $.get('getimagedet/'+$id,function(data){
+                $.each(data,function(i,qwe){
+                    $('#image_previewdet').append('<img width="100%" src="profile_images/img/' + qwe.img_bname + '" />');
+                });
+            });
+        }
         function checkgeree($id) {
             if($id == 3){
 
@@ -834,6 +861,7 @@
                 newWin.print();
                 newWin.close();
             }
+
         } );
     </script>
     <script type='text/javascript' src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
