@@ -187,6 +187,7 @@ class TailanController extends Controller
          to_char(u.economic,'999,999,999,999') as economiccomma,
        u.department_id,
        u.department_name,
+       u.season_name,
        u.plan1,
        u.plan2,
        u.plan3,

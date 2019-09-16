@@ -231,7 +231,8 @@
                                             <?php $s++; ?>
                                             <tr >
                                                 <td>{{$no}}</td>
-                                                <td>@if($projects->executor_type !=2) {{$projects->childabbr}} @else {{$projects->department_name}} - {{$projects->childabbr}}  @endif</td>
+                                                <td><a href="#" title="Төлөвлөгөөт улирал : {{$projects->season_name}}">
+                                                     @if($projects->executor_type !=2) {{$projects->childabbr}} @else {{$projects->department_name}} - {{$projects->childabbr}}  @endif</a></td>
                                                 <td>@if($projects->method_code==3)
                                                         По договору
                                                     @else
@@ -239,7 +240,7 @@
                                                     @endif
                                                 </td>
                                                 <td>{{$projects->project_name}}<br>{{$projects->project_name_ru}}</td>
-                                                <td> <a href="#" title="{{$projects->plan1." ,". $projects->plan2." ,". $projects->plan3." ,". $projects->plan4}}"><?php
+                                                <td> <a href="#" title="Улирлын төлөвлөгөө : {{$projects->plan1." ,". $projects->plan2." ,". $projects->plan3." ,". $projects->plan4}}"><?php
                                                         echo number_format($projects->plan,2)."<br>";
                                                         ?></a></td>
                                                 <?php $sum_plan += ($projects->plan) ?>
@@ -297,8 +298,8 @@
 
                                             <tr >
                                                 <td>{{$no}}</td>
-                                                <td>@if($projects->executor_type !=2) {{$projects->childabbr}} @else {{$projects->department_name}} - {{$projects->childabbr}}  @endif</td>
-
+                                                <td><a href="#" title="Төлөвлөгөөт улирал : {{$projects->season_name}}">
+                                                        @if($projects->executor_type !=2) {{$projects->childabbr}} @else {{$projects->department_name}} - {{$projects->childabbr}}  @endif</a></td>
                                                 <td>@if($projects->method_code==3)
                                                         По договору
                                                     @else
@@ -306,7 +307,7 @@
                                                     @endif
                                                 </td>
                                                 <td>{{$projects->project_name}}<br>{{$projects->project_name_ru}}</td>
-                                                <td> <a href="#" title="{{$projects->plan1." ,". $projects->plan2." ,". $projects->plan3." ,". $projects->plan4}}"><?php
+                                                <td> <a href="#" title="Улирлын төлөвлөгөө :  {{$projects->plan1." ,". $projects->plan2." ,". $projects->plan3." ,". $projects->plan4}}"><?php
                                                         echo number_format($projects->plan,2)."<br>";
                                                         ?></a></td>
                                                 <?php $sum_plan += ($projects->plan) ?>

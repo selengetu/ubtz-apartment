@@ -198,7 +198,7 @@
                                                         @endif
                                                 </td>
                                                 <td>{{$projects->project_name}}<br>{{$projects->project_name_ru}}</td>
-                                                <td> <a href="#" title="{{$projects->plan1." ,". $projects->plan2." ,". $projects->plan3." ,". $projects->plan4}}"><?php
+                                                <td> <a href="#" title="Улирлын төлөвлөгөө: {{$projects->plan1." ,". $projects->plan2." ,". $projects->plan3." ,". $projects->plan4}}"><?php
                                                     echo number_format($projects->plan,2)."<br>";
                                                     ?></a></td>
                                                 <?php $sum_plan += ($projects->plan) ?>
@@ -602,7 +602,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade " id="processmodal" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal fade " id="processmodal" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static" enctype="multipart/form-data">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <form id="form2" method="post" action="addprocess" enctype="multipart/form-data">
@@ -691,7 +691,7 @@
                                         </div>
 
                                     @endif
-                                    <input type="file" name="image" class="form-control">
+                                    <input type="file" name="image[]" class="form-control" multiple>
 
                                 </div>
 

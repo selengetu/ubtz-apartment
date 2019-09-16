@@ -284,41 +284,40 @@ class ProcessController extends Controller
             }
         }
        if (Request::hasFile('image')) {
+           $photo = Input::file('image');
 
-            $file = request()->file('image');
-            $filenamewithextension = $file->getClientOriginalName();
+           foreach ($photo as $photos) {
 
-            //get filename without extension
-            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+               $filenamewithextension = $photos->getClientOriginalName();
 
-            //get file extension
-            $extension = $file->getClientOriginalExtension();
+               //get filename without extension
+               $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
 
-            //filename to store
-            $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+               //get file extension
+               $extension = $photos->getClientOriginalExtension();
 
-            $filenametostoreb = $filename.'_'.uniqid().'.'.$extension;
+               //filename to store
+               $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
-            Storage::put('profile_images/'. $filenametostore, fopen($file, 'r+'));
-            Storage::put('profile_images/thumbnail/'. $filenametostore, fopen($file, 'r+'));
+               $filenametostoreb = $filename . '_' . uniqid() . '.' . $extension;
+               Storage::put('profile_images/thumbnail/' . $filenametostore, fopen($photos, 'r+'));
+               Storage::put('profile_images/img/' . $filenametostoreb, fopen($photos, 'r+'));
+               //Resize image here
+               $thumbnailpath = public_path('profile_images/thumbnail/' . $filenametostore);
 
-            Storage::put('profile_images/'. $filenametostoreb, fopen($file, 'r+'));
-            Storage::put('profile_images/img/'. $filenametostoreb, fopen($file, 'r+'));
-            //Resize image here
-            $thumbnailpath = public_path('profile_images/thumbnail/'.$filenametostore);
+               $img1 = Image::make($photos->getRealPath())->resize(400, 150, function ($constraint) {
+                   $constraint->aspectRatio();
+               });
 
-            $img1 = Image::make($file->getRealPath())->resize(400, 150, function($constraint) {
-                $constraint->aspectRatio();
-            });
-
-            $img1->save($thumbnailpath);
-            $imgpath = public_path('profile_images/img/'.$filenametostoreb);
-            $img = Image::make($file->getRealPath())->save($filenametostoreb);
-            $img->save($imgpath);
-            $process = DB::table('Project_process')
-                ->where('process_id', Request::input('gprocess_id'))
-                ->update(['image_b' => $filenametostoreb , 'image_s' => $filenametostore]);
-        }
+               $img1->save($thumbnailpath);
+               $imgpath = public_path('profile_images/img/' . $filenametostoreb);
+               $img = Image::make($photos->getRealPath())->save($filenametostoreb);
+               $img->save($imgpath);
+               $process = DB::table('Project_process')
+                   ->where('process_id', Request::input('gprocess_id'))
+                   ->update(['image_b' => $filenametostoreb, 'image_s' => $filenametostore]);
+           }
+       }
         Session::flash('gproject_id',Request::input('gproject_id'));
         if(Request::input('proc')== 1){
             return back()->withInput();
