@@ -607,8 +607,6 @@ order by t.department_id
             $query.=" ";
 
         }
-
-
         $project =DB::select("select  * from V_PROJECT_IMAGE2 t where 1=1 ".$query. "");
         return view('tailan.album')->with(['method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype]);
 
