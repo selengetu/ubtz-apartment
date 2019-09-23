@@ -420,7 +420,7 @@
                                                 ?></b></td>
                                         <td><b><?php
                                                 if($sum_runningtotal > 0 && $sum_plan){
-                                                echo number_format((($sum_runningtotal)/($sum_plan)*100), 2, ',', ' ')."%}<br>";
+                                                echo number_format((($sum_runningtotal)/($sum_plan)*100), 2, ',', ' ')."%<br>";
                                                 ?></b></td>
                                         <td></td>
                                         <td></td>

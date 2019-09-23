@@ -48,6 +48,7 @@ class ProcessController extends Controller
     }
     public function store()
     {
+
         $data= Request::input('gproject_id');
         $state = State::orderby('state_name_mn')->get();
         $method = Method::orderby('method_name')->get();
@@ -85,16 +86,13 @@ class ProcessController extends Controller
 
                 //get file extension
                 $extension = $photos->getClientOriginalExtension();
+
                 $size = $photos->getSize();
-                //filename to store
                 $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
 
                 $filenametostoreb = $filename . '_' . uniqid() . '.' . $extension;
 
-                Storage::put('profile_images/' . $filenametostore, fopen($photos, 'r+'));
                 Storage::put('profile_images/thumbnail/' . $filenametostore, fopen($photos, 'r+'));
-
-                Storage::put('profile_images/' . $filenametostoreb, fopen($photos, 'r+'));
                 Storage::put('profile_images/img/' . $filenametostoreb, fopen($photos, 'r+'));
                 //Resize image here
                 $thumbnailpath = public_path('profile_images/thumbnail/' . $filenametostore);
@@ -105,7 +103,9 @@ class ProcessController extends Controller
 
                 $img1->save($thumbnailpath);
                 $imgpath = public_path('profile_images/img/' . $filenametostoreb);
-                $img = Image::make($photos->getRealPath())->save($filenametostoreb);
+                $img = Image::make($photos->getRealPath())->resize(1000, 400, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save($filenametostoreb);
                 $img->save($imgpath);
 
                 $img = new Imagefile;
@@ -249,6 +249,7 @@ class ProcessController extends Controller
 
                 //get file extension
                 $extension = $photos->getClientOriginalExtension();
+
                 $size = $photos->getSize();
                 //filename to store
                 $filenametostore = $filename . '_' . uniqid() . '.' . $extension;

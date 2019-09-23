@@ -544,7 +544,7 @@ on q.department_id=b.department_id");;
             $query.=" ";
 
         }
-        $t= DB::select("select b.* ,q.* ,(q.eune+q.egeree+ezurag+etusuv+emater+esanh+eguits+etusuv) as ehleegui from 
+        $t= DB::select("select b.* ,q.* ,(q.eune+q.egeree+ezurag+etusuv+emater+esanh+eguits+etusuv+ealba+esalbar+etul) as ehleegui from 
 (select d.department_name, t.department_id,d.department_type, sum(t.plan) as plan, sum(t.budget) as budget, sum(t.estimation) as estimation,  (sum(t.budget)/sum(t.plan))*100 as percent, sum(t.budget)-sum(t.plan) as diff, (sum(t.percent)/count(percent)) as rpercent , count(t.project_id) as ajliintoo from V_PROJECT t , CONST_DEPARTMENT d
 where t.department_id=d.department_id  ".$query. "
 group by d.department_type,t.department_id, d.department_name) b inner join 
@@ -557,7 +557,7 @@ SELECT department_id ,state_id
       
       )
 PIVOT  
-(count(state_id) FOR state_id IN (1 as haasan,2 as duussan ,3 as gdag,4 as ghots,5 as gadgeree ,6 as nem,7 as eune,8 as egeree,9 as ezurag,10 as etul,11 as emater,12 as esanh ,13 as eguits ,14 as etusuv,16 as boloogui)
+(count(state_id) FOR state_id IN (1 as haasan,2 as duussan ,3 as gdag,4 as ghots,5 as gadgeree ,6 as nem,7 as eune,8 as egeree,9 as ezurag,10 as etul,11 as emater,12 as esanh ,13 as eguits ,14 as etusuv,16 as boloogui, 41 as ealba, 42 as esalbar)
 )
 ORDER BY department_id) q
 on q.department_id=b.department_id");
@@ -566,7 +566,7 @@ from v_project t
 where t.state_id in (1,2,3,4,5,6) ".$query. "
 group by state_name_mn, state_name_ru");
         $t3= DB::select("select d.department_name, t.department_id, count(t.project_id) as ajliintoo from V_PROJECT t , CONST_DEPARTMENT d
-where t.department_id=d.department_id and t.state_id in (7,8,9,10,11,12,13,14,15)  ".$query. "
+where t.department_id=d.department_id and t.state_id in (7,8,9,10,11,12,13,14,15, 41,42)  ".$query. "
 group by t.department_id, d.department_name
 order by t.department_id
 ");

@@ -681,10 +681,13 @@
                                         </div>
 
                                     @endif
+
                                     <input type="file" name="image[]" class="form-control" multiple>
 
                                 </div>
-
+                                <div class="col-md-3">
+                                    <p style="color: red"><i>2,5mb хэтрэхгүй</i></p>
+                                </div>
 
 
                         </div>
