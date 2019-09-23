@@ -87,8 +87,8 @@
                                             @foreach($project as $projects)
                                                 <tr><td colspan="4" bgcolor="#89c2ff"><center><b>{{$no}}. {{$projects->department_name}}  {{$projects->project_name}}</b></center></td></tr>
                                                 <tr>
-                                                    <td colspan="2" width="400px"><center>@if($projects->image_b1!=NULL)<img src="{{asset('profile_images/img/').'/'.$projects->image_b1}}" height="350">@endif</center></td>
-                                                    <td colspan="2" width="400px"><center>@if($projects->image_b2!=NULL)<img src="{{asset('profile_images/img/').'/'.$projects->image_b2}}" height="350">@endif</center></td>
+                                                    <td colspan="2" width="400px"><center>@if($projects->image_b1!=0)<img src="{{asset('profile_images/img/').'/'.$projects->image_b1}}" height="350">@endif</center></td>
+                                                    <td colspan="2" width="400px"><center>@if($projects->image_b2!=0)<img src="{{asset('profile_images/img/').'/'.$projects->image_b2}}" height="350">@endif</center></td>
                                                 <tr>
                                                 <tr>
                                                     <td><b>{{ trans('messages.tuluwluguu') }}:</b></td>

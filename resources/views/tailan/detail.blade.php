@@ -387,7 +387,7 @@
                 options: {
                     title: {
                         display: true,
-                        text: 'Не начали работы'
+                        text: '{{ trans('messages.ehleeguiajil') }}'
                     },
                     maintainAspectRatio: true,
 
@@ -451,8 +451,7 @@
                 },
                 options: {
                     title: {
-                        display: true,
-                        text: 'Эхлээгүй ажу'
+                        display: true
                     },
                     maintainAspectRatio: true,
                     legend: {
