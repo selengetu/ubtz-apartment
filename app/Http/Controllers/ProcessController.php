@@ -218,6 +218,14 @@ class ProcessController extends Controller
         $enddate = Input::get('sdate2');
 
         $data= Request::input('gproject_id');
+        if (Request::hasFile('image')) {
+            $process = DB::table('Project_process')
+                ->where('process_id', Request::input('gprocess_id'))->update(['image_b' => 1]);
+        }
+        else{
+                $process = DB::table('Project_process')
+                    ->where('process_id',Request::input('gprocess_id'))->update(['image_b' => 0]);
+        }
         $process = DB::table('Project_process')
             ->where('process_id', Request::input('gprocess_id'))
             ->update(['budget' =>  preg_replace('/[a-zZ-a,]/', '',Request::input('gbudget')),'month' => Request::input('gmonth'),'year' => Request::input('gyear')
@@ -228,6 +236,50 @@ class ProcessController extends Controller
             $budget = DB::select("select sum(t.budget) as totalbudget from V_PROCESS t where t.project_id=" . $data . "");
             $plan = DB::select("select plan from V_PROJECT t where t.project_id=".$data."");
 
+        if (Request::hasFile('image')) {
+            $photo = Input::file('image');
+
+            foreach ($photo as $photos) {
+
+                $file = request()->file('image');
+                $filenamewithextension = $photos->getClientOriginalName();
+
+                //get filename without extension
+                $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+
+                //get file extension
+                $extension = $photos->getClientOriginalExtension();
+                $size = $photos->getSize();
+                //filename to store
+                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
+
+                $filenametostoreb = $filename . '_' . uniqid() . '.' . $extension;
+
+                Storage::put('profile_images/thumbnail/' . $filenametostore, fopen($photos, 'r+'));
+
+                Storage::put('profile_images/img/' . $filenametostoreb, fopen($photos, 'r+'));
+                //Resize image here
+                $thumbnailpath = public_path('profile_images/thumbnail/' . $filenametostore);
+
+                $img1 = Image::make($photos->getRealPath())->resize(400, 150, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+
+                $img1->save($thumbnailpath);
+                $imgpath = public_path('profile_images/img/' . $filenametostoreb);
+                $img = Image::make($photos->getRealPath())->save($filenametostoreb);
+                $img->save($imgpath);
+
+                $img = new Imagefile;
+                $img->img_bname = $filenametostoreb;
+                $img->img_name = $filenametostore;
+                $img->img_ext = $extension;
+                $img->img_size = $size;
+                $img->process_id = Request::input('gprocess_id');
+                $img->save();
+
+            }
+        }
 
 
         if(Request::input('gstate_id') != 1){
@@ -299,47 +351,7 @@ class ProcessController extends Controller
                 }
             }
         }
-       if (Request::hasFile('image')) {
-           $photo = Input::file('image');
 
-           foreach ($photo as $photos) {
-
-               $filenamewithextension = $photos->getClientOriginalName();
-
-               //get filename without extension
-               $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-
-               //get file extension
-               $extension = $photos->getClientOriginalExtension();
-               $size = $photos->getSize();
-               //filename to store
-               $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
-
-               $filenametostoreb = $filename . '_' . uniqid() . '.' . $extension;
-               Storage::put('profile_images/thumbnail/' . $filenametostore, fopen($photos, 'r+'));
-               Storage::put('profile_images/img/' . $filenametostoreb, fopen($photos, 'r+'));
-               //Resize image here
-               $thumbnailpath = public_path('profile_images/thumbnail/' . $filenametostore);
-
-               $img1 = Image::make($photos->getRealPath())->resize(400, 150, function ($constraint) {
-                   $constraint->aspectRatio();
-               });
-
-               $img1->save($thumbnailpath);
-               $imgpath = public_path('profile_images/img/' . $filenametostoreb);
-               $img = Image::make($photos->getRealPath())->save($filenametostoreb);
-               $img->save($imgpath);
-
-               $img = new Imagefile;
-               $img->img_bname = $filenametostoreb;
-               $img->img_name = $filenametostore;
-               $img->img_ext = $extension;
-               $img->img_size = $size;
-               $img->process_id = $data;
-               $img->save();
-
-           }
-       }
         Session::flash('gproject_id',Request::input('gproject_id'));
         if(Request::input('proc')== 1){
             return back()->withInput();
