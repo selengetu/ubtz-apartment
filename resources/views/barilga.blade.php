@@ -105,7 +105,7 @@
                                                    size="16" type="text" value="">
                                         </div>
                                         <div class="form-group col-md-2">
-                                            <label for="inputCity">{{ trans('messages.duussan') }}</label>
+                                            <label for="inputCity">{{ trans('messages.duusah') }}</label>
                                             <input class="form-control form-control-inline input-medium date-picker" name="sdate2" id="sdate2"
                                                    size="16" type="text" value="">
                                         </div>
@@ -176,7 +176,7 @@
                                             <th>{{ trans('messages.biylelt') }}</th>
                                             <th>{{ trans('messages.hariutsagch') }}</th>
                                             <th>{{ trans('messages.ehelsen') }}</th>
-                                            <th>{{ trans('messages.duussan') }}</th>
+                                            <th>{{ trans('messages.duusah') }}</th>
 
                                             <th width="300px">{{ trans('messages.tailbar') }}</th>
                                             <th></th>
@@ -445,20 +445,12 @@
                 <div class="modal-body">
 
                         <div class="form-row">
+
                             <div class="form-group col-md-4">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <input type="hidden" class="form-control" id="type" name="type">
                                 <input type="hidden" class="form-control" id="id" name="id">
                                 <input type="hidden" class="form-control" id="proj" name="proj" value="{{$sprojecttype}}">
-                                <label for="inputEmail4">{{ trans('messages.ajliinturul') }}</label>
-                                <select class="form-control select2" id="project_type" name="project_type">
-                                    @foreach($projecttype as $projecttypes)
-                                        <option value= "{{$projecttypes->project_type_id}}">{{$projecttypes->project_type_name_mn}}</option>
-                                    @endforeach
-                                </select>
-
-                            </div>
-                            <div class="form-group col-md-4">
                                 <label for="inputEmail4">{{ trans('messages.ajliinarga') }}</label>
                                 <select class="form-control" id="method_code" name="method_code">
                                     @foreach($method as $methods)
@@ -493,12 +485,12 @@
                             </div>
 
 
-                            <div class="form-group col-md-9">
+                            <div class="form-group col-md-8">
                                 <label for="inputAddress">{{ trans('messages.ajliinner') }}</label>
                                 <textarea class="form-control" rows="1" id="project_name" name="project_name"></textarea>
                             </div>
 
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
                                 <label for="inputZip">{{ trans('messages.hariutsagch') }}</label>
                                 <select class="form-control select2" id="respondent_emp_id" name="respondent_emp_id" @if(Auth::user()->user_grant == 6) disabled="true"@endif>
                                     <option value= "999">Тодорхойгүй</option>
@@ -507,9 +499,17 @@
                                 @endforeach
                                 </select>
                             </div>
-                            <div class="form-group col-md-9">
+                            <div class="form-group col-md-8">
                                 <label for="inputAddress">{{ trans('messages.ajliinner') }} /Русс/</label>
                                 <textarea class="form-control" rows="1" id="project_name_ru" name="project_name_ru"></textarea>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputZip">{{ trans('messages.season') }}</label>
+                                <select class="form-control select2" id="season" name="season">
+                                    @foreach($season as $rp)
+                                        <option value= "{{$rp->season_id}}">{{$rp->season_name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputAddress2">{{ trans('messages.tuluwluguu') }}</label>
@@ -535,12 +535,6 @@
                                 <label for="inputAddress2">{{ trans('messages.tuluwluguu4') }}</label>
                                 <input type="text" class="form-control money" id="plan4" name="plan4" placeholder="" maxlength="20">
                             </div>
-                            <div class="form-group col-md-6">
-                                <label for="inputZip">{{ trans('messages.uunees') }}</label>
-                                <input type="text" class="form-control money" id="economic" name="economic" maxlength="20">
-                            </div>
-
-
                         </div>
 
                     <div class="form-row" id="gereediv" style="display: none;">
@@ -553,12 +547,12 @@
                             <input type="text" class="form-control money" id="geree" name="geree" maxlength="20">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="inputAddress2">Эхэлсэн</label>
+                            <label for="inputAddress2">{{ trans('messages.ehelsen') }}</label>
                             <input class="form-control form-control-inline input-medium date-picker" name="prdate1" id="prdate1"
                                    size="16" type="text" value="">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="inputCity">Дууссан</label>
+                            <label for="inputCity">{{ trans('messages.duusah') }}</label>
                             <input class="form-control form-control-inline input-medium date-picker" name="prdate2" id="prdate2"
                                    size="16" type="text" value="">
                         </div>
@@ -573,7 +567,7 @@
                                        size="16" type="text" value="">
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputCity">{{ trans('messages.duussan') }}</label>
+                                <label for="inputCity">{{ trans('messages.duusah') }}</label>
                                 <input class="form-control form-control-inline input-medium date-picker" name="date2" id="date2"
                                        size="16" type="text" value="">
                             </div>
@@ -615,16 +609,12 @@
                     <div class="modal-body">
 
                         <div class="form-row">
-                            <div class="form-group col-md-2">
+
+                            <div class="form-group col-md-3">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <input type="hidden" class="form-control" id="proc" name="proc" value="{{$sprojecttype}}">
                                 <input type="hidden" class="form-control" id="gprocess_id" name="gprocess_id">
                                 <input type="hidden" class="form-control" id="gproject_id" name="gproject_id">
-                                <label for="inputEmail4">{{ trans('messages.tootsoh') }}</label>
-                                <input type="text"  class="form-control year" id="gyear" name="gyear" required="true">
-
-                            </div>
-                            <div class="form-group col-md-3">
                                 <label for="inputEmail4">{{ trans('messages.sar') }}</label>
                                 <input type="text"  class="form-control month" id="gmonth" name="gmonth" required="true">
 
@@ -819,6 +809,7 @@
             $('#sconstructor_id').val($('#construc').val()).trigger('change');
             $('#sstate_id').val($('#stat').val()).trigger('change');
             $('#schildabbr_id').val($('#child').val()).trigger('change');
+
             const gproject_id = {{ $gproject_id }};
             if(gproject_id != 0){
                 processClicked( gproject_id);

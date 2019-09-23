@@ -68,7 +68,7 @@ class ProcessController extends Controller
         else{
             $process->image_b = 0;
         }
-        $process ->year = Request::input('gyear');
+        $process ->year = Carbon::now()->year;
         $process ->state_id = Request::input('gstate_id');
 
         $process->save();
@@ -228,7 +228,7 @@ class ProcessController extends Controller
         }
         $process = DB::table('Project_process')
             ->where('process_id', Request::input('gprocess_id'))
-            ->update(['budget' =>  preg_replace('/[a-zZ-a,]/', '',Request::input('gbudget')),'month' => Request::input('gmonth'),'year' => Request::input('gyear')
+            ->update(['budget' =>  preg_replace('/[a-zZ-a,]/', '',Request::input('gbudget')),'month' => Request::input('gmonth')
                 ,'description' => Request::input('gdescription'),'state_id' => Request::input('gstate_id')]);
 
         $state = DB::select("select t.state_id as state from V_PROCESS t where t.process_id = (select max(v.process_id) from V_PROCESS v where v.project_id=".$data.")");

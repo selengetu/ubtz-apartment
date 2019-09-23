@@ -66,6 +66,7 @@
                 $('#plan2').val(qwe.plan2);
                 $('#plan3').val(qwe.plan3);
                 $('#plan4').val(qwe.plan4);
+                $('#season').val(qwe.planseason);
             });
 
         });
@@ -220,6 +221,7 @@
         $('#project_type').val('1');
         $('#respondent_emp_id').val('999');
         $('#state_id').val('1');
+        $('#season').val('1');
         $('#method_code').val('1');
         $('#percent').val('');
         $('#executor_id').val('999');

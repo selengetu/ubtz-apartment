@@ -13,7 +13,7 @@ use App\Executor;
 use App\Employee;
 use App\Project;
 use App\Method;
-
+use App\Season;
 use App\Process;
 use App\State;
 use DB;
@@ -53,6 +53,7 @@ class BarilgaController extends Controller
         $state = State::orderby('state_name_mn')->get();
         $method = Method::orderby('method_name')->get();
         $projecttype = Projecttype::orderby('project_type_name_mn')->get();
+        $season = Season::orderby('season_id')->get();
         $constructor = Constructor::orderby('department_abbr')->get();
         $executor = DB::select("select * from V_EXECUTOR t, CONST_DEPARTMENT d where t.executor_par = d.department_id order by t.executor_par ,t.executor_type,t.executor_abbr");
         $employee =DB::select('select  * from V_CONST_EMPLOYEE t where t.is_engineer=1 order by firstname');
@@ -190,9 +191,9 @@ class BarilgaController extends Controller
             $gproject_id = Session::get('gproject_id');
         }
 
-        $project =DB::select("select  * from V_PROJECT t  where 1=1 " .$query. " order by report_rowno, ex_report_no");
+        $project =DB::select("select  * from V_PROJECT t  where 1=1 " .$query. " order by report_rowno, ex_report_no, project_id");
         return view('barilga')->with(['schildabbr'=>$schildabbr,'smethod_id'=>$smethod_id,'sstate_id'=>$sstate_id,'srespondent_emp_id'=>$srespondent_emp_id,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'sprojecttype'=>$sprojecttype,'gproject_id'=>$gproject_id,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'employee'=>$employee,
-            'stusuv'=>$stusuv,'stuluvluguu'=>$stuluvluguu,'sguitsetgel'=>$sguitsetgel,  'method'=>$method,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype]);
+            'stusuv'=>$stusuv,'stuluvluguu'=>$stuluvluguu,'sguitsetgel'=>$sguitsetgel,  'method'=>$method,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype,'season'=>$season]);
     }
     public function store()
     {
@@ -236,11 +237,11 @@ class BarilgaController extends Controller
 
         $project->state_id = 16;
         $project->method_code = Request::input('method_code');
+        $project->planseason = Request::input('season');
         $project->percent = Request::input('percent');
         $project->executor_id = Request::input('executor_id');
         $project->added_user_id = Auth::user()->id;
         $project->project_name_ru = Request::input('project_name_ru');
-        $project->economic = preg_replace('/[a-zZ-a,]/', '',Request::input('economic'));
         $project->description = Request::input('description');
         $project->start_date = Request::input('date1');
         $project->end_date = Request::input('date2');
@@ -277,9 +278,9 @@ class BarilgaController extends Controller
                 'plan' => preg_replace('/[a-zZ-a,]/', '',Request::input('plan')),'department_child' => Request::input('childabbr_id')
                 ,'plan1' => preg_replace('/[a-zZ-a,]/', '',Request::input('plan1')),'plan2' => preg_replace('/[a-zZ-a,]/', '',Request::input('plan2'))
                 ,'plan3' => preg_replace('/[a-zZ-a,]/', '',Request::input('plan3')),'plan4' => preg_replace('/[a-zZ-a,]/', '',Request::input('plan4'))
-                ,'project_type' => Request::input('project_type'),'start_date' => Request::input('date1'),'end_date' => Request::input('date2'),'prstart_date' => Request::input('prdate1')
-                ,'method_code' => Request::input('method_code'),'percent' => Request::input('percent'),'executor_id' => Request::input('executor_id')
-                ,'project_name_ru' => Request::input('project_name_ru'),'economic' => preg_replace('/[a-zZ-a,]/', '',Request::input('economic')),'description' => Request::input('description')]);
+                ,'start_date' => Request::input('date1'),'end_date' => Request::input('date2'),'prstart_date' => Request::input('prdate1')
+                ,'method_code' => Request::input('method_code'),'planseason' => Request::input('season'),'percent' => Request::input('percent'),'executor_id' => Request::input('executor_id')
+                ,'project_name_ru' => Request::input('project_name_ru'),'description' => Request::input('description')]);
 
        if(Auth::user()->user_grant !=6 )
        {
