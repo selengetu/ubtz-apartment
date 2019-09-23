@@ -406,7 +406,7 @@
                 else{
                     $type= qwe.description;
                 }
-                if(qwe.image_b == null){
+                if(qwe.image_b == null || qwe.image_b == 0){
                     $im= ''
                 }
                 else{
