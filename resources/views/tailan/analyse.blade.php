@@ -166,13 +166,13 @@
                                         </table>
                                     </div>
 
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <canvas id="visitors-chart" width="400" height="250"></canvas>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <canvas id="percentchart" width="800" height="450"></canvas>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <canvas id="piechart" width="800" height="450"></canvas>
                                     </div>
                                 </div>
