@@ -249,7 +249,7 @@
                                                 </td>
                                                 <td>
                                                     @if (Auth::user()->dep_id ==22 )
-                                                    @if (Auth::user()->user_grant ==3 )
+                                                    @if (Auth::user()->user_grant !=6 or Auth::user()->id ==$projects->added_user_id or Auth::user()->emp_id ==$projects->respondent_emp_id )
                                                         <button type="button" class="btn btn-warning btn-sm update" data-toggle="modal"  data-id="{{$projects->project_id}}" tag="{{$projects->project_id}}"  data-target="#exampleModal" id="updateproj" onclick="updateproj({{$projects->project_id}})">
                                                             <i class="fa fa-pencil" style="color: rgb(255, 255, 255);"></i>
                                                         </button>
@@ -511,9 +511,10 @@
                                     @endforeach
                                 </select>
                             </div>
+
                             <div class="form-group col-md-6">
                                 <label for="inputAddress2">{{ trans('messages.tuluwluguu') }}</label>
-                                <input type="text" class="form-control money" id="plan" name="plan" placeholder="" maxlength="20">
+                                <input type="text" class="form-control money" id="plan" name="plan" placeholder="" maxlength="20" @if (Auth::user()->user_grant !=3) readonly="true" @endif>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputCity">{{ trans('messages.tusuv') }}</label>

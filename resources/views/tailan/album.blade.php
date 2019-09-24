@@ -138,12 +138,6 @@
         </div>
         </div>
 
-        <!-- /.col (right) -->
-
-
-
-        <!-- row 2 dood-->
-
         </div>
     </section>
 

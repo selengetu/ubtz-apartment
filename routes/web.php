@@ -190,4 +190,5 @@ Route::get('setlocale/{locale}',function($locale){
         return $dt;
     });
     Route::match(['get', 'post'],'/hurungurep', 'HurunguController@report')->name('hurungurep');
+    Route::get('/customers/pdf','TailanController@export_pdf');
 });
