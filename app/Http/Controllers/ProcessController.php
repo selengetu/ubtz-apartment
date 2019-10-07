@@ -103,7 +103,7 @@ class ProcessController extends Controller
 
                 $img1->save($thumbnailpath);
                 $imgpath = public_path('profile_images/img/' . $filenametostoreb);
-                $img = Image::make($photos->getRealPath())->resize(1000, 400, function ($constraint) {
+                $img = Image::make($photos->getRealPath())->resize(800, 300, function ($constraint) {
                     $constraint->aspectRatio();
                 })->save($filenametostoreb);
                 $img->save($imgpath);
@@ -268,7 +268,9 @@ class ProcessController extends Controller
 
                 $img1->save($thumbnailpath);
                 $imgpath = public_path('profile_images/img/' . $filenametostoreb);
-                $img = Image::make($photos->getRealPath())->save($filenametostoreb);
+                $img = Image::make($photos->getRealPath())->resize(800, 300, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save($filenametostoreb);
                 $img->save($imgpath);
 
                 $img = new Imagefile;

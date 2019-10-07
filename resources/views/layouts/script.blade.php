@@ -401,11 +401,18 @@
 
                 var $type;
                 var $im;
+                var $bud;
                 if(qwe.description == null){
                     $type= ''
                 }
                 else{
                     $type= qwe.description;
+                }
+                if(qwe.budgetcomma == null){
+                    $bud= ''
+                }
+                else{
+                    $bud= qwe.budgetcomma;
                 }
                 if(qwe.image_b == null || qwe.image_b == 0){
                     $im= ''
@@ -423,7 +430,7 @@
                 var sHtml = " <tr class='table-row' >" +
 
                     "   <td class='m1'>" + qwe.year + " - " + qwe.month+"</td>" +
-                    "   <td class='m1'>" + qwe.budgetcomma+ "</td>" +
+                    "   <td class='m1'>" + $bud+ "</td>" +
                     "   <td class='m1'>" + qwe.state_name_mn+ " "+ $date+"</td>" +
                     "   <td class='m1'>" + $type + "</td>" +
                     "   <td class='m1'>" + $im + "</td>" +
