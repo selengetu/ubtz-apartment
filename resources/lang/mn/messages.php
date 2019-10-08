@@ -80,6 +80,7 @@ return [
     'tailanbarilga' => 'Их засварын ажлын тайлан',
     'baiguullaga' => 'Байгууллага',
     'photoalbum' => 'Фото альбом',
+    'zurag' => 'Фото',
     'ajliintoo' => 'Ажлын тоо',
     'duussant' => 'Дууссан',
     'graphdaguu' => 'Графикийн дагуу',

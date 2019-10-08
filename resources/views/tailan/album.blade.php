@@ -33,7 +33,7 @@
                         <!-- /.card-header -->
                         <div class="card-body text-center">
                             <form method="post" action="album">
-                                <div class="col-md-12" data-scrollable="true" data-height="400" >
+                                <div class="col-md-12" >
                                     <div class="row" >
                                         <div class="form-group col-md-3">
 
@@ -79,6 +79,7 @@
                             <div class="table-responsive">
                                 <div class="row">
 
+
                                     <div class="col-md-12">
                                         <table class="table table-bordered" id="example" border="1" style="font-size:12px; width:100%; border-collapse: collapse;">
 
@@ -87,8 +88,8 @@
                                             @foreach($project as $projects)
                                                 <tr><td colspan="4" bgcolor="#89c2ff"><center><b>{{$no}}. {{$projects->department_name}}  {{$projects->project_name}}</b></center></td></tr>
                                                 <tr>
-                                                    <td colspan="2" width="400px"><center><img src="{{asset('profile_images/img/').'/'.$projects->image_b1}}" height="350"></center></td>
-                                                    <td colspan="2" width="400px"><center><img src="{{asset('profile_images/img/').'/'.$projects->image_b2}}" height="350"></center></td>
+                                                    <td colspan="2" width="400px"><center><img src="{{asset('profile_images/img/').'/'.$projects->image_b1}}"></center></td>
+                                                    <td colspan="2" width="400px"><center><img src="{{asset('profile_images/img/').'/'.$projects->image_b2}}"></center></td>
                                                 <tr>
                                                 <tr>
                                                     <td><b>{{ trans('messages.tuluwluguu') }}:</b></td>
@@ -146,5 +147,7 @@
 @section('script')
 
     @include('layouts.script')
+    <script type="text/javascript">
 
+    </script>
 @endsection

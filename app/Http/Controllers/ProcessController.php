@@ -88,24 +88,22 @@ class ProcessController extends Controller
                 $extension = $photos->getClientOriginalExtension();
 
                 $size = $photos->getSize();
-                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
+                $filenametostore = date('YmdHisu') . '_2' . '.' . $extension;
 
-                $filenametostoreb = $filename . '_' . uniqid() . '.' . $extension;
+                $filenametostoreb = date('YmdHisu') . '_1' . '.' . $extension;
 
                 Storage::put('profile_images/thumbnail/' . $filenametostore, fopen($photos, 'r+'));
                 Storage::put('profile_images/img/' . $filenametostoreb, fopen($photos, 'r+'));
                 //Resize image here
                 $thumbnailpath = public_path('profile_images/thumbnail/' . $filenametostore);
-
                 $img1 = Image::make($photos->getRealPath())->resize(400, 150, function ($constraint) {
                     $constraint->aspectRatio();
                 });
-
                 $img1->save($thumbnailpath);
                 $imgpath = public_path('profile_images/img/' . $filenametostoreb);
                 $img = Image::make($photos->getRealPath())->resize(800, 300, function ($constraint) {
                     $constraint->aspectRatio();
-                })->save($filenametostoreb);
+                });
                 $img->save($imgpath);
 
                 $img = new Imagefile;
@@ -252,9 +250,9 @@ class ProcessController extends Controller
 
                 $size = $photos->getSize();
                 //filename to store
-                $filenametostore = $filename . '_' . uniqid() . '.' . $extension;
+                $filenametostore = date('YmdHisu') . '_2' . '.' . $extension;
 
-                $filenametostoreb = $filename . '_' . uniqid() . '.' . $extension;
+                $filenametostoreb = date('YmdHisu') . '_1' . '.' . $extension;
 
                 Storage::put('profile_images/thumbnail/' . $filenametostore, fopen($photos, 'r+'));
 
@@ -432,5 +430,21 @@ class ProcessController extends Controller
         if(Request::input('proc')== 2){
             return Redirect('barilga');
         }
+    }
+    public function deletepicture($id,$id1)
+    {
+
+        Imagefile::where('img_id', '=', $id)->delete();
+        $department = DB::table('PROCESS_IMG')
+            ->where('process_id', '=', $id1)->exists();
+        if ($department == false) {
+            $department = DB::table('PROJECT_PROCESS')
+                ->where('process_id', $id1)
+                ->update(['image_b' =>0]);
+           }
+        return response()->json([
+            'success' => 'Record has been deleted successfully!'
+        ]);
+
     }
 }

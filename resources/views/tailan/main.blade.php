@@ -175,7 +175,7 @@
                                         <th>{{ trans('messages.biylelt') }}</th>
                                         <th>{{ trans('messages.hariutsagch') }}</th>
                                         <th>{{ trans('messages.tailbar') }}</th>
-                                        <th>{{ trans('messages.photoalbum') }}</th>
+                                        <th>{{ trans('messages.zurag') }}</th>
 
                                     </tr>
                                     </thead>

@@ -388,7 +388,7 @@
 
                                             <th>{{ trans('messages.tootsoh') }}</th>
                                             <th>{{ trans('messages.guitsetgel') }}</th>
-                                            <th>{{ trans('messages.tuluw') }}</th>
+                                            <th>{{ trans('messages.ajliintuluv') }}</th>
                                             <th>{{ trans('messages.tailbar') }}</th>
                                             <th>{{ trans('messages.ajliinguits') }}</th>
                                             <th></th>
@@ -720,7 +720,12 @@
                                 aria-hidden="true">&times;</span></button></div>
                 <div class="modal-body">
                     <div class="col-md-12">
-                        <div id="image_previewdet"></div>
+                        <input id="pprocess_id" style="display:none;">
+                        <table id="imagetable">
+                            <tbody>
+
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -759,11 +764,20 @@
             }
         });
         function preview_imagedet($id){
-            $('#image_previewdet').empty();
+            $('#pprocess_id').val($id);
+
             $.get('getimagedet/'+$id,function(data){
+                $("#imagetable tbody").empty();
                 $.each(data,function(i,qwe){
-                    $('#image_previewdet').append('<img width="100%" src="profile_images/img/' + qwe.img_bname + '" />');
+                    var sHtml = " <tr class='table-row' >" +
+
+                        "   <td class='m1'> <img width='100%' src='profile_images/img/"+ qwe.img_bname +"'/></td>" +
+                        "   <td class='m1'> <button class='btn btn-danger' onclick=deletepicture(" + qwe.img_id+ ","+ qwe.process_id+")><i class='fa fa-trash' aria-hidden='true'></i></button></td>" +
+
+                        "</tr>";
+                    $("#imagetable tbody").append(sHtml);
                 });
+
             });
         }
         function checkgeree($id) {
@@ -786,7 +800,34 @@
             });
 
         }
+        function deletepicture($id,$id1)
+        {
 
+
+            $.ajax(
+                {
+                    url: "picture/delete/"+$id+"/"+$id1,
+                    type: 'GET',
+                    dataType: "JSON",
+                    data: {
+                        "id": $id,
+                        "_method": 'DELETE',
+
+                    },
+                    success: function ()
+                    {
+                        alert('Зураг устгагдлаа');
+                        preview_imagedet($id1);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        if (jqXHR.status == 500) {
+                            alert('Internal error: ' + jqXHR.responseText);
+                        } else {
+                            alert('Unexpected error.');
+                        }
+                    }
+                });
+        }
         $(function() {
             $("#date1").datepicker({
                 format: 'yyyy-mm-dd',

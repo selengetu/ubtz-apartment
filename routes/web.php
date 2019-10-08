@@ -191,4 +191,5 @@ Route::get('setlocale/{locale}',function($locale){
     });
     Route::match(['get', 'post'],'/hurungurep', 'HurunguController@report')->name('hurungurep');
     Route::get('/customers/pdf','TailanController@export_pdf');
+    Route::get('/picture/delete/{id}/{id1}', 'ProcessController@deletepicture');
 });
