@@ -257,7 +257,7 @@
                                                         @endif
                                                 </td>
 
-                                                <td> @if (Auth::user()->dep_id ==22 ) <button type="button" class="btn btn-danger delete btn-sm" id="deleteproj" onclick="deleteproj({{$projects->project_id}})">  <i class="fa fa-trash" style="color: rgb(255, 255, 255);"></i></button> @endif</td>
+                                                <td> @if (Auth::user()->user_grant ==3 ) <button type="button" class="btn btn-danger delete btn-sm" id="deleteproj" onclick="deleteproj({{$projects->project_id}})">  <i class="fa fa-trash" style="color: rgb(255, 255, 255);"></i></button> @endif</td>
                                             </tr>
                                             <?php $no++; ?>
 
