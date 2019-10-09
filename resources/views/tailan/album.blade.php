@@ -19,9 +19,9 @@
             <div class="row">
 
 
-                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                <div class="tab-pane fade show active offset-1" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" style="width:80%">
                     <div class="card"  style="margin-top: 20px">
-                        <div class="card-header">
+                        <div class="card-header" id="card-header">
                             <div class="row">
                                 <div class="col-md-6">
                                     <h3 class="card-title">{{ trans('messages.hailt') }} </h3>
@@ -34,7 +34,7 @@
                         <div class="card-body text-center">
                             <form method="post" action="album">
                                 <div class="col-md-12" >
-                                    <div class="row" >
+                                    <div class="row" id="searchrow">
                                         <div class="form-group col-md-3">
 
                                             <label for="inputEmail4">{{ trans('messages.ajliinturul') }}</label>
@@ -63,7 +63,7 @@
                         </div>
                         <!-- /.card-body -->
                     </div>
-                    <div class="card">
+                    <div class="card" style="width:100%">
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-md-12">
@@ -75,12 +75,8 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body text-center">
-
-                            <div class="table-responsive">
-                                <div class="row">
-
-
-                                    <div class="col-md-12">
+                            <div class="col-md-12" >
+                                    <div class="col-md-11" >
                                         <table class="table table-bordered" id="example" border="1" style="font-size:12px; width:100%; border-collapse: collapse;">
 
                                             <tbody>
@@ -110,12 +106,11 @@
                                         </table>
                                     </div>
 
-
                                 </div>
+                        </div>
                                 <br>
 
 
-                            </div>
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -141,7 +136,16 @@
 
         </div>
     </section>
+<style>
+    @media print {
 
+        .card-header, #searchrow, .main-footer{
+
+            display: none !important;
+
+        }
+    }
+</style>
 @endsection
 
 @section('script')

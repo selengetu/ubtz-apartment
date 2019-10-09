@@ -614,43 +614,5 @@ order by t.department_id
 
 
     }
-    public function export_pdf()
-    {
-        // Fetch all customers from database
-        $query = "";
-        $state = State::orderby('state_name_mn')->get();
-        $method = Method::orderby('method_name')->get();
-        $projecttype = Projecttype::orderby('project_type_name_mn')->get();
-        $constructor = Constructor::orderby('department_abbr')->get();
-        $executor = Executor::orderby('executor_abbr')->get();
 
-        $employee =DB::select('select  * from V_CONST_EMPLOYEE t where t.is_engineer=1 order by firstname');
-
-        $sprojecttype= Input::get('sproject_type');
-        if (Auth::user()->dep_id == 22) {
-            $query.="";
-
-        }
-        else
-        {
-            $query.=" and department_id = '".Auth::user()->dep_id."'";
-
-        }
-        if ($sprojecttype!=NULL && $sprojecttype !=0) {
-            $query.=" and project_type = ".$sprojecttype."";
-
-        }
-        else
-        {
-            $query.=" ";
-
-        }
-        $project =DB::select("select  * from V_PROJECT_IMAGE2 t where 1=1 ".$query. "");
-
-        // Send data to the view using loadView function of PDF facade
-        //return view('tailan.pdf',compact('project'));
-         return PDF::loadView('tailan.pdf', ['project' => $project]);
-        // Finally, you can download the file using download function
-        // return $pdf->download('tailan.pdf');
-    }
 }

@@ -264,6 +264,7 @@ class BarilgaController extends Controller
     public function update(Request $request)
     {
 
+
         $schildabbr= Input::get('schildabbr_id');
         $smethod_id= Input::get('smethod_id');
         $sstate_id= Input::get('sstate_id');
@@ -271,11 +272,20 @@ class BarilgaController extends Controller
         $srespondent_emp_id = Input::get('srespondent_emp_id');
         $startdate= Input::get('sdate1');
         $enddate = Input::get('sdate2');
+
+        if (Request::input('childabbr_id')!=NULL && Request::input('childabbr_id') !=0) {
+            $dep =DB::select('select t.department_id from V_EXECUTOR t where t.executor_id =  '. Request::input('childabbr_id').'');
+
+            $project = DB::table('Project')
+                ->where('project_id', Request::input('id'))
+                ->update(['department_id' => $dep[0]->department_id]);
+        }
+
         $project = DB::table('Project')
             ->where('project_id', Request::input('id'))
             ->update(['project_name' => Request::input('project_name'),'project_name_ru' => Request::input('project_name_ru')
                , 'contract' =>preg_replace('/[a-zZ-a,]/', '',Request::input('geree')) ,'contract_num' =>Request::input('gereenum') ,'estimation' =>preg_replace('/[a-zZ-a,]/', '',Request::input('estimation')) ,
-                'plan' => preg_replace('/[a-zZ-a,]/', '',Request::input('plan')),'department_child' => Request::input('childabbr_id')
+                'plan' => preg_replace('/[a-zZ-a,]/', '',Request::input('plan'))
                 ,'plan1' => preg_replace('/[a-zZ-a,]/', '',Request::input('plan1')),'plan2' => preg_replace('/[a-zZ-a,]/', '',Request::input('plan2'))
                 ,'plan3' => preg_replace('/[a-zZ-a,]/', '',Request::input('plan3')),'plan4' => preg_replace('/[a-zZ-a,]/', '',Request::input('plan4'))
                 ,'start_date' => Request::input('date1'),'end_date' => Request::input('date2'),'prstart_date' => Request::input('prdate1')
