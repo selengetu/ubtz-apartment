@@ -264,7 +264,6 @@ class BarilgaController extends Controller
     public function update(Request $request)
     {
 
-
         $schildabbr= Input::get('schildabbr_id');
         $smethod_id= Input::get('smethod_id');
         $sstate_id= Input::get('sstate_id');
@@ -278,7 +277,7 @@ class BarilgaController extends Controller
 
             $project = DB::table('Project')
                 ->where('project_id', Request::input('id'))
-                ->update(['department_id' => $dep[0]->department_id]);
+                ->update(['department_id' => $dep[0]->department_id,'department_child' => Request::input('childabbr_id')]);
         }
 
         $project = DB::table('Project')
@@ -320,21 +319,7 @@ class BarilgaController extends Controller
             }
 
         }
-        if($state != NULL) {
-            $process = DB::table('Project')
-                ->where('project_id', $data)
-                ->update(['state_id' => $state[0]->state,'description' => $description[0]->description]);
-        }
-        if($state == NULL){
-            $process = DB::table('Project')
-                ->where('project_id', $data)
-                ->update(['state_id' => 15]);
-        }
-        if($budget[0]->totalbudget == NULL) {
-            $process = DB::table('Project')
-                ->where('project_id', $data)
-                ->update(['budget' => 0,'percent' => 0]);
-        }
+
 
 
         if(Request::input('proj')== 1){
