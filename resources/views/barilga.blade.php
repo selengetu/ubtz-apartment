@@ -515,7 +515,7 @@
 
                             <div class="form-group col-md-6">
                                 <label for="inputAddress2">{{ trans('messages.tuluwluguu') }}</label>
-                                <input type="text" class="form-control money" id="plan" name="plan" placeholder="" maxlength="20" @if (Auth::user()->user_grant !=3) readonly="true" @endif>
+                                <input type="text" class="form-control money" id="plan" name="plan" placeholder="" maxlength="20" >
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputCity">{{ trans('messages.tusuv') }}</label>
