@@ -206,9 +206,11 @@
 
                                         </tr>
                                         <?php
+                                        if($projects->state_id!=61){
                                         $plan=$plan+$projects->plan;
                                         $contract=$contract+$projects->contract;
                                         $budget=$budget+$projects->budget;
+                                        }
                                             ?>
                                         <?php $no++; ?>
                                     @endforeach

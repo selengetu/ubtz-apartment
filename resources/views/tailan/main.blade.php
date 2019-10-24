@@ -243,30 +243,43 @@
                                                 <td> <a href="#" title="Улирлын төлөвлөгөө : {{$projects->plan1." ,". $projects->plan2." ,". $projects->plan3." ,". $projects->plan4}}"><?php
                                                         echo number_format($projects->plan,2)."<br>";
                                                         ?></a></td>
+                                                @if($projects->state_id!=61)
                                                 <?php $sum_plan += ($projects->plan) ?>
+                                                @endif
                                                 <td><?php
                                                     echo number_format($projects->estimation)."<br>";
                                                     ?></td>
+                                                    @if($projects->state_id!=61)
                                                 <?php $sum_estimation += ($projects->estimation) ?>
+                                                    @endif
                                                 <td><?php
                                                     echo number_format($projects->diff)."<br>";
                                                     ?></td>
+                                                    @if($projects->state_id!=61)
                                                 <?php $sum_diff += ($projects->diff) ?>
+                                                    @endif
                                                 <td><?php
                                                     echo number_format($projects->bud)."<br>";
                                                     ?></td>
+                                                    @if($projects->state_id!=61)
                                                 <?php $sum_bud += ($projects->bud) ?>
+                                                    @endif
                                                 <td><?php
                                                     echo number_format($projects->runningtotal)."<br>";
                                                     ?></td>
+                                                    @if($projects->state_id!=61)
                                                 <?php $sum_runningtotal += ($projects->runningtotal) ?>
-
+                                                    @endif
                                                 <td><?php
                                                     echo number_format($projects->economic)."<br>";
                                                     ?></td>
+                                                    @if($projects->state_id!=61)
                                                 <?php $sum_economic += ($projects->economic) ?>
+                                                    @endif
                                                 <td>{{$projects->percent}}%</td>
+                                                    @if($projects->state_id!=61)
                                                 <?php $sum_percent += ($projects->percent) ?>
+                                                    @endif
                                                 <td>{{$projects->fletter}}.{{$projects->firstname}}</td>
 
                                                 <td @if($projects->state_id==2)
@@ -310,30 +323,44 @@
                                                 <td> <a href="#" title="Улирлын төлөвлөгөө :  {{$projects->plan1." ,". $projects->plan2." ,". $projects->plan3." ,". $projects->plan4}}"><?php
                                                         echo number_format($projects->plan,2)."<br>";
                                                         ?></a></td>
+                                                @if($projects->state_id!=61)
                                                 <?php $sum_plan += ($projects->plan) ?>
-                                                <td><?php
+                                                @endif
+                                                <td>
+                                                   <?php
                                                     echo number_format($projects->estimation)."<br>";
                                                     ?></td>
+                                                    @if($projects->state_id!=61)
                                                 <?php $sum_estimation += ($projects->estimation) ?>
+                                                    @endif
                                                 <td><?php
                                                     echo number_format($projects->diff)."<br>";
                                                     ?></td>
+                                                    @if($projects->state_id!=61)
                                                 <?php $sum_diff += ($projects->diff) ?>
+                                                    @endif
                                                 <td><?php
                                                     echo number_format($projects->bud)."<br>";
                                                     ?></td>
+                                                    @if($projects->state_id!=61)
                                                 <?php $sum_bud += ($projects->bud) ?>
+                                                    @endif
                                                 <td><?php
                                                     echo number_format($projects->runningtotal)."<br>";
                                                     ?></td>
+                                                    @if($projects->state_id!=61)
                                                 <?php $sum_runningtotal += ($projects->runningtotal) ?>
-
+                                                    @endif
                                                 <td><?php
                                                     echo number_format($projects->economic)."<br>";
                                                     ?></td>
+                                                    @if($projects->state_id!=61)
                                                 <?php $sum_economic += ($projects->economic) ?>
+                                                    @endif
                                                 <td>{{$projects->percent}}%</td>
+                                                    @if($projects->state_id!=61)
                                                 <?php $sum_percent += ($projects->percent) ?>
+                                                    @endif
                                                 <td>{{$projects->fletter}}.{{$projects->firstname}}</td>
 
                                                 <td @if($projects->state_id==2)
@@ -364,13 +391,17 @@
                                         @endif
                                         <?php
 
-                                        $i1=$i1+$projects->plan;
-                                        $i2=$i2 + $projects->estimation;
-                                        $i3=$i3 +$projects->diff;
-                                        $i4=$i4 +$projects->bud;
-                                        $i5=$i5 +$projects->runningtotal;
-                                        $i6= $i6 +$projects->economic;
-                                        $i7=$i7 + $projects->percent;
+
+                                          if($projects->state_id!=61){
+                                              $i1=$i1+$projects->plan;
+                                              $i2=$i2 + $projects->estimation;
+                                              $i3=$i3 +$projects->diff;
+                                              $i4=$i4 +$projects->bud;
+                                              $i5=$i5 +$projects->runningtotal;
+                                              $i6= $i6 +$projects->economic;
+                                              $i7=$i7 + $projects->percent;
+                                          }
+
                                         ?>
                                         <?php
                                         if(++$iall === $all) { ?>
@@ -528,30 +559,43 @@
                                                 <td><?php
                                                     echo number_format($projects->plan)."<br>";
                                                     ?></td>
+                                                @if($projects->state_id!=61)
                                                 <?php $sum_plan += ($projects->plan) ?>
+                                                @endif
                                                 <td><?php
                                                     echo number_format($projects->estimation)."<br>";
                                                     ?></td>
+                                                    @if($projects->state_id!=61)
                                                 <?php $sum_estimation += ($projects->estimation) ?>
+                                                    @endif
                                                 <td><?php
                                                     echo number_format($projects->diff)."<br>";
                                                     ?></td>
+                                                    @if($projects->state_id!=61)
                                                 <?php $sum_diff += ($projects->diff) ?>
+                                                    @endif
                                                 <td><?php
                                                     echo number_format($projects->bud)."<br>";
                                                     ?></td>
+                                                    @if($projects->state_id!=61)
                                                 <?php $sum_bud += ($projects->bud) ?>
+                                                    @endif
                                                 <td><?php
                                                     echo number_format($projects->runningtotal)."<br>";
                                                     ?></td>
+                                                    @if($projects->state_id!=61)
                                                 <?php $sum_runningtotal += ($projects->runningtotal) ?>
-
+                                                    @endif
                                                 <td><?php
                                                     echo number_format($projects->economic)."<br>";
                                                     ?></td>
+                                                    @if($projects->state_id!=61)
                                                 <?php $sum_economic += ($projects->economic) ?>
+                                                    @endif
                                                 <td>{{$projects->percent}}%</td>
+                                                    @if($projects->state_id!=61)
                                                 <?php $sum_percent += ($projects->percent) ?>
+                                                    @endif
                                                 <td>{{$projects->fletter}}.{{$projects->firstname}}</td>
 
                                                 <td @if($projects->state_id==2)
@@ -593,30 +637,43 @@
                                                 <td><?php
                                                     echo number_format($projects->plan)."<br>";
                                                     ?></td>
+                                                @if($projects->state_id!=61)
                                                 <?php $sum_plan += ($projects->plan) ?>
+                                                @endif
                                                 <td><?php
                                                     echo number_format($projects->estimation)."<br>";
                                                     ?></td>
+                                                    @if($projects->state_id!=61)
                                                 <?php $sum_estimation += ($projects->estimation) ?>
+                                                    @endif
                                                 <td><?php
                                                     echo number_format($projects->diff)."<br>";
                                                     ?></td>
+                                                    @if($projects->state_id!=61)
                                                 <?php $sum_diff += ($projects->diff) ?>
+                                                    @endif
                                                 <td><?php
                                                     echo number_format($projects->bud)."<br>";
                                                     ?></td>
+                                                    @if($projects->state_id!=61)
                                                 <?php $sum_bud += ($projects->bud) ?>
+                                                    @endif
                                                 <td><?php
                                                     echo number_format($projects->runningtotal)."<br>";
                                                     ?></td>
+                                                    @if($projects->state_id!=61)
                                                 <?php $sum_runningtotal += ($projects->runningtotal) ?>
-
+                                                    @endif
                                                 <td><?php
                                                     echo number_format($projects->economic)."<br>";
                                                     ?></td>
+                                                    @if($projects->state_id!=61)
                                                 <?php $sum_economic += ($projects->economic) ?>
+                                                    @endif
                                                 <td>{{$projects->percent}}%</td>
+                                                    @if($projects->state_id!=61)
                                                 <?php $sum_percent += ($projects->percent) ?>
+                                                    @endif
                                                 <td>{{$projects->fletter}}.{{$projects->firstname}}</td>
 
                                                 <td @if($projects->state_id==2)
@@ -646,13 +703,16 @@
                                         @endif
                                         <?php
 
-                                        $i1=$i1+$projects->plan;
-                                        $i2=$i2 + $projects->estimation;
-                                        $i3=$i3 +$projects->diff;
-                                        $i4=$i4 +$projects->bud;
-                                        $i5=$i5 +$projects->runningtotal;
-                                        $i6= $i6 +$projects->economic;
-                                        $i7=$i7 + $projects->percent;
+                                        if($projects->state_id!=61){
+                                            $i1=$i1+$projects->plan;
+                                            $i2=$i2 + $projects->estimation;
+                                            $i3=$i3 +$projects->diff;
+                                            $i4=$i4 +$projects->bud;
+                                            $i5=$i5 +$projects->runningtotal;
+                                            $i6= $i6 +$projects->economic;
+                                            $i7=$i7 + $projects->percent;
+                                        }
+
                                         ?>
                                         <?php
                                         if(++$iall === $all) { ?>

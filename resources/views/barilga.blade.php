@@ -201,21 +201,31 @@
                                                 <td> <a href="#" title="Улирлын төлөвлөгөө: {{$projects->plan1." ,". $projects->plan2." ,". $projects->plan3." ,". $projects->plan4}}"><?php
                                                     echo number_format($projects->plan,2)."<br>";
                                                     ?></a></td>
+                                                @if($projects->state_id!=61)
                                                 <?php $sum_plan += ($projects->plan) ?>
+                                                @endif
                                                 <td><?php
                                                     echo number_format($projects->estimation,2)."<br>";
                                                     ?></td>
+                                                @if($projects->state_id!=61)
                                                 <?php $sum_estimation += ($projects->estimation) ?>
+                                                @endif
                                                 <td><?php
                                                     echo number_format($projects->budget,2)."<br>";
                                                     ?></td>
+                                                    @if($projects->state_id!=61)
                                                 <?php $sum_budget += ($projects->budget) ?>
+                                                @endif
                                                 <td><?php
                                                     echo number_format($projects->economic,2)."<br>";
                                                     ?></td>
+                                                    @if($projects->state_id!=61)
                                                 <?php $sum_economic += ($projects->economic) ?>
+                                                @endif
                                                 <td>{{$projects->percent}}%</td>
+                                                    @if($projects->state_id!=61)
                                                 <?php $sum_percent += ($projects->percent) ?>
+                                                @endif
                                                 <td>{{$projects->fletter}}.{{$projects->firstname}}</td>
                                                 <td> <a href="#" title="Төлөвлөгөөт улирал : {{$projects->season_name}}">
                                                         {{$projects->start_date}}</a></td>

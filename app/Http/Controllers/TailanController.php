@@ -478,11 +478,11 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
         }
 
         $t =DB::select("select d.department_name, t.department_id,d.department_type, sum(t.plan) as plan, sum(t.budget) as budget, sum(t.estimation) as estimation,  (sum(t.budget)/sum(t.plan))*100 as percent, sum(t.budget)-sum(t.plan) as diff, (sum(t.percent)/count(percent)) as rpercent , count(t.project_id) as ajliintoo from V_PROJECT t , CONST_DEPARTMENT d
-where t.department_id=d.department_id ".$query. "
+where t.department_id=d.department_id ".$query. " and t.state_id!=61
 group by d.department_type,t.department_id, d.department_name
 order by t.department_id");
         $t2 =DB::select("select d.executor_name, t.department_child,d.executor_abbr,t.department_id, t.department_name ,sum(t.plan) as plan, sum(t.budget) as budget, sum(t.estimation) as estimation,  (sum(t.budget)/sum(t.plan))*100 as percent, sum(t.budget)-sum(t.plan) as diff,count(t.executor_id)as niit, (sum(t.percent)/count(t.percent)) as rpercent from V_PROJECT t , CONST_EXECUTOR d
-where t.department_child=d.executor_id and t.department_id=2 ".$query. "
+where t.department_child=d.executor_id and t.department_id=2 ".$query. " and t.state_id!=61
 group by t.department_child,d.executor_name,t.department_id, t.department_name,d.executor_abbr");
         $det= DB::select("select b.* ,q.* from 
 (select d.department_name, t.department_id,d.department_type, sum(t.plan) as plan, sum(t.budget) as budget, sum(t.estimation) as estimation,  (sum(t.budget)/sum(t.plan))*100 as percent, sum(t.budget)-sum(t.plan) as diff, (sum(t.percent)/count(percent)) as rpercent , count(t.project_id) as ajliintoo from V_PROJECT t , CONST_DEPARTMENT d
@@ -548,14 +548,14 @@ on q.department_id=b.department_id");;
         }
         $t= DB::select("select b.* ,q.* ,(q.eune+q.egeree+ezurag+etusuv+emater+esanh+eguits+etusuv+ealba+esalbar+etul) as ehleegui from 
 (select d.department_name, t.department_id,d.department_type, sum(t.plan) as plan, sum(t.budget) as budget, sum(t.estimation) as estimation,  (sum(t.budget)/sum(t.plan))*100 as percent, sum(t.budget)-sum(t.plan) as diff, (sum(t.percent)/count(percent)) as rpercent , count(t.project_id) as ajliintoo from V_PROJECT t , CONST_DEPARTMENT d
-where t.department_id=d.department_id  ".$query. "
+where t.department_id=d.department_id  ".$query. "   and t.state_id!=61
 group by d.department_type,t.department_id, d.department_name) b inner join 
 
 (SELECT * FROM 
 (
 SELECT department_id ,state_id
         FROM v_project  
-        where 1=1  ".$query. "
+        where 1=1  ".$query. "  and state_id!=61
       
       )
 PIVOT  
