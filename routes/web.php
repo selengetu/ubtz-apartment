@@ -192,4 +192,10 @@ Route::get('setlocale/{locale}',function($locale){
     Route::match(['get', 'post'],'/hurungurep', 'HurunguController@report')->name('hurungurep');
     Route::get('/customers/pdf','TailanController@export_pdf');
     Route::get('/picture/delete/{id}/{id1}', 'ProcessController@deletepicture');
+
+    Route::get('/filter_resp/{date}', 'BarilgaController@filter_resp');
+    Route::get('/filter_method/{date}', 'BarilgaController@filter_method');
+    Route::get('/filter_state/{date}', 'BarilgaController@filter_state');
+    Route::get('/filter_childabbr/{date}', 'BarilgaController@filter_childabbr');
+    Route::get('/filter_executor/{date}', 'BarilgaController@filter_executor');
 });

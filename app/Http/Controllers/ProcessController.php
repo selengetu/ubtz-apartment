@@ -55,6 +55,8 @@ class ProcessController extends Controller
         $projecttype = Projecttype::orderby('project_type_name_mn')->get();
         $constructor = Constructor::orderby('department_abbr')->get();
         $executor = Executor::orderby('executor_abbr')->get();
+        $srespondent_emp_id = Input::get('resp1');
+        Session::put('srespondent_emp_id', $srespondent_emp_id);
         $employee =DB::select('select  * from V_CONST_EMPLOYEE t where t.is_engineer=1 order by firstname');
         $process = new Process;
         $process ->project_id = Request::input('gproject_id');
@@ -193,27 +195,13 @@ class ProcessController extends Controller
             }
 
         }
-        if(Request::input('proc')== 1){
-            return Redirect('zaswar');
-        }
-
-        if(Request::input('proc')== 2){
-            return Redirect('barilga');
-        }
+       return back();
 
 
     }
 
     public function update(Request $request)
     {
-        $schildabbr= Input::get('schildabbr_id');
-        $smethod_id= Input::get('smethod_id');
-        $sstate_id= Input::get('sstate_id');
-        $sexecutor = Input::get('sexecutor_id');
-        $sconstructor = Input::get('sconstructor_id');
-        $srespondent_emp_id = Input::get('srespondent_emp_id');
-        $startdate= Input::get('sdate1');
-        $enddate = Input::get('sdate2');
 
         $data= Request::input('gproject_id');
         if (Request::hasFile('image')) {

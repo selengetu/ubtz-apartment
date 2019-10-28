@@ -41,38 +41,31 @@
                                         <div class="form-group col-md-2">
 
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                            <input type="hidden" name="projtype" id="projtype" value="{{$sprojecttype}}">
-                                            <input type="hidden" name="stat" id="stat" value="{{$sstate_id}}">
-                                            <input type="hidden" name="construc" id="construc" value="{{$sconstructor}}">
-                                            <input type="hidden" name="exec" id="exec" value="{{$sexecutor}}">
-                                            <input type="hidden" name="resp" id="resp" value="{{$srespondent_emp_id}}">
-                                            <input type="hidden" name="meth" id="meth" value="{{$smethod_id}}">
-                                            <input type="hidden" name="child" id="child" value="{{$schildabbr}}">
                                             <label for="inputEmail4">{{ trans('messages.ajliinarga') }}</label>
-                                            <select class="form-control select2" id="smethod_id" name="smethod_id" >
+                                            <select class="form-control select2" id="smethod_id" name="smethod_id"  onchange="javascript:location.href = 'filter_method/'+this.value;" >
                                                 <option value= "0">Бүгд</option>
                                                 @foreach($method as $methods)
-                                                    <option value= "{{$methods->method_code}}">{{$methods->method_name}}</option>
+                                                    <option value= "{{$methods->method_code}}" @if($methods->method_code==$smethod_id) selected @endif>{{$methods->method_name}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group col-md-2">
 
                                             <label for="inputEmail4">{{ trans('messages.ajliintuluv') }}</label>
-                                            <select class="form-control select2" id="sstate_id" name="sstate_id" >
+                                            <select class="form-control select2" id="sstate_id" name="sstate_id"  onchange="javascript:location.href = 'filter_state/'+this.value;" >
                                                 <option value= "0">Бүгд</option>
                                                 @foreach($state as $states)
-                                                    <option value= "{{$states->state_id}}">{{$states->state_name_mn}}</option>
+                                                    <option value= "{{$states->state_id}}" @if($states->state_id==$sstate_id) selected @endif>{{$states->state_name_mn}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
 
                                         <div class="form-group col-md-2">
                                             <label for="inputEmail4">{{ trans('messages.zahialagchnegj') }}</label>
-                                            <select class="form-control select2" id="schildabbr_id" name="schildabbr_id">
+                                            <select class="form-control select2" id="schildabbr_id" name="schildabbr_id"  onchange="javascript:location.href = 'filter_childabbr/'+this.value;" >
                                                 <option value= "0">Бүгд</option>
                                                 @foreach($executor as $executors)
-                                                    <option value= "{{$executors->executor_id}}"> @if($executors->executor_type == 2){{$executors->department_abbr}} - {{$executors->executor_abbr}}
+                                                    <option value= "{{$executors->executor_id}}" @if($executors->executor_id==$schildabbr) selected @endif> @if($executors->executor_type == 2){{$executors->department_abbr}} - {{$executors->executor_abbr}}
                                                         @else {{$executors->executor_abbr}}@endif</option>
                                                 @endforeach
                                             </select>
@@ -80,22 +73,23 @@
                                         </div>
                                         <div class="form-group col-md-2">
                                             <label for="inputPassword4">{{ trans('messages.guitsetgegch') }}</label>
-                                            <select class="form-control select2" id="sexecutor_id" name="sexecutor_id" >
+                                            <select class="form-control select2" id="sexecutor_id" name="sexecutor_id"  onchange="javascript:location.href = 'filter_executor/'+this.value;" >
                                                 <option value= "0">Бүгд</option>
                                                 @foreach($executor as $executors)
-                                                    <option value= "{{$executors->executor_id}}"> @if($executors->executor_type == 2){{$executors->department_abbr}} - {{$executors->executor_abbr}}
+                                                    <option value= "{{$executors->executor_id}}" @if($executors->executor_id==$sexecutor) selected @endif> @if($executors->executor_type == 2){{$executors->department_abbr}} - {{$executors->executor_abbr}}
                                                         @else {{$executors->executor_abbr}}@endif</option>
                                                 @endforeach
                                             </select>
 
                                         </div>
                                         <div class="form-group col-md-2">
+
                                             <label for="inputZip">{{ trans('messages.hariutsagch') }}</label>
-                                            <select class="form-control select2" id="srespondent_emp_id" name="srespondent_emp_id" >
+                                            <select class="form-control select2" id="srespondent_emp_id" name="srespondent_emp_id"  onchange="javascript:location.href = 'filter_resp/'+this.value;" >
                                                 <option value= "0">Бүгд</option>
                                                 <option value= "999">Тодорхойгүй</option>
                                                 @foreach($employee as $employees)
-                                                    <option value= "{{$employees->emp_id}}">{{$employees->fletter}}.{{$employees->firstname}}</option>
+                                                    <option value= "{{$employees->emp_id}}" @if($employees->emp_id == $srespondent_emp_id) selected @endif>{{$employees->fletter}}.{{$employees->firstname}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -621,7 +615,6 @@
                     <div class="modal-body">
 
                         <div class="form-row">
-
                             <div class="form-group col-md-3">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <input type="hidden" class="form-control" id="proc" name="proc" value="{{$sprojecttype}}">
@@ -858,13 +851,6 @@
                 });
         });
         $(document).ready(function() {
-            $('#smethod_id').val($('#meth').val()).trigger('change');
-
-            $('#sexecutor_id').val($('#exec').val()).trigger('change');
-            $('#srespondent_emp_id').val($('#resp').val()).trigger('change');
-            $('#sconstructor_id').val($('#construc').val()).trigger('change');
-            $('#sstate_id').val($('#stat').val()).trigger('change');
-            $('#schildabbr_id').val($('#child').val()).trigger('change');
 
             const gproject_id = {{ $gproject_id }};
             if(gproject_id != 0){

@@ -48,7 +48,6 @@ class BarilgaController extends Controller
                   $sprojecttype=2;
               }
 
-
         $query = "";
         $state = State::orderby('state_name_mn')->get();
         $method = Method::orderby('method_name')->get();
@@ -57,12 +56,55 @@ class BarilgaController extends Controller
         $constructor = Constructor::orderby('department_abbr')->get();
         $executor = DB::select("select * from V_EXECUTOR t, CONST_DEPARTMENT d where t.executor_par = d.department_id order by t.executor_par ,t.executor_type,t.executor_abbr");
         $employee =DB::select('select  * from V_CONST_EMPLOYEE t where t.is_engineer=1 order by firstname');
-        $schildabbr= Input::get('schildabbr_id');
-        $smethod_id= Input::get('smethod_id');
-        $sstate_id= Input::get('sstate_id');
-        $sexecutor = Input::get('sexecutor_id');
-        $sconstructor = Input::get('sconstructor_id');
         $srespondent_emp_id = Input::get('srespondent_emp_id');
+
+        if(Session::has('srespondent_emp_id')) {
+            $srespondent_emp_id = Session::get('srespondent_emp_id');
+
+        }
+        else {
+            Session::put('srespondent_emp_id', $srespondent_emp_id);
+        }
+        $schildabbr= Input::get('schildabbr_id');
+        if(Session::has('schildabbr_id')) {
+            $schildabbr = Session::get('schildabbr_id');
+        }
+        else {
+            Session::put('schildabbr_id', $schildabbr);
+        }
+        $smethod_id= Input::get('smethod_id');
+        if(Session::has('smethod_id')) {
+            $smethod_id = Session::get('smethod_id');
+        }
+        else {
+            Session::put('smethod_id', $smethod_id);
+        }
+
+        $sstate_id= Input::get('sstate_id');
+
+        if(Session::has('sstate_id')) {
+            $sstate_id = Session::get('sstate_id');
+        }
+        else {
+            Session::put('sstate_id', $sstate_id);
+        }
+
+        $sexecutor = Input::get('sexecutor_id');
+        if(Session::has('sexecutor_id')) {
+            $sexecutor = Session::get('sexecutor_id');
+        }
+        else {
+            Session::put('sexecutor_id', $sexecutor);
+        }
+        $sconstructor = Input::get('sconstructor_id');
+        if(Session::has('sconstructor')) {
+            $sconstructor = Session::get('sconstructor');
+        }
+        else {
+            Session::put('sconstructor', $sconstructor);
+        }
+
+
         $stusuv = preg_replace('/[a-zZ-a,]/', '',Request::input('stusuv'));
         $stuluvluguu = preg_replace('/[a-zZ-a,]/', '',Request::input('stuluvluguu'));
         $sguitsetgel = preg_replace('/[a-zZ-a,]/', '',Request::input('sguitsetgel'));
@@ -142,7 +184,6 @@ class BarilgaController extends Controller
         }
         else
         {
-            $srespondent_emp_id=0;
             $query.=" ";
 
         }
@@ -162,7 +203,7 @@ class BarilgaController extends Controller
         }
         else
         {
-            $sstate_id=0;
+            $sguitsetgel=0;
             $query.=" ";
 
         }
@@ -357,5 +398,27 @@ class BarilgaController extends Controller
         if(Request::input('proj')== 2){
             return Redirect('barilga');
         }
+    }
+    public function filter_resp($srespondent_emp_id) {
+        Session::put('srespondent_emp_id',$srespondent_emp_id);
+        return back();
+    }
+    public function filter_method($smethod_id) {
+        Session::put('smethod_id',$smethod_id);
+        return back();
+    }
+    public function filter_state($sstate_id) {
+
+        Session::put('sstate_id',$sstate_id);
+
+        return back();
+    }
+    public function filter_childabbr($schildabbr_id) {
+        Session::put('schildabbr_id',$schildabbr_id);
+        return back();
+    }
+    public function filter_executor($sexecutor_id) {
+        Session::put('sexecutor_id',$sexecutor_id);
+        return back();
     }
 }
