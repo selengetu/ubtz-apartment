@@ -188,7 +188,13 @@ class BarilgaController extends Controller
 
         }
         if ($sstate_id!=NULL && $sstate_id !=0) {
-            $query.=" and state_id = '".$sstate_id."'";
+            if($sstate_id == 99){
+                $query.=" and state_id in (8,42,41,9,11,12,10,14,7)";
+            }
+            else{
+                $query.=" and state_id = '".$sstate_id."'";
+            }
+
 
         }
         else

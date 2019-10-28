@@ -52,6 +52,7 @@
                                                 @foreach($state as $states)
                                                     <option value= "{{$states->state_id}}">{{$states->state_name_mn}}</option>
                                                 @endforeach
+                                                <option value="99">Эхлээгүй</option>
                                             </select>
                                         </div>
                                         <div class="form-group col-md-2">

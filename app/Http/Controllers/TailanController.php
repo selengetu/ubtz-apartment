@@ -134,7 +134,13 @@ class TailanController extends Controller
 
         }
         if ($sstate_id!=NULL && $sstate_id !=0) {
-            $query.=" and state_id = '".$sstate_id."'";
+            if($sstate_id == 99){
+                $query.=" and state_id in (8,42,41,9,11,12,10,14,7)";
+            }
+            else{
+                $query.=" and state_id = '".$sstate_id."'";
+            }
+
 
         }
         else
@@ -325,7 +331,13 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
 
         }
         if ($sstate_id!=NULL && $sstate_id !=0) {
-            $query.=" and state_id = '".$sstate_id."'";
+            if($sstate_id == 99){
+                $query.=" and state_id in (8,42,41,9,11,12,10,14,7)";
+            }
+            else{
+                $query.=" and state_id = '".$sstate_id."'";
+            }
+
 
         }
         else
@@ -609,8 +621,10 @@ order by t.department_id
             $query.=" ";
 
         }
-        $project =DB::select("select  * from V_PROJECT_IMAGE2 t where 1=1 ".$query. "");
-        return view('tailan.album')->with(['method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype]);
+        $project =DB::select("select  distinct * from V_PROJECT_IMAGE t where 1=1 ".$query. "");
+        $img =DB::select("select  * from V_PROJECT_IMAGE3 t");
+
+        return view('tailan.album')->with(['method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype,'img'=>$img]);
 
 
     }

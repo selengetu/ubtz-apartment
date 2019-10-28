@@ -57,6 +57,7 @@
                                                 @foreach($state as $states)
                                                     <option value= "{{$states->state_id}}" @if($states->state_id==$sstate_id) selected @endif>{{$states->state_name_mn}}</option>
                                                 @endforeach
+                                                <option value="99">Эхлээгүй</option>
                                             </select>
                                         </div>
 
