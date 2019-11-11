@@ -331,7 +331,7 @@
                                                 <th>{{ trans('messages.hariutsagch') }}</th>
                                                 <th>{{ trans('messages.guitsetgegch') }}</th>
                                                 <th width="400px">{{ trans('messages.ajliinner') }}</th>
-                                                <th width="85px">{{ trans('messages.tuluwluguu') }}</th>
+                                                <th width="125px">{{ trans('messages.tuluwluguu') }}</th>
                                                 <th width="85px">{{ trans('messages.tusuv') }}</th>
                                                 <th width="85px">{{ trans('messages.guitsetgel') }}</th>
                                                 <th width="85px">{{ trans('messages.uunees') }}</th>
@@ -395,7 +395,7 @@
                                             <th>{{ trans('messages.tootsoh') }}</th>
                                             <th>{{ trans('messages.guitsetgel') }}</th>
                                             <th>{{ trans('messages.ajliintuluv') }}</th>
-                                            <th>{{ trans('messages.tailbar') }}</th>
+                                            <th >{{ trans('messages.tailbar') }}</th>
                                             <th>{{ trans('messages.ajliinguits') }}</th>
                                             <th></th>
 
