@@ -36,6 +36,7 @@ class ExecutorController extends Controller
         $executor->executor_name = Request::input('executor_name');
         $executor->executor_abbr = Request::input('executor_abbr');
         $executor->executor_name_ru = Request::input('executor_name_ru');
+        $executor->executor_par = 261;
         $executor->is_ubtz = Request::input('is_ubtz');
         $executor->save();
         return Redirect('executor');
