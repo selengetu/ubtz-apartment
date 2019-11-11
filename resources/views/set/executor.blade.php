@@ -39,7 +39,7 @@
                                     <tr role="row">
                                         <th>#</th>
                                         <th>Байгууллагын нэр</th>
-                                        <th>Службы УБТЗ</th>
+                                        <th>Орос нэр</th>
                                         <th>Байгууллагын товчилсон нэр</th>
                                         <th>УБТЗ эсэх</th>
                                         <th></th>
@@ -114,7 +114,7 @@
                                 <input type="text" class="form-control" id="executor_abbr" name="executor_abbr" placeholder="">
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="inputCity">Службы УБТЗ</label>
+                                <label for="inputCity">Орос нэр</label>
                                 <input type="text" class="form-control" id="executor_name_ru" name="executor_name_ru" placeholder="">
                             </div>
                             <div class="form-group col-md-4">
