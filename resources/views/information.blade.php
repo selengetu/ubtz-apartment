@@ -139,7 +139,7 @@
                             <label for="inputCity">Дуусах огноо</label>
                             <input class="form-control form-control-inline input-medium date-picker" name="end_date" id="end_date" placeholder="2019-04-15">
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6" style="display: none">
                             @if ($message = Session::get('success'))
 
                                 <div class="alert alert-success alert-block">
