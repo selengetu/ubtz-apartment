@@ -328,8 +328,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </li>
               </ul>
           </li>
-          @if (Auth::user()->dep_id ==22 )
-          <li class="nav-item has-treeview " style="display: none">
+          @if (Auth::user()->user_grant == 1)
+          <li class="nav-item has-treeview ">
             <a href="{{ route('information') }}" class="nav-link">
               <i class="nav-icon fa fa-book"></i>
               <p>

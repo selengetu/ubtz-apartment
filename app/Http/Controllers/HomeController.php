@@ -30,6 +30,7 @@ class HomeController extends Controller
                         group by t.department_child,d.executor_name,t.department_id, t.department_name,d.executor_abbr");
         $t3 =DB::select("select t.project_type, t.project_type_name_mn, t.project_type_name_ru, (sum(t.budget)/sum(t.plan))*100 as niit  from V_PROJECT t
                         group by t.project_type, t.project_type_name_mn, t.project_type_name_ru");
-        return view('welcome')->with(['t'=>$t,'t2'=>$t2,'t3'=>$t3]);
+        $information =DB::select("select * from INFORMATION t where t.end_date > sysdate");
+        return view('welcome')->with(['t'=>$t,'t2'=>$t2,'t3'=>$t3,'information'=>$information]);
     }
 }

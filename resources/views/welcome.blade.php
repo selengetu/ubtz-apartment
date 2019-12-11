@@ -77,8 +77,28 @@
                                         src="//monxansh.appspot.com/xansh.html?currency=USD|EUR|JPY|GBP|RUB|CNY|KRW&conv_tool=1"></iframe>
                                 <br>
                                 <iframe id="forecast_embed" type="text/html" frameborder="0" height="280" width="370" src="http://tsag-agaar.gov.mn/embed/?name=292&color=228ad4&color2=2179b8&color3=ffffff&color4=ffffff&type=vertical&tdegree=cwidth=370"> </iframe>
+                                <br>
+                                <br>
+                                <div class="card card-info">
+                                    <div class="card-header">
+                                        <h3 class="card-title">{{ trans('messages.zarlal') }}</h3>
 
 
+                                    </div>
+                                    <div class="card-body">
+                                    <TABLE>
+                                      <tbody>
+                                      @foreach($information as $informations)
+                                          <tr>
+                                              <td>{{$informations->information_content}}</td>
+                                         </tr>
+
+                                      @endforeach
+                                      </tbody>
+                                    </TABLE>
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
                             </div>
                         </div>
                         <!-- /.card-body -->

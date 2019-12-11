@@ -186,7 +186,7 @@ Route::get('setlocale/{locale}',function($locale){
     Route::post('/addinformation','InformationController@store');
     Route::post('/updateinformation','InformationController@update');
     Route::get('/informationfill/{id?}',function($id = 0){
-        $dt=App\Information::where('information_id','=',$id)->get();
+        $dt=DB::table('V_INFORMATION')->where('information_id','=',$id)->get();
         return $dt;
     });
     Route::match(['get', 'post'],'/hurungurep', 'HurunguController@report')->name('hurungurep');

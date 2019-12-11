@@ -28,7 +28,7 @@
                                 <h4 class="m-0">{{ trans('messages.medeelel') }}</h4>
                             </div>
                             <div class="col-md-2 col-xs-5">
-                                <button data-toggle="modal" data-target="#exampleModal" class="btn btn-primary  add" style="padding-bottom: 10px;"><i class="fa fa-plus" style="color: rgb(255, 255, 255);"></i></button>
+                                <button data-toggle="modal" data-target="#exampleModal" class="btn btn-primary  add" style="padding-bottom: 10px;"><i class="fa fa-plus" style="color: rgb(255, 255, 255);"></i> Мэдээлэл нэмэх</button>
                             </div>
                         </div>
 
@@ -41,8 +41,8 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Төрөл</th>
-                                    <th>Товч утга</th>
-                                    <th>Зураг</th>
+                                    <th>Мэдээлэл</th>
+                                    <th>Дуусах огноо</th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -52,8 +52,8 @@
                                     <tr>
                                         <td>{{$no}}</td>
                                         <td>{{$informations->type_name}}</td>
-                                        <td>{{$informations->information_name}}</td>
-                                        <td><a class='btn btn-xs btn-info see' data-toggle='modal' data-target='#photomodal' data-id="{{$informations->img_path}}" tag='{{$informations->img_path}}'><i class="fa fa-pencil-square-o" style="color: rgb(255, 255, 255); ">Зураг</i></a></td>
+                                        <td>{{$informations->information_content}}</td>
+                                        <td>{{$informations->end_date}}</td>
                                         <td class='m1'> <a class='btn btn-xs btn-info update' data-toggle='modal' data-target='#exampleModal' data-id="{{$informations->information_id}}" tag='{{$informations->information_id}}'><i class="fa fa-pencil-square-o" style="color: rgb(255, 255, 255); "></i></a> </td>
                                     </tr>
                                     <?php $no++; ?>
@@ -132,10 +132,12 @@
                             </select>
                         </div>
                         <div class="form-group col-md-8">
-                            <label for="inputAddress">Товч утга</label>
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <input type="hidden" class="form-control" id="id" name="id">
-                            <input type="text" class="form-control" id="information_name" name="information_name" placeholder="" maxlength="50">
+                            <label for="inputAddress">Мэдээлэл</label>
+                            <input type="text" class="form-control" id="information_content" name="information_content" placeholder="" maxlength="50">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="inputCity">Дуусах огноо</label>
+                            <input class="form-control form-control-inline input-medium date-picker" name="end_date" id="end_date" placeholder="2019-04-15">
                         </div>
                         <div class="col-md-6">
                             @if ($message = Session::get('success'))
@@ -235,8 +237,9 @@
         $.get('informationfill/'+itag,function(data){
             $.each(data,function(i,qwe){
                 $('#id').val(qwe.information_id);
-                $('#information_name').val(qwe.information_name);
                 $('#information_type').val(qwe.information_type);
+                $('#information_content').val(qwe.information_content);
+                $('#end_date').val(qwe.end_date);
                 $("#imgpath1").attr('src',"http://192.168.4.176/barilga/public/profile_images/inf/"+qwe.img_path+"");
             });
 

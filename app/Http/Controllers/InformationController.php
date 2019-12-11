@@ -37,8 +37,10 @@ class InformationController extends Controller
     {
 
         $inf= new Information();
-        $inf->information_name = Request::input('information_name');
         $inf->information_type = Request::input('information_type');
+        $inf->information_content = Request::input('information_content');
+        $inf->end_date = Request::input('end_date');
+        $inf->add_date = Request::input('add_date');
         if (Request::hasFile('image')) {
             $file = request()->file('image');
             $filenamewithextension = $file->getClientOriginalName();
@@ -76,7 +78,8 @@ class InformationController extends Controller
 
         $information= DB::table('INFORMATION')
             ->where('information_id', Request::input('id'))
-            ->update(['information_name' => Request::input('information_name'),'information_type' => Request::input('information_type')]);
+            ->update(['information_type' => Request::input('information_type')
+                ,'information_content' => Request::input('information_content'),'end_date' => Request::input('end_date')]);
 
         if (Request::hasFile('image')) {
             $file = request()->file('image');
