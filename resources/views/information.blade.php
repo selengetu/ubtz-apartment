@@ -41,6 +41,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Төрөл</th>
+                                    <th>Гарчиг</th>
                                     <th>Мэдээлэл</th>
                                     <th>Дуусах огноо</th>
                                     <th></th>
@@ -52,6 +53,7 @@
                                     <tr>
                                         <td>{{$no}}</td>
                                         <td>{{$informations->type_name}}</td>
+                                        <td>{{$informations->information_name}}</td>
                                         <td>{{$informations->information_content}}</td>
                                         <td>{{$informations->end_date}}</td>
                                         <td class='m1'> <a class='btn btn-xs btn-info update' data-toggle='modal' data-target='#exampleModal' data-id="{{$informations->information_id}}" tag='{{$informations->information_id}}'><i class="fa fa-pencil-square-o" style="color: rgb(255, 255, 255); "></i></a> </td>
@@ -133,8 +135,11 @@
                         </div>
                         <div class="form-group col-md-8">
                             <label for="inputAddress">Мэдээлэл</label>
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <input type="hidden" class="form-control" id="id" name="id">
                             <input type="text" class="form-control" id="information_content" name="information_content" placeholder="" maxlength="50">
                         </div>
+
                         <div class="form-group col-md-4">
                             <label for="inputCity">Дуусах огноо</label>
                             <input class="form-control form-control-inline input-medium date-picker" name="end_date" id="end_date" placeholder="2019-04-15">
