@@ -297,6 +297,8 @@
                                                     bgcolor="blue";
                                                     @elseif($projects->state_id==16)
                                                     bgcolor="blue";
+                                                    @elseif($projects->state_id==81)
+                                                    bgcolor="#87cefa";
                                                     @else
                                                     bgcolor="red";
                                                     @endif
@@ -378,6 +380,8 @@
                                                     bgcolor="blue";
                                                     @elseif($projects->state_id==16)
                                                     bgcolor="blue";
+                                                    @elseif($projects->state_id==81)
+                                                    bgcolor="#87cefa";
                                                     @else
                                                     bgcolor="red";
                                                     @endif
@@ -618,7 +622,7 @@
                                                     @endif
                                                     color="white"
                                                 >    <font  @if($projects->state_id==1)
-                                                            color="black"; @else color="white"; @endif >{{$projects->state_name_mn}}<br>{{$projects->state_name_ru}}</font></td></td>
+                                                            color="black"; @else color="white"; @endif >{{$projects->state_name_mn}}<br>{{$projects->state_name_ru}}<br>{{$projects->description}}</font></td></td>
                                                 </tr>
                                             <?php $no++; ?>
                                             <?php $no1++; ?>
@@ -696,7 +700,7 @@
                                                     @endif
                                                     color="white"
                                                 >    <font  @if($projects->state_id==1)
-                                                            color="black"; @else color="white"; @endif >{{$projects->state_name_mn}}<br>{{$projects->state_name_ru}}</font></td></td>
+                                                            color="black"; @else color="white"; @endif >{{$projects->state_name_mn}}<br>{{$projects->state_name_ru}}<br>{{$projects->description}}</font></td></td>
 
                                                  </tr>
                                             <?php $no++; ?>

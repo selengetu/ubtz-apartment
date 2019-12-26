@@ -197,6 +197,8 @@
                                                 bgcolor="blue";
                                                 @elseif($projects->state_id==16)
                                                 bgcolor="blue";
+                                                @elseif($projects->state_id==81)
+                                                bgcolor="#87cefa";
                                                 @else
                                                 bgcolor="red";
                                                 @endif

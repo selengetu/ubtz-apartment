@@ -102,6 +102,7 @@
                                             <?php $sum_nem = 0 ?>
                                             <?php $sum_boloogui = 0 ?>
                                             <?php $sum_ehleegui = 0 ?>
+                                            <?php $sum_duus = 0 ?>
                                             <tr role="row">
                                                 <th>#</th>
                                                 <th>{{ trans('messages.alba') }}</th>
@@ -116,6 +117,7 @@
                                                 <th>{{ trans('messages.gadgeree') }}</th>
                                                 <th>{{ trans('messages.tuvnemelt') }}</th>
                                                 <th>{{ trans('messages.uliral') }}</th>
+                                                <th>{{ trans('messages.duus') }}</th>
                                                 <th>{{ trans('messages.ehleegui') }}</th>
                                             </tr>
                                             </thead>
@@ -153,6 +155,8 @@
                                                     <?php $sum_nem += ($projects->nem) ?>
                                                     <td>{{$projects->boloogui}}</td>
                                                     <?php $sum_boloogui += ($projects->boloogui) ?>
+                                                    <td>{{$projects->duus}}</td>
+                                                    <?php $sum_duus += ($projects->duus) ?>
                                                     <td>{{$projects->ehleegui}}</td>
                                                     <?php $sum_ehleegui += ($projects->ehleegui) ?>
 
@@ -179,6 +183,7 @@
                                                 <td>{{number_format($sum_gadgeree)}}</td>
                                                 <td>{{number_format($sum_nem)}}</td>
                                                 <td>{{number_format($sum_boloogui)}}</td>
+                                                <td>{{number_format($sum_duus)}}</td>
                                                 <td><?php
                                                     echo number_format($sum_ehleegui)."<br>";
                                                     ?></td>
@@ -227,6 +232,7 @@
                                                 <th>{{ trans('messages.etusuv') }}</th>
                                                 <th>{{ trans('messages.guitsalba') }}</th>
                                                 <th>{{ trans('messages.guitssalbar') }}</th>
+
                                             </tr>
                                             </thead>
                                             <tbody>
