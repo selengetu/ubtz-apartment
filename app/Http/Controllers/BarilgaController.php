@@ -16,6 +16,7 @@ use App\Method;
 use App\Season;
 use App\Process;
 use App\State;
+use App\Year;
 use DB;
 use Auth;
 use Illuminate\Support\Facades\Input;
@@ -51,6 +52,7 @@ class BarilgaController extends Controller
         $query = "";
         $state = State::orderby('state_name_mn')->get();
         $method = Method::orderby('method_name')->get();
+        $year = Year::orderby('year_name')->get();
         $projecttype = Projecttype::orderby('project_type_name_mn')->get();
         $season = Season::orderby('season_id')->get();
         $constructor = Constructor::orderby('department_abbr')->get();
@@ -79,7 +81,13 @@ class BarilgaController extends Controller
         else {
             Session::put('smethod_id', $smethod_id);
         }
-
+        $syear_id= Input::get('syear_id');
+        if(Session::has('syear_id')) {
+            $syear_id = Session::get('syear_id');
+        }
+        else {
+            Session::put('syear_id', $syear_id);
+        }
         $sstate_id= Input::get('sstate_id');
 
         if(Session::has('sstate_id')) {
@@ -150,7 +158,16 @@ class BarilgaController extends Controller
             $query.=" ";
 
         }
+        if ($syear_id!=NULL && $syear_id !=0) {
+            $query.=" and plan_year = '".$syear_id."'";
 
+        }
+        else
+        {
+            $syear_id=2020;
+            $query.=" ";
+
+        }
         if ($schildabbr!=NULL && $schildabbr !=0) {
             $type =DB::select('select t.executor_type from V_EXECUTOR t where t.executor_id =  '. $schildabbr.'');
             if ($type[0]->executor_type ==1){
@@ -240,7 +257,7 @@ class BarilgaController extends Controller
 
         $project =DB::select("select  * from V_PROJECT t  where 1=1 " .$query. " order by report_rowno, ex_report_no, project_id");
         return view('barilga')->with(['schildabbr'=>$schildabbr,'smethod_id'=>$smethod_id,'sstate_id'=>$sstate_id,'srespondent_emp_id'=>$srespondent_emp_id,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'sprojecttype'=>$sprojecttype,'gproject_id'=>$gproject_id,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'employee'=>$employee,
-            'stusuv'=>$stusuv,'stuluvluguu'=>$stuluvluguu,'sguitsetgel'=>$sguitsetgel,  'method'=>$method,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype,'season'=>$season]);
+            'stusuv'=>$stusuv,'syear_id'=>$syear_id,'stuluvluguu'=>$stuluvluguu,'sguitsetgel'=>$sguitsetgel,  'method'=>$method,'project'=>$project,'year'=>$year,'state'=>$state,'projecttype'=>$projecttype,'season'=>$season]);
     }
     public function store()
     {
@@ -425,6 +442,10 @@ class BarilgaController extends Controller
     }
     public function filter_executor($sexecutor_id) {
         Session::put('sexecutor_id',$sexecutor_id);
+        return back();
+    }
+    public function filter_year($syear_id) {
+        Session::put('syear_id',$syear_id);
         return back();
     }
 }
