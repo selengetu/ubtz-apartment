@@ -73,8 +73,10 @@
                                             <select class="form-control select2" id="schildabbr_id" name="schildabbr_id"  onchange="javascript:location.href = 'filter_childabbr/'+this.value;" >
                                                 <option value= "0">Бүгд</option>
                                                 @foreach($executor as $executors)
+                                                    @if($executors->is_ubtz==1)
                                                     <option value= "{{$executors->executor_id}}" @if($executors->executor_id==$schildabbr) selected @endif> @if($executors->executor_type == 2){{$executors->department_abbr}} - {{$executors->executor_abbr}}
                                                         @else {{$executors->executor_abbr}}@endif</option>
+                                                    @endif
                                                 @endforeach
                                             </select>
 

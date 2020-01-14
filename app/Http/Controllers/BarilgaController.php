@@ -56,7 +56,7 @@ class BarilgaController extends Controller
         $projecttype = Projecttype::orderby('project_type_name_mn')->get();
         $season = Season::orderby('season_id')->get();
         $constructor = Constructor::orderby('department_abbr')->get();
-        $executor = DB::select("select * from V_EXECUTOR t, CONST_DEPARTMENT d where t.executor_par = d.department_id and t.IS_UBTZ=1 order by t.executor_par ,t.executor_type,t.executor_abbr");
+        $executor = DB::select("select * from V_EXECUTOR t, CONST_DEPARTMENT d where t.executor_par = d.department_id  order by t.executor_par ,t.executor_type,t.executor_abbr");
         $employee =DB::select('select  * from V_CONST_EMPLOYEE t where t.is_engineer=1 order by firstname');
         $srespondent_emp_id = Input::get('srespondent_emp_id');
 
@@ -257,7 +257,7 @@ class BarilgaController extends Controller
 
         $project =DB::select("select  * from V_PROJECT t  where 1=1 " .$query. " order by report_rowno, ex_report_no, project_id");
         return view('barilga')->with(['schildabbr'=>$schildabbr,'smethod_id'=>$smethod_id,'sstate_id'=>$sstate_id,'srespondent_emp_id'=>$srespondent_emp_id,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'sprojecttype'=>$sprojecttype,'gproject_id'=>$gproject_id,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'employee'=>$employee,
-            'stusuv'=>$stusuv,'syear_id'=>$syear_id,'stuluvluguu'=>$stuluvluguu,'sguitsetgel'=>$sguitsetgel,  'method'=>$method,'project'=>$project,'year'=>$year,'state'=>$state,'projecttype'=>$projecttype,'season'=>$season]);
+            'stusuv'=>$stusuv,'syear_id'=>$syear_id,'year'=>$year,'stuluvluguu'=>$stuluvluguu,'sguitsetgel'=>$sguitsetgel,  'method'=>$method,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype,'season'=>$season]);
     }
     public function store()
     {

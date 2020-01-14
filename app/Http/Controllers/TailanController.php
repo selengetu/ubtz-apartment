@@ -54,7 +54,7 @@ class TailanController extends Controller
         $method = Method::orderby('method_name')->get();
         $projecttype = Projecttype::orderby('project_type_name_mn')->get();
         $constructor = Constructor::orderby('department_abbr')->get();
-        $executor = DB::select("select * from V_EXECUTOR t, CONST_DEPARTMENT d where t.executor_par = d.department_id and t.IS_UBTZ=1 order by t.executor_par ,t.executor_type,t.executor_abbr");
+        $executor = DB::select("select * from V_EXECUTOR t, CONST_DEPARTMENT d where t.executor_par = d.department_id order by t.executor_par ,t.executor_type,t.executor_abbr");
         $month = Input::get('month');
         $employee =DB::select('select  * from V_CONST_EMPLOYEE t where t.is_engineer=1 order by firstname');
         $schildabbr= Input::get('schildabbr_id');
