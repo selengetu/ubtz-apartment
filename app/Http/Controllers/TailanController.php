@@ -12,6 +12,7 @@ use App\Employee;
 use App\Project;
 use App\Method;
 use App\State;
+use App\Year;
 use DB;
 use PDF;
 use Carbon\Carbon;
@@ -48,11 +49,12 @@ class TailanController extends Controller
         $date = "";
         $date1 = "";
         $query = "";
+        $year = Year::orderby('year_name')->get();
         $state = State::orderby('state_name_mn')->get();
         $method = Method::orderby('method_name')->get();
         $projecttype = Projecttype::orderby('project_type_name_mn')->get();
         $constructor = Constructor::orderby('department_abbr')->get();
-        $executor = DB::select("select * from V_EXECUTOR t, CONST_DEPARTMENT d where t.executor_par = d.department_id order by t.executor_par ,t.executor_type,t.executor_abbr");
+        $executor = DB::select("select * from V_EXECUTOR t, CONST_DEPARTMENT d where t.executor_par = d.department_id and t.IS_UBTZ=1 order by t.executor_par ,t.executor_type,t.executor_abbr");
         $month = Input::get('month');
         $employee =DB::select('select  * from V_CONST_EMPLOYEE t where t.is_engineer=1 order by firstname');
         $schildabbr= Input::get('schildabbr_id');
@@ -62,6 +64,13 @@ class TailanController extends Controller
         $srespondent_emp_id = Input::get('srespondent_emp_id');
         $startdate= Input::get('date1');
         $enddate = Input::get('date2');
+        $syear_id= Input::get('syear_id');
+        if(Session::has('syear_id')) {
+            $syear_id = Session::get('syear_id');
+        }
+        else {
+            Session::put('syear_id', $syear_id);
+        }
         if (Auth::user()->dep_id == 22) {
             $query.="";
 
@@ -77,6 +86,16 @@ class TailanController extends Controller
         }
         else
         {
+            $query.=" ";
+
+        }
+        if ($syear_id!=NULL && $syear_id !=0) {
+            $query.=" and plan_year = '".$syear_id."'";
+
+        }
+        else
+        {
+            $syear_id=2020;
             $query.=" ";
 
         }
@@ -248,10 +267,10 @@ order by project_id, month
 group by project_id, month
 order by project_id, month) q
 order by q.project_id, q.month ) par
-where q.project_id(+)=u.project_id and par.project_id=u.project_id ".$date1." ".$query."
+where q.project_id(+)=u.project_id and par.project_id=u.project_id ".$date1." ".$query." 
 order by report_rowno, ex_report_no, xex_report_no, project_id");
 
-        return view('tailan.main')->with(['month'=>$month,'gproject_id'=>$gproject_id,'data'=>$data,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype,'sprojecttype'=>$sprojecttype]);
+        return view('tailan.main')->with(['month'=>$month,'syear_id'=>$syear_id,'year'=>$year,'gproject_id'=>$gproject_id,'data'=>$data,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'syear_id'=>$syear_id,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype,'sprojecttype'=>$sprojecttype]);
     }
     public function time()
     {
@@ -271,6 +290,8 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
         $sprojecttype= Input::get('sproject_type');
         $startdate= Input::get('date1');
         $enddate = Input::get('date2');
+        $syear_id= Input::get('syear_id');
+        $year = Year::orderby('year_name')->get();
         if (Auth::user()->dep_id == 22) {
             $query.="";
 
@@ -353,7 +374,7 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
         }
         $data= Request::input('gproject_id');
         $project =DB::select("select  * from V_PROJECT t  where 1=1 " .$query. " order by project_id");
-        return view('tailan.time')->with(['sstate_id'=>$sstate_id,'srespondent_emp_id'=>$srespondent_emp_id,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'sprojecttype'=>$sprojecttype,'gproject_id'=>$gproject_id,'data'=>$data,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype]);
+        return view('tailan.time')->with(['sstate_id'=>$sstate_id,'syear_id'=>$syear_id,'srespondent_emp_id'=>$srespondent_emp_id,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'sprojecttype'=>$sprojecttype,'gproject_id'=>$gproject_id,'data'=>$data,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype]);
     }
     public function geree()
     {
@@ -373,6 +394,24 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
         $sprojecttype= Input::get('sproject_type');
         $startdate= Input::get('date1');
         $enddate = Input::get('date2');
+        $syear_id= Input::get('syear_id');
+        $year = Year::orderby('year_name')->get();
+        if(Session::has('syear_id')) {
+            $syear_id = Session::get('syear_id');
+        }
+        else {
+            Session::put('syear_id', $syear_id);
+        }
+        if ($syear_id!=NULL && $syear_id !=0) {
+            $query.=" and plan_year = '".$syear_id."'";
+
+        }
+        else
+        {
+            $syear_id=2020;
+            $query.=" ";
+
+        }
         if (Auth::user()->dep_id == 22) {
             $query.="";
 
@@ -456,7 +495,7 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
         }
         $data= Request::input('gproject_id');
         $project =DB::select("select  * from V_PROJECT t  where 1=1 and t.method_code=3 " .$query. " order by report_rowno, ex_report_no");
-        return view('tailan.geree')->with(['sstate_id'=>$sstate_id,'srespondent_emp_id'=>$srespondent_emp_id,'schildabbr'=>$schildabbr,'sexecutor'=>$sexecutor,'sprojecttype'=>$sprojecttype,'gproject_id'=>$gproject_id,'data'=>$data,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sexecutor'=>$sexecutor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype]);
+        return view('tailan.geree')->with(['year'=>$year,'syear_id'=>$syear_id,'sstate_id'=>$sstate_id,'srespondent_emp_id'=>$srespondent_emp_id,'schildabbr'=>$schildabbr,'sexecutor'=>$sexecutor,'sprojecttype'=>$sprojecttype,'gproject_id'=>$gproject_id,'data'=>$data,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sexecutor'=>$sexecutor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype]);
     }
 
     public function analyse()
