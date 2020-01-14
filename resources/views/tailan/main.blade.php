@@ -66,13 +66,15 @@
                                         <div class="form-group col-md-2">
                                             <label for="inputEmail4">{{ trans('messages.zahialagchnegj') }}</label>
                                             <select class="form-control select2" id="schildabbr_id" name="schildabbr_id">
-                                                @if($executors->is_ubtz==1)
+
                                                 <option value= "0">Бүгд</option>
                                                 @foreach($executor as $executors)
+                                                    @if($executors->is_ubtz==1)
                                                     <option value= "{{$executors->executor_id}}"> @if($executors->executor_type == 2){{$executors->department_abbr}} - {{$executors->executor_abbr}}
                                                         @else {{$executors->executor_abbr}}@endif</option>
-                                                @endforeach
                                                     @endif
+                                                @endforeach
+
                                             </select>
 
                                         </div>
