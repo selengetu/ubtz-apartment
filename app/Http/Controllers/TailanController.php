@@ -374,7 +374,7 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
         }
         $data= Request::input('gproject_id');
         $project =DB::select("select  * from V_PROJECT t  where 1=1 " .$query. " order by project_id");
-        return view('tailan.time')->with(['sstate_id'=>$sstate_id,'syear_id'=>$syear_id,'srespondent_emp_id'=>$srespondent_emp_id,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'sprojecttype'=>$sprojecttype,'gproject_id'=>$gproject_id,'data'=>$data,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype]);
+        return view('tailan.time')->with(['sstate_id'=>$sstate_id,'syear_id'=>$syear_id,'year'=>$year,'srespondent_emp_id'=>$srespondent_emp_id,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'sprojecttype'=>$sprojecttype,'gproject_id'=>$gproject_id,'data'=>$data,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype]);
     }
     public function geree()
     {
@@ -516,7 +516,24 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
         $executor = Executor::orderby('executor_abbr')->get();
 
         $employee =DB::select('select  * from V_CONST_EMPLOYEE t where t.is_engineer=1 order by firstname');
+        $syear_id= Input::get('syear_id');
+        $year = Year::orderby('year_name')->get();
+        if(Session::has('syear_id')) {
+            $syear_id = Session::get('syear_id');
+        }
+        else {
+            Session::put('syear_id', $syear_id);
+        }
+        if ($syear_id!=NULL && $syear_id !=0) {
+            $query.=" and plan_year = '".$syear_id."'";
 
+        }
+        else
+        {
+            $syear_id=2020;
+            $query.=" ";
+
+        }
 
 
         if ($sprojecttype!=NULL && $sprojecttype !=0) {
@@ -553,7 +570,7 @@ PIVOT
 ORDER BY department_id) q
 on q.department_id=b.department_id");;
         $project =DB::select("select  * from V_PROJECT t  order by project_id");
-        return view('tailan.analyse')->with(['t'=>$t,'t2'=>$t2,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype,'sprojecttype'=>$sprojecttype]);
+        return view('tailan.analyse')->with(['t'=>$t,'t2'=>$t2,'method'=>$method,'constructor'=>$constructor,'syear_id'=>$syear_id,'year'=>$year,'executor'=>$executor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype,'sprojecttype'=>$sprojecttype]);
 
 
     }
@@ -577,7 +594,24 @@ on q.department_id=b.department_id");;
         $employee =DB::select('select  * from V_CONST_EMPLOYEE t where t.is_engineer=1 order by firstname');
         $startdate= Input::get('sdate1');
         $enddate = Input::get('sdate2');
+        $syear_id= Input::get('syear_id');
+        $year = Year::orderby('year_name')->get();
+        if(Session::has('syear_id')) {
+            $syear_id = Session::get('syear_id');
+        }
+        else {
+            Session::put('syear_id', $syear_id);
+        }
+        if ($syear_id!=NULL && $syear_id !=0) {
+            $query.=" and plan_year = '".$syear_id."'";
 
+        }
+        else
+        {
+            $syear_id=2020;
+            $query.=" ";
+
+        }
         if ($startdate !=0 && $startdate && $enddate !=0 && $enddate !=NULL) {
             $query.="and end_date between '".$startdate."' and '".$enddate." 23:59:59'";
 
@@ -626,7 +660,7 @@ order by t.department_id
 ");
 
         $project =DB::select("select  * from V_PROJECT t  order by project_id");
-        return view('tailan.detail')->with(['t'=>$t,'t2'=>$t2,'t3'=>$t3,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype,'sprojecttype'=>$sprojecttype]);
+        return view('tailan.detail')->with(['t'=>$t,'t2'=>$t2,'t3'=>$t3,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'syear_id'=>$syear_id,'year'=>$year,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype,'sprojecttype'=>$sprojecttype]);
 
 
     }
