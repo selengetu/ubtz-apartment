@@ -248,10 +248,10 @@
             $("#example tr").removeClass("highlight");
             var itag = $(this).attr('id');
             var type = $('#stype').val();
-
+            var year = $('#syear').val();
             if(!selected)
                 $(this).addClass("highlight");
-            $.get('chartfillt/'+itag+'/'+type,function(data){
+            $.get('chartfillt/'+itag+'/'+type+'/'+year,function(data){
                 $("#child tbody").empty();
                 $.each(data,function(i,qwe){
 

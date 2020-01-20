@@ -35,7 +35,7 @@
                                             <div class="form-group col-md-3">
                                                 <label for="inputEmail4">{{ trans('messages.zahialagchnegj') }}</label>
                                                 <select class="form-control select2" id="schildabbr_id" name="schildabbr_id">
-                                                    <option value= "0">Бүгд</option>
+                                                    <option value= "0"> @if ( Config::get('app.locale') == 'mn') Бүгд @else Все @endif</option>
                                                     @foreach($executor as $executors)
                                                         <option value= "{{$executors->executor_id}}"> @if($executors->executor_type == 2){{$executors->department_abbr}} - {{$executors->executor_abbr}}
                                                             @else {{$executors->executor_abbr}}@endif</option>

@@ -50,9 +50,16 @@
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                             <label for="inputEmail4">{{ trans('messages.ajliinarga') }}</label>
                                             <select class="form-control select2" id="smethod_id" name="smethod_id"  onchange="javascript:location.href = 'filter_method/'+this.value;" >
-                                                <option value= "0">Бүгд</option>
+                                                <option value= "0"> @if ( Config::get('app.locale') == 'mn') Бүгд @else Все @endif</option>
                                                 @foreach($method as $methods)
-                                                    <option value= "{{$methods->method_code}}" @if($methods->method_code==$smethod_id) selected @endif>{{$methods->method_name}}</option>
+                                                    <option value= "{{$methods->method_code}}" @if($methods->method_code==$smethod_id) selected @endif>
+                                                        @if ( Config::get('app.locale') == 'mn')
+                                                        {{$methods->method_name}}
+                                                            @else
+                                                            {{$methods->method_name_ru}}
+                                                        @endif
+
+                                                    </option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -60,18 +67,19 @@
 
                                             <label for="inputEmail4">{{ trans('messages.ajliintuluv') }}</label>
                                             <select class="form-control select2" id="sstate_id" name="sstate_id"  onchange="javascript:location.href = 'filter_state/'+this.value;" >
-                                                <option value= "0">Бүгд</option>
+
+                                                <option value= "0"> @if ( Config::get('app.locale') == 'mn') Бүгд @else Все @endif</option>
                                                 @foreach($state as $states)
-                                                    <option value= "{{$states->state_id}}" @if($states->state_id==$sstate_id) selected @endif>{{$states->state_name_mn}}</option>
+                                                    <option value= "{{$states->state_id}}" @if($states->state_id==$sstate_id) selected @endif>  @if ( Config::get('app.locale') == 'mn') {{$states->state_name_mn}} @else {{$states->state_name_ru}}  @endif</option>
                                                 @endforeach
-                                                <option value="99">Эхлээгүй</option>
+                                                <option value="99">  @if ( Config::get('app.locale') == 'mn') Эхлээгүй @else Не начали @endif</option>
                                             </select>
                                         </div>
 
                                         <div class="form-group col-md-2">
                                             <label for="inputEmail4">{{ trans('messages.zahialagchnegj') }}</label>
                                             <select class="form-control select2" id="schildabbr_id" name="schildabbr_id"  onchange="javascript:location.href = 'filter_childabbr/'+this.value;" >
-                                                <option value= "0">Бүгд</option>
+                                                <option value= "0"> @if ( Config::get('app.locale') == 'mn') Бүгд @else Все @endif</option>
                                                 @foreach($executor as $executors)
                                                     @if($executors->is_ubtz==1)
                                                     <option value= "{{$executors->executor_id}}" @if($executors->executor_id==$schildabbr) selected @endif> @if($executors->executor_type == 2){{$executors->department_abbr}} - {{$executors->executor_abbr}}
@@ -84,7 +92,7 @@
                                         <div class="form-group col-md-2">
                                             <label for="inputPassword4">{{ trans('messages.guitsetgegch') }}</label>
                                             <select class="form-control select2" id="sexecutor_id" name="sexecutor_id"  onchange="javascript:location.href = 'filter_executor/'+this.value;" >
-                                                <option value= "0">Бүгд</option>
+                                                <option value= "0"> @if ( Config::get('app.locale') == 'mn') Бүгд @else Все @endif</option>
                                                 @foreach($executor as $executors)
                                                     <option value= "{{$executors->executor_id}}" @if($executors->executor_id==$sexecutor) selected @endif> @if($executors->executor_type == 2){{$executors->department_abbr}} - {{$executors->executor_abbr}}
                                                         @else {{$executors->executor_abbr}}@endif</option>
@@ -96,7 +104,7 @@
 
                                             <label for="inputZip">{{ trans('messages.hariutsagch') }}</label>
                                             <select class="form-control select2" id="srespondent_emp_id" name="srespondent_emp_id"  onchange="javascript:location.href = 'filter_resp/'+this.value;" >
-                                                <option value= "0">Бүгд</option>
+                                                <option value= "0"> @if ( Config::get('app.locale') == 'mn') Бүгд @else Все @endif</option>
                                                 <option value= "999">Тодорхойгүй</option>
                                                 @foreach($employee as $employees)
                                                     <option value= "{{$employees->emp_id}}" @if($employees->emp_id == $srespondent_emp_id) selected @endif>{{$employees->fletter}}.{{$employees->firstname}}</option>
