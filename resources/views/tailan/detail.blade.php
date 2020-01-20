@@ -406,10 +406,6 @@ var zuuchQnt1 = <?php echo json_encode($stackValue2); ?>;
 var salesChart = $('#visitors-chart')
 var myChart = new Chart(salesChart, {
 type: 'bar',
-scaleOverride : true,
-scaleSteps : 10,
-scaleStepWidth : 50,
-scaleStartValue : 0,
 data: {
 labels:  zuuchName1,
 datasets: [{
@@ -433,8 +429,18 @@ display: false
 scales: {
 xAxes: [{
 display: true,
-ticks: ticksStyle
-}]
+    ticks: {
+        beginAtZero: true   // minimum value will be 0.
+    }
+}],
+    yAxes: [{
+        display: true,
+        ticks: {
+            beginAtZero: true,
+            steps: 10,
+
+        }
+    }]
 },
 
 }

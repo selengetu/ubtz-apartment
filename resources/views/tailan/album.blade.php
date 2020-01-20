@@ -40,9 +40,18 @@
                                             <label for="inputEmail4">{{ trans('messages.ajliinturul') }}</label>
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                             <select class="form-control select2" id="sproject_type" name="sproject_type" >
-                                                <option value= "0">Бүгд</option>
+                                                <option value= "0"> @if ( Config::get('app.locale') == 'mn') Бүгд @else Все @endif</option>
                                                 @foreach($projecttype as $projecttypes)
-                                                    <option value= "{{$projecttypes->project_type_id}}">{{$projecttypes->project_type_name_mn}}</option>
+
+                                                    <option value= "{{$projecttypes->project_type_id}}">
+                                                        @if ( Config::get('app.locale') == 'mn')
+                                                        {{$projecttypes->project_type_name_mn}}
+                                                            @else
+                                                            {{$projecttypes->project_type_name_ru}}
+
+                                                        @endif
+                                                    </option>
+
                                                 @endforeach
                                             </select>
 
