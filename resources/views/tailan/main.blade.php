@@ -329,7 +329,7 @@
                                                 <td><a href="#" title="Төлөвлөгөөт улирал : {{$projects->season_name}}">
                                                         @if($projects->executor_type !=2) {{$projects->childabbr}} @else {{$projects->department_name}} - {{$projects->childabbr}}  @endif</a></td>
                                                 <td>@if($projects->method_code==3)
-                                                        По договору {{$projects->executor_abbr}}
+                                                        По договору
                                                     @else
                                                         {{$projects->executor_abbr}}
                                                     @endif
