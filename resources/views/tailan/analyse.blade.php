@@ -40,6 +40,7 @@
                                     <div class="row" >
                                         <div class="form-group col-md-2">
                                             <label for="inputEmail4">{{ trans('messages.on') }}</label>
+                                            <input type="hidden" name="stype"  id="stype" class="form-control" value="{{$sprojecttype}}">
                                             <select class="form-control select2" id="syear" name="syear"  onchange="javascript:location.href = 'filter_year/'+this.value;" >
                                                 @foreach($year as $years)
                                                     <option value= "{{$years->year_id}}" @if($years->year_id==$syear_id) selected @endif>{{$years->year_name}}</option>
@@ -49,18 +50,9 @@
                                         <div class="form-group col-md-2">
                                             <label for="inputEmail4">{{ trans('messages.sar') }}</label>
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                            <input type="hidden" name="stype"  id="stype" class="form-control" value="{{$sprojecttype}}">
-                                            <input type="text" name="month"  id="stype" class="form-control" value="">
-                                        </div>
-
-                                        <div class="form-group col-md-2">
-                                        <div class="form-group col-md-2">
-                                            <label for="inputZip"><span>.</span></label><br>
-                                            <button type="submit" class="btn btn-primary" >{{ trans('messages.haih') }}</button>
 
                                         </div>
 
-                                    </div>
                                 </div>
                                 </div>
                             </form>
