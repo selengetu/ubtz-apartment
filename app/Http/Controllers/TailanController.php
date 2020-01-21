@@ -13,6 +13,7 @@ use App\Project;
 use App\Method;
 use App\State;
 use App\Year;
+use App\Month;
 use DB;
 use PDF;
 use Carbon\Carbon;
@@ -49,6 +50,7 @@ class TailanController extends Controller
         $date = "";
         $date1 = "";
         $query = "";
+        $mo = Month::orderby('id')->get();
         $year = Year::orderby('year_name')->get();
         $state = State::orderby('state_name_mn')->get();
         $method = Method::orderby('method_name')->get();
@@ -65,6 +67,12 @@ class TailanController extends Controller
         $startdate= Input::get('date1');
         $enddate = Input::get('date2');
         $syear_id= Input::get('syear_id');
+        if(Session::has('month')) {
+            $month = Session::get('month');
+        }
+        else {
+            Session::put('month', $month);
+        }
         if(Session::has('syear_id')) {
             $syear_id = Session::get('syear_id');
         }
@@ -270,7 +278,7 @@ order by q.project_id, q.month ) par
 where q.project_id(+)=u.project_id and par.project_id=u.project_id ".$date1." ".$query." 
 order by report_rowno, ex_report_no, xex_report_no, project_id");
 
-        return view('tailan.main')->with(['month'=>$month,'syear_id'=>$syear_id,'year'=>$year,'gproject_id'=>$gproject_id,'data'=>$data,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'syear_id'=>$syear_id,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype,'sprojecttype'=>$sprojecttype]);
+        return view('tailan.main')->with(['mo'=>$mo,'month'=>$month,'syear_id'=>$syear_id,'year'=>$year,'gproject_id'=>$gproject_id,'data'=>$data,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'syear_id'=>$syear_id,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype,'sprojecttype'=>$sprojecttype]);
     }
     public function time()
     {
@@ -292,7 +300,7 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
         $enddate = Input::get('date2');
         $syear_id= Input::get('syear_id');
         $year = Year::orderby('year_name')->get();
-        if (Auth::user()->dep_id == 22) {
+        if (Auth::user()->dep_id == 22 or Auth::user()->dep_id == 99 ) {
             $query.="";
 
         }
@@ -408,11 +416,11 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
         }
         else
         {
-            $syear_id=2020;
-            $query.=" ";
+            $syear_id=2019;
+            $query.="and plan_year =2019 ";
 
         }
-        if (Auth::user()->dep_id == 22) {
+        if (Auth::user()->dep_id == 22 or Auth::user()->dep_id == 99 ) {
             $query.="";
 
         }
@@ -530,8 +538,8 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
         }
         else
         {
-            $syear_id=2020;
-            $query.=" ";
+            $syear_id=2019;
+            $query.="and plan_year =2019 ";
 
         }
 
@@ -608,8 +616,8 @@ on q.department_id=b.department_id");;
         }
         else
         {
-            $syear_id=2020;
-            $query.=" ";
+            $syear_id=2019;
+            $query.="and plan_year =2019 ";
 
         }
         if ($startdate !=0 && $startdate && $enddate !=0 && $enddate !=NULL) {

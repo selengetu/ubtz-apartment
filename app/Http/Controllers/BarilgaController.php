@@ -164,8 +164,8 @@ class BarilgaController extends Controller
         }
         else
         {
-            $syear_id=2020;
-            $query.=" ";
+            $syear_id=2019;
+            $query.="and plan_year = 2019";
 
         }
         if ($schildabbr!=NULL && $schildabbr !=0) {
@@ -446,6 +446,10 @@ class BarilgaController extends Controller
     }
     public function filter_year($syear_id) {
         Session::put('syear_id',$syear_id);
+        return back();
+    }
+    public function filter_month($month) {
+        Session::put('month',$month);
         return back();
     }
 }

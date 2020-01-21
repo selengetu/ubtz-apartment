@@ -47,8 +47,11 @@
                                         <div class="form-group col-md-2">
 
                                             <label for="inputEmail4">{{ trans('messages.sar') }}</label>
-                                            <input type="text" name="month"  id="month" value="" class="form-control" maxlength="2">
-
+                                            <select class="form-control select2" id="month" name="month"  onchange="javascript:location.href = 'filter_month/'+this.value;" >
+                                                @foreach($mo as $months)
+                                                    <option value= "{{$months->id}}" @if($months->id==$month) selected @endif>{{$months->month_name}}</option>
+                                                @endforeach
+                                            </select>
 
                                         </div>
 
@@ -97,12 +100,6 @@
                                                     <option value= "{{$employees->emp_id}}">{{$employees->fletter}}.{{$employees->firstname}}</option>
                                                 @endforeach
                                             </select>
-                                        </div>
-
-                                        <div class="form-group col-md-1">
-
-                                            <button type="submit" class="btn btn-primary" >{{ trans('messages.haih') }}</button>
-
                                         </div>
 
                                     </div>

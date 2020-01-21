@@ -199,4 +199,5 @@ Route::get('setlocale/{locale}',function($locale){
     Route::get('/filter_childabbr/{date}', 'BarilgaController@filter_childabbr');
     Route::get('/filter_executor/{date}', 'BarilgaController@filter_executor');
     Route::get('/filter_year/{date}', 'BarilgaController@filter_year');
+    Route::get('/filter_month/{date}', 'BarilgaController@filter_month');
 });
