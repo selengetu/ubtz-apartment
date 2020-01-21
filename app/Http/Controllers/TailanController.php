@@ -79,7 +79,7 @@ class TailanController extends Controller
         else {
             Session::put('syear_id', $syear_id);
         }
-        if (Auth::user()->dep_id == 22) {
+        if (Auth::user()->dep_id == 22 or Auth::user()->dep_id == 99) {
             $query.="";
 
         }
@@ -103,8 +103,8 @@ class TailanController extends Controller
         }
         else
         {
-            $syear_id=2020;
-            $query.=" ";
+            $syear_id=2019;
+            $query.="and plan_year = 2019 ";
 
         }
         if ($sprojecttype!=NULL && $sprojecttype !=0) {
@@ -685,7 +685,7 @@ order by t.department_id
         $employee =DB::select('select  * from V_CONST_EMPLOYEE t where t.is_engineer=1 order by firstname');
 
         $sprojecttype= Input::get('sproject_type');
-        if (Auth::user()->dep_id == 22) {
+        if (Auth::user()->dep_id == 22 or Auth::user()->dep_id == 99) {
             $query.="";
 
         }
