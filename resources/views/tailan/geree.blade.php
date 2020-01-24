@@ -36,7 +36,7 @@
                                 @csrf
                                 <div class="col-md-12" data-scrollable="true" data-height="400" >
                                     <div class="row" >
-                                        <div class="form-group col-md-2">
+                                        <div class="form-group col-md-1">
                                             <label for="inputEmail4">{{ trans('messages.on') }}</label>
                                             <select class="form-control select2" id="syear" name="syear"  onchange="javascript:location.href = 'filter_year/'+this.value;" >
                                                 @foreach($year as $years)
@@ -103,8 +103,8 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="form-group col-md-2">
-                                            <label for="inputZip"><span>.</span></label><br>
+                                        <div class="form-group col-md-1">
+                                            <label for="inputZip">.</label><br>
                                             <button type="submit" class="btn btn-primary" >{{ trans('messages.haih') }}</button>
 
                                         </div>

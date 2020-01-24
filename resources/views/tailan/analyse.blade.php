@@ -47,11 +47,7 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="form-group col-md-2">
-                                            <label for="inputEmail4">{{ trans('messages.sar') }}</label>
-                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-                                        </div>
 
                                 </div>
                                 </div>
