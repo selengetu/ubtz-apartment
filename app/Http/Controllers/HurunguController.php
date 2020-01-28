@@ -8,6 +8,7 @@ use App\Employee;
 use App\Hurungu;
 use App\Executor;
 use DB;
+use Auth;
 use Illuminate\Support\Facades\Input;
 
 
@@ -94,6 +95,7 @@ class HurunguController extends Controller
     {
         $query = "";
         $schildabbr = Input::get('schildabbr_id');
+
         $executor = DB::select("select * from V_EXECUTOR t, CONST_DEPARTMENT d where t.executor_par = d.department_id order by t.executor_par ,t.executor_type,t.executor_abbr");
         $constructor = Constructor::orderby('department_abbr')->get();
 
@@ -112,6 +114,15 @@ class HurunguController extends Controller
         {
             $schildabbr=0;
             $query.=" ";
+
+        }
+        if (Auth::user()->dep_id == 22 or Auth::user()->dep_id == 99 ) {
+            $query.="";
+
+        }
+        else
+        {
+            $query.=" and depart_id = '".Auth::user()->dep_id."'";
 
         }
         $hurungu =  DB::select("select * from V_INVESTMENT where 1=1 " .$query. " order by investment_id");
