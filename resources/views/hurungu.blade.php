@@ -135,7 +135,9 @@
                                                 <?php $sum_sbudget += ($hurungus->sbudget) ?>
                                                 <td>{{number_format($hurungus->percent, 2, ',', '.')}}%</td>
                                                 <?php $sum_percent += ($hurungus->percent) ?>
-                                                <td>{{$hurungus->diff}}</td>
+                                                <td><?php
+                                                    echo number_format($hurungus->diff)."<br>";
+                                                    ?></td>
                                                 <?php $sum_diff += ($hurungus->diff) ?>
                                                 <td>{{$hurungus->description}}</td>
                                                 <td><button type="button" class="btn btn-warning btn-sm update" data-toggle="modal"  data-id="{{$hurungus->investment_id}}" tag="{{$hurungus->investment_id}}"  data-target="#hurungumodal" id="updatehurungu" onclick="updatehurungu({{$hurungus->investment_id}})">
