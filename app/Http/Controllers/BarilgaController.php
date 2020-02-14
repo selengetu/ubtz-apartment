@@ -270,7 +270,7 @@ class BarilgaController extends Controller
             $sprojecttype=2;
         }
         $project = new Project;
-        $project->plan_year = 2019;
+        $project->plan_year = 2020;
         $project->project_name = Request::input('project_name');
         $project->project_name_ru = Request::input('project_name_ru');
         $project->budget =preg_replace('/[a-zZ-a,]/', '',Request::input('budget'));

@@ -284,8 +284,8 @@
                 data: {
                     labels:  zuuchName,
                     datasets: [{
-                        backgroundColor: '#007bff',
-                        borderColor: '#007bff',
+                        backgroundColor: ticksStyle,
+                        borderColor: ticksStyle,
                         data: zuuchQnt
                     },
                         {
