@@ -94,8 +94,10 @@
                                             <select class="form-control select2" id="sexecutor_id" name="sexecutor_id"  onchange="javascript:location.href = 'filter_executor/'+this.value;" >
                                                 <option value= "0"> @if ( Config::get('app.locale') == 'mn') Бүгд @else Все @endif</option>
                                                 @foreach($executor as $executors)
+                                                    @if($executors->is_ubtz==1)
                                                     <option value= "{{$executors->executor_id}}" @if($executors->executor_id==$sexecutor) selected @endif> @if($executors->executor_type == 2){{$executors->department_abbr}} - {{$executors->executor_abbr}}
                                                         @else {{$executors->executor_abbr}}@endif</option>
+                                                    @endif
                                                 @endforeach
                                             </select>
 
@@ -504,8 +506,10 @@
                                     <option value= "999">Тодорхойгүй</option>
                                     <option value= "0">Бүгд</option>
                                     @foreach($executor as $executors)
+                                        @if($executors->is_ubtz==1)
                                         <option value= "{{$executors->executor_id}}"> @if($executors->executor_type == 2){{$executors->department_abbr}} - {{$executors->executor_abbr}}
                                             @else {{$executors->executor_abbr}}@endif</option>
+                                        @endif
                                     @endforeach
                                 </select>
 
