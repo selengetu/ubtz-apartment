@@ -243,7 +243,7 @@
 
                                         @if($p!=$p1 and $p>0)
                                             <?php $no = 1; ?>
-                                            <Tr><td colspan="14" style="font-weight: bold;font-size: 12px;"> {{$projects->department_name}} {{ trans('messages.alba') }}</td></Tr>
+                                            <Tr><td colspan="14" style="font-weight: bold;font-size: 12px;"> {{$projects->department_name}}  @if($projects->department_type ==1 ){{ trans('messages.alba') }} @endif</td></Tr>
                                             <?php $s++; ?>
                                             <tr >
                                                 <td>{{$no}}</td>
@@ -563,7 +563,7 @@
 
                                         @if($p!=$p1 and $p>0)
                                             <?php $no = 1; ?>
-                                            <Tr><td colspan="12" style="font-weight: bold;font-size: 12px;"> {{$projects->department_name}} {{ trans('messages.alba') }}</td></Tr>
+                                            <Tr><td colspan="12" style="font-weight: bold;font-size: 12px;"> {{$projects->department_name}}  @if($projects->department_type ==1 ){{ trans('messages.alba') }} @endif</td></Tr>
                                             <?php $s++; ?>
                                             <tr >
                                                 <td>{{$no}}</td>

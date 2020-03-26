@@ -392,10 +392,10 @@
             $.each(data,function(i,qwe){
                 var $approve;
                 var $date;
-                if(qwe.is_approved == 1){
+                if(qwe.is_lock == 1){
                     $approve=''
                 }
-                if(qwe.is_approved == 0){
+                if(qwe.is_lock == 0){
                     $approve= "<button id='updateproc' class='btn btn-xs btn-warning' data-toggle='modal' data-target='#processmodal' data-id=" + qwe.process_id + " tag=" + qwe.process_id + " onclick='updateproc("+qwe.process_id+")'>  <i class='fa fa-pencil' style='color: rgb(255, 255, 255);'></i></button>"
                 }
 

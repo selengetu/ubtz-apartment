@@ -103,8 +103,8 @@ class TailanController extends Controller
         }
         else
         {
-            $syear_id=2019;
-            $query.="and plan_year = 2019 ";
+            $syear_id=2020;
+            $query.="and plan_year = 2020 ";
 
         }
         if ($sprojecttype!=NULL && $sprojecttype !=0) {
@@ -222,6 +222,7 @@ class TailanController extends Controller
          to_char(u.economic,'999,999,999,999') as economiccomma,
        u.department_id,
        u.department_name,
+       u.department_type,
        u.season_name,
        u.plan1,
        u.plan2,
@@ -277,7 +278,6 @@ order by project_id, month) q
 order by q.project_id, q.month ) par
 where q.project_id(+)=u.project_id and par.project_id=u.project_id ".$date1." ".$query." 
 order by report_rowno, ex_report_no, xex_report_no, project_id");
-
         return view('tailan.main')->with(['mo'=>$mo,'month'=>$month,'syear_id'=>$syear_id,'year'=>$year,'gproject_id'=>$gproject_id,'data'=>$data,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'syear_id'=>$syear_id,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype,'sprojecttype'=>$sprojecttype]);
     }
     public function time()
@@ -416,8 +416,8 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
         }
         else
         {
-            $syear_id=2019;
-            $query.="and plan_year =2019 ";
+            $syear_id=2020;
+            $query.="and plan_year =2020 ";
 
         }
         if (Auth::user()->dep_id == 22 or Auth::user()->dep_id == 99 ) {
@@ -538,8 +538,8 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
         }
         else
         {
-            $syear_id=2019;
-            $query.="and plan_year =2019 ";
+            $syear_id=2020;
+            $query.="and plan_year =2020 ";
 
         }
 
@@ -616,8 +616,8 @@ on q.department_id=b.department_id");;
         }
         else
         {
-            $syear_id=2019;
-            $query.="and plan_year =2019 ";
+            $syear_id=2020;
+            $query.="and plan_year =2020 ";
 
         }
         if ($startdate !=0 && $startdate && $enddate !=0 && $enddate !=NULL) {

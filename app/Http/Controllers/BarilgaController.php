@@ -164,8 +164,8 @@ class BarilgaController extends Controller
         }
         else
         {
-            $syear_id=2019;
-            $query.="and plan_year = 2019";
+            $syear_id=2020;
+            $query.="and plan_year = 2020";
 
         }
         if ($schildabbr!=NULL && $schildabbr !=0) {
@@ -345,7 +345,7 @@ class BarilgaController extends Controller
         }
 
         $project = DB::table('Project')
-            ->where('project_id', Request::input('id'))
+            ->where('project_id', Request::input('id'))->where('is_lock',0)
             ->update(['project_name' => Request::input('project_name'),'project_name_ru' => Request::input('project_name_ru')
                , 'contract' =>preg_replace('/[a-zZ-a,]/', '',Request::input('geree')) ,'contract_num' =>Request::input('gereenum') ,'estimation' =>preg_replace('/[a-zZ-a,]/', '',Request::input('estimation')) ,
                 'plan' => preg_replace('/[a-zZ-a,]/', '',Request::input('plan'))
@@ -358,7 +358,7 @@ class BarilgaController extends Controller
        if(Auth::user()->user_grant !=6 )
        {
            $project = DB::table('Project')
-               ->where('project_id', Request::input('id'))
+               ->where('project_id', Request::input('id'))->where('is_lock',0)
                ->update(['respondent_emp_id' => Request::input('respondent_emp_id')]);
        }
 
@@ -377,7 +377,7 @@ class BarilgaController extends Controller
             if ($plan[0]->plan != NULL) {
                 $percent=($budget[0]->totalbudget / $plan[0]->plan)*100;
                 $process = DB::table('Project')
-                    ->where('project_id', $data)
+                    ->where('project_id', $data)->where('is_lock',0)
                     ->update(['budget' => $budget[0]->totalbudget, 'percent' => $percent]);
 
             }
@@ -399,7 +399,7 @@ class BarilgaController extends Controller
     public function approve(Request $request)
     {
         $project = DB::table('Project')
-            ->where('project_id', Request::input('id'))
+            ->where('project_id', Request::input('id'))->where('is_lock',0)
             ->update(['is_approved' =>1,'approved_date' =>Carbon::today(),'approved_id' =>Auth::user()->id]);
         activity()->performedOn($project)->log('Project approved');
         if(Request::input('proj')== 1){
