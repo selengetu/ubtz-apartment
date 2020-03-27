@@ -274,7 +274,7 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                @if($projects->is_lock=0)
+                                                @if($projects->is_lock==0)
                                                     @if (Auth::user()->dep_id ==22 )
                                                     @if (Auth::user()->user_grant !=6 or Auth::user()->id ==$projects->added_user_id or Auth::user()->emp_id ==$projects->respondent_emp_id )
                                                         <button type="button" class="btn btn-warning btn-sm update" data-toggle="modal"  data-id="{{$projects->project_id}}" tag="{{$projects->project_id}}"  data-target="#exampleModal" id="updateproj" onclick="updateproj({{$projects->project_id}})">
@@ -400,7 +400,7 @@
                                         <h3 class="card-title">{{ trans('messages.ajliinguits') }}</h3>
                                     </div>
                                     <div class="col-md-4">
-                                    @if( $projects->is_lock=0)
+                                    @if( $projects->is_lock==0)
                                         <button type="button" class="btn btn-primary add" data-toggle="modal" data-target="#processmodal" id="addproc">
                                             <i class="fa fa-plus" style="color: rgb(255, 255, 255);"> {{ trans('messages.guitsnemeh') }}</i>
                                         </button>
