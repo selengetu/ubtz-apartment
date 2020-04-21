@@ -400,11 +400,11 @@
                                         <h3 class="card-title">{{ trans('messages.ajliinguits') }}</h3>
                                     </div>
                                     <div class="col-md-4">
-                                    @if( $projects->is_lock==0)
+                             
                                         <button type="button" class="btn btn-primary add" data-toggle="modal" data-target="#processmodal" id="addproc">
                                             <i class="fa fa-plus" style="color: rgb(255, 255, 255);"> {{ trans('messages.guitsnemeh') }}</i>
                                         </button>
-                                        @endif
+                                    
                                     </div>
                                 </div>
 
