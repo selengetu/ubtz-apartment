@@ -141,6 +141,19 @@ class ProcessController extends Controller
                         ->update(['prend_date' => Request::input('gdate')]);
                 }
             }
+            if($plan[0]->plan == NULL) {
+
+                $budget = DB::select("select sum(t.budget) as totalbudget from V_PROCESS t where t.project_id=" . $data . "");
+             
+                $process = DB::table('Project')
+                    ->where('project_id', $data)
+                    ->update(['budget' => $budget[0]->totalbudget, 'percent' => 0]);
+                if(Request::input('gdate') != NULL) {
+                    $process = DB::table('Project')
+                        ->where('project_id', $data)
+                        ->update(['prend_date' => Request::input('gdate')]);
+                }
+            }
             if($states != NULL){
                 $process = DB::table('Project')
                     ->where('project_id',$data)
@@ -276,12 +289,37 @@ class ProcessController extends Controller
         if(Request::input('gstate_id') != 1){
 
             if($plan != NULL ) {
+                
                 if ($plan[0]->plan != NULL) {
-
+                   
                     $percent = ($budget[0]->totalbudget / $plan[0]->plan) * 100;
                     $process = DB::table('Project')
                         ->where('project_id', $data)
                         ->update(['budget' => $budget[0]->totalbudget, 'percent' => $percent]);
+                    if($state != NULL) {
+                        $process = DB::table('Project')
+                            ->where('project_id', $data)
+                            ->update(['state_id' => $state[0]->state,'description' => $description[0]->description]);
+                        if( $state[0]->state == 1){
+                            $bud = DB::select("select case when count(*)<1 then 0 else max(nvl(t.budget,0)) end budget from Project t where t.project_id=" . $data . "")[0]->budget;
+                            $process = DB::table('Project')
+                                ->where('project_id',$data)
+                                ->update(['economic' => $bud]);
+                        }
+                        if( $state[0]->state != 1){
+                            $process = DB::table('Project')
+
+                                ->where('project_id',$data)
+                                ->update(['economic' => 0]);
+                        }
+                    }
+                }
+                if ($plan[0]->plan == NULL) {
+
+                   
+                    $process = DB::table('Project')
+                        ->where('project_id', $data)
+                        ->update(['budget' => $budget[0]->totalbudget]);
                     if($state != NULL) {
                         $process = DB::table('Project')
                             ->where('project_id', $data)
@@ -374,7 +412,13 @@ class ProcessController extends Controller
                     ->update(['budget' => $budget[0]->totalbudget, 'percent' => $percent]);
 
             }
+            if ($plan[0]->plan == NULL) {
+         
+                $process = DB::table('Project')
+                    ->where('project_id', $data)
+                    ->update(['budget' => $budget[0]->totalbudget]);
 
+            }
         }
         if($state != NULL) {
             $process = DB::table('Project')
