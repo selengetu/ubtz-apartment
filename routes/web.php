@@ -165,8 +165,8 @@ Route::get('/chartfill/{id?}',function($id = 0){
     $dt=DB::table('V_TAILAN_PROJ_CHILD')->where('department_id','=',$id)->where('plan_year','=',2020)->get();
     return $dt;
 });
-    Route::get('/chartfillt/{id?}/{id1?}/{id2?}',function($id = 0,$id1 = 0,$id2= 0){
-        $dt=DB::table('V_TAILAN_PROJ_CHILDTYPE')->where('department_id','=',$id)->where('project_type','=',$id1)->where('plan_year','=',$id2)->get();
+    Route::get('/chartfillt/{id?}/{id1?}/{id2?}',function($id = 0,$id1 = 0,$id2= 0,$id3= 0){
+        $dt=DB::table('V_TAILAN_PROJ_CHILDTYPE')->where('department_id','=',$id)->where('project_type','=',$id1)->where('plan_year','=',$id2)->where('month','=',$id3)->get();
         return $dt;
     });
 Route::get('setlocale/{locale}',function($locale){

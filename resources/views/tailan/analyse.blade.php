@@ -41,13 +41,22 @@
                                         <div class="form-group col-md-2">
                                             <label for="inputEmail4">{{ trans('messages.on') }}</label>
                                             <input type="hidden" name="stype"  id="stype" class="form-control" value="{{$sprojecttype}}">
-                                            <select class="form-control select2" id="syear" name="syear"  onchange="javascript:location.href = 'filter_year/'+this.value;" >
+                                            <select class="form-control select2" id="syear_id" name="syear_id"  onchange="javascript:location.href = 'filter_year/'+this.value;" >
                                                 @foreach($year as $years)
                                                     <option value= "{{$years->year_id}}" @if($years->year_id==$syear_id) selected @endif>{{$years->year_name}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
+                                        <div class="form-group col-md-2">
 
+<label for="inputEmail4">{{ trans('messages.sar') }}</label>
+<select class="form-control select2" id="smonth_id" name="smonth_id"  onchange="javascript:location.href = 'filter_month/'+this.value;" >
+    @foreach($mo as $months)
+        <option value= "{{$months->id}}" @if($months->id==$month) selected @endif>{{$months->month_name}}</option>
+    @endforeach
+</select>
+
+</div>
 
                                 </div>
                                 </div>
@@ -92,9 +101,7 @@
                                                 <th>{{ trans('messages.guitsetgel') }}</th>
                                                 <th>{{ trans('messages.biylelt') }}</th>
                                                 <th>{{ trans('messages.zuruu') }}</th>
-                                                <th>%</th>
-
-
+                                                
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -109,17 +116,17 @@
                                                         ?></td>
                                                     <?php $sum_plan += ($projects->plan) ?>
                                                     <td><?php
-                                                        echo number_format($projects->budget)."<br>";
+                                                        echo number_format($projects->runningtotal)."<br>";
                                                         ?></td>
-                                                    <?php $sum_budget += ($projects->budget) ?>
+                                                    <?php $sum_budget += ($projects->runningtotal) ?>
 
                                                     <td>{{number_format($projects->percent, 2, ',', '.')}}%</td>
                                                     <?php $sum_percent += ($projects->percent) ?>
                                                     <td><?php
-                                                        echo number_format($projects->diff)."<br>";
+                                                        echo number_format($projects->plan-$projects->runningtotal)."<br>";
                                                         ?></td>
-                                                    <?php $sum_diff += ($projects->diff) ?>
-                                                    <td>{{number_format($projects->rpercent, 2, ',', '.')}}%</td>
+                                                    <?php $sum_diff += ($projects->plan-$projects->runningtotal) ?>
+                                                   
                                                     <?php $sum_rpercent += ($projects->rpercent) ?>
 
                                                 </tr>
@@ -137,8 +144,6 @@
                                                 <td><?php
                                                     echo number_format($sum_diff)."<br>";
                                                     ?></td>
-
-                                                <td>{{number_format($sum_rpercent/($no-1), 2, ',', '.')}}%</td>
 
                                             </tr>
                                             </tbody>
@@ -236,10 +241,11 @@
             $("#example tr").removeClass("highlight");
             var itag = $(this).attr('id');
             var type = $('#stype').val();
-            var year = $('#syear').val();
+            var year = $('#syear_id').val();
+            console.log()
             if(!selected)
                 $(this).addClass("highlight");
-            $.get('chartfillt/'+itag+'/'+type+'/'+year,function(data){
+            $.get('chartfillt/'+itag+'/'+type+'/'+year+'/'+month,function(data){
                 $("#child tbody").empty();
                 $.each(data,function(i,qwe){
 
