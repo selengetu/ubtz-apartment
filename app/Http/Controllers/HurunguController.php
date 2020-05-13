@@ -116,7 +116,7 @@ class HurunguController extends Controller
     {
         $query = "";
         $schildabbr = Input::get('schildabbr_id');
-
+        $year = Year::orderby('year_name')->get();
         $executor = DB::select("select * from V_EXECUTOR t, CONST_DEPARTMENT d where t.executor_par = d.department_id order by t.executor_par ,t.executor_type,t.executor_abbr");
         $constructor = Constructor::orderby('department_abbr')->get();
 
@@ -146,7 +146,24 @@ class HurunguController extends Controller
             $query.=" and depart_id = '".Auth::user()->dep_id."'";
 
         }
+        $syear_id= Input::get('syear_id');
+        if(Session::has('syear_id')) {
+            $syear_id = Session::get('syear_id');
+        }
+        else {
+            Session::put('syear_id', $syear_id);
+        }
+        if ($syear_id!=NULL && $syear_id !=0) {
+            $query.=" and year = '".$syear_id."'";
+
+        }
+        else
+        {
+            $syear_id=2020;
+            $query.="and year = 2020";
+
+        }
         $hurungu =  DB::select("select * from V_INVESTMENT where 1=1 " .$query. " order by investment_id");
-        return view('tailan.hurungurep')->with(['executor'=>$executor,'constructor'=>$constructor,'hurungu'=>$hurungu]);
+        return view('tailan.hurungurep')->with(['syear_id'=>$syear_id,'year'=>$year,'executor'=>$executor,'constructor'=>$constructor,'hurungu'=>$hurungu]);
     }
 }

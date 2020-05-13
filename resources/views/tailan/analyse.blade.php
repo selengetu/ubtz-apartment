@@ -231,8 +231,8 @@
     $rpercent = array();
     foreach($t as $wag)
 
-    {array_push($stack,$wag->department_name); array_push($stackValue,$wag->plan);array_push($stackValue2,$wag->budget);
-       ;array_push($percent,$wag->estimation); array_push($rpercent,$wag->rpercent);}
+    {array_push($stack,$wag->department_name); array_push($stackValue,$wag->plan);array_push($stackValue2,$wag->runningtotal);
+       ;array_push($percent,$wag->estimation); array_push($rpercent,$wag->percent);}
 
     ?>
     <script>
@@ -242,7 +242,8 @@
             var itag = $(this).attr('id');
             var type = $('#stype').val();
             var year = $('#syear_id').val();
-            console.log()
+            var month = $('#smonth_id').val();
+            console.log(month);
             if(!selected)
                 $(this).addClass("highlight");
             $.get('chartfillt/'+itag+'/'+type+'/'+year+'/'+month,function(data){
@@ -250,10 +251,10 @@
                 $.each(data,function(i,qwe){
 
                     var sHtmls = "<tr>" +
-                        "   <td class='m1'>" + qwe.executor_abbr + "</td>" +
+                        "   <td class='m1'>" + qwe.childabbr + "</td>" +
                         "   <td class='m2'>" + qwe.plancomma+ "</td>" +
-                        "   <td class='m3'>" + qwe.budgetcomma+ "</td>" +
-                        "   <td class='m3'>" + number_format(qwe.percent, 2, ',', '.')+ "</td>" +
+                        "   <td class='m3'>" + qwe.runningtotalcomma+ "</td>" +
+                        "   <td class='m3'>" + qwe.percent+ "%</td>" +
                         "   <td class='m3'>" + qwe.diffcomma+ "</td>" +
                         "   <td class='m3'>" + number_format(qwe.rpercent, 2, ',', '.')+ "</td>" +
                         "</tr>";
