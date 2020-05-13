@@ -116,9 +116,16 @@ class TailanController extends Controller
             $query.=" ";
 
         }
-        if ($sexecutor!=NULL && $sexecutor !=0) {
-            $query.=" and executor_id = '".$sexecutor."'";
+         if ($sexecutor!=NULL && $sexecutor !=0) {
+            $type =DB::select('select t.executor_type from V_EXECUTOR t where t.executor_id =  '. $sexecutor.'');
+            if ($type[0]->executor_type ==1){
+                $dep =DB::select('select t.department_id from V_EXECUTOR t where t.executor_id =  '. $sexecutor.'');
 
+                $query.=" and department_id = '".$dep[0]->department_id."'";
+            }
+            else{
+                $query.=" and department_child = '".$sexecutor."'";
+            }
         }
         else
         {
@@ -330,8 +337,15 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
 
         }
         if ($sexecutor!=NULL && $sexecutor !=0) {
-            $query.=" and executor_id = '".$sexecutor."'";
+            $type =DB::select('select t.executor_type from V_EXECUTOR t where t.executor_id =  '. $sexecutor.'');
+            if ($type[0]->executor_type ==1){
+                $dep =DB::select('select t.department_id from V_EXECUTOR t where t.executor_id =  '. $sexecutor.'');
 
+                $query.=" and department_id = '".$dep[0]->department_id."'";
+            }
+            else{
+                $query.=" and department_child = '".$sexecutor."'";
+            }
         }
         else
         {
@@ -448,8 +462,15 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
 
         }
         if ($sexecutor!=NULL && $sexecutor !=0) {
-            $query.=" and executor_id = '".$sexecutor."'";
+            $type =DB::select('select t.executor_type from V_EXECUTOR t where t.executor_id =  '. $sexecutor.'');
+            if ($type[0]->executor_type ==1){
+                $dep =DB::select('select t.department_id from V_EXECUTOR t where t.executor_id =  '. $sexecutor.'');
 
+                $query.=" and department_id = '".$dep[0]->department_id."'";
+            }
+            else{
+                $query.=" and department_child = '".$sexecutor."'";
+            }
         }
         else
         {
