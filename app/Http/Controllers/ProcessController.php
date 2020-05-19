@@ -131,7 +131,7 @@ class ProcessController extends Controller
                 $budget = DB::select("select sum(t.budget) as totalbudget from V_PROCESS t where t.project_id=" . $data . "");
               
                 $percent = ($budget[0]->totalbudget / $plan[0]->plan) * 100;
-                dd( $percent);
+   
                 $process = DB::table('Project')
                     ->where('project_id', $data)
                     ->update(['budget' => $budget[0]->totalbudget, 'percent' => $percent]);
