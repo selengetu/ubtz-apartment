@@ -292,9 +292,9 @@
                                                     @if($projects->state_id!=61)
                                                 <?php $sum_economic += ($projects->economic) ?>
                                                     @endif
-                                                <td>{{$projects->percent}}%</td>
+                                                <td>{{ number_format($projects->percent, 2) }}%</td>
                                                     @if($projects->state_id!=61)
-                                                <?php $sum_percent += ($projects->percent) ?>
+                                                <?php $sum_percent += number_format($projects->percent, 2) ?>
                                                     @endif
                                                 <td>{{$projects->fletter}}.{{$projects->firstname}}</td>
 
@@ -375,9 +375,9 @@
                                                     @if($projects->state_id!=61)
                                                 <?php $sum_economic += ($projects->economic) ?>
                                                     @endif
-                                                <td>{{$projects->percent}}%</td>
+                                                <td>{{number_format($projects->percent, 2)}}%</td>
                                                     @if($projects->state_id!=61)
-                                                <?php $sum_percent += ($projects->percent) ?>
+                                                <?php $sum_percent += (number_format($projects->percent, 2)) ?>
                                                     @endif
                                                 <td>{{$projects->fletter}}.{{$projects->firstname}}</td>
 
@@ -612,9 +612,9 @@
                                                     @if($projects->state_id!=61)
                                                 <?php $sum_economic += ($projects->economic) ?>
                                                     @endif
-                                                <td>{{$projects->percent}}%</td>
+                                                <td>{{number_format($projects->percent, 2)}}%</td>
                                                     @if($projects->state_id!=61)
-                                                <?php $sum_percent += ($projects->percent) ?>
+                                                <?php $sum_percent += (number_format($projects->percent, 2)) ?>
                                                     @endif
                                                 <td>{{$projects->fletter}}.{{$projects->firstname}}</td>
 
@@ -690,9 +690,9 @@
                                                     @if($projects->state_id!=61)
                                                 <?php $sum_economic += ($projects->economic) ?>
                                                     @endif
-                                                <td>{{$projects->percent}}%</td>
+                                                <td>{{number_format($projects->percent, 2)}}%</td>
                                                     @if($projects->state_id!=61)
-                                                <?php $sum_percent += ($projects->percent) ?>
+                                                <?php $sum_percent += (number_format($projects->percent, 2)) ?>
                                                     @endif
                                                 <td>{{$projects->fletter}}.{{$projects->firstname}}</td>
 
