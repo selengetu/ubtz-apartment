@@ -236,7 +236,7 @@
                                                     @if($projects->state_id!=61)
                                                 <?php $sum_economic += ($projects->economic) ?>
                                                 @endif
-                                                <td>{{$projects->percent}}%</td>
+                                                <td>{{number_format($projects->percent,2)}}%</td>
                                                     @if($projects->state_id!=61)
                                                 <?php $sum_percent += ($projects->percent) ?>
                                                 @endif
@@ -260,6 +260,14 @@
                                                     bgcolor="blue";
                                                     @elseif($projects->state_id==81)
                                                     bgcolor="#87cefa";
+                                                    @elseif($projects->state_id==61)
+                                                    bgcolor="#05EEE0";
+                                                    @elseif($projects->state_id==101)
+                                                    bgcolor="#EAE573";
+                                                    @elseif($projects->state_id==102)
+                                                    bgcolor="#CB73EA";
+                                                    @elseif($projects->state_id==103)
+                                                    bgcolor="#EA73C2";
                                                     @else
                                                     bgcolor="red";
                                                 @endif>

@@ -314,6 +314,14 @@
                                                     bgcolor="blue";
                                                     @elseif($projects->state_id==81)
                                                     bgcolor="#87cefa";
+                                                    @elseif($projects->state_id==61)
+                                                    bgcolor="#05EEE0";
+                                                    @elseif($projects->state_id==101)
+                                                    bgcolor="#EAE573";
+                                                    @elseif($projects->state_id==102)
+                                                    bgcolor="#CB73EA";
+                                                    @elseif($projects->state_id==103)
+                                                    bgcolor="#EA73C2";
                                                     @else
                                                     bgcolor="red";
                                                     @endif
@@ -397,6 +405,14 @@
                                                     bgcolor="blue";
                                                     @elseif($projects->state_id==81)
                                                     bgcolor="#87cefa";
+                                                    @elseif($projects->state_id==61)
+                                                    bgcolor="#05EEE0";
+                                                    @elseif($projects->state_id==101)
+                                                    bgcolor="#EAE573";
+                                                    @elseif($projects->state_id==102)
+                                                    bgcolor="#CB73EA";
+                                                    @elseif($projects->state_id==103)
+                                                    bgcolor="#EA73C2";
                                                     @else
                                                     bgcolor="red";
                                                     @endif
