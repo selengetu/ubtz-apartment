@@ -163,7 +163,7 @@ class HurunguController extends Controller
             $query.="and year = 2020";
 
         }
-        $hurungu =  DB::select("select * from V_INVESTMENT where 1=1 " .$query. " order by investment_id");
+        $hurungu =  DB::select("select * from V_INVESTMENT where 1=1 " .$query. "");
         return view('tailan.hurungurep')->with(['syear_id'=>$syear_id,'year'=>$year,'executor'=>$executor,'constructor'=>$constructor,'hurungu'=>$hurungu]);
     }
 }
