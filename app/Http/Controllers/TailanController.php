@@ -85,7 +85,13 @@ class TailanController extends Controller
         }
         else
         {
-            $query.=" and department_id = '".Auth::user()->dep_id."'";
+            if(Auth::user()->user_grant == 9) {
+                $query.=" and department_child = '".Auth::user()->dep_id."'";
+    
+            }  
+            else{
+                $query.=" and department_id = '".Auth::user()->dep_id."'";
+            }
 
         }
         if ($startdate !=0 && $startdate && $enddate !=0 && $enddate !=0-NULL) {
@@ -314,7 +320,14 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
         }
         else
         {
-            $query.=" and department_id = '".Auth::user()->dep_id."'";
+            if(Auth::user()->user_grant == 9) {
+                $query.=" and department_child = '".Auth::user()->dep_id."'";
+    
+            }  
+            else{
+                $query.=" and department_id = '".Auth::user()->dep_id."'";
+            }
+           
 
         }
         if ($startdate !=0 && $startdate && $enddate !=0 && $enddate !=NULL) {
@@ -439,7 +452,13 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
         }
         else
         {
-            $query.=" and department_id = '".Auth::user()->dep_id."'";
+            if(Auth::user()->user_grant == 9) {
+                $query.=" and department_child = '".Auth::user()->dep_id."'";
+    
+            }  
+            else{
+                $query.=" and department_id = '".Auth::user()->dep_id."'";
+            }
 
         }
         if ($startdate !=0 && $startdate && $enddate !=0 && $enddate !=NULL) {
@@ -764,8 +783,9 @@ order by t.department_id
         }
         else
         {
-            $query.=" and department_id = '".Auth::user()->dep_id."'";
-
+           
+                $query.=" and department_id = '".Auth::user()->dep_id."'";
+          
         }
         if ($sprojecttype!=NULL && $sprojecttype !=0) {
             $query.=" and project_type = ".$sprojecttype."";
