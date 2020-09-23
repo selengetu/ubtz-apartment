@@ -667,6 +667,7 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
                                         u.department_type,
                                         u.project_type,
                                         u.report_rowno
+                                        
                                 order by report_rowno");
                 $mo = Month::orderby('id')->get();
                         $project =DB::select("select  * from V_PROJECT t  order by project_id");
@@ -751,8 +752,7 @@ group by state_name_mn, state_name_ru");
         $t3= DB::select("select d.department_name, t.department_id, count(t.project_id) as ajliintoo from V_PROJECT t , CONST_DEPARTMENT d
 where t.department_id=d.department_id and t.state_id in (7,8,9,10,11,12,13,14,15, 41,42)  ".$query. "
 group by t.department_id, d.department_name
-order by t.department_id
-");
+order by report_rowno");
 
         $project =DB::select("select  * from V_PROJECT t  order by project_id");
         return view('tailan.detail')->with(['t'=>$t,'t2'=>$t2,'t3'=>$t3,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'syear_id'=>$syear_id,'year'=>$year,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype,'sprojecttype'=>$sprojecttype]);
