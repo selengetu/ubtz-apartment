@@ -143,7 +143,13 @@ class HurunguController extends Controller
         }
         else
         {
-            $query.=" and depart_id = '".Auth::user()->dep_id."'";
+            if(Auth::user()->user_grant == 9) {
+                $query.=" and depart_child = '".Auth::user()->dep_id."'";
+    
+            }  
+            else{
+                $query.=" and depart_id = '".Auth::user()->dep_id."'";
+            }
 
         }
         $syear_id= Input::get('syear_id');
