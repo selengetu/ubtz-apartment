@@ -192,7 +192,9 @@
                   <td><?php
                       echo number_format($sum_budget)."<br>";
                       ?></td>
-                  <td>{{number_format(($sum_budget/$sum_plan)*100, 2, ',', '.')}}%</td>
+                  <td> @if($sum_plan>0)
+                      {{number_format(($sum_budget/$sum_plan)*100, 2, ',', '.')}}%
+                    @endif</td>
                   <td><?php
                       echo number_format($sum_ajliintoo)."<br>";
                       ?></td>
