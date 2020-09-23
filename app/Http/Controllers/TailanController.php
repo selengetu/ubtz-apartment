@@ -86,11 +86,12 @@ class TailanController extends Controller
         else
         {
             if(Auth::user()->user_grant == 9) {
-                $query.=" and department_child = '".Auth::user()->dep_id."'";
+                $query.=" and (department_child = '".Auth::user()->dep_id."' or executor_id ='".Auth::user()->dep_id."') ";
     
             }  
             else{
-                $query.=" and department_id = '".Auth::user()->dep_id."'";
+                $query.=" and (department_id = '".Auth::user()->dep_id."' or executor_id in (select executor_id from CONST_EXECUTOR t
+                where t.executor_par='".Auth::user()->dep_id."'))";
             }
 
         }
@@ -321,7 +322,7 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
         else
         {
             if(Auth::user()->user_grant == 9) {
-                $query.=" and department_child = '".Auth::user()->dep_id."'";
+                $query.=" and department_child = '".Auth::user()->dep_id."' or executor_id ='".Auth::user()->dep_id."' ";
     
             }  
             else{
@@ -453,7 +454,7 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
         else
         {
             if(Auth::user()->user_grant == 9) {
-                $query.=" and department_child = '".Auth::user()->dep_id."'";
+                $query.=" and department_child = '".Auth::user()->dep_id."' or executor_id ='".Auth::user()->dep_id."' ";
     
             }  
             else{
