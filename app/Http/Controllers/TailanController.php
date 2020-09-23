@@ -713,23 +713,17 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
             $query.=" ";
 
         }
-        $t= DB::select("select b.* ,q.* ,(q.eune+q.egeree+ezurag+etusuv+emater+esanh+eguits+etusuv+ealba+esalbar+etul) as ehleegui from 
-(select d.department_name, t.department_id,d.department_type, sum(t.plan) as plan, sum(t.budget) as budget, sum(t.estimation) as estimation,  (sum(t.budget)/sum(t.plan))*100 as percent, sum(t.budget)-sum(t.plan) as diff, (sum(t.percent)/count(percent)) as rpercent , count(t.project_id) as ajliintoo from V_PROJECT t , CONST_DEPARTMENT d
-where t.department_id=d.department_id  ".$query. "   and t.state_id!=61
-group by d.department_type,t.department_id, d.department_name) b inner join 
-
-(SELECT * FROM 
-(
-SELECT department_id ,state_id
-        FROM v_project  
-        where 1=1  ".$query. "  and state_id!=61
-      
-      )
-PIVOT  
-(count(state_id) FOR state_id IN (1 as haasan,2 as duussan ,3 as gdag,4 as ghots,5 as gadgeree ,6 as nem,7 as eune,8 as egeree,9 as ezurag,10 as etul,11 as emater,12 as esanh ,13 as eguits ,14 as etusuv,16 as boloogui, 41 as ealba, 42 as esalbar, 81 as duus, 101 as yam ,102 as tender, 103 as tendersuc)
-)
-ORDER BY department_id) q
-on q.department_id=b.department_id");
+        $t= DB::select("select b.* ,q.* ,(q.eune+q.egeree+ezurag+etusuv+emater+esanh+eguits+etusuv+ealba+esalbar+etul) as ehleegui 
+        from (select d.executor_abbr as department_name, t.department_id,d.executor_type as department_type, t.report_rowno ,sum(t.plan) as plan, sum(t.budget) as budget, sum(t.estimation) as estimation, (sum(t.budget)/sum(t.plan))*100 as percent, sum(t.budget)-sum(t.plan) as diff, (sum(t.percent)/count(percent)) as rpercent , count(t.project_id) as ajliintoo 
+        from V_PROJECT t , CONST_EXECUTOR d where t.department_id=d.executor_id  ".$query. "
+        and plan_year =2020 and project_type = 1 and t.state_id!=61 
+        group by d.executor_type,t.department_id, d.executor_abbr, t.report_rowno
+        order by t.report_rowno) b 
+        inner join (SELECT * FROM ( SELECT department_id ,state_id 
+        FROM v_project where 1=1  ".$query. " and plan_year =2020 and project_type = 1 and state_id!=61 ) 
+        PIVOT (count(state_id) 
+        FOR state_id IN (1 as haasan,2 as duussan ,3 as gdag,4 as ghots,5 as gadgeree ,6 as nem,7 as eune,8 as egeree,9 as ezurag,10 as etul,11 as emater,12 as esanh ,13 as eguits ,14 as etusuv,16 as boloogui, 41 as ealba, 42 as esalbar, 81 as duus, 101 as yam ,102 as tender, 103 as tendersuc) ) ORDER BY department_id) q 
+        on q.department_id=b.department_id");
         $t2= DB::select("select state_name_ru , state_name_mn ,count(project_name) as niit 
 from v_project t 
 where t.state_id in (1,2,3,4,5,6,81,101,102,103) ".$query. "
