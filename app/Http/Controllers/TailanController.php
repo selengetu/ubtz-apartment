@@ -744,7 +744,8 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
         FROM v_project where 1=1  ".$query. " and state_id!=61 ) 
         PIVOT (count(state_id) 
         FOR state_id IN (1 as haasan,2 as duussan ,3 as gdag,4 as ghots,5 as gadgeree ,6 as nem,7 as eune,8 as egeree,9 as ezurag,10 as etul,11 as emater,12 as esanh ,13 as eguits ,14 as etusuv,16 as boloogui, 41 as ealba, 42 as esalbar, 81 as duus, 101 as yam ,102 as tender, 103 as tendersuc) ) ORDER BY department_id) q 
-        on q.department_id=b.department_id");
+        on q.department_id=b.department_id
+        order by report_rowno");
         $t2= DB::select("select state_name_ru , state_name_mn ,count(project_name) as niit 
                             from v_project t 
                             where t.state_id in (1,2,3,4,5,6,81,101,102,103) ".$query. "
