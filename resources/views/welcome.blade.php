@@ -179,7 +179,7 @@
 
     <script>
         $(document).ready(function(){
-            drawchart(1);
+            drawchart(40);
             var detailchart=null;
             function drawchart($id) {
                 var plans=[];
