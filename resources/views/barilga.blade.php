@@ -275,7 +275,7 @@
                                                            color="black"; @else color="white"; @endif >{{$projects->state_name_mn}}<br> {{$projects->state_name_ru}}@if($projects->prend_date!=NULL && $projects->state_id==1) <br> {{$projects->prend_date}} @endif<br>{{$projects->description}}</font></td>
                                                 <td>
 
-                                                    @if (Auth::user()->dep_id ==22 )
+                                                    @if (Auth::user()->dep_id ==55 )
                                                     @if (Auth::user()->user_grant !=6 or Auth::user()->id ==$projects->added_user_id or Auth::user()->emp_id ==$projects->respondent_emp_id)
                                                         <button onclick="processClicked({{$projects->project_id}})"{{-- onclick="$('#nav-profile-tab').trigger('click')" --}} data-id="{{$projects->project_id}}" tag="{{$projects->project_id}}" class="btn btn-primary btn-sm process"> <i class="fa fa-plus" style="color: rgb(255, 255, 255);"></i></button>
                                                     @endif
@@ -283,7 +283,7 @@
                                                 </td>
                                                 <td>
                                                 @if($projects->is_lock==0)
-                                                    @if (Auth::user()->dep_id ==22 )
+                                                    @if (Auth::user()->dep_id ==55 )
                                                     @if (Auth::user()->user_grant !=6 or Auth::user()->id ==$projects->added_user_id or Auth::user()->emp_id ==$projects->respondent_emp_id )
                                                         <button type="button" class="btn btn-warning btn-sm update" data-toggle="modal"  data-id="{{$projects->project_id}}" tag="{{$projects->project_id}}"  data-target="#exampleModal" id="updateproj" onclick="updateproj({{$projects->project_id}})">
                                                             <i class="fa fa-pencil" style="color: rgb(255, 255, 255);"></i>
