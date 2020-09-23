@@ -420,7 +420,7 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
         $method = Method::orderby('method_name')->get();
         $projecttype = Projecttype::orderby('project_type_name_mn')->get();
         $constructor = Constructor::orderby('department_abbr')->get();
-        $executor = DB::select("select * from V_EXECUTOR t, CONST_DEPARTMENT d where t.executor_par = d.department_id order by t.executor_par ,t.executor_type,t.executor_abbr");
+        $executor = DB::select("select * from V_EXECUTOR t");
         $employee =DB::select('select  * from V_CONST_EMPLOYEE t where t.is_engineer=1 order by firstname');
         $sstate_id= Input::get('sstate_id');
         $sexecutor = Input::get('sexecutor_id');
@@ -749,10 +749,9 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
 from v_project t 
 where t.state_id in (1,2,3,4,5,6,81,101,102,103) ".$query. "
 group by state_name_mn, state_name_ru");
-        $t3= DB::select("select d.department_name, t.department_id, count(t.project_id) as ajliintoo from V_PROJECT t , CONST_DEPARTMENT d
-where t.department_id=d.department_id and t.state_id in (7,8,9,10,11,12,13,14,15, 41,42)  ".$query. "
-group by t.department_id, d.department_name
-order by report_rowno");
+        $t3= DB::select("select d.executor_name as department_name, t.department_id, count(t.project_id) as ajliintoo from V_PROJECT t , CONST_EXECUTOR d
+        where t.department_id=d.executor_id and t.state_id in (7,8,9,10,11,12,13,14,15, 41,42) ".$query. "
+        group by t.department_id, d.executor_name");
 
         $project =DB::select("select  * from V_PROJECT t  order by project_id");
         return view('tailan.detail')->with(['t'=>$t,'t2'=>$t2,'t3'=>$t3,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'syear_id'=>$syear_id,'year'=>$year,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype,'sprojecttype'=>$sprojecttype]);
