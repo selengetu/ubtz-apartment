@@ -56,7 +56,7 @@ class TailanController extends Controller
         $method = Method::orderby('method_name')->get();
         $projecttype = Projecttype::orderby('project_type_name_mn')->get();
         $constructor = Constructor::orderby('department_abbr')->get();
-        $executor = DB::select("select * from V_EXECUTOR t, CONST_DEPARTMENT d where t.executor_par = d.department_id order by t.executor_par ,t.executor_type,t.executor_abbr");
+        $executor = DB::select("select * from V_EXECUTOR");
         $month = Input::get('month');
         $employee =DB::select('select  * from V_CONST_EMPLOYEE t where t.is_engineer=1 order by firstname');
         $schildabbr= Input::get('schildabbr_id');
@@ -79,7 +79,7 @@ class TailanController extends Controller
         else {
             Session::put('syear_id', $syear_id);
         }
-        if (Auth::user()->dep_id == 22 or Auth::user()->dep_id == 99) {
+        if (Auth::user()->dep_id == 55 or Auth::user()->dep_id == 99) {
             $query.="";
 
         }
@@ -308,7 +308,7 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
         $enddate = Input::get('date2');
         $syear_id= Input::get('syear_id');
         $year = Year::orderby('year_name')->get();
-        if (Auth::user()->dep_id == 22 or Auth::user()->dep_id == 99 ) {
+        if (Auth::user()->dep_id == 55 or Auth::user()->dep_id == 99 ) {
             $query.="";
 
         }
@@ -433,7 +433,7 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
             $query.="and plan_year =2020 ";
 
         }
-        if (Auth::user()->dep_id == 22 or Auth::user()->dep_id == 99 ) {
+        if (Auth::user()->dep_id == 55 or Auth::user()->dep_id == 99 ) {
             $query.="";
 
         }
@@ -758,7 +758,7 @@ order by t.department_id
         $employee =DB::select('select  * from V_CONST_EMPLOYEE t where t.is_engineer=1 order by firstname');
 
         $sprojecttype= Input::get('sproject_type');
-        if (Auth::user()->dep_id == 22 or Auth::user()->dep_id == 99) {
+        if (Auth::user()->dep_id == 55 or Auth::user()->dep_id == 99) {
             $query.="";
 
         }

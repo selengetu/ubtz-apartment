@@ -119,7 +119,7 @@ class BarilgaController extends Controller
 
         $startdate= Input::get('sdate1');
         $enddate = Input::get('sdate2');
-        if (Auth::user()->dep_id == 22) {
+        if (Auth::user()->dep_id == 55) {
             $query.="";
 
         }
