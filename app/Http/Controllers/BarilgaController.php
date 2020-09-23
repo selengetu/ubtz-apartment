@@ -56,7 +56,7 @@ class BarilgaController extends Controller
         $projecttype = Projecttype::orderby('project_type_name_mn')->get();
         $season = Season::orderby('season_id')->get();
         $constructor = Constructor::orderby('department_abbr')->get();
-        $executor = DB::select("select * from V_EXECUTOR t, CONST_DEPARTMENT d where t.executor_par = d.department_id  order by t.executor_par ,t.executor_type,t.executor_abbr");
+        $executor = DB::select("select * from V_EXECUTOR t order by report_rowno, ex_report_no");
         $employee =DB::select('select  * from V_CONST_EMPLOYEE t where t.is_engineer=1 order by firstname');
         $srespondent_emp_id = Input::get('srespondent_emp_id');
 
