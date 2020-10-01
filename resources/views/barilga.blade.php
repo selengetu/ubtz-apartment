@@ -920,8 +920,7 @@
                 var a = ($('#plan1').val()).replace(/[_\W]+/g, "");
                 var b = ($('#plan2').val()).replace(/[_\W]+/g, "");
                 var c = ($('#plan3').val()).replace(/[_\W]+/g, "");
-                var d = ($('#plan4').val()).replace(/[_\W]+/g, "");
-               
+                var d = ($('#plan4').val()).replace(/[_\W]+/g, "");          
                 var sum= Number(a)+Number(b)+Number(c)+Number(d);
                 $('#plan').val(sum);
                 });
