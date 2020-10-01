@@ -565,19 +565,19 @@
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="inputAddress2">{{ trans('messages.tuluwluguu1') }}</label>
-                                <input type="text" class="form-control money" id="plan1" name="plan1" placeholder="" maxlength="20">
+                                <input type="text" class="form-control money plans" id="plan1" name="plan1" placeholder="" maxlength="20">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="inputAddress2">{{ trans('messages.tuluwluguu2') }}</label>
-                                <input type="text" class="form-control money" id="plan2" name="plan2" placeholder="" maxlength="20">
+                                <input type="text" class="form-control money plans" id="plan2" name="plan2" placeholder="" maxlength="20">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="inputAddress2">{{ trans('messages.tuluwluguu3') }}</label>
-                                <input type="text" class="form-control money" id="plan3" name="plan3" placeholder="" maxlength="20">
+                                <input type="text" class="form-control money plans" id="plan3" name="plan3" placeholder="" maxlength="20">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="inputAddress2">{{ trans('messages.tuluwluguu4') }}</label>
-                                <input type="text" class="form-control money" id="plan4" name="plan4" placeholder="" maxlength="20">
+                                <input type="text" class="form-control money plans" id="plan4" name="plan4" placeholder="" maxlength="20">
                             </div>
                         </div>
 
@@ -916,6 +916,15 @@
                 },
                 "pageLength": 10
             } );
+            $('.plans').change( function() {
+                var a = ($('#plan1').val()).replace(/[_\W]+/g, "");
+                var b = ($('#plan2').val()).replace(/[_\W]+/g, "");
+                var c = ($('#plan3').val()).replace(/[_\W]+/g, "");
+                var d = ($('#plan4').val()).replace(/[_\W]+/g, "");
+               
+                var sum= Number(a)+Number(b)+Number(c)+Number(d);
+                $('#plan').val(sum);
+                });
             $('#export-btn').on('click', function(e){
                 $("#example").table2excel({
 
