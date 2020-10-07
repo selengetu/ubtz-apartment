@@ -156,6 +156,26 @@ class TailanController extends Controller
             $query.=" ";
 
         }
+        if ($both_id!=NULL && $both_id !=0) {
+            $type =DB::select('select t.executor_type from V_EXECUTOR t where t.executor_id =  '. $both_id.'');
+            $dep =DB::select('select t.department_id from V_EXECUTOR t where t.executor_id =  '. $both_id.'');
+
+            if ($type[0]->executor_type ==1){
+                $query.=" and (department_id = '".$dep[0]->department_id."' or executor_id in (select executor_id from CONST_EXECUTOR t
+                where t.executor_par='".$dep[0]->department_id."'))";
+            }  
+            else{
+               
+                $query.=" and (department_child = '".$both_id."' or executor_id ='".$both_id."') ";
+               
+            }
+           
+        }
+        else
+        {
+            $query.=" ";
+
+        }
         if ($schildabbr!=NULL && $schildabbr !=0) {
             $type =DB::select('select t.executor_type from V_EXECUTOR t where t.executor_id =  '. $schildabbr.'');
             if ($type[0]->executor_type ==1){
