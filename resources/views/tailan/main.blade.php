@@ -67,6 +67,28 @@
                                             </select>
                                         </div>
                                         <div class="form-group col-md-2">
+                                            <label for="inputZip">{{ trans('messages.hariutsagch') }}</label>
+                                            <select class="form-control select2" id="srespondent_emp_id" name="srespondent_emp_id" >
+                                                <option value= "0"> @if ( Config::get('app.locale') == 'mn') Бүгд @else Все @endif</option>
+                                                @foreach($employee as $employees)
+                                                    <option value= "{{$employees->emp_id}}">{{$employees->fletter}}.{{$employees->firstname}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="inputPassword4">{{ trans('messages.guitsetgegch') }} / {{ trans('messages.zahialagchnegj') }}</label>
+                                            <select class="form-control select2" id="both_id" name="both_id"  onchange="javascript:location.href = 'filter_both/'+this.value;" >
+                                                <option value= "0"> @if ( Config::get('app.locale') == 'mn') Бүгд @else Все @endif</option>
+                                                @foreach($executor as $executors)
+                                                    @if($executors->is_ubtz==1)
+                                                    <option value= "{{$executors->executor_id}}" @if($executors->executor_id==$both_id) selected @endif> @if($executors->executor_type == 2){{$executors->department_abbr}} - {{$executors->executor_abbr}}
+                                                        @else {{$executors->executor_abbr}}@endif</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+
+                                        </div>
+                                        <div class="form-group col-md-2">
                                             <label for="inputEmail4">{{ trans('messages.zahialagchnegj') }}</label>
                                             <select class="form-control select2" id="schildabbr_id" name="schildabbr_id">
 
@@ -94,15 +116,7 @@
                                             </select>
 
                                         </div>
-                                        <div class="form-group col-md-2">
-                                            <label for="inputZip">{{ trans('messages.hariutsagch') }}</label>
-                                            <select class="form-control select2" id="srespondent_emp_id" name="srespondent_emp_id" >
-                                                <option value= "0"> @if ( Config::get('app.locale') == 'mn') Бүгд @else Все @endif</option>
-                                                @foreach($employee as $employees)
-                                                    <option value= "{{$employees->emp_id}}">{{$employees->fletter}}.{{$employees->firstname}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+                                       
 
                                         <div class="form-group col-md-1">
                                             <button type="submit" class="btn btn-primary form-control" >{{ trans('messages.haih') }}</button>

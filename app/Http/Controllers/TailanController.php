@@ -67,6 +67,7 @@ class TailanController extends Controller
         $startdate= Input::get('date1');
         $enddate = Input::get('date2');
         $syear_id= Input::get('syear_id');
+        $both_id = Input::get('both_id');
         if(Session::has('month')) {
             $month = Session::get('month');
         }
@@ -94,6 +95,13 @@ class TailanController extends Controller
                 where t.executor_par='".Auth::user()->dep_id."'))";
             }
 
+        }
+        if(Session::has('both_id')) {
+            $both_id = Session::get('both_id');
+
+        }
+        else {
+            Session::put('both_id', $both_id);
         }
         if ($startdate !=0 && $startdate && $enddate !=0 && $enddate !=0-NULL) {
             $query.=" where start_date between '".$startdate."' and '".$enddate." 23:59:59'";
@@ -293,7 +301,7 @@ order by q.project_id, q.month ) par
 where q.project_id(+)=u.project_id and par.project_id=u.project_id ".$date1." ".$query." 
 order by report_rowno, ex_report_no, xex_report_no, project_id");
 
-        return view('tailan.main')->with(['mo'=>$mo,'month'=>$month,'syear_id'=>$syear_id,'year'=>$year,'gproject_id'=>$gproject_id,'data'=>$data,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'syear_id'=>$syear_id,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype,'sprojecttype'=>$sprojecttype]);
+        return view('tailan.main')->with(['both_id'=>$both_id,'mo'=>$mo,'month'=>$month,'syear_id'=>$syear_id,'year'=>$year,'gproject_id'=>$gproject_id,'data'=>$data,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'syear_id'=>$syear_id,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype,'sprojecttype'=>$sprojecttype]);
     }
     public function time()
     {

@@ -59,7 +59,8 @@ class BarilgaController extends Controller
         $executor = DB::select("select * from V_EXECUTOR t order by report_rowno, ex_report_no");
         $employee =DB::select('select  * from V_CONST_EMPLOYEE t where t.is_engineer=1 order by firstname');
         $srespondent_emp_id = Input::get('srespondent_emp_id');
-
+        $both_id = Input::get('both_id');
+    
         if(Session::has('srespondent_emp_id')) {
             $srespondent_emp_id = Session::get('srespondent_emp_id');
 
@@ -67,6 +68,14 @@ class BarilgaController extends Controller
         else {
             Session::put('srespondent_emp_id', $srespondent_emp_id);
         }
+        if(Session::has('both_id')) {
+            $both_id = Session::get('both_id');
+
+        }
+        else {
+            Session::put('both_id', $both_id);
+        }
+       
         $schildabbr= Input::get('schildabbr_id');
         if(Session::has('schildabbr_id')) {
             $schildabbr = Session::get('schildabbr_id');
@@ -163,6 +172,28 @@ class BarilgaController extends Controller
         else
         {
             $sexecutor=0;
+            $query.=" ";
+
+            
+        }
+  
+        if ($both_id!=NULL && $both_id !=0) {
+            $type =DB::select('select t.executor_type from V_EXECUTOR t where t.executor_id =  '. $both_id.'');
+            $dep =DB::select('select t.department_id from V_EXECUTOR t where t.executor_id =  '. $both_id.'');
+
+            if ($type[0]->executor_type ==1){
+                $query.=" and (department_id = '".$dep[0]->department_id."' or executor_id in (select executor_id from CONST_EXECUTOR t
+                where t.executor_par='".$dep[0]->department_id."'))";
+            }  
+            else{
+               
+                $query.=" and (department_child = '".$both_id."' or executor_id ='".$both_id."') ";
+               
+            }
+           
+        }
+        else
+        {
             $query.=" ";
 
         }
@@ -265,7 +296,7 @@ class BarilgaController extends Controller
 
         $project =DB::select("select  * from V_PROJECT t  where 1=1 " .$query. " order by report_rowno, ex_report_no, project_id");
     
-        return view('barilga')->with(['schildabbr'=>$schildabbr,'smethod_id'=>$smethod_id,'sstate_id'=>$sstate_id,'srespondent_emp_id'=>$srespondent_emp_id,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'sprojecttype'=>$sprojecttype,'gproject_id'=>$gproject_id,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'employee'=>$employee,
+        return view('barilga')->with(['both_id'=>$both_id,'schildabbr'=>$schildabbr,'smethod_id'=>$smethod_id,'sstate_id'=>$sstate_id,'srespondent_emp_id'=>$srespondent_emp_id,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'sprojecttype'=>$sprojecttype,'gproject_id'=>$gproject_id,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'employee'=>$employee,
             'stusuv'=>$stusuv,'syear_id'=>$syear_id,'year'=>$year,'stuluvluguu'=>$stuluvluguu,'sguitsetgel'=>$sguitsetgel,  'method'=>$method,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype,'season'=>$season]);
     }
     public function store()
@@ -459,6 +490,10 @@ class BarilgaController extends Controller
     }
     public function filter_month($month) {
         Session::put('month',$month);
+        return back();
+    }
+    public function filter_both($both_id) {
+        Session::put('both_id',$both_id);
         return back();
     }
 }
