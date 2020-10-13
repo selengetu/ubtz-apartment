@@ -119,6 +119,7 @@
                                        
 
                                         <div class="form-group col-md-1">
+                                        <label for="inputPassword4">.</label>
                                             <button type="submit" class="btn btn-primary form-control" >{{ trans('messages.haih') }}</button>
 
                                         </div>
