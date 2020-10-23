@@ -308,7 +308,8 @@
                                                     @endif
                                                 <td>{{ number_format($projects->percent, 2) }}%</td>
                                                     @if($projects->state_id!=61)
-                                                <?php $sum_percent += number_format($projects->percent, 2) ?>
+                                                    
+                                                <?php $sum_percent += $projects->percent ?>
                                                     @endif
                                                 <td>{{$projects->fletter}}.{{$projects->firstname}}</td>
 
