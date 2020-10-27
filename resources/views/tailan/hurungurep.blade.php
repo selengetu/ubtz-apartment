@@ -178,7 +178,10 @@
                                                             echo number_format($sum_sbudget,2)."<br>";
                                                             ?></b></td>
                                                     <td><b><?php
-                                                             echo number_format($sum_percent/($no-1),2)."%<br>";
+                                                    if($no > 2){
+                                                        echo number_format($sum_percent/($no-1),2)."%<br>";
+                                                    }
+                                                             
                                                             ?></b></td>
                                                     <td><b><?php
                                                             echo number_format($sum_diff,2)."<br>";
