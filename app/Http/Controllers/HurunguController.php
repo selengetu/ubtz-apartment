@@ -36,7 +36,7 @@ class HurunguController extends Controller
     {
         $query = "";
         $schildabbr = Input::get('schildabbr_id');
-        $executor = DB::select("select * from V_EXECUTOR t, CONST_DEPARTMENT d where t.executor_par = d.department_id order by t.executor_par ,t.executor_type,t.executor_abbr");
+        $executor = DB::select("select * from V_EXECUTOR t order by report_rowno, ex_report_no");
         $constructor = Constructor::orderby('department_abbr')->get();
         $year = Year::orderby('year_name')->get();
         if ($schildabbr!=NULL && $schildabbr !=0) {
@@ -52,7 +52,7 @@ class HurunguController extends Controller
         }
         else
         {
-            $schildabbr=0;
+          
             $query.=" ";
 
         }
@@ -100,7 +100,7 @@ class HurunguController extends Controller
     {
         $hurungu = DB::table('INVESTMENT')
             ->where('investment_id', Request::input('id'))
-            ->update(['depart_id' => Request::input('constructor_id'),'depart_child' => Request::input('childabbr_id'),'plan' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan'))
+            ->update(['depart_child' => Request::input('childabbr_id'),'plan' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan'))
                 ,'plan1' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan1')),'plan2' =>preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan2')),'plan3' =>preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan3')),'plan4' =>preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan4'))
                 ,'budget1' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('budget1')),'budget2' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('budget2')),'budget3' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('budget3')) ,'budget4' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('budget4'))
                 ,'description' => Request::input('description')]);
