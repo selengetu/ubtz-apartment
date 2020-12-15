@@ -414,6 +414,7 @@
                                                     bgcolor="green";
                                                     @elseif($projects->state_id==4)
                                                     bgcolor="lightgreen";
+                                                    color="black"
                                                     @elseif($projects->state_id==5)
                                                     bgcolor="#8a2be2";
                                                     @elseif($projects->state_id==6)
@@ -659,6 +660,7 @@
                                                     bgcolor="green";
                                                     @elseif($projects->state_id==4)
                                                     bgcolor="lightgreen";
+                                                    color="black"
                                                     @elseif($projects->state_id==5)
                                                     bgcolor="#8a2be2";
                                                     @elseif($projects->state_id==6)
@@ -737,6 +739,7 @@
                                                     bgcolor="green";
                                                     @elseif($projects->state_id==4)
                                                     bgcolor="lightgreen";
+                                                    color="black"
                                                     @elseif($projects->state_id==5)
                                                     bgcolor="#8a2be2";
                                                     @elseif($projects->state_id==6)
