@@ -285,7 +285,7 @@
                                                     @else
                                                     bgcolor="red";
                                                 @endif>
-                                                    <font  @if($projects->state_id==1)
+                                                    <font  @if($projects->state_id==1 or $projects->state_id==4)
                                                            color="black"; @else color="white"; @endif >{{$projects->state_name_mn}}<br> {{$projects->state_name_ru}}@if($projects->prend_date!=NULL && $projects->state_id==1) <br> {{$projects->prend_date}} @endif<br>{{$projects->description}}</font></td>
                                                 <td>
 
