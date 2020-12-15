@@ -41,17 +41,17 @@
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-2">
-                                                <label for="inputEmail4">{{ trans('messages.zahialagchnegj') }}</label>
-                                                <select class="form-control select2" id="schildabbr_id" name="schildabbr_id">
-                                                    <option value= "0">Бүгд</option>
+                                                <label for="inputPassword4">{{ trans('messages.zahialagchnegj') }}</label>
+                                                <select class="form-control select2" id="sexecutor_id" name="sexecutor_id"  onchange="javascript:location.href = 'filter_executor/'+this.value;" >
+                                                    <option value= "0"> @if ( Config::get('app.locale') == 'mn') Бүгд @else Все @endif</option>
                                                     @foreach($executor as $executors)
                                                         @if($executors->is_ubtz==1)
-                                                        <option value= "{{$executors->executor_id}}"> @if($executors->executor_type == 2){{$executors->department_abbr}} - {{$executors->executor_abbr}}
+                                                        <option value= "{{$executors->executor_id}}" > @if($executors->executor_type == 2){{$executors->department_abbr}} - {{$executors->executor_abbr}}
                                                             @else {{$executors->executor_abbr}}@endif</option>
                                                         @endif
                                                     @endforeach
                                                 </select>
-
+    
                                             </div>
 
                                             <div class="form-group col-md-1">
@@ -240,31 +240,21 @@
 
                         <div class="form-row">
 
-                            <div class="form-group col-md-4">
-                                <label for="inputEmail4">{{ trans('messages.zahialagch') }}</label>
-                                <select class="form-control select2" id="constructor_id" name="constructor_id">
-                                    @foreach($constructor as $constructors)
-                                        <option value= "{{$constructors->department_id}}">{{$constructors->department_name}}</option>
-                                    @endforeach
-                                </select>
-
-                            </div>
-                            <div class="form-group col-md-4">
+                           
+                            <div class="form-group col-md-12">
                                 <label for="inputEmail4">{{ trans('messages.zahialagchnegj') }}</label>
                                 <select class="form-control select2" id="childabbr_id" name="childabbr_id">
-                                    <option value= "0">Бүгд</option>childabbr_id
-                                    @foreach($executor as $executors)
-                                        @if($executors->is_ubtz==1)
-                                        <option value= "{{$executors->executor_id}}">{{$executors->executor_abbr}}</option>
-                                        @endif
-                                    @endforeach
+                                    <option value= "0"> @if ( Config::get('app.locale') == 'mn') Бүгд @else Все @endif</option>
+                                                    @foreach($executor as $executors)
+                                                        @if($executors->is_ubtz==1)
+                                                        <option value= "{{$executors->executor_id}}" > @if($executors->executor_type == 2){{$executors->department_abbr}} - {{$executors->executor_abbr}}
+                                                            @else {{$executors->executor_abbr}}@endif</option>
+                                                        @endif
+                                                    @endforeach
                                 </select>
 
                             </div>
-                            <div class="form-group col-md-4">
-
-                            </div>
-
+                           
                             <div class="form-group col-md-3">
                                 <label for="inputEmail4">{{ trans('messages.tuluwluguu1') }}</label>
                                 <input type="text" class="form-control money" id="plan1" name="plan1" maxlength="14">
