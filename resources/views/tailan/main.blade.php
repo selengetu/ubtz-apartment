@@ -344,7 +344,7 @@
                                                     @endif
                                                     color="white"
                                                 >    <font  @if($projects->state_id==1 or $projects->state_id==4)
-                                                            color="black"; @else color="white"; @endif >{{$projects->state_name_mn}}<br>{{$projects->state_name_ru}}<br>{{$projects->description}}</font></td>
+                                                            color="black"; @else color="white"; @endif >{{$projects->state_name_mn}}<br>{{$projects->state_name_ru}}@if($projects->prend_date!=NULL && $projects->state_id==1) <br> {{$projects->prend_date}} @endif<br>{{$projects->description}}</font></td>
                                                 <td>@if($projects->image_b1!=null)<img src="<?php echo asset("profile_images/img/$projects->image_b1")?>"  height="100" width="100" onclick="preview_image({{$projects->project_id}})" data-toggle="modal" data-target="#photomodal">@endif</td>
 
                                             </tr>
@@ -436,7 +436,7 @@
                                                     @endif
                                                     color="white"
                                                 >    <font  @if($projects->state_id==1 or $projects->state_id==4)
-                                                            color="black"; @else color="white"; @endif >{{$projects->state_name_mn}}<br>{{$projects->state_name_ru}}<br>{{$projects->description}}</font></td>
+                                                            color="black"; @else color="white"; @endif >{{$projects->state_name_mn}}<br>{{$projects->state_name_ru}}@if($projects->prend_date!=NULL && $projects->state_id==1) <br> {{$projects->prend_date}} @endif<br>{{$projects->description}}</font></td>
 
                                                 <td>@if($projects->image_b1!=null)<img src="<?php echo asset("profile_images/img/$projects->image_b1")?>"  height="100" width="100" onclick="preview_image({{$projects->project_id}})" data-toggle="modal" data-target="#photomodal">@endif</td>
                                             </tr>
@@ -672,7 +672,7 @@
                                                     @endif
                                                     color="white"
                                                 >    <font  @if($projects->state_id==1 or $projects->state_id==4)
-                                                            color="black"; @else color="white"; @endif >{{$projects->state_name_mn}}<br>{{$projects->state_name_ru}}<br>{{$projects->description}}</font></td></td>
+                                                            color="black"; @else color="white"; @endif >{{$projects->state_name_mn}}@if($projects->prend_date!=NULL && $projects->state_id==1) <br> {{$projects->prend_date}} @endif<br>{{$projects->state_name_ru}}<br>{{$projects->description}}</font></td></td>
                                                 </tr>
                                             <?php $no++; ?>
                                             <?php $no1++; ?>

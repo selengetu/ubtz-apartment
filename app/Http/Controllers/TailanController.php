@@ -292,6 +292,7 @@ class TailanController extends Controller
        u.end_date,
        u.description,
        u.report_rowno,
+       u.prend_date,
        q.image_b1,
        q.image_b2
        from
