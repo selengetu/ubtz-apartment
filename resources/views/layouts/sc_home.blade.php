@@ -1,4 +1,5 @@
 <script>
+    
     $("#method_code").on('change', function() {
         var itag =$(this).val();
         checkgeree(itag);
@@ -83,6 +84,19 @@
                 }
             });
     }
+    function readURL(input, id) {
+       console.log('#imageResult_'+id); 
+            if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#imageResult_'+id)
+                .attr('src', e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
     $(function() {
         $("#date1").datepicker({
             format: 'yyyy-mm-dd',
