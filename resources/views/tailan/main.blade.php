@@ -652,27 +652,8 @@
                                                     @endif
                                                 <td>{{$projects->fletter}}.{{$projects->firstname}}</td>
 
-                                                <td @if($projects->state_id==2)
-                                                    bgcolor="#ff8c00";
-                                                    @elseif($projects->state_id==1)
-                                                    bgcolor="yellow";
-                                                    @elseif($projects->state_id==3)
-                                                    bgcolor="green";
-                                                    @elseif($projects->state_id==4)
-                                                    bgcolor="lightgreen";
-                                                    color="black"
-                                                    @elseif($projects->state_id==5)
-                                                    bgcolor="#8a2be2";
-                                                    @elseif($projects->state_id==6)
-                                                    bgcolor="blue";
-                                                    @elseif($projects->state_id==16)
-                                                    bgcolor="blue";
-                                                    @else
-                                                    bgcolor="red";
-                                                    @endif
-                                                    color="white"
-                                                >    <font  @if($projects->state_id==1 or $projects->state_id==4)
-                                                            color="black"; @else color="white"; @endif >{{$projects->state_name_mn}}@if($projects->prend_date!=NULL && $projects->state_id==1) <br> {{$projects->prend_date}} @endif<br>{{$projects->state_name_ru}}<br>{{$projects->description}}</font></td></td>
+                                                <td width="102px"  bgcolor= {{$projects->state_bk_color}}>
+                                                    <font color="{{$projects->state_tx_color}}" >{{$projects->state_name_mn}}@if($projects->prend_date!=NULL && $projects->state_id==1) <br> {{$projects->prend_date}} @endif<br>{{$projects->state_name_ru}}<br>{{$projects->description}}</font></td></td>
                                                 </tr>
                                             <?php $no++; ?>
                                             <?php $no1++; ?>

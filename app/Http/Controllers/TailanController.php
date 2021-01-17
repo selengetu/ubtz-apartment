@@ -282,6 +282,8 @@ class TailanController extends Controller
       u.state_id,
        u.state_name_mn,
        u.state_name_ru,
+       u.state_bk_color, 
+       u.state_tx_color,
        u.method_code,
        u.method_name,
        u.percent,
