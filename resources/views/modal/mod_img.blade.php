@@ -1,4 +1,4 @@
-<div id="processimagemodal" class="modal fade" role="dialog">
+<div id="imgModal" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg">
 
         <!-- Modal content-->

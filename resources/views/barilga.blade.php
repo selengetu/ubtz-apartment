@@ -280,7 +280,7 @@
                                                         @endif
                                                 </td>
 
-                                                <td> @if (Auth::user()->user_grant ==3 ) <button type="button" class="btn btn-danger delete btn-sm" id="deleteproj" onclick="deleteproj({{$projects->project_id}})">  <i class="fa fa-trash" style="color: rgb(255, 255, 255);"></i></button> @endif</td>
+                                                <td><button type="button" class="btn btn-danger delete btn-sm" data-toggle="modal" data-target="#imgModal">  <i class="fa fa-picture-o" style="color: rgb(255, 255, 255);"></i></button>  @if (Auth::user()->user_grant ==3 ) <button type="button" class="btn btn-danger delete btn-sm" id="deleteproj" onclick="deleteproj({{$projects->project_id}})">  <i class="fa fa-trash" style="color: rgb(255, 255, 255);"></i></button> @endif</td>
                                             </tr>
                                             <?php $no++; ?>
 
@@ -356,6 +356,7 @@
     </section>
    @include('modal.mod_process');
    @include('modal.mod_project');
+   @include('modal.mod_img');
 <style>
     .disabledTab {
         pointer-events: none;
