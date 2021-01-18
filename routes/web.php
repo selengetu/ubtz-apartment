@@ -42,7 +42,7 @@ Route::get('/projectfill/{id?}',function($id = 0){
 });
 
 Route::match(['get', 'post'],'/zaswar', 'BarilgaController@index')->name('zaswar');
-
+Route::match(['get', 'post'],'/saveimg', 'BarilgaController@saveimg')->name('saveimg');
 
 Route::get('/process', 'ProcessController@index')->name('process');
 Route::post('/addprocess','ProcessController@store');

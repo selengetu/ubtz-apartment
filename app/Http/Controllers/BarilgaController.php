@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Storage;
+use Image;
 use App\Projecttype;
 use Illuminate\Support\Facades\Route;
 use Carbon\Carbon;
@@ -462,6 +463,57 @@ class BarilgaController extends Controller
             return Redirect('barilga');
         }
     }
+    public function saveimg(Request $request)
+    {
+       
+     
+        
+        if (Request::hasFile('img_1')) {
+            $photo = Input::file('img_1');
+          
+                $file = Input::file('img_1');
+              
+                $filenamewithextension = $photo->getClientOriginalName();
+                
+                //get filename without extension
+                $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+
+                //get file extension
+                $extension = $photo->getClientOriginalExtension();
+      
+                $size = $photo->getSize();
+                //filename to store
+                $filenametostore = date('YmdHisu') . '_2' . '.' . $extension;
+
+                $filenametostoreb = date('YmdHisu') . '_1' . '.' . $extension;
+
+                Storage::put('profile_images/thumbnail/' . $filenametostore, fopen($photo, 'r+'));
+
+                Storage::put('profile_images/img/' . $filenametostoreb, fopen($photo, 'r+'));
+                //Resize image here
+                $thumbnailpath = public_path('profile_images/thumbnail/' . $filenametostore);
+
+                $img1 = Image::make($photo->getRealPath())->resize(400, 150, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+
+                $img1->save($thumbnailpath);
+                $imgpath = public_path('profile_images/img/' . $filenametostoreb);
+                $img = Image::make($photo->getRealPath())->resize(800, 300, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save($filenametostoreb);
+                $img->save($imgpath);
+
+                $project = DB::table('Project')
+                ->where('project_id', 2261)->where('is_lock',0)
+                ->update(['img_1' =>$thumbnailpath,'img_2' =>$filenametostore]);
+
+            
+        }
+
+      
+    }
+
     public function filter_resp($srespondent_emp_id) {
         Session::put('srespondent_emp_id',$srespondent_emp_id);
         return back();
