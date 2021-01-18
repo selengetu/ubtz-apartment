@@ -465,7 +465,7 @@ class BarilgaController extends Controller
     }
     public function saveimg(Request $request)
     {
-
+        $data= Request::input('pr_id');
         if (Request::hasFile('img_1')) {
             $photo = Input::file('img_1');
           
@@ -481,32 +481,20 @@ class BarilgaController extends Controller
       
                 $size = $photo->getSize();
                 //filename to store
-                $filenametostore = date('YmdHisu') . '_2' . '.' . $extension;
 
-                $filenametostoreb = date('YmdHisu') . '_1' . '.' . $extension;
+                $filenametostore = date('YmdHisu') . '_1' . '.' . $extension;
 
-                Storage::put('profile_images/thumbnail/' . $filenametostore, fopen($photo, 'r+'));
-
-                Storage::put('profile_images/img/' . $filenametostoreb, fopen($photo, 'r+'));
+                Storage::put('profile_images/img/' . $filenametostore, fopen($photo, 'r+'));
                 //Resize image here
-                $thumbnailpath = public_path('profile_images/thumbnail/' . $filenametostore);
-
-                $img1 = Image::make($photo->getRealPath())->resize(400, 150, function ($constraint) {
+              
+                $imgpath = public_path('profile_images/img/' . $filenametostore);
+                $img = Image::make($photo->getRealPath())->resize(2500, 1500, function ($constraint) {
                     $constraint->aspectRatio();
-                });
-
-                $img1->save($thumbnailpath);
-                $imgpath = public_path('profile_images/img/' . $filenametostoreb);
-                $img = Image::make($photo->getRealPath())->resize(800, 300, function ($constraint) {
-                    $constraint->aspectRatio();
-                })->save($filenametostoreb);
-                $img->save($imgpath);
-
+                })->save($imgpath);
                 $project = DB::table('Project')
                 ->where('project_id', 2261)->where('is_lock',0)
                 ->update(['img_1' =>$filenametostore]);
 
-            
         }
 
       

@@ -177,10 +177,7 @@ Route::get('setlocale/{locale}',function($locale){
         $dt=DB::table('V_PROCESS_IMG')->where('project_id','=',$id)->get();
         return $dt;
     });
-    Route::get('/getimagedet/{id?}',function($id = 0){
-        $dt=DB::table('V_PROCESS_IMG')->where('process_id','=',$id)->get();
-        return $dt;
-    });
+ 
     Route::get('/information', 'InformationController@index')->name('information');
     Route::get('/information/delete/{id}', 'InformationController@destroy');
     Route::post('/addinformation','InformationController@store');

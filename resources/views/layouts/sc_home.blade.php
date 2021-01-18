@@ -19,19 +19,13 @@
 
         }
     });
-    function preview_imagedet($id){
-        $('#pprocess_id').val($id);
+    function imgclick($id){
+        $('#pr_id').val($id);
 
-        $.get('getimagedet/'+$id,function(data){
-            $("#imagetable tbody").empty();
+        $.get('getimage/'+$id,function(data){
+  
             $.each(data,function(i,qwe){
-                var sHtml = " <tr class='table-row' >" +
-
-                    "   <td class='m1'> <img width='100%' src='profile_images/img/"+ qwe.img_bname +"'/></td>" +
-                    "   <td class='m1'> <button class='btn btn-danger' onclick=deletepicture(" + qwe.img_id+ ","+ qwe.process_id+")><i class='fa fa-trash' aria-hidden='true'></i></button></td>" +
-
-                    "</tr>";
-                $("#imagetable tbody").append(sHtml);
+                $('#my_image').attr('src',qwe.img_1);
             });
 
         });
