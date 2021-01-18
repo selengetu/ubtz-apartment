@@ -25,7 +25,10 @@
         $.get('getimage/'+$id,function(data){
   
             $.each(data,function(i,qwe){
-                $('#my_image').attr('src',qwe.img_1);
+                $('#imageResult_1').attr('src','profile_images/img/' + qwe.img_1);
+                $('#imageResult_2').attr('src','profile_images/img/' + qwe.img_2);
+                $('#imageResult_3').attr('src','profile_images/img/' + qwe.img_3);
+                $('#imageResult_4').attr('src','profile_images/img/' + qwe.img_4);
             });
 
         });

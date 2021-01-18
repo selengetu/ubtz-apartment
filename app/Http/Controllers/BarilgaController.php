@@ -492,8 +492,98 @@ class BarilgaController extends Controller
                     $constraint->aspectRatio();
                 })->save($imgpath);
                 $project = DB::table('Project')
-                ->where('project_id', 2261)->where('is_lock',0)
+                ->where('project_id', $data)->where('is_lock',0)
                 ->update(['img_1' =>$filenametostore]);
+                return back();
+        }
+        if (Request::hasFile('img_2')) {
+            $photo = Input::file('img_2');
+          
+                $file = Input::file('img_2');
+              
+                $filenamewithextension = $photo->getClientOriginalName();
+                
+                //get filename without extension
+                $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+
+                //get file extension
+                $extension = $photo->getClientOriginalExtension();
+      
+                $size = $photo->getSize();
+                //filename to store
+
+                $filenametostore = date('YmdHisu') . '_2' . '.' . $extension;
+
+                Storage::put('profile_images/img/' . $filenametostore, fopen($photo, 'r+'));
+                //Resize image here
+              
+                $imgpath = public_path('profile_images/img/' . $filenametostore);
+                $img = Image::make($photo->getRealPath())->resize(2500, 1500, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save($imgpath);
+                $project = DB::table('Project')
+                ->where('project_id', $data)->where('is_lock',0)
+                ->update(['img_2' =>$filenametostore]);
+
+        }
+        if (Request::hasFile('img_3')) {
+            $photo = Input::file('img_3');
+          
+                $file = Input::file('img_3');
+              
+                $filenamewithextension = $photo->getClientOriginalName();
+                
+                //get filename without extension
+                $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+
+                //get file extension
+                $extension = $photo->getClientOriginalExtension();
+      
+                $size = $photo->getSize();
+                //filename to store
+
+                $filenametostore = date('YmdHisu') . '_3' . '.' . $extension;
+
+                Storage::put('profile_images/img/' . $filenametostore, fopen($photo, 'r+'));
+                //Resize image here
+              
+                $imgpath = public_path('profile_images/img/' . $filenametostore);
+                $img = Image::make($photo->getRealPath())->resize(2500, 1500, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save($imgpath);
+                $project = DB::table('Project')
+                ->where('project_id', $data)->where('is_lock',0)
+                ->update(['img_3' =>$filenametostore]);
+
+        }
+        if (Request::hasFile('img_4')) {
+            $photo = Input::file('img_4');
+          
+                $file = Input::file('img_4');
+              
+                $filenamewithextension = $photo->getClientOriginalName();
+                
+                //get filename without extension
+                $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+
+                //get file extension
+                $extension = $photo->getClientOriginalExtension();
+      
+                $size = $photo->getSize();
+                //filename to store
+
+                $filenametostore = date('YmdHisu') . '_4' . '.' . $extension;
+
+                Storage::put('profile_images/img/' . $filenametostore, fopen($photo, 'r+'));
+                //Resize image here
+              
+                $imgpath = public_path('profile_images/img/' . $filenametostore);
+                $img = Image::make($photo->getRealPath())->resize(2500, 1500, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save($imgpath);
+                $project = DB::table('Project')
+                ->where('project_id', $data)->where('is_lock',0)
+                ->update(['img_4' =>$filenametostore]);
 
         }
 

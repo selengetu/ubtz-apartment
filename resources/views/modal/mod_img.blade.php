@@ -15,6 +15,7 @@
                             <input type="file" id="1" class="custom-file-input" name="img_1" onchange="readURL(this, $(this).attr('id'));">
                             <label class="custom-file-label" for="customFile">1-р зураг</label>
                           </div>
+                          <input type="hidden" class="form-control" id="pr_id" name="pr_id">
                           <img id="imageResult_1" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block">
                     </div>
                     <div class="col-md-3">
