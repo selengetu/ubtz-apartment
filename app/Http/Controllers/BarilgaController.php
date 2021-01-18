@@ -465,9 +465,7 @@ class BarilgaController extends Controller
     }
     public function saveimg(Request $request)
     {
-       
-     
-        
+
         if (Request::hasFile('img_1')) {
             $photo = Input::file('img_1');
           
@@ -506,7 +504,7 @@ class BarilgaController extends Controller
 
                 $project = DB::table('Project')
                 ->where('project_id', 2261)->where('is_lock',0)
-                ->update(['img_1' =>$thumbnailpath,'img_2' =>$filenametostore]);
+                ->update(['img_1' =>$filenametostore]);
 
             
         }
