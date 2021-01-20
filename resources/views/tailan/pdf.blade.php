@@ -6,9 +6,13 @@
                                             @foreach($project as $projects)
                                                 <tr><td colspan="4" bgcolor="#89c2ff" style="text-align:center"><b>{{$no}}. {{$projects->department_name}}  {{$projects->project_name}}</b></td></tr>
                                                 <tr>
-                                                    <td colspan="2" width="400px" style="text-align:center"><img src="{{ asset('profile_images/img/'.$projects->image_b2)}}" height="350"></td>
-                                                    <td colspan="2" width="400px" style="text-align:center"><img src="{{ asset('profile_images/img/'.$projects->image_b2)}}" height="350"></td>
+                                                    <td colspan="2" width="400px" style="text-align:center"><img src="{{ asset('profile_images/img/'.$projects->img_1)}}" height="350"></td>
+                                                    <td colspan="2" width="400px" style="text-align:center"><img src="{{ asset('profile_images/img/'.$projects->img_2 )}}" height="350"></td>
                                                 <tr>
+                                                    <tr>
+                                                        <td colspan="2" width="400px" style="text-align:center"><img src="{{ asset('profile_images/img/'.$projects->img_3)}}" height="350"></td>
+                                                        <td colspan="2" width="400px" style="text-align:center"><img src="{{ asset('profile_images/img/'.$projects->img_4 )}}" height="350"></td>
+                                                    <tr>
                                                 <tr>
                                                     <td><b>{{ trans('messages.tuluwluguu') }}:</b></td>
                                                     <td>{{number_format($projects->plan)}}</td>

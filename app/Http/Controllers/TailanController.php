@@ -118,8 +118,8 @@ class TailanController extends Controller
         }
         else
         {
-            $syear_id=2020;
-            $query.="and plan_year = 2020 ";
+            $syear_id=2021;
+            $query.="and plan_year = 2021 ";
 
         }
         if ($sprojecttype!=NULL && $sprojecttype !=0) {
@@ -266,6 +266,7 @@ class TailanController extends Controller
        u.department_name,
        u.department_type,
        u.season_name,
+       u.img_1 as image_b1,
        u.plan1,
        u.plan2,
        u.plan3,
@@ -294,17 +295,10 @@ class TailanController extends Controller
        u.end_date,
        u.description,
        u.report_rowno,
-       u.prend_date,
-       q.image_b1,
-       q.image_b2
+       u.prend_date
        from
        v_project u,
-(select e.img_id, e.img_bname as image_b1, img_name as image_b2, e.PROCESS_ID, e.project_id
-from V_PROCESS_IMG e,
-(select project_id, max(img_id) ma from V_PROCESS_IMG
-group by project_id) t
-where e.IMG_ID = t.ma
-) q,
+
 (
 select q.project_id , q.month, q.budget,  SUM(q.budget) OVER (PARTITION BY q.project_id ORDER BY Month) AS RunningTotal,( SUM(q.budget) OVER (PARTITION BY q.project_id ORDER BY Month) )- q.budget as diff
 from 
@@ -321,7 +315,7 @@ order by project_id, month
 group by project_id, month
 order by project_id, month) q
 order by q.project_id, q.month ) par
-where q.project_id(+)=u.project_id and par.project_id=u.project_id ".$date1." ".$query." 
+where  par.project_id=u.project_id ".$date1." ".$query." 
 order by report_rowno, ex_report_no, xex_report_no, project_id");
 
         return view('tailan.main')->with(['both_id'=>$both_id,'mo'=>$mo,'month'=>$month,'syear_id'=>$syear_id,'year'=>$year,'gproject_id'=>$gproject_id,'data'=>$data,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'syear_id'=>$syear_id,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype,'sprojecttype'=>$sprojecttype]);
@@ -474,8 +468,8 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
         }
         else
         {
-            $syear_id=2020;
-            $query.="and plan_year =2020 ";
+            $syear_id=2021;
+            $query.="and plan_year =2021 ";
 
         }
         if (Auth::user()->dep_id == 55 or Auth::user()->dep_id == 99 ) {
@@ -616,8 +610,8 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
         }
         else
         {
-            $syear_id=2020;
-            $query.="and plan_year =2020 ";
+            $syear_id=2021;
+            $query.="and plan_year =2021 ";
 
         }
         if ($month!=NULL && $month !=0) {
@@ -741,8 +735,8 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
         }
         else
         {
-            $syear_id=2020;
-            $query.="and plan_year =2020 ";
+            $syear_id=2021;
+            $query.="and plan_year =2021 ";
 
         }
         if ($startdate !=0 && $startdate && $enddate !=0 && $enddate !=NULL) {
@@ -822,10 +816,10 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
             $query.=" ";
 
         }
-        $project =DB::select("select  distinct * from V_PROJECT_IMAGE t where 1=1 ".$query. "");
-        $img =DB::select("select  * from V_PROJECT_IMAGE3 t");
+        $project =DB::select("select  distinct * from V_PROCESS_IMG t where plan_year=2021 ".$query. "");
+        
 
-        return view('tailan.album')->with(['method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype,'img'=>$img]);
+        return view('tailan.album')->with(['method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype]);
 
 
     }

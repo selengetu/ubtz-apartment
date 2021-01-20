@@ -93,49 +93,16 @@
                                             @foreach($project as $projects)
                                                 <tr><td colspan="4" bgcolor="#89c2ff"><center><b>{{$no}}. {{$projects->department_name}}  {{$projects->project_name}}</b></center></td></tr>
 
-
-
-                                                        <tr>
-                                                            @foreach ($img as $imgs)
-                                                            @if($projects->project_id == $imgs->project_id)
-
-                                                                        @if ($loop->index==0)
-                                                                    <td colspan="2" width="400px"><center>
-                                                                        <img src="{{asset('profile_images/img/').'/'.$imgs->image_b1}}">
-                                                                        </center></td>
-                                                                        @endif
-                                                                            @if ($loop->index==1)
-                                                                                <td colspan="2" width="400px"><center>
-                                                                                        <img src="{{asset('profile_images/img/').'/'.$imgs->image_b1}}">
-                                                                                    </center></td>
-                                                                            @endif
-                                                                @endif
-
-                                                            @endforeach
-                                                        </tr>
                                                 <tr>
-                                                    @foreach ($img as $imgs)
-                                                        @if($projects->project_id == $imgs->project_id)
-
-                                                            @if ($loop->index==0)
-                                                                <td colspan="2" width="400px"><center>
-                                                                        <img src="{{asset('profile_images/img/').'/'.$imgs->image_b1}}">
+                                                 <td colspan="2" width="400px"><center>
+                                                                        <img src="{{asset('profile_images/img/').'/'.$projects->img_1}}">
                                                                     </center></td>
-                                                            @endif
-
-                                                            @if ($loop->index==3)
+                                                        
                                                                     <td colspan="2" width="400px"><center>
-                                                                        <img src="{{asset('profile_images/img/').'/'.$imgs->image_b1}}">
+                                                                        <img src="{{asset('profile_images/img/').'/'.$projects->img_2}}">
                                                                         </center></td>
-                                                            @endif
-
-                                                        @endif
-
-                                                    @endforeach
+                                                         
                                                 </tr>
-
-
-
                                             <tr>
 
 
