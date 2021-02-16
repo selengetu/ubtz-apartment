@@ -94,12 +94,12 @@
                                                 <tr><td colspan="4" bgcolor="#89c2ff"><center><b>{{$no}}. {{$projects->department_name}}  {{$projects->project_name}}</b></center></td></tr>
 
                                                 <tr>
-                                                 <td colspan="2" width="400px"><center>
-                                                                        <img src="{{asset('profile_images/img/').'/'.$projects->img_1}}">
+                                                 <td colspan="2" width="200px"><center>
+                                                                        <img src="{{asset('profile_images/img/').'/'.$projects->img_1}}"  width="300px">
                                                                     </center></td>
                                                         
-                                                                    <td colspan="2" width="400px"><center>
-                                                                        <img src="{{asset('profile_images/img/').'/'.$projects->img_2}}">
+                                                                    <td colspan="2"><center>
+                                                                        <img src="{{asset('profile_images/img/').'/'.$projects->img_2}}"  width="300px">
                                                                         </center></td>
                                                          
                                                 </tr>
