@@ -15,8 +15,8 @@ Route::group(['middleware' => 'locale'], function () {
     Route::get('/', 'HomeController@index')->name('home');
 
     Auth::routes();
-
-
+Route::redirect('/ibiz', '/');
+Route::redirect('/ibiz/public', '/');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
