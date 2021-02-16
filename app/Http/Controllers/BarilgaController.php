@@ -494,7 +494,7 @@ class BarilgaController extends Controller
                 $project = DB::table('Project')
                 ->where('project_id', $data)->where('is_lock',0)
                 ->update(['img_1' =>$filenametostore]);
-                return back();
+           
         }
         if (Request::hasFile('img_2')) {
             $photo = Input::file('img_2');
@@ -586,7 +586,7 @@ class BarilgaController extends Controller
                 ->update(['img_4' =>$filenametostore]);
 
         }
-
+        return back();
       
     }
 
