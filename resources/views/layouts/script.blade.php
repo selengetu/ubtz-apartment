@@ -88,7 +88,7 @@
                 $('#gproject_id').val(qwe.project_id);
                 $('#gbudget').val(qwe.budget);
                 $('#gdate').val(qwe.prend_date);
-                $('#gmonth').val(qwe.month);
+                $('#gmonth').val(qwe.month).trigger('change');
                 $('#gdescription').val(qwe.description);
                 $('#gyear').val(qwe.year);
                 $('#gstate_id').val(qwe.state_id);
@@ -234,7 +234,7 @@
     $('#addproc').on('click',function(){
         $('#gprocess_id').val('');
         $('#gbudget').val('');
-        $('#gmonth').val('');
+        $('#gmonth').val('1');
         $('#gdescription').val('');
         $('#grespondent_emp_id').val('1');
         $('#gyear').val('');

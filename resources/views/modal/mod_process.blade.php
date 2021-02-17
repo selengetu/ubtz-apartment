@@ -17,7 +17,11 @@
                             <input type="hidden" class="form-control" id="gprocess_id" name="gprocess_id">
                             <input type="hidden" class="form-control" id="gproject_id" name="gproject_id">
                             <label for="inputEmail4">{{ trans('messages.sar') }}</label>
-                            <input type="text"  class="form-control month" id="gmonth" name="gmonth" required="true">
+                            <select class="form-control" id="gmonth" name="gmonth">
+                                @foreach($month as $months)
+                                    <option value= "{{$months->id}}" >{{$months->month_name}}</option>
+                                @endforeach
+                            </select>
 
                         </div>
                         <div class="form-group col-md-6">
