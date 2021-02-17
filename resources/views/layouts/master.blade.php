@@ -284,7 +284,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <p>  {{ trans('messages.tailanphoto') }}</p>
                 </a>
               </li>
-
+            
             </ul>
           </li>
           @if (Auth::user()->dep_id ==55 or Auth::user()->dep_id ==99 )

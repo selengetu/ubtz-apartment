@@ -175,32 +175,13 @@
                                         <th>{{ trans('messages.ussundun') }} {{$month -1 }} {{ trans('messages.ussundun1') }} </th>
                                         <th>   @if ( Config::get('app.locale') == 'mn'){{ trans('messages.enesar') }} {{$month}} {{ trans('messages.ussundun2') }}
                                             @elseif ( Config::get('app.locale') == 'en')
-                                                @if($month == 1)
-                                                    За январь
-                                                @elseif($month == 2)
-                                                        За февраль
-                                                    @elseif($month == 3)
-                                                            За март
-                                                        @elseif($month == 4)
-                                                          За  апрель
-                                                            @elseif($month == 5)
-                                                        За май
-                                                                @elseif($month == 6)
-                                                        За  июнь
-                                                                    @elseif($month == 7)
-                                                       За июль
-                                                                        @elseif($month == 8)
-                                                       За август
-                                                                            @elseif($month == 9)
-                                                       За сентябрь
-                                                                                @elseif($month == 10)
-                                                       За  октябрь
-                                                                                    @elseif($month == 11)
-                                                       За  ноябрь
-                                                @elseif($month == 12)
-                                                      За  декабрь
-                                                    @endif
-                                            @endif </th>
+                                            @foreach($mo as $m)
+                                            @if($month == $m->id)
+                                           {{$m->rus}}
+                                            @endif
+                                            @endforeach
+                                            @endif
+                                            </th>
                                         <th>{{ trans('messages.ussundun') }} {{$month}} {{ trans('messages.ussundun1') }} </th>
                                         <th>{{ trans('messages.uunees') }}</th>
                                         <th>{{ trans('messages.biylelt') }}</th>
@@ -314,37 +295,8 @@
                                                     @endif
                                                 <td>{{$projects->fletter}}.{{$projects->firstname}}</td>
 
-                                                <td @if($projects->state_id==2)
-                                                    bgcolor="#ff8c00";
-                                                    @elseif($projects->state_id==1)
-                                                    bgcolor="yellow";
-                                                    @elseif($projects->state_id==3)
-                                                    bgcolor="green";
-                                                    @elseif($projects->state_id==4)
-                                                    bgcolor="lightgreen";
-                                                    color="black"
-                                                    @elseif($projects->state_id==5)
-                                                    bgcolor="#8a2be2";
-                                                    @elseif($projects->state_id==6)
-                                                    bgcolor="blue";
-                                                    @elseif($projects->state_id==16)
-                                                    bgcolor="blue";
-                                                    @elseif($projects->state_id==81)
-                                                    bgcolor="#87cefa";
-                                                    @elseif($projects->state_id==61)
-                                                    bgcolor="#05EEE0";
-                                                    @elseif($projects->state_id==101)
-                                                    bgcolor="#EAE573";
-                                                    @elseif($projects->state_id==102)
-                                                    bgcolor="#CB73EA";
-                                                    @elseif($projects->state_id==103)
-                                                    bgcolor="#EA73C2";
-                                                    @else
-                                                    bgcolor="red";
-                                                    @endif
-                                                    color="white"
-                                                >    <font  @if($projects->state_id==1 or $projects->state_id==4)
-                                                            color="black"; @else color="white"; @endif >{{$projects->state_name_mn}}<br>{{$projects->state_name_ru}}@if($projects->prend_date!=NULL && $projects->state_id==1) <br> {{$projects->prend_date}} @endif<br>{{$projects->description}}</font></td>
+                                                <td bgcolor= {{$projects->state_bk_color}}>
+                                                    <font color="{{$projects->state_tx_color}}" >{{$projects->state_name_mn}}<br>{{$projects->state_name_ru}}@if($projects->prend_date!=NULL && $projects->state_id==1) <br> {{$projects->prend_date}} @endif<br>{{$projects->description}}</font></td>
                                                 <td>@if($projects->image_b1!=null)<img src="<?php echo asset("profile_images/img/$projects->image_b1")?>"  height="100" width="100" onclick="preview_image({{$projects->project_id}})" data-toggle="modal" data-target="#photomodal">@endif</td>
 
                                             </tr>
@@ -406,37 +358,8 @@
                                                     @endif
                                                 <td>{{$projects->fletter}}.{{$projects->firstname}}</td>
 
-                                                <td @if($projects->state_id==2)
-                                                    bgcolor="#ff8c00";
-                                                    @elseif($projects->state_id==1)
-                                                    bgcolor="yellow";
-                                                    @elseif($projects->state_id==3)
-                                                    bgcolor="green";
-                                                    @elseif($projects->state_id==4)
-                                                    bgcolor="lightgreen";
-                                                    color="black"
-                                                    @elseif($projects->state_id==5)
-                                                    bgcolor="#8a2be2";
-                                                    @elseif($projects->state_id==6)
-                                                    bgcolor="blue";
-                                                    @elseif($projects->state_id==16)
-                                                    bgcolor="blue";
-                                                    @elseif($projects->state_id==81)
-                                                    bgcolor="#87cefa";
-                                                    @elseif($projects->state_id==61)
-                                                    bgcolor="#05EEE0";
-                                                    @elseif($projects->state_id==101)
-                                                    bgcolor="#EAE573";
-                                                    @elseif($projects->state_id==102)
-                                                    bgcolor="#CB73EA";
-                                                    @elseif($projects->state_id==103)
-                                                    bgcolor="#EA73C2";
-                                                    @else
-                                                    bgcolor="red";
-                                                    @endif
-                                                    color="white"
-                                                >    <font  @if($projects->state_id==1 or $projects->state_id==4)
-                                                            color="black"; @else color="white"; @endif >{{$projects->state_name_mn}}<br>{{$projects->state_name_ru}}@if($projects->prend_date!=NULL && $projects->state_id==1) <br> {{$projects->prend_date}} @endif<br>{{$projects->description}}</font></td>
+                                                <td bgcolor= {{$projects->state_bk_color}}>
+                                                    <font color="{{$projects->state_tx_color}}" >{{$projects->state_name_mn}}<br>{{$projects->state_name_ru}}@if($projects->prend_date!=NULL && $projects->state_id==1) <br> {{$projects->prend_date}} @endif<br>{{$projects->description}}</font></td>
 
                                                 <td>@if($projects->image_b1!=null)<img src="<?php echo asset("profile_images/img/$projects->image_b1")?>"  height="100" width="100" onclick="preview_image({{$projects->project_id}})" data-toggle="modal" data-target="#photomodal">@endif</td>
                                             </tr>
@@ -712,27 +635,8 @@
                                                     @endif
                                                 <td>{{$projects->fletter}}.{{$projects->firstname}}</td>
 
-                                                <td @if($projects->state_id==2)
-                                                    bgcolor="#ff8c00";
-                                                    @elseif($projects->state_id==1)
-                                                    bgcolor="yellow";
-                                                    @elseif($projects->state_id==3)
-                                                    bgcolor="green";
-                                                    @elseif($projects->state_id==4)
-                                                    bgcolor="lightgreen";
-                                                    color="black"
-                                                    @elseif($projects->state_id==5)
-                                                    bgcolor="#8a2be2";
-                                                    @elseif($projects->state_id==6)
-                                                    bgcolor="blue";
-                                                    @elseif($projects->state_id==16)
-                                                    bgcolor="blue";
-                                                    @else
-                                                    bgcolor="red";
-                                                    @endif
-                                                    color="white"
-                                                >    <font  @if($projects->state_id==1 or $projects->state_id==4)
-                                                            color="black"; @else color="white"; @endif >{{$projects->state_name_mn}}<br>{{$projects->state_name_ru}}<br>{{$projects->description}}</font></td></td>
+                                                <td bgcolor= {{$projects->state_bk_color}}>
+                                                    <font color="{{$projects->state_tx_color}}" >{{$projects->state_name_mn}}<br>{{$projects->state_name_ru}}<br>{{$projects->description}}</font></td></td>
 
                                                  </tr>
                                             <?php $no++; ?>
