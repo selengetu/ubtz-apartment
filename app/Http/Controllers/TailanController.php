@@ -56,6 +56,7 @@ class TailanController extends Controller
         $method = Method::orderby('method_name')->get();
         $projecttype = Projecttype::orderby('project_type_name_mn')->get();
         $constructor = Constructor::orderby('department_abbr')->get();
+        $nz = DB::table('CONST_NZ')->orderby('nz_id')->get();
         $executor = DB::select("select * from V_EXECUTOR");
         $month = Input::get('month');
         $employee =DB::select('select  * from V_CONST_EMPLOYEE t where t.is_engineer=1 order by firstname');
@@ -67,6 +68,7 @@ class TailanController extends Controller
         $startdate= Input::get('date1');
         $enddate = Input::get('date2');
         $syear_id= Input::get('syear_id');
+        $nz_id= Input::get('nz_id');
         $both_id = Input::get('both_id');
         if(Session::has('month')) {
             $month = Session::get('month');
@@ -225,6 +227,14 @@ class TailanController extends Controller
         {
             $query.=" ";
 
+        }if ($nz_id!=NULL && $nz_id !=0) {
+            $query.=" and department_id in (".$nz_id.")";
+
+        }
+        else
+        {
+            $query.=" ";
+
         }
         if ($month!=NULL && $month !=0) {
             $date.=" and month <= ".$month."";
@@ -318,7 +328,7 @@ order by q.project_id, q.month ) par
 where  par.project_id=u.project_id ".$date1." ".$query." 
 order by report_rowno, ex_report_no, xex_report_no, project_id");
 
-        return view('tailan.main')->with(['both_id'=>$both_id,'mo'=>$mo,'month'=>$month,'syear_id'=>$syear_id,'year'=>$year,'gproject_id'=>$gproject_id,'data'=>$data,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'syear_id'=>$syear_id,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype,'sprojecttype'=>$sprojecttype]);
+        return view('tailan.main')->with(['both_id'=>$both_id,'mo'=>$mo,'nz'=>$nz,'month'=>$month,'syear_id'=>$syear_id,'year'=>$year,'gproject_id'=>$gproject_id,'data'=>$data,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'syear_id'=>$syear_id,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype,'sprojecttype'=>$sprojecttype]);
     }
     public function time()
     {

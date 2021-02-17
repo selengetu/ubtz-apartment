@@ -102,6 +102,19 @@
 
                                             </select>
 
+                                        </div>  <div class="form-group col-md-2">
+                                            <label for="inputEmail4">{{ trans('messages.zahialagch') }}</label>
+                                            <select class="form-control select2" id="nz_id" name="nz_id">
+
+                                                <option value= "0"> @if ( Config::get('app.locale') == 'mn') Бүгд @else Все @endif</option>
+                                                @foreach($nz as $s)
+                                                    
+                                                    <option value= "{{$s->nz_dep}}">  {{$s->nz_name}}
+                                                      
+                                                @endforeach
+
+                                            </select>
+
                                         </div>
                                         <div class="form-group col-md-2">
                                             <label for="inputPassword4">{{ trans('messages.guitsetgegch') }}</label>
