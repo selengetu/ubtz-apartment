@@ -97,7 +97,7 @@
                                                  <td colspan="2" ><center>
                                                  
                                                                         <img src="{{asset('profile_images/img/').'/'.$projects->img_1}}"  width="300px">
-                                                                        @endif
+                                                                
                                                                     </center></td>
                                                         
                                                                     <td colspan="2"><center>
