@@ -95,15 +95,15 @@
 
                                                 <tr>
                                                  <td colspan="2" ><center>
-                                                 
+                                                    @if($projects->img_1)
                                                                         <img src="{{asset('profile_images/img/').'/'.$projects->img_1}}"  width="300px">
-                                                                
+                                                                        @endif
                                                                     </center></td>
                                                         
                                                                     <td colspan="2"><center>
-                                                                   
+                                                                        @if($projects->img_2)
                                                                         <img src="{{asset('profile_images/img/').'/'.$projects->img_2}}"  width="300px">
-                                                              
+                                                                        @endif
                                                                         </center></td>
                                                          
                                                 </tr>
