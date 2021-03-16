@@ -171,13 +171,9 @@
                                 <table class="table table-bordered" id="example2" border="1" style="font-size:12px; width:100%; border-collapse: collapse;">
                                     <thead>
                                     <?php $sum_plan = 0 ?>
-                                    <?php $sum_estimation = 0 ?>
+                                 
                                     <?php $sum_bud = 0 ?>
-                                    <?php $sum_economic = 0 ?>
-                                    <?php $sum_percent = 0 ?>
-                                    <?php $sum_bud = 0 ?>
-                                    <?php $sum_diff = 0 ?>
-                                    <?php $sum_runningtotal = 0 ?>
+                                   
                                     <tr role="row">
                                         <th>#</th>
                                         <th>{{ trans('messages.zahialagch') }}</th>
@@ -187,37 +183,159 @@
                                         <th>{{ trans('messages.guitsetgel') }}</th>
                                         <th>{{ trans('messages.biylelt') }}</th>
                                         <th>{{ trans('messages.hariutsagch') }}</th>
-                                      
+                                        <th>{{ trans('messages.zurag') }}</th>
                                      
                                     </tr>
                                     </thead>
 
+                                 
                                     <tbody>
-                                        <?php $no = 1; ?>
-                                        @foreach($project as $projects)
-                                       
-                                        <tr>
-                                          
-                                            <td>{{$no}}</td>
+                                    <?php $s=1;
+                                    $p=0;
+                                    $p1=0;
+                                    $iall=0;
+                                    $i1=0;
+                                    $i2=0;
+                                    $i3=0;
+                                    $i4=0;
+                                    $i5=0;
+                                    $i6=0;
+                                    $i7=0;
+                                    ?>
+                                    <?php $all=count($project);?>
+                                    <?php $no = 1; ?>
+                                    <?php $no1 = 1; ?>
+                                    @foreach($project as $i=>$projects)
+                                        @if($p!=$projects->department_id and $p>0 )
+
+                                            <tr>
+                                                <td colspan="3"><center><b>{{ trans('messages.dun') }}</b> </center></td>
+                                                <td><b>{{number_format($no-1)}}</b></td>
+                                                <td><b>{{number_format($i1)}}</b></td>
+                                                <td><b>{{number_format($i2)}}</b> </td>
+                                                <td><b>@if($i7> 0 && $no>0)
+                                                        {{number_format($i7/($no-1),2)}}%
+                                                    @endif</b></td>
+                                                <td colspan="2"></td>
+                                            </tr>
+                                        @endif
+                                        <?php if($p!=$projects->department_id) { $p=$projects->department_id;
+                                            $i1=0;
+                                            $i2=0;
+                                            $i3=0;
+                                            
+
+                                        } else  { $p1=$projects->department_id; }?>
+
+                                        @if($p!=$p1 and $p>0)
+                                            <?php $no = 1; ?>
+                                            <Tr><td colspan="9" style="font-weight: bold;font-size: 12px;"> {{$projects->department_name}}  @if($projects->department_type ==1 ){{ trans('messages.alba') }} @endif</td></Tr>
+                                            <?php $s++; ?>
+                                            <tr >
+                                                <td>{{$no}}</td>
                                             <td>{{$projects->childabbr}}</td>
                                             <td>{{$projects->executor_abbr}}</td>
                                             <td>{{$projects->project_name}}</td>
-                                            <td>{{$projects->vplan}}</td>
-                                            <td>{{$projects->qbudget}}</td>
+                                            <td><?php
+                                                echo number_format($projects->vplan)."<br>";
+                                                ?>
+                                                <?php $sum_plan += ($projects->vplan) ?></td>
+                                            <td><?php
+                                                echo number_format($projects->qbudget)."<br>";
+                                                ?></td>
+                                            <?php $sum_bud += ($projects->qbudget) ?></td>
                                             <td>
                                                 @if($projects->vplan != 0)     
-                                                        {{$projects->qbudget/$projects->vplan}}
+                                                <?php
+                                                    echo number_format(($projects->qbudget/$projects->vplan)*100, 1)."%<br>";
+                                                ?>
                                                     @else
                                                     0
                                                 @endif
                                                 </td>
                                             <td>{{$projects->firstname}}</td>
-                                         
-                                          
+                                        
+                                            <td>@if($projects->img_1!=null)<img src="<?php echo asset("profile_images/img/$projects->img_1")?>"  height="100" width="100" onclick="preview_image({{$projects->project_id}})" data-toggle="modal" data-target="#photomodal">@endif</td>
+                                            </tr>
+                                            <?php $no++; ?>
+                                            <?php $no1++; ?>
+                                        @else
+
+                                            <tr >
+                                                <td>{{$no}}</td>
+                                                <td>{{$projects->childabbr}}</td>
+                                                <td>{{$projects->executor_abbr}}</td>
+                                                <td>{{$projects->project_name}}</td>
+                                                <td><?php
+                                                    echo number_format($projects->vplan)."<br>";
+                                                    ?>
+                                                    <?php $sum_plan += ($projects->vplan) ?></td>
+                                                <td><?php
+                                                    echo number_format($projects->qbudget)."<br>";
+                                                    ?>
+                                                <?php $sum_bud += ($projects->qbudget) ?></td>
+                                                <td>
+                                                    @if($projects->vplan != 0)     
+                                                    <?php
+                                                     echo number_format(($projects->qbudget/$projects->vplan)*100, 1)."%<br>";
+                                                    ?>
+                                                        @else
+                                                        0
+                                                    @endif
+                                                    </td>
+                                                <td>{{$projects->firstname}}</td>
+                                            
+                                                <td>@if($projects->img_1!=null)<img src="<?php echo asset("profile_images/img/$projects->img_1")?>"  height="100" width="100" onclick="preview_image({{$projects->project_id}})" data-toggle="modal" data-target="#photomodal">@endif</td>
+                                              </tr>
+                                            <?php $no++; ?>
+                                            <?php $no1++; ?>
+                                        @endif
+                                        <?php
+
+
+                                          if($projects->state_id!=61){
+                                              $i1=$i1+$projects->vplan;
+                                              $i2=$i2 + $projects->qbudget;
+                                            
+                                          }
+
+                                        ?>
+                                        <?php
+                                        if(++$iall === $all) { ?>
+
+                                        <tr>
+                                            <td colspan="3"><center><b>{{ trans('messages.dun') }}</b> </center></td>
+                                            <td><b>{{number_format($no-1)}}</b></td>
+                                            <td><b>{{number_format($i1)}}</b></td>
+                                            <td><b>{{number_format($i2)}}</b> </td>
+                                            <td><b>@if($i7> 0 && $no>0)
+                                                    {{number_format($i7/($no-1),2)}}%
+                                                @endif</b></td>
+                                            <td colspan="2"></td>
                                         </tr>
-                                        <?php $no++; ?>
-                                        @endforeach
-                               
+
+                                                <?php } ?>
+
+                                    @endforeach
+                                    <tr>
+
+
+                                        <td><b>{{ trans('messages.niit') }}</b></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td><b><?php
+                                                echo number_format($sum_plan)."<br>";
+                                                ?></b></td>
+                                        <td><b><?php
+                                                echo number_format($sum_bud)."<br>";
+                                                ?></b></td>
+                                      
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+
+                                    </tr>
                                     </tbody>
 
 
