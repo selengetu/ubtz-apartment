@@ -369,6 +369,9 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
         else {
             Session::put('season', $season);
         }
+        if ($season ==NULL) {
+            $season.="1,2,3";
+        }
         $s =DB::select('select t.season_plan, season_process from CONST_REPORT_SEASON t where t.season_id =  '. $season.'');
 
         if ($s[0]->season_plan!=NULL) {
@@ -377,7 +380,7 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
         }
         else
         {
-            $date.="";
+            $date.="plan1 as vplan";
         }
     
         if(Session::has('syear_id')) {
@@ -386,6 +389,7 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
         else {
             Session::put('syear_id', $syear_id);
         }
+        
         if (Auth::user()->dep_id == 55 or Auth::user()->dep_id == 99) {
             $query.="";
 
