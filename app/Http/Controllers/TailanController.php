@@ -341,7 +341,7 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
         }
 
         $query = "";
-        $season = DB::select('select * from CONST_REPORT_SEASON');
+        $seasons = DB::select('select * from CONST_REPORT_SEASON');
         $year = Year::orderby('year_name')->get();
         $state = State::orderby('state_name_mn')->get();
         $method = Method::orderby('method_name')->get();
@@ -367,7 +367,7 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
         else {
             Session::put('season', $season);
         }
-        dd($season);
+
         if(Session::has('syear_id')) {
             $syear_id = Session::get('syear_id');
         }
@@ -605,7 +605,7 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
             group by project_id) b
             where b.project_id=v.project_id ".$query." ");
 
-        return view('tailan.season')->with(['both_id'=>$both_id,'season'=>$season,'nz'=>$nz,'month'=>$month,'syear_id'=>$syear_id,'year'=>$year,'gproject_id'=>$gproject_id,'data'=>$data,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'syear_id'=>$syear_id,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype,'sprojecttype'=>$sprojecttype]);
+        return view('tailan.season')->with(['both_id'=>$both_id,'seasons'=>$seasons,'season'=>$season,'nz'=>$nz,'syear_id'=>$syear_id,'year'=>$year,'gproject_id'=>$gproject_id,'data'=>$data,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'syear_id'=>$syear_id,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype,'sprojecttype'=>$sprojecttype]);
     }
     public function time()
     {
@@ -923,9 +923,64 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
 
         }
 
-        $t =DB::select("
-        
-        ");
+        $t =DB::select("select 
+        u.plan_year,
+        par.month,
+        u.department_id,
+        u.department_name,
+        u.department_type,
+        u.project_type,
+        u.report_rowno,
+        to_char(  sum(u.budget),'999,999,999,999') as budgetcomma,
+        sum(u.budget) as budget,
+        to_char(  sum(par.budget),'999,999,999,999') as budcomma,
+        sum(par.budget) as bud,
+        to_char(  sum(par.runningtotal),'999,999,999,999') as runningtotalcomma,
+        sum(par.runningtotal) as runningtotal,
+        to_char(  sum(par.diff),'999,999,999,999') as diffcomma,
+        sum(par.diff) as diff,
+        to_char(  sum(u.estimation),'999,999,999,999') as estimationcomma,
+        sum(u.estimation) as estimation,
+        to_char(  sum(u.plan),'999,999,999,999') as plancomma,
+        sum(u.plan) as plan,
+        to_char(  sum(u.economic),'999,999,999,999') as economiccomma,
+        sum(u.economic) as economic,
+        (sum(par.runningtotal)/sum(u.plan))*100 as percent, 
+        count(u.project_id) as ajliintoo,
+    sum( u.plan1) as plan1,
+        sum( u.plan2) as plan2,
+        sum( u.plan3) as plan3,
+        sum( u.plan4) as plan4,
+        round((sum(u.percent)/count(u.percent)),2) as rpercent
+        from
+        v_project u,
+
+            (
+            select q.project_id , q.month, q.budget,  SUM(q.budget) OVER (PARTITION BY q.project_id ORDER BY Month) AS RunningTotal,( SUM(q.budget) OVER (PARTITION BY q.project_id ORDER BY Month) )- q.budget as diff
+            from 
+            (select project_id , month, sum (budget) budget
+            from 
+            (
+            select t.project_id , t.month, t.budget
+            from PROJECT_PROCESS t 
+            union all    
+            select t.project_id , m.id month , 0 budget
+            from V_PROJECT t , CONST_MONTH m 
+            order by project_id, month
+            )
+                group by project_id, month
+                order by project_id, month) q
+                order by q.project_id, q.month ) par
+                where par.project_id=u.project_id ".$query."
+                group by u.plan_year,
+                        par.month,
+                        u.department_id,
+                        u.department_name,
+                        u.department_type,
+                        u.project_type,
+                        u.report_rowno
+                        
+                order by report_rowno");
                 $mo = Month::orderby('id')->get();
                         $project =DB::select("select  * from V_PROJECT t  order by project_id");
        

@@ -32,7 +32,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body text-center">
-                            <form method="post"  @if($sprojecttype ==1 ) action="main"  @elseif($sprojecttype ==2 ) action="mainib" @endif>
+                            <form method="post"  @if($sprojecttype ==1 ) action="seasoniz"  @elseif($sprojecttype ==2 ) action="seasonib" @endif>
                                 @csrf
                                 <div class="col-md-12" data-scrollable="true" data-height="400" >
                                     <div class="row" >
@@ -48,7 +48,7 @@
 
                                             <label for="inputEmail4">{{ trans('messages.sar') }}</label>
                                             <select class="form-control select2" id="month" name="month"  onchange="javascript:location.href = 'filter_season/'+this.value;" >
-                                                @foreach($season as $months)
+                                                @foreach($seasons as $months)
                                                     <option value= "{{$months->season_id}}" @if($months->season_id==$season) selected @endif>{{$months->season_name}}</option>
                                                 @endforeach
                                             </select>
@@ -184,7 +184,7 @@
                                         <th>{{ trans('messages.guitsetgegch') }}</th>
                                         <th>{{ trans('messages.ajliinner') }}</th>
                                         <th>{{ trans('messages.tuluwluguu') }}</th>
-                                        <th>{{ trans('messages.enesar') }}</th>
+                                        <th>{{ trans('messages.guitsetgel') }}</th>
                                         <th>{{ trans('messages.biylelt') }}</th>
                                         <th>{{ trans('messages.hariutsagch') }}</th>
                                       
