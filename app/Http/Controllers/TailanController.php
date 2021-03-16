@@ -276,7 +276,7 @@ class TailanController extends Controller
        u.department_name,
        u.department_type,
        u.season_name,
-       u.img_1 as image_b1,
+       u.img_1,
        u.plan1,
        u.plan2,
        u.plan3,
