@@ -47,7 +47,7 @@
                                         <div class="form-group col-md-2">
 
                                             <label for="inputEmail4">{{ trans('messages.sar') }}</label>
-                                            <select class="form-control select2" id="month" name="month"  onchange="javascript:location.href = 'filter_season/'+this.value;" >
+                                            <select class="form-control select2" id="season" name="season"  onchange="javascript:location.href = 'filter_season/'+this.value;" >
                                                 @foreach($seasons as $months)
                                                     <option value= "{{$months->season_id}}" @if($months->season_id==$season) selected @endif>{{$months->season_name}}</option>
                                                 @endforeach
@@ -204,7 +204,13 @@
                                             <td>{{$projects->project_name}}</td>
                                             <td>{{$projects->vplan}}</td>
                                             <td>{{$projects->qbudget}}</td>
-                                            <td>{{$projects->percent}}</td>
+                                            <td>
+                                                @if($projects->vplan != 0)     
+                                                        {{$projects->qbudget/$projects->vplan}}
+                                                    @else
+                                                    0
+                                                @endif
+                                                </td>
                                             <td>{{$projects->firstname}}</td>
                                          
                                           

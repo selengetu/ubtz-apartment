@@ -834,7 +834,7 @@
             $('#image_preview').empty();
             $.get('getimage/'+$id,function(data){
                 $.each(data,function(i,qwe){
-                    $('#image_preview').append('<img width="100%" src="profile_images/img/' + qwe.img_bname + '" />');
+                    $('#image_preview').append('<img width="100%" src="profile_images/img/' + qwe.img_1 + '" />');
                 });
             });
         }

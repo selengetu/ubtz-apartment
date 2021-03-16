@@ -341,6 +341,7 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
         }
 
         $query = "";
+        $date = "";
         $seasons = DB::select('select * from CONST_REPORT_SEASON');
         $year = Year::orderby('year_name')->get();
         $state = State::orderby('state_name_mn')->get();
@@ -350,6 +351,7 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
         $nz = DB::table('CONST_NZ')->orderby('nz_id')->get();
         $executor = DB::select("select * from V_EXECUTOR");
         $season = Input::get('season');
+       
         $employee =DB::select('select  * from V_CONST_EMPLOYEE t where t.is_engineer=1 order by firstname');
         $schildabbr= Input::get('schildabbr_id');
         $sstate_id= Input::get('sstate_id');
@@ -367,7 +369,17 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
         else {
             Session::put('season', $season);
         }
+        $s =DB::select('select t.season_plan, season_process from CONST_REPORT_SEASON t where t.season_id =  '. $season.'');
 
+        if ($s[0]->season_plan!=NULL) {
+            $date.=" (".$s[0]->season_plan.") as vplan";
+
+        }
+        else
+        {
+            $date.="";
+        }
+    
         if(Session::has('syear_id')) {
             $syear_id = Session::get('syear_id');
         }
@@ -527,65 +539,10 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
                     }
 
                     $data= Request::input('gproject_id');
-                    $project =DB::select("select v.project_id,
-                    v.plan_year,
-                    v.project_name,
-                    (v.plan1 + v.plan2) as vplan, 
-                    b.qbudget,
-                    v.budgetcomma,
-                    v.budget,
-                    v.estimationcomma,
-                    v.estimation,
-                    v.contractcomma,
-                    v.contract,
-                    v.plancomma,
-                    v.plan,
-                    v.economic,
-                    v.economiccomma,
-                    v.department_id,
-                    v.report_rowno,
-                    v.department_name,
-                    v.department_type,
-                    v.childdepartment,
-                    v.childabbr,
-                    v.executor_type,
-                    v.childpar,
-                    v.ex_report_no,
-                    v.department_child,
-                    v.project_type,
-                    v.project_type_name_mn,
-                    v.project_type_name_ru,
-                    v.added_user_id,
-                    v.description,
-                    v.name,
-                    v.respondent_emp_id,
-                    v.firstname,
-                    v.fletter,
-                    v.state_id,
-                    v.state_name_mn,
-                    v.state_name_ru,
-                    v.state_bk_color,
-                    v.state_tx_color,
-                    v.method_code,
-                    v.method_name,
-                    v.percent,
-                    v.executor_id,
-                    v.executor_abbr,
-                    v.xex_report_no,
-                    v.project_name_ru,
-                    v.is_approved,
-                    v.planseason,
-                    v.season_name,
-                    v.prend_date,
-                    v.prstart_date,
-                    v.start_date,
-                    v.end_date,
-                    v.diff,
-                    v.plan1,
-                    v.plan2,
-                    v.plan3,
-                    v.plan4,
-                    v.contract_num from V_PROJECT v, 
+                    $project =DB::select("select v.*, 
+                    $date,
+                    b.qbudget
+                    from V_PROJECT v, 
             
             (select project_id, sum(q.budget) as qbudget
             from
@@ -601,7 +558,7 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
             )
             group by project_id, month
             order by project_id, month) q
-            where q.month in (1,2,3,5,4,6)
+            where q.month in (".$s[0]->season_process." )
             group by project_id) b
             where b.project_id=v.project_id ".$query." ");
 
