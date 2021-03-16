@@ -370,7 +370,7 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
             Session::put('season', $season);
         }
         if ($season ==NULL) {
-            $season.="1,2,3";
+            $season.="1";
         }
         $s =DB::select('select t.season_plan, season_process from CONST_REPORT_SEASON t where t.season_id =  '. $season.'');
 
@@ -393,7 +393,6 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
         if (Auth::user()->dep_id == 55 or Auth::user()->dep_id == 99) {
             $query.="";
 
-        }
         else
         {
             if(Auth::user()->user_grant == 9) {
