@@ -622,6 +622,10 @@ class BarilgaController extends Controller
         Session::put('month',$month);
         return back();
     }
+    public function filter_season($season) {
+        Session::put('season',$season);
+        return back();
+    }
     public function filter_both($both_id) {
         Session::put('both_id',$both_id);
         return back();

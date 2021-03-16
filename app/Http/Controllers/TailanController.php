@@ -330,6 +330,283 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
 
         return view('tailan.main')->with(['both_id'=>$both_id,'mo'=>$mo,'nz'=>$nz,'month'=>$month,'syear_id'=>$syear_id,'year'=>$year,'gproject_id'=>$gproject_id,'data'=>$data,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'syear_id'=>$syear_id,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype,'sprojecttype'=>$sprojecttype]);
     }
+    public function season()
+    {
+        if(Route::getFacadeRoot()->current()->uri()== 'seasoniz'){
+            $sprojecttype=1;
+        }
+
+        if(Route::getFacadeRoot()->current()->uri()== 'seasonib'){
+            $sprojecttype=2;
+        }
+
+        $query = "";
+        $season = DB::select('select * from CONST_REPORT_SEASON');
+        $year = Year::orderby('year_name')->get();
+        $state = State::orderby('state_name_mn')->get();
+        $method = Method::orderby('method_name')->get();
+        $projecttype = Projecttype::orderby('project_type_name_mn')->get();
+        $constructor = Constructor::orderby('department_abbr')->get();
+        $nz = DB::table('CONST_NZ')->orderby('nz_id')->get();
+        $executor = DB::select("select * from V_EXECUTOR");
+        $season = Input::get('season');
+        $employee =DB::select('select  * from V_CONST_EMPLOYEE t where t.is_engineer=1 order by firstname');
+        $schildabbr= Input::get('schildabbr_id');
+        $sstate_id= Input::get('sstate_id');
+        $sexecutor = Input::get('sexecutor_id');
+        $sconstructor = Input::get('sconstructor_id');
+        $srespondent_emp_id = Input::get('srespondent_emp_id');
+        $startdate= Input::get('date1');
+        $enddate = Input::get('date2');
+        $syear_id= Input::get('syear_id');
+        $nz_id= Input::get('nz_id');
+        $both_id = Input::get('both_id');
+        if(Session::has('season')) {
+            $season = Session::get('season');
+        }
+        else {
+            Session::put('season', $season);
+        }
+        dd($season);
+        if(Session::has('syear_id')) {
+            $syear_id = Session::get('syear_id');
+        }
+        else {
+            Session::put('syear_id', $syear_id);
+        }
+        if (Auth::user()->dep_id == 55 or Auth::user()->dep_id == 99) {
+            $query.="";
+
+        }
+        else
+        {
+            if(Auth::user()->user_grant == 9) {
+                $query.=" and (department_child = '".Auth::user()->dep_id."' or executor_id ='".Auth::user()->dep_id."') ";
+    
+            }  
+            else{
+                $query.=" and (department_id = '".Auth::user()->dep_id."' or executor_id in (select executor_id from CONST_EXECUTOR t
+                where t.executor_par='".Auth::user()->dep_id."'))";
+            }
+
+        }
+        if(Session::has('both_id')) {
+            $both_id = Session::get('both_id');
+
+        }
+        else {
+            Session::put('both_id', $both_id);
+        }
+        if ($startdate !=0 && $startdate && $enddate !=0 && $enddate !=0-NULL) {
+            $query.=" where start_date between '".$startdate."' and '".$enddate." 23:59:59'";
+
+        }
+        else
+        {
+            $query.=" ";
+
+        }
+        if ($syear_id!=NULL && $syear_id !=0) {
+            $query.=" and plan_year = '".$syear_id."'";
+
+        }
+        else
+        {
+            $syear_id=2021;
+            $query.="and plan_year = 2021 ";
+
+        }
+        if ($sprojecttype!=NULL && $sprojecttype !=0) {
+            $query.=" and project_type = '".$sprojecttype."'";
+
+        }
+        else
+        {
+            $query.=" ";
+
+        }
+        if ($sexecutor!=NULL && $sexecutor !=0) {
+            $type =DB::select('select t.executor_type from V_EXECUTOR t where t.executor_id =  '. $sexecutor.'');
+            if ($type[0]->executor_type ==1){
+                $dep =DB::select('select t.department_id from V_EXECUTOR t where t.executor_id =  '. $sexecutor.'');
+
+                $query.=" and executor_id in (select executor_id from CONST_EXECUTOR t where t.executor_par='".$dep[0]->department_id."')";
+            }
+            else{
+                $query.=" and executor_id = '".$sexecutor."'";
+            }
+        }
+        else
+        {
+            $query.=" ";
+
+        }
+        if ($sconstructor!=NULL && $sconstructor !=0) {
+            $query.=" and department_id = '".$sconstructor."'";
+
+        }
+        else
+        {
+            $query.=" ";
+
+        }
+        if ($both_id!=NULL && $both_id !=0) {
+            $type =DB::select('select t.executor_type from V_EXECUTOR t where t.executor_id =  '. $both_id.'');
+            $dep =DB::select('select t.department_id from V_EXECUTOR t where t.executor_id =  '. $both_id.'');
+
+            if ($type[0]->executor_type ==1){
+                $query.=" and (department_id = '".$dep[0]->department_id."' or executor_id in (select executor_id from CONST_EXECUTOR t
+                where t.executor_par='".$dep[0]->department_id."'))";
+            }  
+            else{
+               
+                $query.=" and (department_child = '".$both_id."' or executor_id ='".$both_id."') ";
+               
+            }
+           
+        }
+        else
+        {
+            $query.=" ";
+
+        }
+        if ($schildabbr!=NULL && $schildabbr !=0) {
+            $type =DB::select('select t.executor_type from V_EXECUTOR t where t.executor_id =  '. $schildabbr.'');
+            if ($type[0]->executor_type ==1){
+                $dep =DB::select('select t.department_id from V_EXECUTOR t where t.executor_id =  '. $schildabbr.'');
+
+                $query.=" and department_id = '".$dep[0]->department_id."'";
+            }
+            else{
+                $query.=" and department_child = '".$schildabbr."'";
+            }
+        }
+        else
+        {
+            $schildabbr=0;
+            $query.=" ";
+
+        }
+        if ($srespondent_emp_id!=NULL && $srespondent_emp_id !=0) {
+            $query.=" and respondent_emp_id = '".$srespondent_emp_id."'";
+
+        }
+        else
+        {
+            $query.=" ";
+
+        }
+        if ($sstate_id!=NULL && $sstate_id !=0) {
+            if($sstate_id == 99){
+                $query.=" and state_id in (8,42,41,9,11,12,10,14,7)";
+            }
+            else{
+                $query.=" and state_id = '".$sstate_id."'";
+            }
+
+
+        }
+        else
+        {
+            $query.=" ";
+
+        }
+        if ($srespondent_emp_id!=NULL && $srespondent_emp_id !=0) {
+            $query.=" and respondent_emp_id = '".$srespondent_emp_id."'";
+
+        }
+        else
+        {
+            $query.=" ";
+
+        }
+       
+        $gproject_id = 0;
+        if( Session::has('gproject_id') ) {
+            $gproject_id = Session::get('gproject_id');
+                    }
+
+                    $data= Request::input('gproject_id');
+                    $project =DB::select("select v.project_id,
+                    v.plan_year,
+                    v.project_name,
+                    (v.plan1 + v.plan2) as vplan, 
+                    b.qbudget,
+                    v.budgetcomma,
+                    v.budget,
+                    v.estimationcomma,
+                    v.estimation,
+                    v.contractcomma,
+                    v.contract,
+                    v.plancomma,
+                    v.plan,
+                    v.economic,
+                    v.economiccomma,
+                    v.department_id,
+                    v.report_rowno,
+                    v.department_name,
+                    v.department_type,
+                    v.childdepartment,
+                    v.childabbr,
+                    v.executor_type,
+                    v.childpar,
+                    v.ex_report_no,
+                    v.department_child,
+                    v.project_type,
+                    v.project_type_name_mn,
+                    v.project_type_name_ru,
+                    v.added_user_id,
+                    v.description,
+                    v.name,
+                    v.respondent_emp_id,
+                    v.firstname,
+                    v.fletter,
+                    v.state_id,
+                    v.state_name_mn,
+                    v.state_name_ru,
+                    v.state_bk_color,
+                    v.state_tx_color,
+                    v.method_code,
+                    v.method_name,
+                    v.percent,
+                    v.executor_id,
+                    v.executor_abbr,
+                    v.xex_report_no,
+                    v.project_name_ru,
+                    v.is_approved,
+                    v.planseason,
+                    v.season_name,
+                    v.prend_date,
+                    v.prstart_date,
+                    v.start_date,
+                    v.end_date,
+                    v.diff,
+                    v.plan1,
+                    v.plan2,
+                    v.plan3,
+                    v.plan4,
+                    v.contract_num from V_PROJECT v, 
+            
+            (select project_id, sum(q.budget) as qbudget
+            from
+            (select project_id , month, sum (budget) budget
+            from 
+            (
+            select t.project_id , t.month, t.budget
+            from PROJECT_PROCESS t 
+            union all    
+            select t.project_id , m.id month , 0 budget
+            from V_PROJECT t , CONST_MONTH m 
+            order by project_id, month
+            )
+            group by project_id, month
+            order by project_id, month) q
+            where q.month in (1,2,3,5,4,6)
+            group by project_id) b
+            where b.project_id=v.project_id ".$query." ");
+
+        return view('tailan.season')->with(['both_id'=>$both_id,'season'=>$season,'nz'=>$nz,'month'=>$month,'syear_id'=>$syear_id,'year'=>$year,'gproject_id'=>$gproject_id,'data'=>$data,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'syear_id'=>$syear_id,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype,'sprojecttype'=>$sprojecttype]);
+    }
     public function time()
     {
         $query = "";
@@ -646,64 +923,9 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
 
         }
 
-        $t =DB::select("select 
-                        u.plan_year,
-                        par.month,
-                        u.department_id,
-                        u.department_name,
-                        u.department_type,
-                        u.project_type,
-                        u.report_rowno,
-                        to_char(  sum(u.budget),'999,999,999,999') as budgetcomma,
-                        sum(u.budget) as budget,
-                        to_char(  sum(par.budget),'999,999,999,999') as budcomma,
-                        sum(par.budget) as bud,
-                        to_char(  sum(par.runningtotal),'999,999,999,999') as runningtotalcomma,
-                        sum(par.runningtotal) as runningtotal,
-                        to_char(  sum(par.diff),'999,999,999,999') as diffcomma,
-                        sum(par.diff) as diff,
-                        to_char(  sum(u.estimation),'999,999,999,999') as estimationcomma,
-                        sum(u.estimation) as estimation,
-                        to_char(  sum(u.plan),'999,999,999,999') as plancomma,
-                        sum(u.plan) as plan,
-                        to_char(  sum(u.economic),'999,999,999,999') as economiccomma,
-                        sum(u.economic) as economic,
-                        (sum(par.runningtotal)/sum(u.plan))*100 as percent, 
-                        count(u.project_id) as ajliintoo,
-                    sum( u.plan1) as plan1,
-                        sum( u.plan2) as plan2,
-                        sum( u.plan3) as plan3,
-                        sum( u.plan4) as plan4,
-                        round((sum(u.percent)/count(u.percent)),2) as rpercent
-                        from
-                        v_project u,
- 
-                            (
-                            select q.project_id , q.month, q.budget,  SUM(q.budget) OVER (PARTITION BY q.project_id ORDER BY Month) AS RunningTotal,( SUM(q.budget) OVER (PARTITION BY q.project_id ORDER BY Month) )- q.budget as diff
-                            from 
-                            (select project_id , month, sum (budget) budget
-                            from 
-                            (
-                            select t.project_id , t.month, t.budget
-                            from PROJECT_PROCESS t 
-                            union all    
-                            select t.project_id , m.id month , 0 budget
-                            from V_PROJECT t , CONST_MONTH m 
-                            order by project_id, month
-                            )
-                                group by project_id, month
-                                order by project_id, month) q
-                                order by q.project_id, q.month ) par
-                                where par.project_id=u.project_id ".$query."
-                                group by u.plan_year,
-                                        par.month,
-                                        u.department_id,
-                                        u.department_name,
-                                        u.department_type,
-                                        u.project_type,
-                                        u.report_rowno
-                                        
-                                order by report_rowno");
+        $t =DB::select("
+        
+        ");
                 $mo = Month::orderby('id')->get();
                         $project =DB::select("select  * from V_PROJECT t  order by project_id");
        
