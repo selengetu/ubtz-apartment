@@ -397,7 +397,7 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
         
         if (Auth::user()->dep_id == 55 or Auth::user()->dep_id == 99) {
             $query.="";
-
+        }
         else
         {
             if(Auth::user()->user_grant == 9) {
