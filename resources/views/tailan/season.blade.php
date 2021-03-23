@@ -183,6 +183,7 @@
                                         <th>{{ trans('messages.guitsetgel') }}</th>
                                         <th>{{ trans('messages.biylelt') }}</th>
                                         <th>{{ trans('messages.hariutsagch') }}</th>
+                                        <th>{{ trans('messages.tailbar') }}</th>
                                         <th>{{ trans('messages.zurag') }}</th>
                                      
                                     </tr>
@@ -213,10 +214,10 @@
                                                 <td><b>{{number_format($no-1)}}</b></td>
                                                 <td><b>{{number_format($i1)}}</b></td>
                                                 <td><b>{{number_format($i2)}}</b> </td>
-                                                <td><b>@if($i7> 0 && $no>0)
-                                                        {{number_format($i7/($no-1),2)}}%
-                                                    @endif</b></td>
-                                                <td colspan="2"></td>
+                                                <td><b>
+                                                    {{number_format(($i2/$i1)*100,2)}}%
+                                               </b></td>
+                                                <td colspan="3"></td>
                                             </tr>
                                         @endif
                                         <?php if($p!=$projects->department_id) { $p=$projects->department_id;
@@ -229,7 +230,7 @@
 
                                         @if($p!=$p1 and $p>0)
                                             <?php $no = 1; ?>
-                                            <Tr><td colspan="9" style="font-weight: bold;font-size: 12px;"> {{$projects->department_name}}  @if($projects->department_type ==1 ){{ trans('messages.alba') }} @endif</td></Tr>
+                                            <Tr><td colspan="10" style="font-weight: bold;font-size: 12px;"> {{$projects->department_name}}  @if($projects->department_type ==1 ){{ trans('messages.alba') }} @endif</td></Tr>
                                             <?php $s++; ?>
                                             <tr >
                                                 <td>{{$no}}</td>
@@ -254,7 +255,8 @@
                                                 @endif
                                                 </td>
                                             <td>{{$projects->fletter}}.{{$projects->firstname}}</td>
-                                        
+                                            <td bgcolor= {{$projects->state_bk_color}}>
+                                                <font color="{{$projects->state_tx_color}}" >{{$projects->state_name_mn}}<br>{{$projects->state_name_ru}}@if($projects->prend_date!=NULL && $projects->state_id==1) <br> {{$projects->prend_date}} @endif<br>{{$projects->description}}</font></td>
                                             <td>@if($projects->img_1!=null)<img src="<?php echo asset("profile_images/img/$projects->img_1")?>"  height="100" width="100" onclick="preview_image({{$projects->project_id}})" data-toggle="modal" data-target="#photomodal">@endif</td>
                                             </tr>
                                             <?php $no++; ?>
@@ -284,7 +286,8 @@
                                                     @endif
                                                     </td>
                                                 <td>{{$projects->fletter}}.{{$projects->firstname}}</td>
-                                            
+                                                <td bgcolor= {{$projects->state_bk_color}}>
+                                                    <font color="{{$projects->state_tx_color}}" >{{$projects->state_name_mn}}<br>{{$projects->state_name_ru}}@if($projects->prend_date!=NULL && $projects->state_id==1) <br> {{$projects->prend_date}} @endif<br>{{$projects->description}}</font></td>
                                                 <td>@if($projects->img_1!=null)<img src="<?php echo asset("profile_images/img/$projects->img_1")?>"  height="100" width="100" onclick="preview_image({{$projects->project_id}})" data-toggle="modal" data-target="#photomodal">@endif</td>
                                               </tr>
                                             <?php $no++; ?>
@@ -308,10 +311,10 @@
                                             <td><b>{{number_format($no-1)}}</b></td>
                                             <td><b>{{number_format($i1)}}</b></td>
                                             <td><b>{{number_format($i2)}}</b> </td>
-                                            <td><b>@if($i7> 0 && $no>0)
-                                                    {{number_format($i7/($no-1),2)}}%
-                                                @endif</b></td>
-                                            <td colspan="2"></td>
+                                            <td><b>
+                                                {{number_format(($i2/$i1)*100,2)}}%
+                                           </b></td>
+                                            <td colspan="3"></td>
                                         </tr>
 
                                                 <?php } ?>
@@ -331,10 +334,12 @@
                                                 echo number_format($sum_bud)."<br>";
                                                 ?></b></td>
                                       
+                                      <td><b><?php
+                                        echo number_format(($sum_bud/$sum_plan)*100,2)."%<br>";
+                                        ?></b></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
-
                                     </tr>
                                     </tbody>
 
