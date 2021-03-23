@@ -380,12 +380,12 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
         $s =DB::select('select t.season_plan, season_process from CONST_REPORT_SEASON t where t.season_id =  '. $season.'');
 
         if ($s[0]->season_plan!=NULL) {
-            $date.=" (".$s[0]->season_plan.") as vplan";
+            $date.=" (".$s[0]->season_plan.")";
 
         }
         else
         {
-            $date.="plan1 as vplan";
+            $date.="plan1";
         }
     
         if(Session::has('syear_id')) {
@@ -548,7 +548,7 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
 
                     $data= Request::input('gproject_id');
                     $project =DB::select("select v.*, 
-                    $date,
+                    $date as vplan,
                     b.qbudget
                     from V_PROJECT v, 
             
@@ -568,7 +568,7 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
             order by project_id, month) q
             where q.month in (".$s[0]->season_process." )
             group by project_id) b
-            where b.project_id=v.project_id ".$query." ");
+            where b.project_id=v.project_id ".$query." and ".$date.">0  ");
 
         return view('tailan.season')->with(['both_id'=>$both_id,'seasons'=>$seasons,'season'=>$season,'nz'=>$nz,'syear_id'=>$syear_id,'year'=>$year,'gproject_id'=>$gproject_id,'data'=>$data,'method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'sconstructor'=>$sconstructor,'sexecutor'=>$sexecutor,'syear_id'=>$syear_id,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype,'sprojecttype'=>$sprojecttype]);
     }

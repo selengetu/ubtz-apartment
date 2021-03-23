@@ -233,9 +233,9 @@
                                             <?php $s++; ?>
                                             <tr >
                                                 <td>{{$no}}</td>
-                                            <td>{{$projects->childabbr}}</td>
+                                            <td> @if($projects->executor_type !=2) {{$projects->childabbr}} @else {{$projects->department_name}} - {{$projects->childabbr}}  @endif</td>
                                             <td>{{$projects->executor_abbr}}</td>
-                                            <td>{{$projects->project_name}}</td>
+                                            <td>{{$projects->project_name}}<br>{{$projects->project_name_ru}}</td>
                                             <td><?php
                                                 echo number_format($projects->vplan)."<br>";
                                                 ?>
@@ -253,7 +253,7 @@
                                                     0
                                                 @endif
                                                 </td>
-                                            <td>{{$projects->firstname}}</td>
+                                            <td>{{$projects->fletter}}.{{$projects->firstname}}</td>
                                         
                                             <td>@if($projects->img_1!=null)<img src="<?php echo asset("profile_images/img/$projects->img_1")?>"  height="100" width="100" onclick="preview_image({{$projects->project_id}})" data-toggle="modal" data-target="#photomodal">@endif</td>
                                             </tr>
@@ -263,9 +263,9 @@
 
                                             <tr >
                                                 <td>{{$no}}</td>
-                                                <td>{{$projects->childabbr}}</td>
+                                                <td> @if($projects->executor_type !=2) {{$projects->childabbr}} @else {{$projects->department_name}} - {{$projects->childabbr}}  @endif</td>
                                                 <td>{{$projects->executor_abbr}}</td>
-                                                <td>{{$projects->project_name}}</td>
+                                                <td>{{$projects->project_name}}<br>{{$projects->project_name_ru}}</td>
                                                 <td><?php
                                                     echo number_format($projects->vplan)."<br>";
                                                     ?>
@@ -283,7 +283,7 @@
                                                         0
                                                     @endif
                                                     </td>
-                                                <td>{{$projects->firstname}}</td>
+                                                <td>{{$projects->fletter}}.{{$projects->firstname}}</td>
                                             
                                                 <td>@if($projects->img_1!=null)<img src="<?php echo asset("profile_images/img/$projects->img_1")?>"  height="100" width="100" onclick="preview_image({{$projects->project_id}})" data-toggle="modal" data-target="#photomodal">@endif</td>
                                               </tr>
