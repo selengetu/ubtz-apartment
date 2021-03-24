@@ -258,11 +258,9 @@
                                                 <td>{{$no}}</td>
                                                 <td><a href="#" title="Төлөвлөгөөт улирал : {{$projects->season_name}}">
                                                      @if($projects->executor_type !=2) {{$projects->childabbr}} @else {{$projects->department_name}} - {{$projects->childabbr}}  @endif</a></td>
-                                                <td>@if($projects->method_code==3)
-                                                        По договору
-                                                    @else
+                                                <td>
                                                         {{$projects->executor_abbr}}
-                                                    @endif
+                                                  
                                                 </td>
                                                 <td>{{$projects->project_name}}<br>{{$projects->project_name_ru}}</td>
                                                 <td> <a href="#" title="Улирлын төлөвлөгөө : {{$projects->plan1." ,". $projects->plan2." ,". $projects->plan3." ,". $projects->plan4}}"><?php
@@ -321,11 +319,9 @@
                                                 <td>{{$no}}</td>
                                                 <td><a href="#" title="Төлөвлөгөөт улирал : {{$projects->season_name}}">
                                                         @if($projects->executor_type !=2) {{$projects->childabbr}} @else {{$projects->department_name}} - {{$projects->childabbr}}  @endif</a></td>
-                                                <td>@if($projects->method_code==3)
-                                                        По договору
-                                                    @else
+                                                <td>
                                                         {{$projects->executor_abbr}}
-                                                    @endif
+                                                 
                                                 </td>
                                                 <td>{{$projects->project_name}}<br>{{$projects->project_name_ru}}</td>
                                                 <td> <a href="#" title="Улирлын төлөвлөгөө :  {{$projects->plan1." ,". $projects->plan2." ,". $projects->plan3." ,". $projects->plan4}}"><?php
@@ -539,11 +535,9 @@
                                                 <td>{{$no}}</td>
                                                 <td>@if($projects->executor_type !=2) {{$projects->childabbr}} @else {{$projects->department_name}} - {{$projects->childabbr}}  @endif</td>
 
-                                                <td>@if($projects->method_code==3)
-                                                        По договору
-                                                    @else
+                                                <td>
                                                         {{$projects->executor_abbr}}
-                                                    @endif
+                                                  
                                                 </td>
                                                 <td>{{$projects->project_name}}<br>{{$projects->project_name_ru}}</td>
                                                 <td><?php
@@ -599,11 +593,9 @@
                                                 <td>{{$no}}</td>
                                                 <td>@if($projects->executor_type !=2) {{$projects->childabbr}} @else {{$projects->department_name}} - {{$projects->childabbr}}  @endif</td>
 
-                                                <td>@if($projects->method_code==3)
-                                                        По договору
-                                                    @else
+                                                <td>
                                                         {{$projects->executor_abbr}}
-                                                    @endif
+                                                
                                                 </td>
                                                 <td>{{$projects->project_name}}<br>{{$projects->project_name_ru}}</td>
                                                 <td><?php
