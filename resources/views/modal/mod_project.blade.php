@@ -84,7 +84,7 @@
 
                         <div class="form-group col-md-6">
                             <label for="inputAddress2">{{ trans('messages.tuluwluguu') }}</label>
-                            <input type="text" class="form-control money" id="plan" name="plan" placeholder="" maxlength="20" >
+                            <input type="text" class="form-control money" id="plan" name="plan" readonly >
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputCity">{{ trans('messages.tusuv') }}</label>
