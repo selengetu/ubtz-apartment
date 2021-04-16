@@ -142,6 +142,8 @@ Route::match(['get', 'post'],'/analysehu', 'TailanController@analysehu')->name('
 Route::match(['get', 'post'],'/album', 'TailanController@album')->name('album');
 Route::match(['get', 'post'],'/detailib', 'TailanController@detail')->name('detailib');
 Route::match(['get', 'post'],'/detailiz', 'TailanController@detail')->name('detailiz');
+Route::match(['get', 'post'],'/seasonib', 'TailanController@season')->name('seasonib');
+Route::match(['get', 'post'],'/seasoniz', 'TailanController@season')->name('seasoniz');
 
 Route::get('/profile', 'UserController@index')->name('profile');
 Route::post('/changePassword','UserController@postCredentials');
@@ -197,5 +199,6 @@ Route::get('setlocale/{locale}',function($locale){
     Route::get('/filter_executor/{date}', 'BarilgaController@filter_executor');
     Route::get('/filter_year/{date}', 'BarilgaController@filter_year');
     Route::get('/filter_month/{date}', 'BarilgaController@filter_month');
+    Route::get('/filter_season/{date}', 'BarilgaController@filter_season');
     Route::get('/filter_both/{date}', 'BarilgaController@filter_both');
 });

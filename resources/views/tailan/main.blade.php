@@ -258,11 +258,9 @@
                                                 <td>{{$no}}</td>
                                                 <td><a href="#" title="Төлөвлөгөөт улирал : {{$projects->season_name}}">
                                                      @if($projects->executor_type !=2) {{$projects->childabbr}} @else {{$projects->department_name}} - {{$projects->childabbr}}  @endif</a></td>
-                                                <td>@if($projects->method_code==3)
-                                                        По договору
-                                                    @else
+                                                <td>
                                                         {{$projects->executor_abbr}}
-                                                    @endif
+                                                  
                                                 </td>
                                                 <td>{{$projects->project_name}}<br>{{$projects->project_name_ru}}</td>
                                                 <td> <a href="#" title="Улирлын төлөвлөгөө : {{$projects->plan1." ,". $projects->plan2." ,". $projects->plan3." ,". $projects->plan4}}"><?php
@@ -310,7 +308,7 @@
 
                                                 <td bgcolor= {{$projects->state_bk_color}}>
                                                     <font color="{{$projects->state_tx_color}}" >{{$projects->state_name_mn}}<br>{{$projects->state_name_ru}}@if($projects->prend_date!=NULL && $projects->state_id==1) <br> {{$projects->prend_date}} @endif<br>{{$projects->description}}</font></td>
-                                                <td>@if($projects->image_b1!=null)<img src="<?php echo asset("profile_images/img/$projects->image_b1")?>"  height="100" width="100" onclick="preview_image({{$projects->project_id}})" data-toggle="modal" data-target="#photomodal">@endif</td>
+                                                <td>@if($projects->img_1!=null)<img src="<?php echo asset("profile_images/img/$projects->img_1")?>"  height="100" width="100" onclick="preview_image({{$projects->project_id}})" data-toggle="modal" data-target="#photomodal">@endif</td>
 
                                             </tr>
                                             <?php $no++; ?>
@@ -321,11 +319,9 @@
                                                 <td>{{$no}}</td>
                                                 <td><a href="#" title="Төлөвлөгөөт улирал : {{$projects->season_name}}">
                                                         @if($projects->executor_type !=2) {{$projects->childabbr}} @else {{$projects->department_name}} - {{$projects->childabbr}}  @endif</a></td>
-                                                <td>@if($projects->method_code==3)
-                                                        По договору
-                                                    @else
+                                                <td>
                                                         {{$projects->executor_abbr}}
-                                                    @endif
+                                                 
                                                 </td>
                                                 <td>{{$projects->project_name}}<br>{{$projects->project_name_ru}}</td>
                                                 <td> <a href="#" title="Улирлын төлөвлөгөө :  {{$projects->plan1." ,". $projects->plan2." ,". $projects->plan3." ,". $projects->plan4}}"><?php
@@ -374,7 +370,7 @@
                                                 <td bgcolor= {{$projects->state_bk_color}}>
                                                     <font color="{{$projects->state_tx_color}}" >{{$projects->state_name_mn}}<br>{{$projects->state_name_ru}}@if($projects->prend_date!=NULL && $projects->state_id==1) <br> {{$projects->prend_date}} @endif<br>{{$projects->description}}</font></td>
 
-                                                <td>@if($projects->image_b1!=null)<img src="<?php echo asset("profile_images/img/$projects->image_b1")?>"  height="100" width="100" onclick="preview_image({{$projects->project_id}})" data-toggle="modal" data-target="#photomodal">@endif</td>
+                                                <td>@if($projects->img_1!=null)<img src="<?php echo asset("profile_images/img/$projects->img_1")?>"  height="100" width="100" onclick="preview_image({{$projects->project_id}})" data-toggle="modal" data-target="#photomodal">@endif</td>
                                             </tr>
                                             <?php $no++; ?>
                                             <?php $no1++; ?>
@@ -539,11 +535,9 @@
                                                 <td>{{$no}}</td>
                                                 <td>@if($projects->executor_type !=2) {{$projects->childabbr}} @else {{$projects->department_name}} - {{$projects->childabbr}}  @endif</td>
 
-                                                <td>@if($projects->method_code==3)
-                                                        По договору
-                                                    @else
+                                                <td>
                                                         {{$projects->executor_abbr}}
-                                                    @endif
+                                                  
                                                 </td>
                                                 <td>{{$projects->project_name}}<br>{{$projects->project_name_ru}}</td>
                                                 <td><?php
@@ -599,11 +593,9 @@
                                                 <td>{{$no}}</td>
                                                 <td>@if($projects->executor_type !=2) {{$projects->childabbr}} @else {{$projects->department_name}} - {{$projects->childabbr}}  @endif</td>
 
-                                                <td>@if($projects->method_code==3)
-                                                        По договору
-                                                    @else
+                                                <td>
                                                         {{$projects->executor_abbr}}
-                                                    @endif
+                                                
                                                 </td>
                                                 <td>{{$projects->project_name}}<br>{{$projects->project_name_ru}}</td>
                                                 <td><?php
@@ -834,7 +826,7 @@
             $('#image_preview').empty();
             $.get('getimage/'+$id,function(data){
                 $.each(data,function(i,qwe){
-                    $('#image_preview').append('<img width="100%" src="profile_images/img/' + qwe.img_bname + '" />');
+                    $('#image_preview').append('<img width="100%" src="profile_images/img/' + qwe.img_1 + '" />');
                 });
             });
         }
