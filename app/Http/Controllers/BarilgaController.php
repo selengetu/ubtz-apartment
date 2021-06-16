@@ -320,7 +320,7 @@ class BarilgaController extends Controller
         $project->contract =preg_replace('/[a-zZ-a,]/', '',Request::input('geree'));
         $project->contract_num =Request::input('gereenum');
         $project->estimation = preg_replace('/[a-zZ-a,]/', '',Request::input('estimation'));
-        $project->plan = preg_replace('/[a-zZ-a,]/', '',Request::input('plan'));
+        $project->plan = preg_replace('/[a-zZ-a,]/', '',Request::input('plan1')) + preg_replace('/[a-zZ-a,]/', '',Request::input('plan2')) + preg_replace('/[a-zZ-a,]/', '',Request::input('plan3')) + preg_replace('/[a-zZ-a,]/', '',Request::input('plan4'));
         $project->plan1 = preg_replace('/[a-zZ-a,]/', '',Request::input('plan1'));
         $project->plan2 = preg_replace('/[a-zZ-a,]/', '',Request::input('plan2'));
         $project->plan3 = preg_replace('/[a-zZ-a,]/', '',Request::input('plan3'));
@@ -391,7 +391,7 @@ class BarilgaController extends Controller
             ->where('project_id', Request::input('id'))->where('is_lock',0)
             ->update(['project_name' => Request::input('project_name'),'project_name_ru' => Request::input('project_name_ru')
                , 'contract' =>preg_replace('/[a-zZ-a,]/', '',Request::input('geree')) ,'contract_num' =>Request::input('gereenum') ,'estimation' =>preg_replace('/[a-zZ-a,]/', '',Request::input('estimation')) ,
-                'plan' => preg_replace('/[a-zZ-a,]/', '',Request::input('plan'))
+                'plan' => (preg_replace('/[a-zZ-a,]/', '',Request::input('plan1')) + preg_replace('/[a-zZ-a,]/', '',Request::input('plan2')) + preg_replace('/[a-zZ-a,]/', '',Request::input('plan3')) + preg_replace('/[a-zZ-a,]/', '',Request::input('plan4')))
                 ,'plan1' => preg_replace('/[a-zZ-a,]/', '',Request::input('plan1')),'plan2' => preg_replace('/[a-zZ-a,]/', '',Request::input('plan2'))
                 ,'plan3' => preg_replace('/[a-zZ-a,]/', '',Request::input('plan3')),'plan4' => preg_replace('/[a-zZ-a,]/', '',Request::input('plan4'))
                 ,'start_date' => Request::input('date1'),'end_date' => Request::input('date2'),'prstart_date' => Request::input('prdate1')
