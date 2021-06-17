@@ -240,7 +240,11 @@
                                             <td><?php
                                                 echo number_format($projects->vplan)."<br>";
                                                 ?>
-                                                <?php $sum_plan += ($projects->vplan) ?></td>
+                                                @if($projects->state_id!=61)
+                                                    <?php
+                                                           $sum_plan += ($projects->vplan)
+                                                       ?>
+                                                       @endif</td>
                                             <td><?php
                                                 echo number_format($projects->qbudget)."<br>";
                                                 ?></td>
@@ -271,7 +275,11 @@
                                                 <td><?php
                                                     echo number_format($projects->vplan)."<br>";
                                                     ?>
-                                                    <?php $sum_plan += ($projects->vplan) ?></td>
+                                                      @if($projects->state_id!=61)
+                                                    <?php
+                                                           $sum_plan += ($projects->vplan)
+                                                       ?>
+                                                       @endif </td>
                                                 <td><?php
                                                     echo number_format($projects->qbudget)."<br>";
                                                     ?>
