@@ -206,10 +206,11 @@
                   <td>{{number_format($sum_gadgeree)}}</td>
                   <td>{{number_format($sum_nem)}}</td>
                   <td>{{number_format($sum_boloogui)}}</td>
+                  <td>{{number_format($sum_duus)}}</td>
                   <td>{{number_format($sum_yam)}}</td>
                   <td>{{number_format($sum_tender)}}</td>
                   <td>{{number_format($sum_tendersuc)}}</td>
-                  <td>{{number_format($sum_duus)}}</td>
+                 
                   <td><?php
                       echo number_format($sum_ehleegui)."<br>";
                       ?></td>
