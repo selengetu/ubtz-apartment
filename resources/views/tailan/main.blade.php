@@ -162,7 +162,7 @@
 
                                     </div>
                                     <div class="col-md-2">
-                                        <button class="btn btn-info" id="export-btn" onclick="tableToExcel('example2', 'Export HTML Table to Excel')"><i class="fa fa-print" aria-hidden="true"></i> Excel</button>
+                                        <button class="btn btn-info" id="export-btn" onclick="ex()"><i class="fa fa-print" aria-hidden="true"></i> Excel</button>
 
 
                                     </div>
@@ -771,7 +771,9 @@
 @endsection
 
 @section('script')
+<script src="https://www.jqueryscript.net/demo/Export-Html-Table-To-Excel-Spreadsheet-using-jQuery-table2excel/src/jquery.table2excel.js"></script>
     <script>
+        
         $(document).ready(function() {
 
             const gproject_id = {{ $gproject_id }};
@@ -807,7 +809,13 @@
                     window.location.href = uri + base64(format(template, ctx))
             }
         })()
-
+            function ex(){
+                $("#example2").table2excel({
+                    exclude: ".xls",
+                    name: "Excel Document Name"
+                        }); 
+             
+            }
         function ifIE() {
             var isIE11 = navigator.userAgent.indexOf(".NET CLR") > -1;
             var isIE11orLess = isIE11 || navigator.appVersion.indexOf("MSIE") != -1;
