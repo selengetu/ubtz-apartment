@@ -308,7 +308,7 @@
 
                                                 <td bgcolor= {{$projects->state_bk_color}}>
                                                     <font color="{{$projects->state_tx_color}}" >{{$projects->state_name_mn}}<br>{{$projects->state_name_ru}}@if($projects->prend_date!=NULL && $projects->state_id==1) <br> {{$projects->prend_date}} @endif<br>{{$projects->description}}</font></td>
-                                                <td></td>
+                                                <td>>@if($projects->img_1!=null)<img src="<?php echo asset("profile_images/img/$projects->img_1")?>"  height="100" width="100" onclick="preview_image({{$projects->project_id}})" data-toggle="modal" data-target="#photomodal">@endif</td>
 
                                             </tr>
                                             <?php $no++; ?>
@@ -370,7 +370,7 @@
                                                 <td bgcolor= {{$projects->state_bk_color}}>
                                                     <font color="{{$projects->state_tx_color}}" >{{$projects->state_name_mn}}<br>{{$projects->state_name_ru}}@if($projects->prend_date!=NULL && $projects->state_id==1) <br> {{$projects->prend_date}} @endif<br>{{$projects->description}}</font></td>
 
-                                                <td></td>
+                                                <td>>@if($projects->img_1!=null)<img src="<?php echo asset("profile_images/img/$projects->img_1")?>"  height="100" width="100" onclick="preview_image({{$projects->project_id}})" data-toggle="modal" data-target="#photomodal">@endif</td>
                                             </tr>
                                             <?php $no++; ?>
                                             <?php $no1++; ?>
