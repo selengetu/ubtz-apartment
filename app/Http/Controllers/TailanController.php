@@ -1068,7 +1068,7 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
             $query.=" ";
 
         }
-        $project =DB::select("select  distinct * from V_PROCESS_IMG t where plan_year=2020 ".$query. "");
+        $project =DB::select("select  distinct * from V_PROCESS_IMG t where plan_year=2021 ".$query. "");
         
 
         return view('tailan.album')->with(['method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype]);
