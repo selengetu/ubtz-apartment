@@ -30,7 +30,16 @@
 
         var title = document.getElementById("modal-title");
         title.innerHTML = "{{ trans('messages.tsonhzas') }}";
+        $.get('getexec/1',function(data){
+            $('#executor_id').empty();
 
+            $.each(data,function(i,qwe){
+                $('#executor_id').append($('<option>', {
+                    value: qwe.executor_id,
+                    text: qwe.executor_abbr
+                }));
+            });
+        });
         $('#type').val('2');
         var itag=$id;
 

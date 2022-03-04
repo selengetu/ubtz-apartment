@@ -41,16 +41,7 @@
         else{
             $('#gereediv').hide();
         }
-        $.get('getexec/'+$id,function(data){
-            $('#executor_id').empty();
-
-            $.each(data,function(i,qwe){
-                $('#executor_id').append($('<option>', {
-                    value: qwe.executor_id,
-                    text: qwe.executor_abbr
-                }));
-            });
-        });
+  
 
     }
     function deletepicture($id,$id1)

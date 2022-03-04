@@ -154,6 +154,12 @@ Route::get('/getexec/{id?}',function($id = 0){
             ->where('is_ubtz','=',0)->orderby('executor_name')->get();
         return $dt;
 
+    }
+    if ($id == 1)
+    {
+        $dt=DB::table('V_EXECUTOR')->orderby('executor_name')->get();
+        return $dt;
+
     } else{
         $dt=DB::table('V_EXECUTOR')
             ->where('is_ubtz','=',1)->orderby('executor_name')->get();
