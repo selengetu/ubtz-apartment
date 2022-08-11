@@ -931,6 +931,7 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
             union all    
             select t.project_id , m.id month , 0 budget
             from V_PROJECT t , CONST_MONTH m 
+            where t.state_id!=61
             order by project_id, month
             )
                 group by project_id, month
