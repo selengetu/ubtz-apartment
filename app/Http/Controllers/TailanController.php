@@ -120,8 +120,8 @@ class TailanController extends Controller
         }
         else
         {
-            $syear_id=2021;
-            $query.="and plan_year = 2021 ";
+            $syear_id=2022;
+            $query.="and plan_year = 2022 ";
 
         }
         if ($sprojecttype!=NULL && $sprojecttype !=0) {
@@ -432,8 +432,8 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
         }
         else
         {
-            $syear_id=2021;
-            $query.="and plan_year = 2021 ";
+            $syear_id=2022;
+            $query.="and plan_year = 2022 ";
 
         }
         if ($sprojecttype!=NULL && $sprojecttype !=0) {
@@ -720,8 +720,8 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
         }
         else
         {
-            $syear_id=2021;
-            $query.="and plan_year =2021 ";
+            $syear_id=2022;
+            $query.="and plan_year =2022 ";
 
         }
         if (Auth::user()->dep_id == 55 or Auth::user()->dep_id == 99 ) {
@@ -862,8 +862,8 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
         }
         else
         {
-            $syear_id=2021;
-            $query.="and plan_year =2021 ";
+            $syear_id=2022;
+            $query.="and plan_year =2022 ";
 
         }
         if ($month!=NULL && $month !=0) {
@@ -987,8 +987,8 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
         }
         else
         {
-            $syear_id=2021;
-            $query.="and plan_year =2021 ";
+            $syear_id=2022;
+            $query.="and plan_year =2022 ";
 
         }
         if ($startdate !=0 && $startdate && $enddate !=0 && $enddate !=NULL) {
@@ -1068,7 +1068,7 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
             $query.=" ";
 
         }
-        $project =DB::select("select  distinct * from V_PROCESS_IMG t where plan_year=2021 ".$query. "");
+        $project =DB::select("select  distinct * from V_PROCESS_IMG t where plan_year=2022 ".$query. "");
         
 
         return view('tailan.album')->with(['method'=>$method,'constructor'=>$constructor,'executor'=>$executor,'employee'=>$employee,'project'=>$project,'state'=>$state,'projecttype'=>$projecttype]);
