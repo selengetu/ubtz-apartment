@@ -46,7 +46,7 @@
                                                     <option value= "0"> @if ( Config::get('app.locale') == 'mn') Бүгд @else Все @endif</option>
                                                     @foreach($executor as $executors)
                                                         @if($executors->is_ubtz==1)
-                                                        <option value= "{{$executors->executor_id}}" > @if($executors->executor_type == 2){{$executors->department_abbr}} - {{$executors->executor_abbr}}
+                                                        <option value= "{{$executors->executor_id}}" @if($executors->executor_id==$sexecutor) selected @endif> @if($executors->executor_type == 2){{$executors->department_abbr}} - {{$executors->executor_abbr}}
                                                             @else {{$executors->executor_abbr}}@endif</option>
                                                         @endif
                                                     @endforeach

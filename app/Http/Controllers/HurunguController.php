@@ -35,27 +35,17 @@ class HurunguController extends Controller
     public function index()
     {
         $query = "";
-        $schildabbr = Input::get('schildabbr_id');
+        $sexecutor = Input::get('sexecutor_id');
+        if(Session::has('sexecutor_id')) {
+            $sexecutor = Session::get('sexecutor_id');
+        }
+        else {
+            Session::put('sexecutor_id', $sexecutor);
+        }
         $executor = DB::select("select * from V_EXECUTOR t order by report_rowno, ex_report_no");
         $constructor = Constructor::orderby('department_abbr')->get();
         $year = Year::orderby('year_name')->get();
-        if ($schildabbr!=NULL && $schildabbr !=0) {
-            $type =DB::select('select t.executor_type from V_EXECUTOR t where t.executor_id =  '. $schildabbr.'');
-            if ($type[0]->executor_type ==1){
-                $dep =DB::select('select t.department_id from V_EXECUTOR t where t.executor_id =  '. $schildabbr.'');
-
-                $query.=" and department_id = '".$dep[0]->department_id."'";
-            }
-            else{
-                $query.=" and depart_child = '".$schildabbr."'";
-            }
-        }
-        else
-        {
-          
-            $query.=" ";
-
-        }
+ 
         $syear_id= Input::get('syear_id');
         if(Session::has('syear_id')) {
             $syear_id = Session::get('syear_id');
@@ -72,9 +62,29 @@ class HurunguController extends Controller
             $syear_id=2020;
             $query.="and year = 2020";
 
+        
+        }
+
+        if ($sexecutor!=NULL && $sexecutor !=0) {
+            $type =DB::select('select t.executor_type from V_EXECUTOR t where t.executor_id =  '. $sexecutor.'');
+            if ($type[0]->executor_type ==1){
+                $dep =DB::select('select t.department_id from V_EXECUTOR t where t.executor_id =  '. $sexecutor.'');
+
+                $query.=" and depart_child in (select executor_id from CONST_EXECUTOR t where t.executor_par='".$dep[0]->department_id."')";
+            }
+            else{
+                $query.=" and depart_child= '".$sexecutor."'";
+            }
+        }
+        else
+        {
+            $sexecutor=0;
+            $query.=" ";
+
+            
         }
         $hurungu =  DB::select("select * from V_INVESTMENT where 1=1 " .$query. "");
-        return view('hurungu')->with(['syear_id'=>$syear_id,'year'=>$year,'executor'=>$executor,'constructor'=>$constructor,'hurungu'=>$hurungu]);
+        return view('hurungu')->with(['syear_id'=>$syear_id,'year'=>$year,'executor'=>$executor,'constructor'=>$constructor,'hurungu'=>$hurungu,'sexecutor'=>$sexecutor]);
     }
     public function store()
     {

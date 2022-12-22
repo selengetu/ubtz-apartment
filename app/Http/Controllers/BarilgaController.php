@@ -49,7 +49,7 @@ class BarilgaController extends Controller
 
               if(Route::getFacadeRoot()->current()->uri()== 'barilga'){
                   $sprojecttype=2;
-              }
+         }
 
         $query = "";
         $state = State::orderby('state_name_mn')->get();
