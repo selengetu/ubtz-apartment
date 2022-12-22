@@ -91,15 +91,15 @@ class HurunguController extends Controller
         $hurungu = new Hurungu;
         $hurungu->depart_id = Request::input('constructor_id');
         $hurungu->depart_child = Request::input('childabbr_id');
-        $hurungu->plan = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan'));
-        $hurungu->plan1 = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan1'));
-        $hurungu->plan2 = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan2'));
-        $hurungu->plan3 = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan3'));
-        $hurungu->plan4 = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan4'));
-        $hurungu->budget1 = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('budget1'));
-        $hurungu->budget2 = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('budget2'));
-        $hurungu->budget3 = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('budget3'));
-        $hurungu->budget4 = preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('budget4'));
+        $hurungu->plan = preg_replace('/[a-zZ-a,]/', '',Request::input('plan'));
+        $hurungu->plan1 = preg_replace('/[a-zZ-a,]/', '',Request::input('plan1'));
+        $hurungu->plan2 = preg_replace('/[a-zZ-a,]/', '',Request::input('plan2'));
+        $hurungu->plan3 = preg_replace('/[a-zZ-a,]/', '',Request::input('plan3'));
+        $hurungu->plan4 = preg_replace('/[a-zZ-a,]/', '',Request::input('plan4'));
+        $hurungu->budget1 = preg_replace('/[a-zZ-a,]/', '',Request::input('budget1'));
+        $hurungu->budget2 = preg_replace('/[a-zZ-a,]/', '',Request::input('budget2'));
+        $hurungu->budget3 = preg_replace('/[a-zZ-a,]/', '',Request::input('budget3'));
+        $hurungu->budget4 = preg_replace('/[a-zZ-a,]/', '',Request::input('budget4'));
         $hurungu->description = Request::input('description');
         $hurungu->year = Carbon::now()->year;
         $hurungu->save();
@@ -110,9 +110,9 @@ class HurunguController extends Controller
     {
         $hurungu = DB::table('INVESTMENT')
             ->where('investment_id', Request::input('id'))
-            ->update(['depart_child' => Request::input('childabbr_id'),'plan' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan'))
-                ,'plan1' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan1')),'plan2' =>preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan2')),'plan3' =>preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan3')),'plan4' =>preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('plan4'))
-                ,'budget1' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('budget1')),'budget2' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('budget2')),'budget3' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('budget3')) ,'budget4' => preg_replace('/[^A-Za-z0-9\-]/', '',Request::input('budget4'))
+            ->update(['depart_child' => Request::input('childabbr_id'),'plan' => preg_replace('/[a-zZ-a,]/', '',Request::input('plan'))
+                ,'plan1' => preg_replace('/[a-zZ-a,]/', '',Request::input('plan1')),'plan2' =>preg_replace('/[a-zZ-a,]/', '',Request::input('plan2')),'plan3' =>preg_replace('/[a-zZ-a,]/', '',Request::input('plan3')),'plan4' =>preg_replace('/[a-zZ-a,]/', '',Request::input('plan4'))
+                ,'budget1' => preg_replace('/[a-zZ-a,]/', '',Request::input('budget1')),'budget2' => preg_replace('/[a-zZ-a,]/', '',Request::input('budget2')),'budget3' => preg_replace('/[a-zZ-a,]/', '',Request::input('budget3')) ,'budget4' => preg_replace('/[a-zZ-a,]/', '',Request::input('budget4'))
                 ,'description' => Request::input('description')]);
         return Redirect('hurungu');
     }

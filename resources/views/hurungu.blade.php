@@ -118,34 +118,35 @@
                                             <tr >
                                                 <td>{{$no}}</td>
                                                 <td>{{$hurungus->department_name}}-{{$hurungus->executor_abbr}}</td>
-                                                <td><?php
-                                                    echo number_format($hurungus->splan)."<br>";
+                                                <td>
+                                                    <?php
+                                                    echo number_format($hurungus->splan,2)."<br>";
                                                     ?></td>
                                                 <?php $sum_splan += ($hurungus->splan) ?>
                                                 <td><?php
-                                                    echo number_format($hurungus->plan1)."<br>";
+                                                    echo number_format($hurungus->plan1,2)."<br>";
                                                     ?></td>
                                                 <?php $sum_plan1 += ($hurungus->plan1) ?>
                                                 <td><?php
-                                                    echo number_format($hurungus->plan2)."<br>";
+                                                    echo number_format($hurungus->plan2,2)."<br>";
                                                     ?></td>
                                                 <?php $sum_plan2 += ($hurungus->plan2) ?>
                                                 <td><?php
-                                                    echo number_format($hurungus->plan3)."<br>";
+                                                    echo number_format($hurungus->plan3,2)."<br>";
                                                     ?></td>
                                                 <?php $sum_plan3 += ($hurungus->plan3) ?>
                                                 <td><?php
-                                                    echo number_format($hurungus->plan4)."<br>";
+                                                    echo number_format($hurungus->plan4,2)."<br>";
                                                     ?></td>
                                                 <?php $sum_plan4 += ($hurungus->plan4) ?>
                                                 <td><?php
-                                                    echo number_format($hurungus->sbudget)."<br>";
+                                                    echo number_format($hurungus->sbudget,2)."<br>";
                                                     ?></td>
                                                 <?php $sum_sbudget += ($hurungus->sbudget) ?>
                                                 <td>{{number_format($hurungus->percent, 2, ',', '.')}}%</td>
                                                 <?php $sum_percent += ($hurungus->percent) ?>
                                                 <td><?php
-                                                    echo number_format($hurungus->diff)."<br>";
+                                                    echo number_format($hurungus->diff,2)."<br>";
                                                     ?></td>
                                                 <?php $sum_diff += ($hurungus->diff) ?>
                                                 <td>{{$hurungus->description}}</td>
@@ -261,40 +262,40 @@
                            
                             <div class="form-group col-md-3">
                                 <label for="inputEmail4">{{ trans('messages.tuluwluguu1') }}</label>
-                                <input type="text" class="form-control money" id="plan1" name="plan1" maxlength="14">
-                                <input type="hidden" class="form-control" id="id" name="id" maxlength="14">
+                                <input type="text" class="form-control money" id="plan1" name="plan1" maxlength="20">
+                                <input type="hidden" class="form-control" id="id" name="id" maxlength="20">
 
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="inputEmail4">{{ trans('messages.tuluwluguu2') }}</label>
-                                <input type="text" class="form-control money" id="plan2" name="plan2" maxlength="14">
+                                <input type="text" class="form-control money" id="plan2" name="plan2" maxlength="20">
 
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="inputEmail4">{{ trans('messages.tuluwluguu3') }}</label>
-                                <input type="text" class="form-control money" id="plan3" name="plan3" maxlength="14">
+                                <input type="text" class="form-control money" id="plan3" name="plan3" maxlength="20">
 
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="inputEmail4">{{ trans('messages.tuluwluguu4') }}</label>
-                                <input type="text" class="form-control money" id="plan4" name="plan4" maxlength="14">
+                                <input type="text" class="form-control money" id="plan4" name="plan4" maxlength="20">
 
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="inputZip">{{ trans('messages.guitsetgel1') }}</label>
-                                <input type="text" class="form-control money" id="budget1" name="budget1" maxlength="14">
+                                <input type="text" class="form-control money" id="budget1" name="budget1" maxlength="20">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="inputZip">{{ trans('messages.guitsetgel2') }}</label>
-                                <input type="text" class="form-control money" id="budget2" name="budget2" maxlength="14">
+                                <input type="text" class="form-control money" id="budget2" name="budget2" maxlength="20">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="inputZip">{{ trans('messages.guitsetgel3') }}</label>
-                                <input type="text" class="form-control money" id="budget3" name="budget3" maxlength="14">
+                                <input type="text" class="form-control money" id="budget3" name="budget3" maxlength="20">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="inputZip">{{ trans('messages.guitsetgel4') }}</label>
-                                <input type="text" class="form-control money" id="budget4" name="budget4" maxlength="14">
+                                <input type="text" class="form-control money" id="budget4" name="budget4" maxlength="20">
                             </div>
 
                             <div class="form-group col-md-8">
