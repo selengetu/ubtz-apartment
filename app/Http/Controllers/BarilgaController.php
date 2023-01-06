@@ -313,7 +313,7 @@ class BarilgaController extends Controller
             $sprojecttype=2;
         }
         $project = new Project;
-        $project->plan_year = 2023;
+        $project->plan_year = Request::input('project_year');
         $project->project_name = Request::input('project_name');
         $project->project_name_ru = Request::input('project_name_ru');
         $project->budget =preg_replace('/[a-zZ-a,]/', '',Request::input('budget'));
@@ -389,7 +389,7 @@ class BarilgaController extends Controller
 
         $project = DB::table('Project')
             ->where('project_id', Request::input('id'))->where('is_lock',0)
-            ->update(['project_name' => Request::input('project_name'),'project_name_ru' => Request::input('project_name_ru')
+            ->update(['project_name' => Request::input('project_name'),'project_name_ru' => Request::input('project_name_ru'),'plan_year' => Request::input('project_year')
                , 'contract' =>preg_replace('/[a-zZ-a,]/', '',Request::input('geree')) ,'contract_num' =>Request::input('gereenum') ,'estimation' =>preg_replace('/[a-zZ-a,]/', '',Request::input('estimation')) ,
                 'plan' => (preg_replace('/[a-zZ-a,]/', '',Request::input('plan1')) + preg_replace('/[a-zZ-a,]/', '',Request::input('plan2')) + preg_replace('/[a-zZ-a,]/', '',Request::input('plan3')) + preg_replace('/[a-zZ-a,]/', '',Request::input('plan4')))
                 ,'plan1' => preg_replace('/[a-zZ-a,]/', '',Request::input('plan1')),'plan2' => preg_replace('/[a-zZ-a,]/', '',Request::input('plan2'))

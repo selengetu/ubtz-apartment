@@ -11,8 +11,15 @@
             <div class="modal-body">
 
                     <div class="form-row">
-
-                        <div class="form-group col-md-4">
+                    <div class="form-group col-md-2">
+                                            <label for="inputEmail4">{{ trans('messages.on') }}</label>
+                                            <select class="form-control select2" id="project_year" name="project_year">
+                                                @foreach($year as $years)
+                                                    <option value= "{{$years->year_id}}" @if($years->year_id==$syear_id) selected @endif>{{$years->year_name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                        <div class="form-group col-md-3">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <input type="hidden" class="form-control" id="type" name="type">
                             <input type="hidden" class="form-control" id="id" name="id">
@@ -26,7 +33,7 @@
 
                         </div>
 
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                             <label for="inputEmail4">{{ trans('messages.zahialagchnegj') }}</label>
                             <select class="form-control" id="childabbr_id" name="childabbr_id">
                                 <option value= "0">Бүгд</option>
