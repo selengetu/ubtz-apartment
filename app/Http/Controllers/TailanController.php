@@ -132,7 +132,7 @@ class TailanController extends Controller
                 $query .= " and estimation >0";
             }
             else{
-                $query .= " and (estimation = 0 or estimation is null)";
+                $query .= " and (estimation is null)";
             }
         } else {
             $query .= " ";
