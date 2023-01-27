@@ -132,7 +132,7 @@ class TailanController extends Controller
                 $query .= " and estimation >0";
             }
             else{
-                $query .= " and (estimation =0)";
+                $query .= " and (estimation = 0 or estimation is null)";
             }
         } else {
             $query .= " ";
@@ -267,7 +267,7 @@ class TailanController extends Controller
         if( Session::has('gproject_id') ) {
             $gproject_id = Session::get('gproject_id');
         }
-
+        dd($query);
         $data= Request::input('gproject_id');
         $project =DB::select("select u.project_id,
        u.plan_year,
