@@ -49,6 +49,7 @@
                 $('#id').val(qwe.project_id);
                 $('#project_name').val(qwe.project_name);
                 $('#project_name_ru').val(qwe.project_name_ru);
+                $('#project_year').val(qwe.plan_year);
                 $('#budget').val(qwe.budget);
                 $('#estimation').val(qwe.estimation);
                 $('#plan').val(qwe.plan);
