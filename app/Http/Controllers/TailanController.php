@@ -70,6 +70,7 @@ class TailanController extends Controller
         $syear_id= Input::get('syear_id');
         $nz_id= Input::get('nz_id');
         $both_id = Input::get('both_id');
+        $stusuv_id = Input::get('stusuv_id');
         if(Session::has('month')) {
             $month = Session::get('month');
         }
@@ -118,10 +119,23 @@ class TailanController extends Controller
             $query.=" and plan_year = '".$syear_id."'";
 
         }
+        
         else
         {
             $syear_id=2022;
             $query.="and plan_year = 2022 ";
+
+        }
+        if ($stusuv_id != NULL && $stusuv_id != 0) {
+          
+            if($stusuv_id == 1){
+                $query .= " and estimation >0";
+            }
+            else{
+                $query .= " and estimation = 0 or estimation is null";
+            }
+        } else {
+            $query .= " ";
 
         }
         if ($sprojecttype!=NULL && $sprojecttype !=0) {
@@ -752,6 +766,7 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
             $query.=" and project_type = '".$sprojecttype."'";
 
         }
+        
         else
         {
             $sprojecttype=0;

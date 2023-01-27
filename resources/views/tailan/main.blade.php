@@ -129,7 +129,14 @@
                                             </select>
 
                                         </div>
-                                       
+                                           <div class="form-group col-md-2">
+                                            <label for="inputPassword4">Төсөв</label>
+                                            <select class="form-control select2" id="stusuv_id" name="stusuv_id" >
+                                                <option value= "0"> @if ( Config::get('app.locale') == 'mn') Бүгд @else Все @endif</option>
+                                                <option value= "1">Байгаа</option>
+                                                <option value= "2">Байхгүй</option>
+                                            </select>
+                                        </div>
 
                                         <div class="form-group col-md-1">
                                         <label for="inputPassword4">.</label>
