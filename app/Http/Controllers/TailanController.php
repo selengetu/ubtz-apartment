@@ -267,7 +267,7 @@ class TailanController extends Controller
         if( Session::has('gproject_id') ) {
             $gproject_id = Session::get('gproject_id');
         }
-        dd($query);
+        
         $data= Request::input('gproject_id');
         $project =DB::select("select u.project_id,
        u.plan_year,
