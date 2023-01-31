@@ -1028,7 +1028,8 @@ order by report_rowno, ex_report_no, xex_report_no, project_id");
 
         }
         $t= DB::select("select b.* ,q.* ,(q.eune+q.egeree+ezurag+etusuv+emater+esanh+eguits+etusuv+ealba+esalbar+etul) as ehleegui 
-        from (select d.executor_abbr as department_name, t.department_id,d.executor_type as department_type, t.report_rowno ,sum(t.plan) as plan, sum(t.budget) as budget, sum(t.estimation) as estimation, (sum(t.budget)/sum(t.plan))*100 as percent, sum(t.budget)-sum(t.plan) as diff, (sum(t.percent)/count(percent)) as rpercent , count(t.project_id) as ajliintoo 
+        from (select d.executor_abbr as department_name, t.department_id,d.executor_type as department_type, t.report_rowno ,sum(t.plan) as plan, sum(t.budget) as budget, sum(case when t.estimation>0 then 1 else 0 end) as estimationtoo,
+         sum(t.estimation) as estimation, (sum(t.budget)/sum(t.plan))*100 as percent, sum(t.budget)-sum(t.plan) as diff, (sum(t.percent)/count(percent)) as rpercent , count(t.project_id) as ajliintoo 
         from V_PROJECT t , CONST_EXECUTOR d where t.department_id=d.executor_id  ".$query. "
         and t.state_id!=61 
         group by d.executor_type,t.department_id, d.executor_abbr, t.report_rowno

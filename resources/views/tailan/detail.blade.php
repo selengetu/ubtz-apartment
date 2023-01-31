@@ -103,6 +103,7 @@
               <?php $sum_rpercent = 0 ?>
               <?php $sum_budget = 0 ?>
               <?php $sum_ajliintoo = 0 ?>
+              <?php $sum_estimationtoo = 0 ?>
               <?php $sum_haasan = 0 ?>
               <?php $sum_duussan = 0 ?>
               <?php $sum_gdag = 0 ?>
@@ -122,6 +123,7 @@
                   <th>{{ trans('messages.guitsetgel') }}</th>
                   <th>{{ trans('messages.biylelt') }}</th>
                   <th>{{ trans('messages.ajliintoo') }}</th>
+                  <th>{{ trans('messages.tusviintoo') }}</th>
                   <th>{{ trans('messages.uunees') }}</th>
                   <th>{{ trans('messages.duussant') }}</th>
                   <th>{{ trans('messages.graphdaguu') }}</th>
@@ -156,6 +158,8 @@
                       <?php $sum_percent += ($projects->percent) ?>
                       <td>{{$projects->ajliintoo}}</td>
                       <?php $sum_ajliintoo += ($projects->ajliintoo) ?>
+                      <td>{{$projects->estimationtoo}}</td>
+                       <?php $sum_estimationtoo += ($projects->estimationtoo) ?>
                       <td>{{$projects->haasan}}</td>
                       <?php $sum_haasan += ($projects->haasan) ?>
                       <td>{{$projects->duussan}}</td>
@@ -198,7 +202,9 @@
                   <td><?php
                       echo number_format($sum_ajliintoo)."<br>";
                       ?></td>
-
+ <td><?php
+                      echo number_format($sum_estimationtoo)."<br>";
+                      ?></td>
                   <td>{{number_format($sum_haasan)}}</td>
                   <td>{{number_format($sum_duussan)}}</td>
                   <td>{{number_format($sum_gdag)}}</td>
