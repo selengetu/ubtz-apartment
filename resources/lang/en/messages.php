@@ -87,6 +87,7 @@ return [
     'tailanbarilga' => 'Отчет о капитальном строительстве',
     'baiguullaga' => 'Организация',
     'ajliintoo' => 'Число работы',
+    'tusviintoo' => 'Число бюджеты',
     'duussant' => 'Закончилось',
     'graphdaguu' => 'Идет по графику',
     'graphhots' => 'Остает от графика',

@@ -86,6 +86,7 @@ return [
     'photoalbum' => 'Фото альбом',
     'zurag' => 'Фото',
     'ajliintoo' => 'Ажлын тоо',
+    'tusviintoo' => 'Төсвийн тоо',
     'duussant' => 'Дууссан',
     'graphdaguu' => 'Графикийн дагуу',
     'graphhots' => 'Графикаас хоцорч байна',
