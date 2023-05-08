@@ -170,7 +170,7 @@ Route::get('/getexec/{id?}',function($id = 0){
 
 
 Route::get('/chartfill/{id?}',function($id = 0){
-    $dt=DB::table('V_TAILAN_PROJ_CHILD')->where('department_id','=',$id)->where('plan_year','=',2022)->get();
+    $dt=DB::table('V_TAILAN_PROJ_CHILD')->where('department_id','=',$id)->where('plan_year','=', 2023)->get();
     return $dt;
 });
     Route::get('/chartfillt/{id?}/{id1?}/{id2?}/{id3?}',function($id = 0,$id1 = 0,$id2= 0,$id3= 0){
